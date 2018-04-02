@@ -1,0 +1,40 @@
+from flask import Flask
+from sqlalchemy import Column, Integer, String, Boolean, Table
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+
+Base = declarative_base()
+
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    username = Column(String(255), unique=True, nullable=False)
+    email = Column(String(255), unique=True)
+    password = Column(String(255), nullable=False)
+    position = Column(String(50))
+    is_admin = Column(Boolean)
+    status = Column(String(50))
+    avatar = Column(String(255))
+
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'position': self.position,
+            'is_admin': self.is_admin,
+            'status': self.status,
+            'avatar': self.avatar
+
+        }
+
+    def __repr__(self):
+        return self.username
+
+
+
+engine = create_engine('sqlite:///v-manDB.db')
+Base.metadata.create_all(engine)
