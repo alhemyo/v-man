@@ -9,7 +9,7 @@
 
 </template>
 
-<style>
+<style scoped>
 
   /*
   font-family: 'Rubik', sans-serif;
@@ -26,7 +26,7 @@
 
     font-family: 'Rubik', sans-serif;
     font-size: 40px;
-    font-weight: 300;
+    font-weight: 400;
     color: white;
 
     position: absolute;
@@ -39,6 +39,7 @@
   h1 span {
 
     font-size: 24px;
+    font-weight: 300;
     color: #B50000;
   }
 
