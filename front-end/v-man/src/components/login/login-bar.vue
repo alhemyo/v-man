@@ -9,11 +9,12 @@
 
       <div class="login-input-wrap">
 
-        <input class="login-input username" type="text" v-model="username" placeholder="username">
+        <input @keyup="validate" class="login-input username" type="text" v-model="username" placeholder="username">
 
         <div class="login-input-lock">
 
-          <img :src="locked" alt="lock" >
+          <img v-if="validation === false" :src="locked"  alt="lock" >
+          <img v-if="validation === true" :src="unlocked"  alt="lock" >
 
         </div>
 
@@ -21,11 +22,12 @@
 
       <div class="login-input-wrap">
 
-        <input class="login-input password" type="password" v-model="password" placeholder="password">
+        <input @keyup="validate" class="login-input password" type="password" v-model="password" placeholder="password">
 
-        <div class="login-input-lock">
+        <div class="login-input-lock" >
 
-          <img :src="locked" alt="lock" >
+          <img v-if="validation === false" :src="locked"  alt="lock" >
+          <img v-if="validation === true" :src="unlocked"  alt="lock" >
 
         </div>
 
@@ -39,6 +41,8 @@
 
 <script>
 
+  import _ from 'lodash'
+
   export default {
 
     name: 'login-bar',
@@ -47,8 +51,23 @@
         locked: '/static/images/icons/login/login_lock.png',
         unlocked: '/static/images/icons/login/login_unlock.png',
         username: "",
-        password: ""
+        password: "",
+        name: "Jane Doe",
+        pass: "password",
+        validation: false
       }
+    },
+    methods: {
+      validate: _.debounce( function() {
+        if ( this.username === this.name && this.password === this.pass )
+          {
+            this.validation = true
+          }
+        else
+          {
+            console.log('unauthorized acces')
+          }
+      },500 )
     }
 
   }
@@ -122,6 +141,11 @@
     border-radius: 30px;
   }
 
+  .login-success {
+
+    background-color: green;
+  }
+
   .login-input-lock img {
 
     position: absolute;
@@ -134,6 +158,11 @@
   .login-input::placeholder {
 
     color: gray;
+  }
+
+  .login-input:focus {
+
+    outline: none;
   }
 
 </style>
