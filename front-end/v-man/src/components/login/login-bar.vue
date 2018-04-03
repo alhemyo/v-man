@@ -58,16 +58,26 @@
       }
     },
     methods: {
+
+      // Login Validation - api call when user stop typing
       validate: _.debounce( function() {
+
         if ( this.username === this.name && this.password === this.pass )
           {
             this.validation = true
+            $('.login-input-lock').removeClass('login-error').addClass('login-success')
+          }
+        else if ( this.username === "" && this.password === "" )
+          {
+            this.validation = false
+            $('.login-input-lock').removeClass('login-error').removeClass('login-success')
           }
         else
           {
-            console.log('unauthorized acces')
+            this.validation = false
+            $('.login-input-lock').removeClass('login-success').addClass('login-error')
           }
-      },500 )
+      },1000 )
     }
 
   }
@@ -139,11 +149,22 @@
     float: right;
 
     border-radius: 30px;
+
+    transition: all 0.3s ease;
   }
 
   .login-success {
 
-    background-color: green;
+    transform: rotateY(-180deg);
+
+    background-color: #8BC34A;
+  }
+
+  .login-error {
+
+    transform: rotateY(180deg);
+
+    background-color: #E74040;
   }
 
   .login-input-lock img {
