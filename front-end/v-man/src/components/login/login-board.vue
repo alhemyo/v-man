@@ -9,6 +9,21 @@
 
 </template>
 
+<script>
+
+export default {
+
+  data() {
+    return {
+      name: 'login-board'
+    }
+  }
+  
+}
+
+
+</script>
+
 <style scoped>
 
   /*

@@ -13,8 +13,9 @@
 
         <div class="login-input-lock">
 
-          <img v-if="validation === false" :src="locked"  alt="lock" >
-          <img v-if="validation === true" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'locked'" :src="locked"  alt="lock" >
+          <img v-if="validation === 'sucess'" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'error'" :src="loginError"  alt="lock" >
 
         </div>
 
@@ -26,8 +27,9 @@
 
         <div class="login-input-lock" >
 
-          <img v-if="validation === false" :src="locked"  alt="lock" >
-          <img v-if="validation === true" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'locked'" :src="locked"  alt="lock" >
+          <img v-if="validation === 'sucess'" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'error'" :src="loginError"  alt="lock" >
 
         </div>
 
@@ -44,17 +46,17 @@
   import _ from 'lodash'
 
   export default {
-
     name: 'login-bar',
     data () {
       return {
         locked: '/static/images/icons/login/login_lock.png',
         unlocked: '/static/images/icons/login/login_unlock.png',
+        loginError: '/static/images/icons/login/login_error.png',
         username: "",
         password: "",
         name: "Jane Doe",
         pass: "password",
-        validation: false
+        validation: "locked"
       }
     },
     methods: {
@@ -64,17 +66,17 @@
 
         if ( this.username === this.name && this.password === this.pass )
           {
-            this.validation = true
+            this.validation = "sucess"
             $('.login-input-lock').removeClass('login-error').addClass('login-success')
           }
         else if ( this.username === "" && this.password === "" )
           {
-            this.validation = false
+            this.validation = "locked"
             $('.login-input-lock').removeClass('login-error').removeClass('login-success')
           }
-        else
+        else if ( this.username != this.name && this.password != this.pass )
           {
-            this.validation = false
+            this.validation = "error"
             $('.login-input-lock').removeClass('login-success').addClass('login-error')
           }
       },1000 )
@@ -86,104 +88,104 @@
 
 <style scoped>
 
-  /*
+/*
+font-family: 'Roboto', sans-serif;
+*/
+
+.login-bar {
+
+  width: 500px;
+  height: 100vh;
+
+  position: relative;
+}
+
+.login-form {
+
+  width: auto;
+  height: auto;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%,-50%);
+
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: auto 40px 40px;
+  grid-row-gap: 40px;
+}
+
+.login-input-wrap {
+
+  border-radius: 30px;
+  background-color: whitesmoke;
+}
+
+.login-input {
+
   font-family: 'Roboto', sans-serif;
-  */
+  font-size: 14px;
+  color: dimgray;
 
-  .login-bar {
+  width: 260px;
+  height: 40px;
 
-    width: 500px;
-    height: 100vh;
+  position: relative;
+  float: left;
 
-    position: relative;
-  }
+  padding: 10px 20px;
 
-  .login-form {
+  box-sizing: border-box;
 
-    width: auto;
-    height: auto;
+  border: none;
+  background-color: transparent;
+}
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.login-input-lock {
+  width: 40px;
+  height: 40px;
 
-    transform: translate(-50%,-50%);
+  position: relative;
+  float: right;
 
-    display: grid;
-    grid-template-columns: 300px;
-    grid-template-rows: auto 40px 40px;
-    grid-row-gap: 40px;
-  }
+  border-radius: 30px;
 
-  .login-input-wrap {
+  transition: all 0.3s ease;
+}
 
-    border-radius: 30px;
-    background-color: whitesmoke;
-  }
+.login-success {
 
-  .login-input {
+  transform: rotateY(-180deg);
 
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: dimgray;
+  background-color: #8BC34A;
+}
 
-    width: 260px;
-    height: 40px;
+.login-error {
 
-    position: relative;
-    float: left;
+  transform: rotateY(180deg);
 
-    padding: 10px 20px;
+  background-color: #E74040;
+}
 
-    box-sizing: border-box;
+.login-input-lock img {
 
-    border: none;
-    background-color: transparent;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
-  .login-input-lock {
-    width: 40px;
-    height: 40px;
+  transform: translate(-50%,-50%);
+}
 
-    position: relative;
-    float: right;
+.login-input::placeholder {
 
-    border-radius: 30px;
+  color: gray;
+}
 
-    transition: all 0.3s ease;
-  }
+.login-input:focus {
 
-  .login-success {
-
-    transform: rotateY(-180deg);
-
-    background-color: #8BC34A;
-  }
-
-  .login-error {
-
-    transform: rotateY(180deg);
-
-    background-color: #E74040;
-  }
-
-  .login-input-lock img {
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%,-50%);
-  }
-
-  .login-input::placeholder {
-
-    color: gray;
-  }
-
-  .login-input:focus {
-
-    outline: none;
-  }
+  outline: none;
+}
 
 </style>
