@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="login-bar">
+  <div class="login-bar"> <!-- login form component -->
 
     <form id="login-form" class="login-form">
 
@@ -9,7 +9,13 @@
 
       <div class="login-input-wrap">
 
-        <input @keyup="validate" class="login-input username" type="text" v-model="username" placeholder="username">
+        <input
+          @keyup=""
+          class="login-input username"
+          name="username"
+          type="text"
+          v-model="username"
+          placeholder="username">
 
         <div class="login-input-lock">
 
@@ -23,7 +29,13 @@
 
       <div class="login-input-wrap">
 
-        <input @keyup="validate" class="login-input password" type="password" v-model="password" placeholder="password">
+        <input
+          @keyup=""
+          class="login-input password"
+          name="password"
+          type="password"
+          v-model="password"
+          placeholder="password">
 
         <div class="login-input-lock" >
 
@@ -42,8 +54,8 @@
 </template>
 
 <script>
-
   import _ from 'lodash'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'login-bar',
@@ -51,37 +63,20 @@
       return {
         locked: '/static/images/icons/login/login_lock.png',
         unlocked: '/static/images/icons/login/login_unlock.png',
-        loginError: '/static/images/icons/login/login_error.png',
-        username: "",
-        password: "",
-        name: "Jane Doe",
-        pass: "password",
-        validation: "locked"
+        loginError: '/static/images/icons/login/login_error.png'
       }
     },
-    methods: {
-
-      // Login Validation - api call when user stop typing
-      validate: _.debounce( function() {
-
-        if ( this.username === this.name && this.password === this.pass )
-          {
-            this.validation = "sucess"
-            $('.login-input-lock').removeClass('login-error').addClass('login-success')
-          }
-        else if ( this.username === "" && this.password === "" )
-          {
-            this.validation = "locked"
-            $('.login-input-lock').removeClass('login-error').removeClass('login-success')
-          }
-        else if ( this.username != this.name && this.password != this.pass )
-          {
-            this.validation = "error"
-            $('.login-input-lock').removeClass('login-success').addClass('login-error')
-          }
-      },1000 )
+    computed: {
+      username: {
+        get() { return this.$store.state.username },
+        set(value) { this.$store.commit('updateUsername', value) }
+      },
+      password: {
+        get() { return this.$store.state.password },
+        set(value) { this.$store.commit('updatePassword', value) }
+      },
+      validation() { return this.$store.state.validation }
     }
-
   }
 
 </script>
