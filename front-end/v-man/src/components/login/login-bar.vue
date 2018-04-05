@@ -10,7 +10,7 @@
       <div class="login-input-wrap">
 
         <input
-          @keyup=""
+          @keyup="validate"
           class="login-input username"
           name="username"
           type="text"
@@ -20,7 +20,7 @@
         <div class="login-input-lock">
 
           <img v-if="validation === 'locked'" :src="locked"  alt="lock" >
-          <img v-if="validation === 'sucess'" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'success'" :src="unlocked"  alt="lock" >
           <img v-if="validation === 'error'" :src="loginError"  alt="lock" >
 
         </div>
@@ -30,7 +30,7 @@
       <div class="login-input-wrap">
 
         <input
-          @keyup=""
+          @keyup="validate"
           class="login-input password"
           name="password"
           type="password"
@@ -40,7 +40,7 @@
         <div class="login-input-lock" >
 
           <img v-if="validation === 'locked'" :src="locked"  alt="lock" >
-          <img v-if="validation === 'sucess'" :src="unlocked"  alt="lock" >
+          <img v-if="validation === 'success'" :src="unlocked"  alt="lock" >
           <img v-if="validation === 'error'" :src="loginError"  alt="lock" >
 
         </div>
@@ -55,7 +55,8 @@
 
 <script>
   import _ from 'lodash'
-  import { mapGetters } from 'vuex'
+  import axios from 'axios'
+  // import { mapGetters } from 'vuex'
 
   export default {
     name: 'login-bar',
@@ -75,7 +76,18 @@
         get() { return this.$store.state.password },
         set(value) { this.$store.commit('updatePassword', value) }
       },
-      validation() { return this.$store.state.validation }
+      validation: {
+        get() { return this.$store.state.validation }
+      }
+    },
+    methods: {
+      validate: _.debounce( function() {
+        if ( this.username === "Jane Doe" && this.password === "password" )
+          {
+            this.$store.commit( 'updateValidation', 'success' )
+            $('.login-input-lock').removeClass('login-error').addClass('login-success')
+          }
+      }, 1000 )
     }
   }
 

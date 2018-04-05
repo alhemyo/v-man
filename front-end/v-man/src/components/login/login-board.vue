@@ -4,6 +4,7 @@
   <div class="login-board">
 
     <h1>V-MAN | <span>project assistant</span></h1>
+    <p class="welcome-message">{{ welcome }}</p>
 
   </div>
 
@@ -15,10 +16,24 @@ export default {
 
   data() {
     return {
-      name: 'login-board'
+      name: 'login-board',
+      welcome: 'Welcome Jane Doe, have a coffee, we are setting things for you.',
+    }
+  },
+  computed: {
+    validation() {
+      return this.$store.state.validation
+    }
+  },
+  watch: {
+    validation() {
+      if ( this.validation === 'success' )
+        {
+          console.log(this.validation)
+        }
     }
   }
-  
+
 }
 
 
