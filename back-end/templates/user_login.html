@@ -1,0 +1,15 @@
+<h4>User Login</h4>
+
+<form action="{{ url_for('user_login') }}" method="POST">
+
+  <p>Username:</p>
+  <input type='text' size="30" name="username">
+  <p>Password:</p>
+  <input type='password' size="30" name="password">
+
+
+  <br/><br/>
+  <input type="submit" value="Log in">
+  <a href="{{ url_for('users_list') }}">Cancel</a>
+
+</form>
