@@ -4,7 +4,7 @@
   <div class="login-board">
 
     <h1>V-MAN | <span>project assistant</span></h1>
-    <p class="welcome-message">{{ welcome }}</p>
+    <p class="welcome-message">Welcome {{ username }}, have a coffee, we are setting things for you</p>
 
   </div>
 
@@ -16,20 +16,23 @@ export default {
 
   data() {
     return {
-      name: 'login-board',
-      welcome: 'Welcome Jane Doe, have a coffee, we are setting things for you.',
+      name: 'login-board'
     }
   },
   computed: {
     validation() {
       return this.$store.state.validation
+    },
+    username() {
+      return this.$store.state.username
     }
   },
   watch: {
     validation() {
-      if ( this.validation === 'success' )
+      if ( this.validation === "success" )
         {
-          console.log(this.validation)
+          $('.welcome-message').addClass('welcome-in')
+          $('h1').addClass('heading-out')
         }
     }
   }
@@ -43,6 +46,7 @@ export default {
 
   /*
   font-family: 'Rubik', sans-serif;
+  font-family: 'Roboto', sans-serif;
   */
 
   .login-board {
@@ -64,6 +68,14 @@ export default {
     left: 50%;
 
     transform: translate(-50%,-50%);
+    transition: all 0.5s ease;
+  }
+
+  .heading-out {
+
+    top: 40%;
+
+    opacity: 0;
   }
 
   h1 span {
@@ -71,6 +83,25 @@ export default {
     font-size: 24px;
     font-weight: 300;
     color: #B50000;
+  }
+
+  .welcome-message {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+
+    transform: translate( -50%, -50%);
+    transition: all 0.5s ease;
+
+    opacity: 0;
+  }
+
+  .welcome-in {
+    opacity: 1;
+    top: 50%;
   }
 
 </style>
