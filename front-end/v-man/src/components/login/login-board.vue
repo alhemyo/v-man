@@ -3,8 +3,16 @@
 
   <div class="login-board">
 
+    <div class="vertigo-wrap">
+
+      <div class="vertigo-circle v-c-a"></div>
+      <div class="vertigo-circle v-c-b"></div>
+      <div class="vertigo-circle v-c-c"></div>
+
+    </div>
+
     <h1>V-MAN | <span>project assistant</span></h1>
-    <p class="welcome-message">Welcome {{ username }}, have a coffee, we are setting things for you</p>
+    <p class="welcome-message">Welcome {{ welcomeName }}, have a coffee, we are setting things for you</p>
 
   </div>
 
@@ -25,6 +33,11 @@ export default {
     },
     username() {
       return this.$store.state.username
+    },
+    welcomeName() {
+      let w = this.username.split(" ")
+      return w[0]
+
     }
   },
   watch: {
@@ -38,7 +51,6 @@ export default {
   }
 
 }
-
 
 </script>
 
@@ -54,6 +66,49 @@ export default {
     background-color: #E74040;
 
     position: relative;
+
+    overflow: hidden;
+  }
+
+  .vertigo-wrap {
+
+    width: 1200px;
+    height: 1200px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate( -50%, -50% );
+  }
+
+  @keyframes pulse {
+    0%   { transform: scale(0); opacity: 0.1 }
+    50%  { transform: scale(0.5); opacity: 0.5 }
+    100% { transform: scale(1); opacity: 0 }
+  }
+
+  .vertigo-circle {
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    border: 1px solid white;
+    border-radius: 100%;
+
+    opacity: 0;
+
+    animation: pulse 5s linear infinite;
+  }
+
+  .v-c-b {
+    animation-delay: 2s;
+  }
+
+  .v-c-c {
+    animation-delay: 3.5s;
   }
 
   h1 {
