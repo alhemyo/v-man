@@ -35,6 +35,7 @@ export default {
       return this.$store.state.username
     },
     welcomeName() {
+      // Return only first name from full name
       let w = this.username.split(" ")
       return w[0]
 
@@ -84,7 +85,7 @@ export default {
 
   @keyframes pulse {
     0%   { transform: scale(0); opacity: 0.1 }
-    50%  { transform: scale(0.5); opacity: 0.5 }
+    50%  { transform: scale(0.5); opacity: 0.2 }
     100% { transform: scale(1); opacity: 0 }
   }
 
@@ -95,7 +96,7 @@ export default {
 
     position: absolute;
 
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 100%;
 
     opacity: 0;
