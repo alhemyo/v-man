@@ -95,10 +95,11 @@
         // Check if both are empty
         else if ( this.username === "" && this.password === "" )
           {
+            this.$store.commit( 'updateValidation', 'locked' )
             $('.username').attr( "placeholder", "username" )
             $('.password').attr("placeholder", "password")
-            this.$store.commit( 'updateValidation', 'locked' )
             $('.login-input-lock').removeClass('login-error login-success')
+            $('.login-input').prop('disabled', false)
           }
         // Check if username and password match
         else if ( this.username === "Jane Doe" && this.password === "password" )
@@ -111,7 +112,19 @@
         else
           {
             this.$store.commit( 'updateValidation', 'error' )
+            $('.login-input').prop('disabled', true)
             $('.login-input-lock').removeClass('login-success').addClass('login-error')
+
+            setTimeout( ()=>{
+              // After 4 seconds reset login form to locked
+              this.$store.commit( 'updateValidation', 'locked' )
+              this.username = ""
+              this.password = ""
+              $('.login-input-lock').removeClass('login-error login-success')
+              $('.login-input').prop('disabled', false)
+              $('.username').focus()
+
+            }, 4000 )
           }
       }, 1000 )
     }
