@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, json, jsonify
-from flask_login import LoginManager, current_user, login_user, logout_user, login_required
+from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import jwt
+import datetime
+from functools import wraps
+
 
 from models import Base, User
 
@@ -14,72 +17,112 @@ Base.metadata.bind = engine
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
-login = LoginManager(app)
-login.login_view = 'user_login'
 
-@login.user_loader
-def load_user(id):
-    return session.query(User).get(int(id))
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
 
-@app.route('/')
-def index():
-    return "Hello"
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
 
-@app.route('/api/login', methods=['GET', 'POST'])
-def user_login():
-    if current_user.is_authenticated:
-        return redirect(url_for('users_list'))
-    if request.method == 'POST':
-        user = session.query(User).filter_by(username=request.form['username']).first()
-        if user is None or not user.check_password(request.form['password']):
-            # print("Wrong Password")
-            # return redirect(url_for('user_login'))
-            return '{"error": "username or password is not correct!"}'
-        login_user(user)
-        return '{"message": "Login Successful"}'
-    elif request.method == 'GET':
-        return render_template('user_login.html')
+        if not token:
+            return jsonify({'message': 'Token is missing!'}), 401
 
-@app.route('/api/logout')
-def user_logout():
-    logout_user()
-    return '{"message": "You have logged out"}'
+        # try:
+        data = jwt.decode(token, app.config["SECRET_KEY"])
+        current_user = session.query(User).filter_by(id=data['user_id']).first()
+        # except:
+        #     return jsonify({'message': 'Token is invalid!'}), 401
 
-@app.route('/api/users_list')
-@login_required
-def users_list():
+        return f(current_user, *args, **kwargs)
+
+    return decorated
+
+
+@app.route('/user', methods=['GET'])
+@token_required
+def get_all_users(current_user):
+
+    if not current_user.is_admin:
+        return jsonify({'message': 'User not authorized!'})
+
     users = session.query(User).all()
     return jsonify(Users=[u.serialize for u in users])
 
-@app.route('/api/users_add', methods=['GET', 'POST'])
-@login_required
-def users_add():
-    if request.method == 'POST':
-        try:
-            if request.form['is_admin']:
-                is_admin = True
-        except:
-            is_admin = False
-        new_user = User(username=request.form['username'],
-                        email=request.form['email'],
-                        position=request.form['position'],
-                        is_admin=is_admin,
-                        status=request.form['status'],
-                        avatar=request.form['avatar']
-                        )
-        new_user.set_password(request.form['password'])
-        session.add(new_user)
-        session.commit()
-        return redirect(url_for('users_list'))
+@app.route('/user/<user_id>', methods=['GET'])
+@token_required
+def get_one_user(current_user, user_id):
 
-    elif request.method == 'GET':
-        return render_template('users_add.html')
+    if not current_user.is_admin:
+        return jsonify({'message': 'User not authorized!'})
 
-@app.route('/api/users/<int:user_id>')
-@login_required
-def user_detail(user_id):
-    user = session.query(User).filter_by(id=user_id).one()
+    user = session.query(User).filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'No user found!'})
+
     return jsonify(user.serialize)
+
+@app.route('/user', methods=['POST'])
+def create_user():
+    data = request.get_json()
+    print(data)
+    is_admin = False
+    if data["is_admin"] == 'True':
+        is_admin=True
+    new_user = User(username=data['username'],
+                    email=data['email'],
+                    position=data['position'],
+                    is_admin=is_admin,
+                    status=data['status'],
+                    avatar=data['avatar']
+                    )
+    new_user.set_password(data['password'])
+    session.add(new_user)
+    session.commit()
+
+    return jsonify({'message': 'new user created'})
+
+@app.route('/user/<user_id>', methods=['PUT'])
+def edit_user(user_id):
+    user = session.query(User).filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'No user found!'})
+
+    return ''
+
+@app.route('/user/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    user = session.query(User).filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'No user found!'})
+
+    session.delete(user)
+    session.commit()
+
+    return jsonify({'message': 'The user has been deleted'})
+
+@app.route('/login')
+def login():
+    auth = request.authorization
+
+    if not auth or not auth.username or not auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+    user = session.query(User).filter_by(username=auth.username).first()
+
+    if not user:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+    if user.check_password(auth.password):
+        token = jwt.encode({'user_id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+
+        return jsonify({'token': token.decode('UTF-8')})
+
+    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
 
 
 if __name__ == '__main__':

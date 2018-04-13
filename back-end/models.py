@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import Column, Integer, String, Boolean, Table
 from sqlalchemy.ext.declarative import declarative_base
@@ -8,7 +7,7 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
-class User(UserMixin, Base):
+class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     username = Column(String(255), unique=True, nullable=False)
