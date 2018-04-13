@@ -95,25 +95,50 @@
         // Check if both are empty
         else if ( this.username === "" && this.password === "" )
           {
+            this.$store.commit( 'updateValidation', 'locked' )
             $('.username').attr( "placeholder", "username" )
             $('.password').attr("placeholder", "password")
-            this.$store.commit( 'updateValidation', 'locked' )
-            $('.login-input-lock').removeClass('login-error login-success')
           }
         // Check if username and password match
         else if ( this.username === "Jane Doe" && this.password === "password" )
           {
             this.$store.commit( 'updateValidation', 'success' )
-            $('.login-input-lock').removeClass('login-error').addClass('login-success')
-            $('.login-input').prop('disabled', true)
           }
         // Check if error
         else
           {
             this.$store.commit( 'updateValidation', 'error' )
-            $('.login-input-lock').removeClass('login-success').addClass('login-error')
+
+            setTimeout( ()=>{
+              // After 4 seconds reset login form to locked
+              this.$store.commit( 'updateValidation', 'locked' )
+              this.username = ""
+              this.password = ""
+            }, 4000 )
           }
       }, 1000 )
+    },
+    watch: {
+      validation() {
+        if ( this.validation === 'locked' )
+          {
+            $('.username').attr( "placeholder", "username" )
+            $('.password').attr("placeholder", "password")
+            $('.login-input-lock').removeClass('login-error login-success')
+            $('.login-input').prop('disabled', false)
+            $('.username').focus()
+          }
+        else if ( this.validation === 'error' )
+          {
+            $('.login-input-lock').removeClass('login-success').addClass('login-error')
+            $('.login-input').prop('disabled', true)
+          }
+        else
+          {
+            $('.login-input-lock').removeClass('login-error').addClass('login-success')
+            $('.login-input').prop('disabled', true)
+          }
+      }
     }
   }
 
