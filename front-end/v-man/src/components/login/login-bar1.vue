@@ -91,14 +91,7 @@
     },
     methods: {
       validate: _.debounce( function() {
-        console.log( btoa( this.username + ':' + this.password ) )
-        axios.post('http://127.0.0.1:5000/login', {
-          headers: {
-            Authorization: 'Basic ' + btoa( this.username + ':' + this.password )
-          },
-          username: this.username,
-          password: this.password
-        }).then(response => {console.log(response)}).catch(e => { console.log(e) })
+        this.$http(this.options).then( response => { console.log(response.body.token) })
       }, 1000 )
     },
     watch: {

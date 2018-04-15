@@ -64,16 +64,7 @@
       return {
         locked: '/static/images/icons/login/login_lock.png',
         unlocked: '/static/images/icons/login/login_unlock.png',
-        loginError: '/static/images/icons/login/login_error.png',
-        options: {
-          url: 'http://127.0.0.1:5000/login',
-          method: 'POST',
-          headers: {
-            Authorization: 'Basic ' + btoa("Ignat Petrov:123")
-          },
-          username: 'Ignat Petrov',
-          password: '123'
-        }
+        loginError: '/static/images/icons/login/login_error.png'
       }
     },
     computed: {
@@ -91,14 +82,40 @@
     },
     methods: {
       validate: _.debounce( function() {
-        console.log( btoa( this.username + ':' + this.password ) )
-        axios.post('http://127.0.0.1:5000/login', {
-          headers: {
-            Authorization: 'Basic ' + btoa( this.username + ':' + this.password )
-          },
-          username: this.username,
-          password: this.password
-        }).then(response => {console.log(response)}).catch(e => { console.log(e) })
+        // Check if username is empty
+        if ( this.username === "" && this.password != "" )
+          {
+            $('.username').attr( "placeholder", "C'mon, u must have a name?" )
+          }
+        // Check if password is empty
+        else if ( this.username != "" && this.password === "" )
+          {
+            $('.password').attr("placeholder", "The magic word please!")
+          }
+        // Check if both are empty
+        else if ( this.username === "" && this.password === "" )
+          {
+            this.$store.commit( 'updateValidation', 'locked' )
+            $('.username').attr( "placeholder", "username" )
+            $('.password').attr("placeholder", "password")
+          }
+        // Check if username and password match
+        else if ( this.username === "Jane Doe" && this.password === "password" )
+          {
+            this.$store.commit( 'updateValidation', 'success' )
+          }
+        // Check if error
+        else
+          {
+            this.$store.commit( 'updateValidation', 'error' )
+
+            setTimeout( ()=>{
+              // After 4 seconds reset login form to locked
+              this.$store.commit( 'updateValidation', 'locked' )
+              this.username = ""
+              this.password = ""
+            }, 4000 )
+          }
       }, 1000 )
     },
     watch: {

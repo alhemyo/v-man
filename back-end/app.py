@@ -4,12 +4,14 @@ from sqlalchemy.orm import sessionmaker
 import jwt
 import datetime
 from functools import wraps
-
+from flask_cors import CORS
 
 from models import Base, User
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
+
+CORS(app)
 
 engine = create_engine('sqlite:///v-manDB.db')
 Base.metadata.bind = engine
@@ -105,7 +107,7 @@ def delete_user(user_id):
 
     return jsonify({'message': 'The user has been deleted'})
 
-@app.route('/login')
+@app.route('/login', methods = ['POST'])
 def login():
     auth = request.authorization
 
