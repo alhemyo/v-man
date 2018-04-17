@@ -52,6 +52,16 @@ def get_all_users(current_user):
     users = session.query(User).all()
     return jsonify(Users=[u.serialize for u in users])
 
+
+@app.route('/thisuser', methods=['GET'])
+@token_required
+def get_this_users(current_user):
+
+    if not current_user.is_admin:
+        return jsonify({'message': 'User not authorized!'})
+
+    return jsonify(current_user.serialize)
+
 @app.route('/user/<user_id>', methods=['GET'])
 @token_required
 def get_one_user(current_user, user_id):

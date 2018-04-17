@@ -64,16 +64,7 @@
       return {
         locked: '/static/images/icons/login/login_lock.png',
         unlocked: '/static/images/icons/login/login_unlock.png',
-        loginError: '/static/images/icons/login/login_error.png',
-        options: {
-          url: 'http://127.0.0.1:5000/login',
-          method: 'POST',
-          headers: {
-            Authorization: 'Basic ' + btoa("Ignat Petrov:123")
-          },
-          username: 'Ignat Petrov',
-          password: '123'
-        }
+        loginError: '/static/images/icons/login/login_error.png'
       }
     },
     computed: {
@@ -105,8 +96,8 @@
         this.$http(data).then( response => {
           if ( response.status === 200 )
             {
-              this.$http.get('http://127.0.0.1:5000/user', { headers: { 'x-access-token' : response.body.token } }).then( data => {
-                console.log( data.body.Users[0].email )
+              this.$http.get('http://127.0.0.1:5000/thisuser', { headers: { 'x-access-token' : response.body.token } }).then( data => {
+                console.log( data.body )
                 this.$store.commit( 'updateValidation', 'success' )
               })
             }
