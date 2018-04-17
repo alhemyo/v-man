@@ -91,14 +91,34 @@
     },
     methods: {
       validate: _.debounce( function() {
-        console.log( btoa( this.username + ':' + this.password ) )
-        axios.post('http://127.0.0.1:5000/login', {
+
+        let data = {
+          url: 'http://127.0.0.1:5000/login',
+          method: 'POST',
           headers: {
             Authorization: 'Basic ' + btoa( this.username + ':' + this.password )
           },
           username: this.username,
           password: this.password
-        }).then(response => {console.log(response)}).catch(e => { console.log(e) })
+        }
+
+        this.$http(data).then( response => {
+          if ( response.status === 200 )
+            {
+              this.$http.get('http://127.0.0.1:5000/user', { headers: { 'x-access-token' : response.body.token } }).then( data => {
+                console.log( data.body.Users[0].email )
+                this.$store.commit( 'updateValidation', 'success' )
+              })
+            }
+        }).catch( error => {
+          this.$store.commit( 'updateValidation', 'error' )
+          setTimeout( () => {
+            this.$store.commit( 'updateValidation', 'locked' )
+            this.username = '',
+            this.password = ''
+          },3000 )
+        })
+
       }, 1000 )
     },
     watch: {
