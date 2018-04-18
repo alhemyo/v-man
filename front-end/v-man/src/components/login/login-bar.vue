@@ -69,15 +69,15 @@
     },
     computed: {
       username: {
-        get() { return this.$store.state.username },
+        get() { return this.$store.state.login.username },
         set(value) { this.$store.commit('updateUsername', value) }
       },
       password: {
-        get() { return this.$store.state.password },
+        get() { return this.$store.state.login.password },
         set(value) { this.$store.commit('updatePassword', value) }
       },
       validation: {
-        get() { return this.$store.state.validation }
+        get() { return this.$store.state.login.validation }
       }
     },
     methods: {
