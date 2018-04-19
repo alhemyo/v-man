@@ -30,10 +30,10 @@ export default {
   },
   computed: {
     validation() {
-      return this.$store.state.validation
+      return this.$store.state.login.validation
     },
     username() {
-      return this.$store.state.username
+      return this.$store.state.login.username
     },
     welcomeName() {
       // Return only first name from full name
