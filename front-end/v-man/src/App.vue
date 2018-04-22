@@ -3,8 +3,20 @@
 
   <div id="app" class="app">
 
-    <login-bar />
-    <login-board />
+    <nav-bar></nav-bar>
+
+    <div class="login-wrap">
+
+      <login-bar />
+      <login-board />
+
+    </div>
+
+    <div class="dash-wrap">
+
+      <dashboard />
+
+    </div>
 
   </div>
 
@@ -12,14 +24,18 @@
 
 <script>
 
+  import navBar from './components/nav-bar'
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
+  import dashboard from './components/dashboard/dashboard'
 
   export default {
     name: 'App',
     components: {
+      navBar,
       loginBar,
-      loginBoard
+      loginBoard,
+      dashboard
     }
   }
 
@@ -32,9 +48,41 @@
   width: 100%;
   height: 100vh;
 
+  position: relative;
+}
+
+.login-wrap {
+
+  width: 100%;
+  height: 100vh;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
   display: grid;
-  grid-template-columns: 500px auto;
+  grid-template-columns: 400px auto;
   grid-template-rows: 100vh;
+
+  display: none;
+
+  z-index: 10;
+}
+
+.dash-wrap {
+
+  width: 100%;
+  height: 100vh;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  display: grid;
+  grid-template-columns: 500px;
+  grid-template-rows: 100vh;
+
+  z-index: 9;
 }
 
 </style>

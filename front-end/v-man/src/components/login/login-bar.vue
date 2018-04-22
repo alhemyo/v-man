@@ -146,7 +146,7 @@ font-family: 'Roboto', sans-serif;
 
 .login-bar {
 
-  width: 500px;
+  width: 400px;
   height: 100vh;
 
   position: relative;

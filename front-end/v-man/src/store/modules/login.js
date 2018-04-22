@@ -3,6 +3,7 @@ export default {
   state: {
     username: '',
     password: '',
+    profilePic: '',
     name: '',
     surname: '',
     validation: 'locked'
