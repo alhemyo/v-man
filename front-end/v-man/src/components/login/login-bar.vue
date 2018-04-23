@@ -97,7 +97,12 @@
           if ( response.status === 200 )
             {
               this.$http.get('http://127.0.0.1:5000/thisuser', { headers: { 'x-access-token' : response.body.token } }).then( data => {
-                console.log( data.body )
+                let name = data.body.username.split(" ")
+                this.$store.commit( 'updateName', name[0] )
+                this.$store.commit( 'updateSurname', name[1] )
+                this.$store.commit( 'updateAdmin', data.body.is_admin )
+                this.$store.commit( 'updatePosition', data.body.position )
+                this.$store.commit( 'updateStatus', data.body.status )
                 this.$store.commit( 'updateValidation', 'success' )
               })
             }
@@ -150,6 +155,15 @@ font-family: 'Roboto', sans-serif;
   height: 100vh;
 
   position: relative;
+
+  background-color: white;
+
+  transition: transform 0.6s ease;
+}
+
+.login-bar-out {
+
+  transform: translateX(-400px);
 }
 
 .login-form {

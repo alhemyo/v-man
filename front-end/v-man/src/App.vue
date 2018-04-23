@@ -49,6 +49,8 @@
   height: 100vh;
 
   position: relative;
+
+  overflow: hidden;
 }
 
 .login-wrap {
@@ -63,8 +65,6 @@
   display: grid;
   grid-template-columns: 400px auto;
   grid-template-rows: 100vh;
-
-  display: none;
 
   z-index: 10;
 }

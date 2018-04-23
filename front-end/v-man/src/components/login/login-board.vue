@@ -101,6 +101,12 @@
     position: relative;
 
     overflow: hidden;
+
+    transition: transform 0.6s ease;
+  }
+
+  .login-board-out {
+
   }
 
   .vertigo-wrap {

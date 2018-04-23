@@ -46,8 +46,8 @@ def token_required(f):
 @token_required
 def get_all_users(current_user):
 
-    if not current_user.is_admin:
-        return jsonify({'message': 'User not authorized!'})
+    #if not current_user.is_admin:
+        #return jsonify({'message': 'User not authorized!'})
 
     users = session.query(User).all()
     return jsonify(Users=[u.serialize for u in users])
@@ -57,8 +57,8 @@ def get_all_users(current_user):
 @token_required
 def get_this_users(current_user):
 
-    if not current_user.is_admin:
-        return jsonify({'message': 'User not authorized!'})
+    #if not current_user.is_admin:
+        #return jsonify({'message': 'User not authorized!'})
 
     return jsonify(current_user.serialize)
 
@@ -66,8 +66,8 @@ def get_this_users(current_user):
 @token_required
 def get_one_user(current_user, user_id):
 
-    if not current_user.is_admin:
-        return jsonify({'message': 'User not authorized!'})
+    #if not current_user.is_admin:
+        #return jsonify({'message': 'User not authorized!'})
 
     user = session.query(User).filter_by(id=user_id).first()
 

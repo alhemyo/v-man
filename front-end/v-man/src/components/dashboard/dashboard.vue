@@ -48,6 +48,23 @@
       status() {
         return this.$store.state.dash.status
       }
+    },
+    updated() {
+
+      console.log( 'Dashboard ready!' )
+
+      setTimeout(() => {
+        let loginBoardW = $('.login-board').innerWidth()
+
+        $('.login-bar').addClass('login-bar-out')
+        $('.login-board').addClass('login-board-out')
+        $('.login-board-out').css( 'transform', 'translateX(' + loginBoardW + 'px)' )
+
+        setTimeout(() => {
+          $('.login-wrap').hide()
+        },1000)
+
+      },4000)
     }
 
   }
