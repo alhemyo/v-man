@@ -1,7 +1,7 @@
 export default {
 
   state: {
-    admin: false,
+    admin: true,
     name: 'Jane',
     surname: 'Doe',
     pp: '/static/images/janeDoe.png',

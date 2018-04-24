@@ -66,6 +66,8 @@
   grid-template-columns: 400px auto;
   grid-template-rows: 100vh;
 
+  display: none;
+
   z-index: 10;
 }
 

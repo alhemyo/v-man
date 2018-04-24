@@ -22,13 +22,28 @@
 
     </div>
 
+    <div class="user-projects">
+      
+    </div>
+
+    <div class="dash-footer">
+      
+      <div v-if="admin" class="add-project">
+
+        <p class="link-description">new project |</p>
+        <img src="static/images/icons/add.png" />
+
+      </div>
+
+    </div>
+
   </div>
 
 </template>
 
 <script>
 
-  export default {
+  export default { 
 
     name: 'dashboard',
 
@@ -84,7 +99,7 @@
 
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 80px 230px;
+    grid-template-rows: 80px 230px auto 80px;
   }
 
   .user-card {
@@ -95,6 +110,7 @@
   }
 
   .p-p {
+
     padding: 40px;
   }
 
@@ -115,6 +131,40 @@
 
     font-weight: bold;
     color: #B50000;
+  }
+
+  .add-project {
+
+    float: right;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+
+    padding: 30px;
+
+    cursor: pointer;
+  }
+
+  .link-description {
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+
+    padding: 6px;
+
+    opacity: 0;
+
+    transform: translateX(40px);
+
+    transition: all 0.3s ease;
+  }
+
+  .add-project:hover .link-description {
+
+    transform: translateX(0px);
+    opacity: 1;
   }
 
 </style>
