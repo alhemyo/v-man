@@ -6,7 +6,7 @@ import datetime
 from functools import wraps
 from flask_cors import CORS
 
-from models import Base, User
+from models import Base, User, Project
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -88,7 +88,8 @@ def create_user():
                     position=data['position'],
                     is_admin=is_admin,
                     status=data['status'],
-                    avatar=data['avatar']
+                    avatar=data['avatar'],
+                    projects=[]
                     )
     new_user.set_password(data['password'])
     session.add(new_user)
@@ -135,6 +136,32 @@ def login():
         return jsonify({'token': token.decode('UTF-8')})
 
     return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+
+@app.route('/project', methods=['GET'])
+@token_required
+def get_all_projects(current_user):
+
+    #if not current_user.is_admin:
+        #return jsonify({'message': 'User not authorized!'})
+
+    projects = session.query(Project).all()
+    return jsonify(Projects=[p.serialize for p in projects])
+
+
+@app.route('/project', methods=['POST'])
+@token_required
+def create_project(current_user):
+    data = request.get_json()
+    print(data)
+
+    new_project = Project(name=data['name'],
+                        users=[current_user]
+                    )
+    session.add(new_project)
+    session.commit()
+
+    return jsonify({'message': 'new project created'})
 
 
 if __name__ == '__main__':
