@@ -23,11 +23,11 @@
     </div>
 
     <div class="user-projects">
-      
+
     </div>
 
     <div class="dash-footer">
-      
+
       <div v-if="admin" class="add-project">
 
         <p class="link-description">new project |</p>
@@ -43,7 +43,7 @@
 
 <script>
 
-  export default { 
+  export default {
 
     name: 'dashboard',
 

@@ -15,6 +15,7 @@
     <div class="dash-wrap">
 
       <dashboard />
+      <add-project />
 
     </div>
 
@@ -28,6 +29,7 @@
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
   import dashboard from './components/dashboard/dashboard'
+  import addProject from './components/forms/addProject'
 
   export default {
     name: 'App',
@@ -35,13 +37,20 @@
       navBar,
       loginBar,
       loginBoard,
-      dashboard
+      dashboard,
+      addProject
     }
   }
 
 </script>
 
 <style>
+
+.header-space {
+
+  width: 100%;
+  height: 80px;
+}
 
 .app {
 
@@ -81,7 +90,7 @@
   left: 0px;
 
   display: grid;
-  grid-template-columns: 500px;
+  grid-template-columns: 500px auto;
   grid-template-rows: 100vh;
 
   z-index: 9;

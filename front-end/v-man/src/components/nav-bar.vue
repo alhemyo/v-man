@@ -4,27 +4,31 @@
 
     <p class="nav-title"><span>V</span>-MAN</p>
 
-    <div class="icon-wrap">
-      
-      <img class="nav-icon" :src="icons.dashboard.dashOn" alt="nav-icon">
+    <div class="dash-nav">
 
-      <p class="nav-desc">| {{ icons.dashboard.desc }}</p>
+      <div class="link-wrap">
 
-    </div>
+        <img class="link-icon" :src="icons.dashboard.dashOn" >
 
-    <div class="icon-wrap">
-      
-      <img class="nav-icon" :src="icons.projects.projectsOff" alt="nav-icon">
+        <p class="link-desc">| dashboard</p>
 
-      <p class="nav-desc">| {{ icons.projects.desc }}</p>
+      </div>
 
-    </div>
+      <div class="link-wrap">
 
-    <div class="icon-wrap">
-      
-      <img class="nav-icon" :src="icons.chat.chatOff" alt="nav-icon">
+        <img class="link-icon" :src="icons.projects.projectsOff" >
 
-      <p class="nav-desc">| {{ icons.chat.desc }}</p>
+        <p class="link-desc">| projects</p>
+
+      </div>
+
+      <div class="link-wrap">
+
+        <img class="link-icon" :src="icons.chat.chatOff" >
+
+        <p class="link-desc">| chat</p>
+
+      </div>
 
     </div>
 
@@ -42,23 +46,31 @@
         icons: {
           dashboard: {
             dashOn: "static/images/icons/navbar/dash-on.png",
-            dashOff: "static/images/icons/navbar/dash-off.png",
-            desc: "dashboard"
+            dashOff: "static/images/icons/navbar/dash-off.png"
           },
           projects: {
             projectsOn: "static/images/icons/navbar/projects-on.png",
-            projectsOff: "static/images/icons/navbar/projects-off.png",
-            desc: "projects"
+            projectsOff: "static/images/icons/navbar/projects-off.png"
           },
           chat: {
             chatOn: "static/images/icons/navbar/chat-on.png",
-            chatOff: "static/images/icons/navbar/chat-off.png",
-            desc: "chat"
+            chatOff: "static/images/icons/navbar/chat-off.png"
           }
         }
       }
+    },
+    mounted() {
+      $('.link-wrap').hoverIntent(
+        function () {
+          $(this).addClass('link-wrap-open')
+          $(this).find('.link-desc').addClass('link-desc-open')
+        },
+        function () {
+          $(this).removeClass('link-wrap-open')
+          $(this).find('.link-desc').removeClass('link-desc-open')
+        }
+      )
     }
-
   }
 
 </script>
@@ -99,48 +111,50 @@
     color: #B50000;
   }
 
-  .icon-wrap {
+  .link-wrap {
 
     width: auto;
-    height: auto;
+    max-width: 20px;
+    height: 20px;
 
     position: relative;
     float: left;
 
+    box-sizing: content-box;
     padding: 30px 10px;
 
-    cursor: pointer;
-  }
-
-  .nav-icon {
-
-    float: left;
-  }
-
-  .nav-desc {
-
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-    color: white;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    width: 0px;
-
-    float: left;
-
-    padding: 3px 0px;
-    opacity: 0;
+    display: grid;
+    grid-template-columns: 20px auto;
+    grid-template-rows: 20px;
 
     transition: all 0.3s ease;
 
+    cursor: pointer;
     overflow: hidden;
   }
 
-  .icon-wrap:hover .nav-desc {
+  .link-wrap-open {
 
-    width: auto;
-    padding: 3px 10px;
+    max-width: 100%;
+  }
+
+  .link-desc {
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: white;
+    white-space: nowrap;
+
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+
+    transition: opacity 0.3s ease;
+
+    opacity: 0;
+  }
+
+  .link-desc-open {
 
     opacity: 1;
   }
