@@ -20,7 +20,7 @@
         <p class="a-p-input-desc">Project dir</p>
         <select v-model="projectDir" class="a-p-input">
 
-          <option class="a-p-option" value="category" disabled >category</option>
+          <option class="a-p-option" value="directory" disabled >dir</option>
           <option class="a-p-option" value="AD" >AD</option>
           <option class="a-p-option" value="BR" >BR</option>
           <option class="a-p-option" value="CS" >CS</option>
@@ -74,7 +74,7 @@
       return {
         projectName: "",
         projectDescription: "",
-        projectDir: "category",
+        projectDir: "directory",
         projectPriority: ""
       }
     }
@@ -112,6 +112,7 @@
       'name name'
       'directory priority'
       'description description';
+    grid-gap: 40px;
   }
 
   .a-p-input-wrap {
@@ -119,8 +120,6 @@
     width: 100%;
 
     position: relative;
-
-    padding: 20px 0px;
 
     display: grid;
     grid-template-columns: min-content auto;
@@ -132,8 +131,6 @@
     width: 100%;
 
     position: relative;
-
-    padding: 20px 0px;
 
     display: grid;
     grid-template-columns: fit-content;
@@ -185,7 +182,7 @@
     padding: 12px;
 
     border: none;
-
+    border-bottom: 1px solid lightgray;
     background-color: whitesmoke;
   }
 
