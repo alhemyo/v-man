@@ -1,8 +1,8 @@
 {
   "name": "v-man",
   "version": "1.0.0",
-  "description": "project assistant for media company",
-  "author": "alhemyo <alhemyo@users.noreply.github.com>",
+  "description": "project manager",
+  "author": "Vanja Sheremetkoski",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -10,9 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "jquery": "^3.3.1",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.0",
     "vuex": "^3.0.1"

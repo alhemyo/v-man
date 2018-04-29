@@ -1,6 +1,6 @@
 # v-man
 
-> project assistant for media company
+> project manager
 
 ## Build Setup
 
