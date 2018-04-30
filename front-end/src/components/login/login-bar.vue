@@ -10,9 +10,13 @@
 
         <input class="login-input" id="username-input" type="text" name="username" placeholder="username" @keyup="validate" v-model="username" />
 
-        <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
-        <img class="login-lock" v-if="validation === 'error'" :src="error" />
-        <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+        <div class="login-lock-wrap">
+
+          <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
+          <img class="login-lock" v-if="validation === 'error'" :src="error" />
+          <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+
+        </div>
 
       </div>
 
@@ -20,9 +24,13 @@
 
         <input class="login-input" id="password-input" type="password" name="password" placeholder="password" @keyup="validate" v-model="password" />
 
-        <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
-        <img class="login-lock" v-if="validation === 'error'" :src="error" />
-        <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+        <div class="login-lock-wrap">
+
+          <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
+          <img class="login-lock" v-if="validation === 'error'" :src="error" />
+          <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+
+        </div>
 
       </div>
 
@@ -59,6 +67,7 @@
       }
     },
     methods: {
+
       validate: _.debounce( function() {
 
         // Letters, numbers and spaces only REGEX
@@ -90,9 +99,27 @@
     },
 
     watch: {
+
       validation() {
+        if ( this.validation === "locked" )
+          {
+            $('.login-lock-wrap').removeClass('login-success login-error')
+          }
+        else if ( this.validation === "error" )
+          {
+            $('.login-lock-wrap').removeClass('login-success').addClass('login-error')
+          }
+        else if ( this.validation === "success" )
+          {
+            $('.login-lock-wrap').removeClass('login-error').addClass('login-success')
+          }
       }
+    },
+
+    mounted() {
+      $('#username-input').focus()
     }
+
   }
 
 </script>
@@ -125,11 +152,6 @@
   }
 
   .login-input-wrap {
-
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: dimgray;
-
     position: relative;
 
     border: none;
@@ -139,13 +161,19 @@
 
   .login-input {
 
+    width: 100%;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: dimgray;
+
     padding: 10px 20px;
 
     border: none;
     background-color: transparent;
   }
 
-  .login-lock {
+  .login-lock-wrap {
 
     position: absolute;
     top: 0px;
@@ -162,14 +190,14 @@
 
   .login-success {
 
-    transform: rotateY(180deg);
+    transform: rotateY(0deg);
 
-    background-color: green;
+    background-color: #8BC34A;
   }
 
   .login-error {
 
-    transform: rotateY(0deg);
+    transform: rotateY(180deg);
 
     background-color: tomato;
   }

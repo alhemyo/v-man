@@ -42,7 +42,9 @@ export default {
               `${ this.state.api }thisuser`,
               { headers: { 'x-access-token' : response.body.token } }
             ).then( data => {
-              console.log(data.body)
+              $('.login-input').prop('disabled', true) // Disable login inputs on success
+              let name = data.body.username.split(" ") // Split username
+              commit( 'updateName', name[0] )
               commit( 'updateId', data.body.id )
               commit( 'updateDashUsername', data.body.username )
               commit( 'updateEmail', data.body.email )
@@ -53,7 +55,16 @@ export default {
             })
           }
       }).catch( error => {
+          $('.login-input').prop('disabled', true) // Disable login inputs on error
           commit( 'updateValidation', 'error' )
+
+          setTimeout( ()=> {
+            commit( 'updateValidation', 'locked' )
+            $('.login-input').prop('disabled', false)
+            $('#username-input').focus()
+            this.state.login.username = "",
+            this.state.login.password = ""
+          },3000 )
         })
     }
   }

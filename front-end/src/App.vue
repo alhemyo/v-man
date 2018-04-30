@@ -7,7 +7,7 @@
     <div class="login-wrap wrap">
 
       <login-bar />
-      <!-- <login-board /> Greeting and logo -->
+      <login-board />
 
     </div>
 
@@ -33,12 +33,14 @@
 
   // Import Vue Components
   import loginBar from './components/login/login-bar'
+  import loginBoard from './components/login/login-board'
 
   export default {
 
     name: 'App',
     components: {
-      loginBar
+      loginBar,
+      loginBoard
     }
 
   }
