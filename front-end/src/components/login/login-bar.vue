@@ -6,8 +6,25 @@
 
       <img src="/static/images/logo/vertigo_logo.png" alt="vertigo logo" />
 
-      <input class="login-input" id="username-input" type="text" name="username" placeholder="username" @keyup="validate" v-model="username" />
-      <input class="login-input" id="password-input" type="password" name="password" placeholder="password" @keyup="validate" v-model="password" />
+      <div class="login-input-wrap">
+
+        <input class="login-input" id="username-input" type="text" name="username" placeholder="username" @keyup="validate" v-model="username" />
+
+        <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
+        <img class="login-lock" v-if="validation === 'error'" :src="error" />
+        <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+
+      </div>
+
+      <div class="login-input-wrap">
+
+        <input class="login-input" id="password-input" type="password" name="password" placeholder="password" @keyup="validate" v-model="password" />
+
+        <img class="login-lock" v-if="validation === 'locked'" :src="locked" />
+        <img class="login-lock" v-if="validation === 'error'" :src="error" />
+        <img class="login-lock" v-if="validation === 'success'" :src="unlocked" />
+
+      </div>
 
     </form>
 
@@ -21,6 +38,13 @@
 
   export default {
     name: "login-bar",
+    data() {
+      return {
+        locked: "/static/images/icons/login/login_lock.png",
+        error: "/static/images/icons/login/login_error.png",
+        unlocked: "/static/images/icons/login/login_unlock.png"
+      }
+    },
     computed: {
       username: {
         get() { return this.$store.state.login.username },
@@ -62,6 +86,12 @@
           }
 
       },1000 )
+
+    },
+
+    watch: {
+      validation() {
+      }
     }
   }
 
@@ -94,17 +124,54 @@
     grid-row-gap: 20px;
   }
 
-  .login-input {
+  .login-input-wrap {
 
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: dimgray;
 
-    padding: 0px 20px;
+    position: relative;
 
     border: none;
     border-radius: 30px;
     background-color: whitesmoke;
+  }
+
+  .login-input {
+
+    padding: 10px 20px;
+
+    border: none;
+    background-color: transparent;
+  }
+
+  .login-lock {
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    padding: 14px;
+
+    border-radius: 30px;
+
+    transform: rotateY(-180deg);
+
+    transition: all 0.5s ease;
+  }
+
+  .login-success {
+
+    transform: rotateY(180deg);
+
+    background-color: green;
+  }
+
+  .login-error {
+
+    transform: rotateY(0deg);
+
+    background-color: tomato;
   }
 
 </style>

@@ -52,7 +52,9 @@ export default {
               commit( 'updateValidation', 'success' )
             })
           }
-      }).catch( error => { commit( 'updateValidation', 'error' ) })
+      }).catch( error => {
+          commit( 'updateValidation', 'error' )
+        })
     }
   }
 }
