@@ -88,8 +88,6 @@
     display: grid;
     grid-template-columns: 400px auto;
     grid-template-rows: 100%;
-
-    display: none;
   }
 
   .dash-wrap {
@@ -98,7 +96,7 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 400px auto;
+    grid-template-columns: 410px auto;
     grid-template-rows: 100%;
   }
 

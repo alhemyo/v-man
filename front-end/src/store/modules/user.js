@@ -4,16 +4,16 @@ export default {
 
   state: {
     id: "",
-    name: "",
-    surname: "",
+    name: "Jane",
+    surname: "Doe",
     phone: "",
     address: "",
     dashUsername: "",
     email: "",
-    avatar: "",
-    position: "",
-    status: "",
-    admin: false
+    avatar: "../static/images/janeDoe.png",
+    position: "DESIGN",
+    status: "online",
+    admin: true
   },
 
   getters: {

@@ -45,6 +45,7 @@ export default {
               $('.login-input').prop('disabled', true) // Disable login inputs on success
               let name = data.body.username.split(" ") // Split username
               commit( 'updateName', name[0] )
+              commit( 'updateSurname', name[1] )
               commit( 'updateId', data.body.id )
               commit( 'updateDashUsername', data.body.username )
               commit( 'updateEmail', data.body.email )
