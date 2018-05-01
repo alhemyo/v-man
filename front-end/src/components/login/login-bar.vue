@@ -131,6 +131,8 @@
     position: relative;
 
     background-color: white;
+
+    transition: all 0.3s ease;
   }
 
   .login-form {

@@ -13,7 +13,7 @@
 
     <div class="dash-wrap wrap">
 
-      <!-- <dashboard /> User Info -->
+      <dashboard />
       <div class="loader">
 
         <!-- <project /> Selected Project -->
@@ -34,13 +34,15 @@
   // Import Vue Components
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
+  import dashboard from './components/dashboard/dashboard'
 
   export default {
 
     name: 'App',
     components: {
       loginBar,
-      loginBoard
+      loginBoard,
+      dashboard
     }
 
   }
@@ -65,6 +67,8 @@
     margin: 0;
     margin: auto;
     padding: 0;
+
+    overflow: hidden;
   }
 
   .wrap {
@@ -80,6 +84,18 @@
   .login-wrap {
 
     z-index: 10;
+
+    display: grid;
+    grid-template-columns: 400px auto;
+    grid-template-rows: 100%;
+
+    display: none;
+  }
+
+  .dash-wrap {
+
+    width: 100%;
+    height: 100vh;
 
     display: grid;
     grid-template-columns: 400px auto;

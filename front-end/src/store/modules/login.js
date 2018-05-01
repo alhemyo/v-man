@@ -52,6 +52,13 @@ export default {
               commit( 'updatePosition', data.body.position )
               commit( 'updateStatus', data.body.status )
               commit( 'updateValidation', 'success' )
+
+              setTimeout( () => {
+                let logBoardW = $('.login-board-wrap').outerWidth()
+                $('.login-bar').css({ transform: "translateX(-400px)" })
+                $('.login-board-wrap').css({ transform: "translateX(" + logBoardW + "px)" })
+                $('.login-wrap').hide(4000)
+              },3000 )
             })
           }
       }).catch( error => {

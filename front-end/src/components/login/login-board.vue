@@ -51,6 +51,8 @@
     position: relative;
 
     background-color: #E74040;
+
+    transition: all 0.3s ease;
   }
 
   .login-board {
@@ -107,8 +109,6 @@
     display: inline-block;
 
     padding: 20px;
-
-    border-top: 1px solid rgba(255,255,255,0.3);
     opacity: 0;
   }
 
