@@ -50,7 +50,7 @@ export default {
               commit( 'updateDashUsername', data.body.username )
               commit( 'updateEmail', data.body.email )
               commit( 'updateAdmin', data.body.is_admin )
-              commit( 'updatePosition', data.body.position )
+              commit( 'updatePosition', data.body.position.toUpperCase() )
               commit( 'updateStatus', data.body.status )
               commit( 'updateValidation', 'success' )
 
@@ -69,7 +69,8 @@ export default {
           setTimeout( ()=> {
             commit( 'updateValidation', 'locked' )
             $('.login-input').prop('disabled', false)
-            $('#username-input').focus()
+            $('#username-input').attr('placeholder', 'username').focus()
+            $('#password-input').attr('placeholder', 'password')
             this.state.login.username = "",
             this.state.login.password = ""
           },3000 )

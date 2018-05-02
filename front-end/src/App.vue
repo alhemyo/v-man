@@ -86,7 +86,7 @@
     z-index: 10;
 
     display: grid;
-    grid-template-columns: 400px auto;
+    grid-template-columns: 400px minmax(600px, auto);
     grid-template-rows: 100%;
   }
 
@@ -96,7 +96,7 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 410px auto;
+    grid-template-columns: 410px minmax(600px, auto);
     grid-template-rows: 100%;
   }
 
