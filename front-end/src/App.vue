@@ -18,8 +18,8 @@
 
         <!-- <project /> Selected Project -->
         <!-- <activity /> User activity log -->
-        <!-- <add-project /> Add new project form -->
-        <!-- <add-user /> Add new user form -->
+        <add-project />
+        <add-user />
 
       </div>
 
@@ -35,6 +35,8 @@
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
   import dashboard from './components/dashboard/dashboard'
+  import addProject from './components/forms/add-project'
+  import addUser from './components/forms/add-user'
 
   export default {
 
@@ -42,7 +44,9 @@
     components: {
       loginBar,
       loginBoard,
-      dashboard
+      dashboard,
+      addProject,
+      addUser
     }
 
   }
@@ -88,6 +92,8 @@
     display: grid;
     grid-template-columns: 400px minmax(600px, auto);
     grid-template-rows: 100%;
+
+    display: none;
   }
 
   .dash-wrap {
@@ -100,6 +106,55 @@
     grid-template-rows: 100%;
   }
 
+  .loader {
+
+    position: relative;
+
+    overflow: auto;
+  }
+
   /* Global CSS */
+
+  .nav-split {
+
+    height: 80px;
+
+    position: relative;
+  }
+
+  .input-select-list {
+
+    width: 100%;
+    height: 40px;
+    list-style: none;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    padding: 0px 20px;
+
+    background-color: whitesmoke;
+    border-radius: 0px 10px 10px 10px;
+
+    overflow: hidden;
+  }
+
+  .input-select-item {
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #9e9e9e;
+
+    padding: 14px 0px;
+  }
+
+  .input-select-list li {
+
+    font-weight: bold;
+    color: dimgray;
+
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
 
 </style>
