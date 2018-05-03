@@ -102,7 +102,7 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 410px minmax(600px, auto);
+    grid-template-columns: 410px minmax(400px, auto);
     grid-template-rows: 100%;
   }
 

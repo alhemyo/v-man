@@ -6,16 +6,24 @@
 
     <form class="add-user" name="add-user">
 
-      <p class="add-user-title">Add new minion</p>
+      <p class="add-user-title">Add new user</p>
 
-      <div class="add-user-input-wrap">
+      <div class="add-user-input-wrap combined">
 
         <p class="add-user-input-desc">Admin</p>
-        <div class="add-user-checkbox">
+        <div class="add-user-checkbox no-radius">
 
           <div class="add-user-checkbox-box"></div>
 
         </div>
+
+        <select class="add-user-input select">
+
+          <option hidden >Admin type</option>
+          <option value="uber">uber admin</option>
+          <option value="regular">regular admin</option>
+
+        </select>
 
       </div>
 
@@ -30,6 +38,33 @@
 
         <p class="add-user-input-desc">Surname</p>
         <input class="add-user-input" type="text" name="surname" placeholder="Doe" />
+
+      </div>
+
+      <div class="add-user-input-wrap">
+
+        <p class="add-user-input-desc">Gender</p>
+        <select class="add-user-input select">
+
+          <option hidden >Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+
+        </select>
+
+      </div>
+
+      <div class="add-user-input-wrap">
+
+        <p class="add-user-input-desc">Education</p>
+        <select class="add-user-input select">
+
+          <option hidden >Select category</option>
+          <option value="low">low</option>
+          <option value="mid">Mid</option>
+          <option value="high">High</option>
+
+        </select>
 
       </div>
 
@@ -73,7 +108,7 @@
       <div class="add-user-input-wrap">
 
         <p class="add-user-input-desc">Position</p>
-        <select class="add-user-input">
+        <select class="add-user-input select">
 
           <option hidden >Select Position</option>
           <option value="account">ACCOUNT</option>
@@ -134,6 +169,8 @@
 
     transform: translateX( -50% );
 
+    padding: 0px 20px;
+
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto auto auto auto;
@@ -153,8 +190,15 @@
   .add-user-input-wrap {
 
     display: grid;
-    grid-template-columns: minmax(min-content, 100px) auto;
+    grid-template-columns: minmax(min-content, 110px) auto;
     grid-template-rows: 40px;
+  }
+
+  .add-user-input-wrap select {
+
+    color: #8e8e8e;
+
+    height: 40px;
   }
 
   .add-user-input-wrap:nth-child(2) {
@@ -164,7 +208,13 @@
 
   .mult {
 
-    grid-template-columns: minmax(min-content, 100px) auto auto auto;
+    grid-template-columns: minmax(min-content, 110px) auto auto auto;
+    grid-column-gap: 2px;
+  }
+
+  .combined {
+
+    grid-template-columns: minmax(min-content, 110px) auto 1fr;
     grid-column-gap: 2px;
   }
 
@@ -177,6 +227,7 @@
     padding: 12px 20px;
 
     background-color: whitesmoke;
+    border-radius: 5px 0px 0px 5px;
   }
 
   .add-user-checkbox {
@@ -187,7 +238,7 @@
     padding-left: 20px;
 
     border: 1px solid whitesmoke;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 5px 5px 0px;
 
     cursor: pointer;
   }
@@ -217,9 +268,14 @@
     position: relative;
 
     border: 1px solid whitesmoke;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 5px 5px 0px;
 
     padding: 12px 20px;
+  }
+
+  .select {
+
+    padding: 0px 20px;
   }
 
   .no-radius {
