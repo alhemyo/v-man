@@ -36,6 +36,7 @@ font-family: 'Roboto', sans-serif;
     
     font-size: 14px;
     color: #9E9E9E;
+    user-select: none;
     
     padding: 14px;
 }
@@ -92,6 +93,7 @@ font-family: 'Roboto', sans-serif;
 
 .input-select-desc {
 
+    user-select: none;
     white-space: nowrap;
     
     padding: 12px 0px;
@@ -99,6 +101,8 @@ font-family: 'Roboto', sans-serif;
 
 .input-select-item {
     
+    user-select: none;
+
     padding: 12px 0px;
     
     border-top: 1px solid #F5F5F5;
