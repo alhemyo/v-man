@@ -3,6 +3,19 @@
 	
 	<form class="add-user" name="add-user">
 		
+		<!-- search user -->
+
+		<div class="column column-00">
+			
+			<div class="input-wrap">
+				
+				<p class="input-desc">Search user</p>
+				<input class="input" type="text" name="user" placeholder="ex: Jane Doe">
+
+			</div>
+
+		</div>
+
 		<!-- options -->
 
 		<div class="column column-01">
@@ -180,7 +193,7 @@
 
 		display: grid;
 		grid-template-columns: 100%;
-		grid-template-rows: 60px 40px;
+		grid-template-rows: 60px 60px 40px;
 		grid-row-gap: 20px;
 	}
 
@@ -191,6 +204,13 @@
 		display: grid;
 		grid-template-columns: auto;
 		grid-column-gap: 20px;
+	}
+
+	.column-00 {
+
+		padding: 0px;
+
+		border-bottom: 1px solid whitesmoke;
 	}
 	
 	.column-01 {
