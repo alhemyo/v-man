@@ -4,130 +4,162 @@
 
     <div class="nav-split"></div>
 
-    <form class="add-user" name="add-user">
+    <div class="user-config-wrap">
 
-      <p class="add-user-title">Add new user</p>
+      <div class="user-config-nav">
 
-      <div class="add-user-input-wrap combined">
-
-        <p class="add-user-input-desc">Admin</p>
-        <div class="add-user-checkbox no-radius">
-
-          <div class="add-user-checkbox-box"></div>
-
-        </div>
-
-        <select class="add-user-input select">
-
-          <option hidden >Admin type</option>
-          <option value="uber">uber admin</option>
-          <option value="regular">regular admin</option>
-
-        </select>
+        <p class="user-config-nav-link">Add User</p>
+        <p class="user-config-nav-link">Edit User</p>
+        <p class="user-config-nav-link">Delete User</p>
 
       </div>
 
-      <div class="add-user-input-wrap">
+      <div class="user-config-loader">
 
-        <p class="add-user-input-desc">Name</p>
-        <input class="add-user-input" type="text" name="name" placeholder="Jane" />
+        <form class="add-user" name="add-user">
 
-      </div>
+          <!-- admin -->
 
-      <div class="add-user-input-wrap">
+          <div class="add-user-input-wrap checkbox-input double condensed">
 
-        <p class="add-user-input-desc">Surname</p>
-        <input class="add-user-input" type="text" name="surname" placeholder="Doe" />
+            <p class="add-user-input-desc">Admin</p>
+            <div class="checkbox-wrap">
 
-      </div>
+              <div class="checkbox-box"></div>
 
-      <div class="add-user-input-wrap">
+            </div>
 
-        <p class="add-user-input-desc">Gender</p>
-        <select class="add-user-input select">
+            <div class="add-user-input select" @click="toggleSelect($event)">
 
-          <option hidden >Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+              <p class="select-desc">Admin type ▼</p>
 
-        </select>
+              <ul class="select-list">
 
-      </div>
+                <li class="select-item">admin</li>
+                <li class="select-item">uber admin</li>
 
-      <div class="add-user-input-wrap">
+              </ul>
 
-        <p class="add-user-input-desc">Education</p>
-        <select class="add-user-input select">
+            </div>
 
-          <option hidden >Select category</option>
-          <option value="low">low</option>
-          <option value="mid">Mid</option>
-          <option value="high">High</option>
+          </div>
 
-        </select>
+          <!-- position -->
 
-      </div>
+          <div class="add-user-input-wrap">
 
-      <div class="add-user-input-wrap">
+            <p class="add-user-input-desc">Positon</p>
 
-        <p class="add-user-input-desc">Address</p>
-        <input class="add-user-input" type="text" name="address" placeholder="Current living address" />
+            <div class="add-user-input select" @click="toggleSelect($event)">
 
-      </div>
+              <p class="select-desc">select Positon ▼</p>
 
-      <div class="add-user-input-wrap">
+              <ul class="select-list">
 
-        <p class="add-user-input-desc">Phone</p>
-        <input class="add-user-input" type="text" name="phone" value="00389" />
+                <li class="select-item">Account</li>
+                <li class="select-item">Sys admin</li>
+                <li class="select-item">3D</li>
+                <li class="select-item">MGFX</li>
+                <li class="select-item">Design</li>
 
-      </div>
+              </ul>
 
-      <div class="add-user-input-wrap mult">
+            </div>
 
-        <p class="add-user-input-desc">Birthday</p>
-        <input class="add-user-input no-radius" type="text" name="day" placeholder="day" maxlength="2" />
-        <input class="add-user-input no-radius" type="text" name="month" placeholder="month" maxlength="2" />
-        <input class="add-user-input" type="text" name="year" placeholder="year" maxlength="4" />
+          </div>
 
-      </div>
+          <!-- gender -->
 
-      <div class="add-user-input-wrap">
+          <div class="add-user-input-wrap">
 
-        <p class="add-user-input-desc">EMBG</p>
-        <input class="add-user-input" type="text" name="phone" placeholder="0000000000000" maxlength="13" />
+            <p class="add-user-input-desc">Gender</p>
 
-      </div>
+            <div class="add-user-input select" @click="toggleSelect($event)">
 
-      <div class="add-user-input-wrap">
+              <p class="select-desc">select Gender ▼</p>
 
-        <p class="add-user-input-desc">Email</p>
-        <input class="add-user-input" type="email" name="email" placeholder="user@vertigo.com.mk" />
+              <ul class="select-list">
 
-      </div>
+                <li class="select-item">Male</li>
+                <li class="select-item">Female</li>
 
-      <div class="add-user-input-wrap">
+              </ul>
 
-        <p class="add-user-input-desc">Position</p>
-        <select class="add-user-input select">
+            </div>
 
-          <option hidden >Select Position</option>
-          <option value="account">ACCOUNT</option>
-          <option value="system admin">SYS ADMIN</option>
-          <option value="3d">3D</option>
-          <option value="MGFX">MGFX</option>
-          <option value="DESIGN">DESIGN</option>
+          </div>
 
-        </select>
+          <!-- name -->
 
-      </div>
+          <div class="add-user-input-wrap">
 
-      <div>
+            <p class="add-user-input-desc">Name</p>
+            <input class="add-user-input" type="text" name="name" />
 
-        <img class="add-user-submit" src="/static/images/icons/add.png" alt="add" title="add user" />
+          </div>
 
-      </div>
+          <!-- surname -->
 
-    </form>
+          <div class="add-user-input-wrap">
+
+            <p class="add-user-input-desc">Surname</p>
+            <input class="add-user-input" type="text" name="surname" />
+
+          </div>
+
+          <!-- birthday -->
+
+          <div class="add-user-input-wrap tripple">
+
+            <p class="add-user-input-desc">Birthday</p>
+            <input class="add-user-input" type="text" name="day" maxlength="2" placeholder="day" />
+            <input class="add-user-input" type="text" name="month" maxlength="2" placeholder="month" />
+            <input class="add-user-input" type="text" name="year" maxlength="4" placeholder="year" />
+
+          </div>
+
+          <!-- UMCN -->
+
+          <div class="add-user-input-wrap">
+
+            <p class="add-user-input-desc">UMCN</p>
+            <input class="add-user-input" type="text" name="umcn" maxlength="13" />
+
+          </div>
+
+          <!-- address -->
+
+          <div class="add-user-input-wrap double">
+
+            <p class="add-user-input-desc">Address</p>
+            <input class="add-user-input" type="text" name="city" placeholder="city" />
+            <input class="add-user-input" type="text" name="address" placeholder="address" />
+
+          </div>
+
+          <!-- phone -->
+
+          <div class="add-user-input-wrap">
+
+            <p class="add-user-input-desc">Phone</p>
+            <input class="add-user-input" type="text" name="phone" />
+
+          </div>
+
+          <!-- email -->
+
+          <div class="add-user-input-wrap">
+
+            <p class="add-user-input-desc">Email</p>
+            <input class="add-user-input" type="email" name="email" />
+
+          </div>
+
+        </form>
+
+      </div> <!-- end user-config-loader -->
+
+    </div>
 
   </div>
 
@@ -136,7 +168,12 @@
 <script>
 
   export default {
-    name: 'add-user'
+    name: 'add-user',
+    methods: {
+      toggleSelect($event) {
+        $($event.currentTarget).find('.select-list').toggleClass('select-list-down').find('.select-item').toggleClass('select-item-in')
+      }
+    }
   }
 
 </script>
@@ -153,158 +190,222 @@
     width: 100%;
     height: 100%;
 
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80px auto;
+  }
+
+  .user-config-wrap {
+
+    width: 100%;
+    max-width: 1200px;
+
+    position: relative;
+    margin: auto;
+    margin-top: 0px;
+
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-rows: 40px auto;
+
+    padding: 0px 40px;
+  }
+
+  .user-config-nav {
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 40px;
+    grid-column-gap: 4px;
+
+  }
+
+  .user-config-nav-link {
+
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    color: #BDBDBD;
+
+    padding: 12px;
+
+    border-bottom: 4px solid whitesmoke;
+
+    transition: 0.2s ease;
+
+    cursor: pointer;
+  }
+
+  .user-config-nav-link:hover {
+
+    color: #9E9E9E;
+
+    border-bottom: 4px solid lightgray;
+  }
+
+  .user-config-loader {
+
+    padding: 20px;
   }
 
   .add-user {
 
     width: 100%;
-    max-width: 800px;
     height: auto;
 
-    position: absolute;
-    left: 50%;
-
-    transform: translateX( -50% );
-
-    padding: 0px 20px;
-
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto auto auto;
-    grid-gap: 2px;
-  }
-
-  .add-user-title {
-
-    font-family: 'Roboto', sans-serif;
-    color: dimgray;
-
-    padding: 20px 0px;
-
-    border-bottom: 1px solid whitesmoke;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
   }
 
   .add-user-input-wrap {
 
     display: grid;
-    grid-template-columns: minmax(min-content, 110px) auto;
+    grid-template-columns: 110px auto;
     grid-template-rows: 40px;
-  }
+    grid-column-gap: 20px;
 
-  .add-user-input-wrap select {
-
-    color: #8e8e8e;
-
-    height: 40px;
-  }
-
-  .add-user-input-wrap:nth-child(2) {
-
-    padding-top: 20px;
-  }
-
-  .mult {
-
-    grid-template-columns: minmax(min-content, 110px) auto auto auto;
-    grid-column-gap: 2px;
-  }
-
-  .combined {
-
-    grid-template-columns: minmax(min-content, 110px) auto 1fr;
-    grid-column-gap: 2px;
+    padding: 14px 0px;
   }
 
   .add-user-input-desc {
 
     font-family: 'Roboto', sans-serif;
+    font-weight: bold;
     font-size: 14px;
-    color: rgba(0,0,0,0.3);
-
-    padding: 12px 20px;
-
-    background-color: whitesmoke;
-    border-radius: 5px 0px 0px 5px;
-  }
-
-  .add-user-checkbox {
-
-    width: 48px;
+    color: #BDBDBD;
 
     padding: 12px;
-    padding-left: 20px;
-
-    border: 1px solid whitesmoke;
-    border-radius: 0px 5px 5px 0px;
-
-    cursor: pointer;
-  }
-
-  .add-user-checkbox-box {
-
-    width: 100%;
-    height: 100%;
-
-    border: 2px solid gray;
-    border-radius: 10px;
-  }
-
-  .add-user-checkbox:hover .add-user-checkbox-box {
-
-    background-color: lightgray;
   }
 
   .add-user-input {
 
-    width: 100%;
-
     font-family: 'Roboto', sans-serif;
-    color: dimgray;
-    appearance: none;
+    font-size: 14px;
+    color: #9E9E9E;
 
-    position: relative;
-
-    border: 1px solid whitesmoke;
-    border-radius: 0px 5px 5px 0px;
-
-    padding: 12px 20px;
-  }
-
-  .select {
+    background-color: transparent;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
 
     padding: 0px 20px;
   }
 
-  .no-radius {
+  .tripple {
 
-    border-radius: 0px;
+    grid-template-columns: 110px auto auto auto;
   }
 
-  .add-user-submit {
+  .double {
+
+    grid-template-columns: 110px auto auto;
+  }
+
+  .condensed {
+
+    grid-template-columns: 110px max-content max-content max-content;
+  }
+
+  .checkbox-wrap {
 
     width: 40px;
     height: 40px;
 
     padding: 10px;
 
-    position: relative;
-    float: right;
-    margin-top: 20px;
-
-    background-color: tomato;
-    border-radius: 5px;
+    border: 1px solid #E0E0E0;
+    border-radius: 40px;
 
     cursor: pointer;
+  }
+
+  .checkbox-box {
+
+    width: 100%;
+    height: 100%;
+
+    background-color: whitesmoke;
+    border: 1px solid #E0E0E0;
+    border-radius: 30px;
+  }
+
+  .checkbox-wrap:hover .checkbox-box {
+
+    background-color: #E0E0E0;
+  }
+
+  .select {
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #BDBDBD;
+    text-align: center;
+
+    width: auto;
+    height: 40px;
+
+    padding: 12px 0px;
+
+    cursor: pointer;
+  }
+
+  .select-list {
+
+    list-style: none;
+
+    height: auto;
+    max-height: 0px;
+
+    padding: 0px 12px;
+    padding-bottom: 12px;
+
+    position: relative;
+    z-index: 0;
+
+    background-color: white;
+    border: 1px solid #E0E0E0;
+    border-top: none;
+    border-radius: 0px 0px 20px 20px;
+
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .select-list-down {
+
+    max-height: 800px;
+    z-index: 2;
+
+    padding: 12px;
+  }
+
+  .select-item {
+
+    padding: 12px;
+
+    border-top: 1px solid #F5F5F5;
+
+    opacity: 0;
 
     transition: 0.2s ease;
   }
 
-  .add-user-submit:hover {
+  .select-item-in {
 
-    background-color: #8BC34A;
+    opacity: 1;
   }
+
+  .select-item:nth-last-child(1) {
+
+    padding-bottom: 0px;
+  }
+
+  .select-item:hover {
+
+    color: dimgray;
+  }
+
 
 </style>

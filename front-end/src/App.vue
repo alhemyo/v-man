@@ -122,39 +122,4 @@
     position: relative;
   }
 
-  .input-select-list {
-
-    width: 100%;
-    height: 40px;
-    list-style: none;
-
-    position: absolute;
-    top: 0px;
-    left: 0px;
-
-    padding: 0px 20px;
-
-    background-color: whitesmoke;
-    border-radius: 0px 10px 10px 10px;
-
-    overflow: hidden;
-  }
-
-  .input-select-item {
-
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: #9e9e9e;
-
-    padding: 14px 0px;
-  }
-
-  .input-select-list li {
-
-    font-weight: bold;
-    color: dimgray;
-
-    border-top: 1px solid rgba(0,0,0,0.05);
-  }
-
 </style>
