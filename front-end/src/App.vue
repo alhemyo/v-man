@@ -19,7 +19,7 @@
         <!-- <project /> Selected Project -->
         <!-- <activity /> User activity log -->
         <add-project />
-        <add-user />
+        <user-config />
 
       </div>
 
@@ -35,8 +35,8 @@
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
   import dashboard from './components/dashboard/dashboard'
+  import userConfig from './components/dashboard/user-config'
   import addProject from './components/forms/add-project'
-  import addUser from './components/forms/add-user'
 
   export default {
 
@@ -46,7 +46,7 @@
       loginBoard,
       dashboard,
       addProject,
-      addUser
+      userConfig
     }
 
   }
