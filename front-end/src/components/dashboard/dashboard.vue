@@ -50,11 +50,6 @@
 
 <style scoped>
 
-  /* Google Fonts
-  font-family: 'Rubik', sans-serif;
-  font-family: 'Roboto', sans-serif;
-  */
-
   .dashboard {
 
     display: grid;

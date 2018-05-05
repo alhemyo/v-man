@@ -182,7 +182,7 @@
 
 </script>
 
-<style>
+<style scoped>
 
 	.add-user {
 

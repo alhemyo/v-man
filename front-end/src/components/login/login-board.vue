@@ -19,12 +19,8 @@
     name: "login-board",
 
     computed: {
-      validation: {
-        get() { return this.$store.state.login.validation }
-      },
-      name: {
-        get() { return this.$store.state.user.name }
-      }
+      validation: { get() { return this.$store.state.login.validation } },
+      name: { get() { return this.$store.state.user.name } }
     },
 
     watch: {
@@ -40,11 +36,6 @@
 </script>
 
 <style scoped>
-
-  /* Google Fonts
-  font-family: 'Rubik', sans-serif;
-  font-family: 'Roboto', sans-serif;
-  */
 
   .login-board-wrap {
 

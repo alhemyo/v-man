@@ -169,7 +169,7 @@
 
 </script>
 
-<style>
+<style scoped>
 
 	.add-user {
 
@@ -180,7 +180,7 @@
 
 		display: grid;
 		grid-template-columns: 100%;
-		grid-template-rows: 60px 40px;
+		grid-template-rows: 60px 40px ;
 		grid-row-gap: 20px;
 	}
 

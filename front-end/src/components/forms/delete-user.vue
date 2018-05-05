@@ -1,11 +1,16 @@
 
 <template>
-	
-	<div class="delete-user-wrap">
 		
-		<h1>Delete User</h1>
+		<form class="delete-user" name="delete-user">
+			
+			<div class="input-wrap">
+				
+				<p class="input-desc">Search user</p>
+				<input class="input" type="text" name="user" placeholder="ex: Jane Doe" />
 
-	</div>
+			</div>
+
+		</form>
 
 </template>
 
@@ -19,23 +24,17 @@
 
 <style scoped>
 
-	.delete-user-wrap {
+	.delete-user {
 
 		width: 100%;
-		height: 100%;
+		height: auto;
 
-		padding: 60px;
+		padding: 20px 0px;
 
-		position: relative;
-	}
-
-	h1 {
-
-		position: absolute;
-		left: 50%;
-		top: 50%;
-
-		transform: translate( -50%, -50% );
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 60px 40px;
+		grid-row-gap: 20px;
 	}
 
 </style>

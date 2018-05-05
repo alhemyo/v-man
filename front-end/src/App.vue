@@ -92,8 +92,6 @@
     display: grid;
     grid-template-columns: 400px minmax(600px, auto);
     grid-template-rows: 100%;
-
-    display: none;
   }
 
   .dash-wrap {
@@ -112,14 +110,4 @@
 
     overflow: auto;
   }
-
-  /* Global CSS */
-
-  .nav-split {
-
-    height: 80px;
-
-    position: relative;
-  }
-
 </style>

@@ -84,11 +84,6 @@
 
 <style scoped>
 
-  /* Google Fonts
-  font-family: 'Rubik', sans-serif;
-  font-family: 'Roboto', sans-serif;
-  */
-
   h1 {
     font-size: 20px;
     font-weight: 500;

@@ -4,8 +4,16 @@ font-family: 'Roboto', sans-serif;
 */
 
 * {
+    
     font-family: 'Roboto', sans-serif;
 }
+
+.nav-split {
+
+    height: 80px;
+
+    position: relative;
+  }
 
 /* input CSS */
 
