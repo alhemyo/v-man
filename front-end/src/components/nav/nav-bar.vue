@@ -33,7 +33,7 @@
   .nav-bar-title {
 
     font-family: 'Rubik', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: white;
     user-select: none;
@@ -42,7 +42,7 @@
     position: relative;
     float: left;
 
-    padding: 30px 40px;
+    padding: 28px 40px;
   }
 
   .nav-bar-title span {
