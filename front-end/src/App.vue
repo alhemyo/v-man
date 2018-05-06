@@ -2,7 +2,7 @@
 
   <div class="app-wrap">
 
-    <!-- <navbar /> Fixed nav for the entire app -->
+    <nav-bar />
 
     <div class="login-wrap wrap">
 
@@ -32,6 +32,7 @@
 <script>
 
   // Import Vue Components
+  import navBar from './components/nav/nav-bar'
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
   import dashboard from './components/dashboard/dashboard'
@@ -42,6 +43,7 @@
 
     name: 'App',
     components: {
+      navBar,
       loginBar,
       loginBoard,
       dashboard,
@@ -92,6 +94,8 @@
     display: grid;
     grid-template-columns: 400px minmax(600px, auto);
     grid-template-rows: 100%;
+
+    display: none;
   }
 
   .dash-wrap {

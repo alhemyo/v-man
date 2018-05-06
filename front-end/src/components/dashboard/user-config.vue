@@ -105,6 +105,7 @@
     grid-template-rows: 80px auto;
 
     overflow: hidden;
+    overflow-y: auto;
   }
 
   .user-config {
@@ -149,11 +150,11 @@
   .user-config-nav-link:hover {
     color: #9E9E9E;
 
-    border-bottom: 4px solid lightgray;
+    border-bottom: 4px solid #FFC107;
   }
 
   .user-config-loader {
-    
+
     padding: 20px;
   }
 

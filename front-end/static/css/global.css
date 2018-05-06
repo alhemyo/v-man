@@ -1,10 +1,11 @@
+
 /* Google Fonts
 font-family: 'Rubik', sans-serif;
 font-family: 'Roboto', sans-serif;
 */
 
 * {
-    
+
     font-family: 'Roboto', sans-serif;
 }
 
@@ -18,12 +19,12 @@ font-family: 'Roboto', sans-serif;
 /* input CSS */
 
 .input-wrap {
-    
+
     width: auto;
     height: auto;
-    
+
     position: relative;
-    
+
     display: grid;
     grid-template-columns: 110px auto;
     grid-template-rows: 40px;
@@ -41,20 +42,21 @@ font-family: 'Roboto', sans-serif;
 }
 
 .input-desc {
-    
+
     font-size: 14px;
     color: #9E9E9E;
     user-select: none;
-    
+    -moz-user-select: none;
+
     padding: 14px;
 }
 
 .input {
-    
+
     font-size: 14px;
     font-weight: 400;
     color: #757575;
-    
+
     width: auto;
     height: 40px;
 
@@ -66,116 +68,117 @@ font-family: 'Roboto', sans-serif;
 /* input select CSS */
 
 .input-select-list {
-    
+
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     text-align: center;
     list-style: none;
     color: #9E9E9E;
-    
+
     width: auto;
     height: auto;
     max-height: 40px;
-    
+
     position: relative;
     z-index: 1;
     padding: 0px 12px;
-    
+
     background-color: white;
     border: 1px solid #E0E0E0;
     border-radius: 20px;
-    
+
     cursor: pointer;
-    
+
     transition: all 0.2s ease;
-    
+
     overflow: hidden;
 }
 
 .input-select-list:hover {
-    
+
     max-height: 1000px;
-    
+
     z-index: 2;
 }
 
 .input-select-desc {
 
     user-select: none;
+    -moz-user-select: none;
     white-space: nowrap;
-    
+
     padding: 12px 0px;
 }
 
 .input-select-item {
-    
+
     user-select: none;
 
     padding: 12px 0px;
-    
+
     border-top: 1px solid #F5F5F5;
-    
+
     transition: color 0.2s ease;
 }
 
 .input-select-item:hover {
-    
+
     font-weight: 500;
-    color: #616161;
+    color: #FFC107;
 }
 
 /* input checkbox CSS */
 
 .input-checkbox-wrap {
-    
+
     width: auto;
     height: auto;
-    
+
     position: relative;
-    
+
     display: grid;
     grid-template-columns: min-content max-content;
     grid-template-rows: 40px;
 }
 
 .input-checkbox {
-    
+
     width: 40px;
     height: 40px;
-    
+
     padding: 10px;
-    
+
     background-color: white;
     border: 1px solid #E0E0E0;
     border-radius: 20px;
-    
+
     cursor: pointer;
 }
 
 .input-box {
-    
+
     width: 100%;
     height: 100%;
-    
+
     position: relative;
-    
+
     background-color: whitesmoke;
     border: 1px solid #E0E0E0;
     border-radius: 20px;
-    
+
     transition: all 0.2s ease;
 }
 
 .input-checkbox:hover .input-box {
-    
-    background-color: #E0E0E0;
+
+    background-color: #FFC107;
 }
 
 .input-checkbox-desc {
-    
+
     font-size: 14px;
     color: #9E9E9E;
-    
+
     padding: 14px;
 }
 
