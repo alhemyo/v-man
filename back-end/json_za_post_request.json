@@ -7,11 +7,31 @@
 	"status": "online",
 	"avatar": "none",
 	"password": "123",
-  "gender": "Male",
-  "education": "high",
-  "address": "bul.Partizanski odredi",
-  "city": "Skopje",
-  "phone_number": "070111111",
-  "birthday": "05.04.1988",
-  "umcn": "192894785792"
+	"gender": "Male",
+	"education": "high",
+	"address": "bul.Partizanski odredi",
+	"city": "Skopje",
+	"phone_number": "070111111",
+	"birthday": "05.04.1988",
+	"umcn": "192894785792"
+}
+
+ // 
+
+{
+	name: "",
+	surname: "",
+	email: "",
+	position: "",
+	is_admin: false,
+	admin_type: "",
+	gender: "",
+	education: "",
+	address: "",
+	city: "",
+	phone_number: "",
+	day: "",
+	month: "",
+	year: "",
+	umcn: ""
 }

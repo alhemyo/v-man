@@ -23,7 +23,7 @@
 
       <!-- admin type -->
 
-      <div class="input-select-wrap" id="adminType" v-show="this.postBody.is_admin" >
+      <div class="input-select-wrap adminType" :class="{ 'rollIn': this.postBody.is_admin }" >
 
           <ul class="input-select-list">
 
@@ -38,7 +38,7 @@
 
   		<!-- Position -->
 
-      <div class="input-select-wrap" id="position">
+      <div class="input-select-wrap">
 
           <ul class="input-select-list">
 
@@ -56,7 +56,7 @@
 
       <!-- Gender -->
 
-      <div class="input-select-wrap" id="gender">
+      <div class="input-select-wrap">
 
           <ul class="input-select-list">
 
@@ -71,7 +71,7 @@
 
       <!-- education -->
 
-      <div class="input-select-wrap" id="education">
+      <div class="input-select-wrap">
 
           <ul class="input-select-list">
 
@@ -87,75 +87,76 @@
 
 		</div>
 
-	    <!-- name -->
+    <!-- name -->
 
-	    <div class="column column-02">
+    <div class="column column-02">
 
-	    	<div class="input-wrap">
+    	<div class="input-wrap double">
 
-	    		<p class="input-desc">Full name</p>
-	    		<input class="input" type="text" name="name" placeholder="Name Surname" v-model="fullname" />
+    		<p class="input-desc">Full name</p>
+    		<input class="input" type="text" name="name" placeholder="Name" v-model="postBody.name" />
+				<input class="input" type="text" name="surname" placeholder="Surname" v-model="postBody.surname" />
 
-	    	</div>
+    	</div>
 
-	    </div>
+    </div>
 
-	    <!-- Birth info -->
+    <!-- Birth info -->
 
-	    <div class="column column-03">
+    <div class="column column-03">
 
-	    	<div class="input-wrap quadro">
+    	<div class="input-wrap quadro">
 
-	    		<p class="input-desc">Birth info</p>
+    		<p class="input-desc">Birth info</p>
 
-	    		<input class="input small" type="text" name="day" maxlength="2" placeholder="day" />
-	    		<input class="input small" type="text" name="month" maxlength="2" placeholder="month" />
-	    		<input class="input small" type="text" name="year" maxlength="4" placeholder="year" />
-	    		<input class="input" type="text" name="umcn" maxlength="13" placeholder="UMCN">
+    		<input class="input small" type="text" name="day" maxlength="2" placeholder="day" v-model="postBody.day" />
+    		<input class="input small" type="text" name="month" maxlength="2" placeholder="month" v-model="postBody.month" />
+    		<input class="input small" type="text" name="year" maxlength="4" placeholder="year" v-model="postBody.year" />
+    		<input class="input" type="text" name="umcn" maxlength="13" placeholder="UMCN" v-model="postBody.umcn" />
 
-	    	</div>
+    	</div>
 
-	    </div>
+    </div>
 
-	    <!-- address -->
+    <!-- address -->
 
-	    <div class="column column-04">
+    <div class="column column-04">
 
-	    	<div class="input-wrap double">
+    	<div class="input-wrap double">
 
-	    		<p class="input-desc">Address</p>
-	    		<input class="input" type="text" name="city" placeholder="city">
-	    		<input class="input" type="text" name="address" placeholder="address">
+    		<p class="input-desc">Address</p>
+    		<input class="input" type="text" name="city" placeholder="city" v-model="postBody.city" />
+    		<input class="input" type="text" name="address" placeholder="address" v-model="postBody.address" />
 
-	    	</div>
+    	</div>
 
-	    </div>
+    </div>
 
-	    <!-- contact -->
+    <!-- contact -->
 
-	    <div class="column column-04">
+    <div class="column column-04">
 
-	    	<div class="input-wrap double">
+    	<div class="input-wrap double">
 
-	    		<p class="input-desc">Contact</p>
-	    		<input class="input" type="phone" name="phone" placeholder="phone">
-	    		<input class="input" type="email" name="address" placeholder="email">
+    		<p class="input-desc">Contact</p>
+    		<input class="input" type="phone" name="phone" placeholder="phone" v-model="postBody.phone_number" />
+    		<input class="input" type="email" name="address" placeholder="email" v-model="postBody.email" />
 
-	    	</div>
+    	</div>
 
-	    </div>
+    </div>
 
-	    <!-- submit -->
+    <!-- submit -->
 
-	    <div class="column column-05">
+    <div class="column column-05">
 
-	    	<div class="submit-wrap" title="add user">
+    	<div class="submit-wrap" title="add user" @click="addUser" >
 
-	    		<img class="submit-icon" src="/static/images/icons/add.png" alt="add user" />
+    		<img class="submit-icon" src="/static/images/icons/add.png" alt="add user" />
 
-	    	</div>
+    	</div>
 
-	    </div>
+    </div>
 
 	</form>
 
@@ -172,7 +173,6 @@
 				positonSelected: false,
 				genderSelected: false,
 				educationSelected: false,
-				fullname: "",
 				postBody: {
 					name: "",
 					surname: "",
@@ -180,14 +180,14 @@
 					position: "Position",
 					is_admin: false,
 					admin_type: "Admin type",
-					status: "",
-					avatar: "",
 				  gender: "Gender",
 				  education: "Education",
 				  address: "",
 				  city: "",
 				  phone_number: "",
-				  birthday: "",
+				  day: "",
+					month: "",
+					year: "",
 				  umcn: ""
 				}
 			}
@@ -210,10 +210,13 @@
 			getEducation($event) {
 				this.postBody.education = $($event.currentTarget).html()
 				this.educationSelected = true
+			},
+			addUser() {
+				console.log(this.postBody)
 			}
-		}
-		
-	}
+		} // end methods
+
+	} // end export
 
 </script>
 
@@ -243,7 +246,7 @@
 
 	.column-01 {
 
-		grid-template-columns: auto auto auto auto auto;
+		grid-template-columns: min-content auto auto auto auto;
 
 		padding-bottom: 20px;
 
@@ -257,6 +260,21 @@
 		padding-top: 20px;
 
 		display: block;
+	}
+
+	.adminType {
+
+		transform: rotateX(-90deg);
+		opacity: 0;
+
+		transition: all .2s ease;
+	}
+
+	.rollIn {
+
+		transform: rotateX(0deg);
+		opacity: 1;
+		z-index: 1;
 	}
 
 </style>

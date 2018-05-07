@@ -4,7 +4,7 @@
 
     <div class="nav-split">
 
-      <p class="settings-title" :class="{ 'open-settings-title': this.activeSettings }" >Settings</p>
+      <p class="settings-title" :class="{ 'open-settings-title': this.activeSettings }" >| Settings</p>
 
     </div>
 
