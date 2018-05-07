@@ -1,6 +1,6 @@
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import Column, Integer, String, Boolean, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Date, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -22,10 +22,18 @@ class User(Base):
     username = Column(String(255), unique=True, nullable=False)
     email = Column(String(255), unique=True)
     password = Column(String(255), nullable=False)
-    position = Column(String(50))
-    is_admin = Column(Boolean)
+    gender = Column(String(10))
+    education = Column(String(10))
+    address = Column(String(200))
+    city = Column(String(100))
+    phone = Column(String(30))
+    birthday = Column(Date)
+    umcn = Column(String(50))
     status = Column(String(50))
     avatar = Column(String(255))
+    position = Column(String(50))
+    is_admin = Column(Boolean)
+    admin_type = Column(String(50))
     projects = relationship("Project", secondary=user_project)
 
     def set_password(self, password):
@@ -42,8 +50,16 @@ class User(Base):
             'username': self.username,
             'password': self.password,
             'email': self.email,
+            'birth_info': self.birthday,
+            'gender': self.gender,
+            'education': self.education,
+            'umcn': self.umcn,
+            'address': self.address,
+            'city': self.city,
+            'phone_number': self.phone,
             'position': self.position,
             'is_admin': self.is_admin,
+            'admin_type': self.admin_type,
             'status': self.status,
             'avatar': self.avatar,
             'projects': [s.serialize for s in self.projects]

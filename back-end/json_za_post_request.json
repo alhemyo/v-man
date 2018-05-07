@@ -1,0 +1,17 @@
+{
+	"username": "Ignat Petrov",
+	"email": "ignat14@gmail.com",
+	"position": "3D",
+	"is_admin": "True",
+	"admin_type": "uber admin",
+	"status": "online",
+	"avatar": "none",
+	"password": "123",
+  "gender": "Male",
+  "education": "high",
+  "address": "bul.Partizanski odredi",
+  "city": "Skopje",
+  "phone_number": "070111111",
+  "birthday": "05.04.1988",
+  "umcn": "192894785792"
+}
