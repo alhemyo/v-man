@@ -37,6 +37,9 @@ div:after {
 
 img {
 
+    user-select: none;
+    -moz-user-select: none;
+
     width: none;
     height: none;
 

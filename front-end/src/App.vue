@@ -3,6 +3,7 @@
   <div class="app-wrap">
 
     <nav-bar />
+    <settings />
 
     <div class="login-wrap wrap">
 
@@ -33,6 +34,7 @@
 
   // Import Vue Components
   import navBar from './components/nav/nav-bar'
+  import settings from './components/nav/settings'
   import loginBar from './components/login/login-bar'
   import loginBoard from './components/login/login-board'
   import dashboard from './components/dashboard/dashboard'
@@ -44,6 +46,7 @@
     name: 'App',
     components: {
       navBar,
+      settings,
       loginBar,
       loginBoard,
       dashboard,

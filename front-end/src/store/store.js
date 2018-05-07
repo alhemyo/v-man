@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import nav from './modules/nav'
 import login from './modules/login'
 import user from './modules/user'
 
@@ -13,6 +14,7 @@ export const store = new Vuex.Store({
   },
 
   modules: {
+    nav,
     login,
     user
   }

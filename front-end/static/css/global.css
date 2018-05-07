@@ -178,6 +178,8 @@ font-family: 'Roboto', sans-serif;
 
     font-size: 14px;
     color: #9E9E9E;
+    user-select: none;
+    -moz-user-select: none;
 
     padding: 14px;
 }
