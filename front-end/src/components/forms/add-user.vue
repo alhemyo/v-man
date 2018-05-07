@@ -11,9 +11,9 @@
 
       <div class="input-checkbox-wrap">
 
-              <div class="input-checkbox">
+              <div class="input-checkbox" @click="toggleAdmin">
 
-                  <div class="input-box"></div>
+                  <div class="input-box" :class="{ 'input-box-checked': this.postBody.is_admin }"></div>
 
               </div>
 
@@ -23,14 +23,14 @@
 
       <!-- admin type -->
 
-      <div class="input-select-wrap">
+      <div class="input-select-wrap" id="adminType" v-show="this.postBody.is_admin" >
 
           <ul class="input-select-list">
 
-              <p class="input-select-desc">Admin type <span>▼</span></p>
+              <p class="input-select-desc">{{ this.postBody.admin_type }} <span>▼</span></p>
 
-              <li class="input-select-item">admin</li>
-              <li class="input-select-item">uber admin</li>
+              <li class="input-select-item" @click="getAdminType($event)" >admin</li>
+              <li class="input-select-item" @click="getAdminType($event)" >uber admin</li>
 
           </ul>
 
@@ -38,17 +38,17 @@
 
   		<!-- Position -->
 
-      <div class="input-select-wrap">
+      <div class="input-select-wrap" id="position">
 
           <ul class="input-select-list">
 
-              <p class="input-select-desc">Position <span>▼</span></p>
+              <p class="input-select-desc">{{ this.postBody.position }} <span>▼</span></p>
 
-              <li class="input-select-item">Account</li>
-              <li class="input-select-item">Sys Admin</li>
-              <li class="input-select-item">3D</li>
-              <li class="input-select-item">MGFX</li>
-              <li class="input-select-item">Design</li>
+              <li class="input-select-item" @click="getPosition($event)" >Account</li>
+              <li class="input-select-item" @click="getPosition($event)" >Sys Admin</li>
+              <li class="input-select-item" @click="getPosition($event)" >3D</li>
+              <li class="input-select-item" @click="getPosition($event)" >MGFX</li>
+              <li class="input-select-item" @click="getPosition($event)" >Design</li>
 
           </ul>
 
@@ -56,14 +56,14 @@
 
       <!-- Gender -->
 
-      <div class="input-select-wrap">
+      <div class="input-select-wrap" id="gender">
 
           <ul class="input-select-list">
 
-              <p class="input-select-desc">Gender <span>▼</span></p>
+              <p class="input-select-desc">{{ this.postBody.gender }} <span>▼</span></p>
 
-              <li class="input-select-item">Male</li>
-              <li class="input-select-item">Female</li>
+              <li class="input-select-item" @click="getGender($event)" >Male</li>
+              <li class="input-select-item" @click="getGender($event)" >Female</li>
 
           </ul>
 
@@ -71,15 +71,15 @@
 
       <!-- education -->
 
-      <div class="input-select-wrap">
+      <div class="input-select-wrap" id="education">
 
           <ul class="input-select-list">
 
-              <p class="input-select-desc">Education <span>▼</span></p>
+              <p class="input-select-desc">{{ this.postBody.education }} <span>▼</span></p>
 
-              <li class="input-select-item">low</li>
-              <li class="input-select-item">mid</li>
-              <li class="input-select-item">high</li>
+              <li class="input-select-item" @click="getEducation($event)" >low</li>
+              <li class="input-select-item" @click="getEducation($event)" >mid</li>
+              <li class="input-select-item" @click="getEducation($event)" >high</li>
 
           </ul>
 
@@ -94,7 +94,7 @@
 	    	<div class="input-wrap">
 
 	    		<p class="input-desc">Full name</p>
-	    		<input class="input" type="text" name="name" placeholder="Name Surname" />
+	    		<input class="input" type="text" name="name" placeholder="Name Surname" v-model="fullname" />
 
 	    	</div>
 
@@ -164,7 +164,55 @@
 <script>
 
 	export default {
-		name: 'add-user'
+		name: 'add-user',
+
+		data() {
+			return {
+				adminTypeSelected: false,
+				positonSelected: false,
+				genderSelected: false,
+				educationSelected: false,
+				fullname: "",
+				postBody: {
+					name: "",
+					surname: "",
+					email: "",
+					position: "Position",
+					is_admin: false,
+					admin_type: "Admin type",
+					status: "",
+					avatar: "",
+				  gender: "Gender",
+				  education: "Education",
+				  address: "",
+				  city: "",
+				  phone_number: "",
+				  birthday: "",
+				  umcn: ""
+				}
+			}
+		}, // end data
+
+		methods: {
+			toggleAdmin() { this.postBody.is_admin = !this.postBody.is_admin },
+			getAdminType($event) {
+				this.postBody.admin_type = $($event.currentTarget).html()
+				this.adminTypeSelected = true
+			},
+			getPosition($event) {
+				this.postBody.position = $($event.currentTarget).html()
+				this.positonSelected = true
+			},
+			getGender($event) {
+				this.postBody.gender = $($event.currentTarget).html()
+				this.genderSelected = true
+			},
+			getEducation($event) {
+				this.postBody.education = $($event.currentTarget).html()
+				this.educationSelected = true
+			}
+		}
+		
 	}
 
 </script>

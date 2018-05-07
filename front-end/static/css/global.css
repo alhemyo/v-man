@@ -169,9 +169,12 @@ font-family: 'Roboto', sans-serif;
     transition: all 0.2s ease;
 }
 
-.input-checkbox:hover .input-box {
+.input-box-checked {
 
-    background-color: #FFC107;
+  background-color: #E74040;
+
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
 
 .input-checkbox-desc {
