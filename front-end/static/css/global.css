@@ -65,6 +65,11 @@ font-family: 'Roboto', sans-serif;
     border-radius: 20px;
 }
 
+.not-valid-input {
+
+  border: 2px solid tomato;
+}
+
 /* input select CSS */
 
 .input-select-list {
@@ -125,6 +130,11 @@ font-family: 'Roboto', sans-serif;
 
     font-weight: 500;
     color: #FFC107;
+}
+
+.not-valid-input-select-list {
+
+  border: 2px solid tomato;
 }
 
 /* input checkbox CSS */
@@ -227,4 +237,85 @@ font-family: 'Roboto', sans-serif;
     transform: rotate(90deg);
 }
 
+.submit-desc {
+
+  font-size: 14px;
+  color: tomato;
+
+  position: relative;
+  float: left;
+
+  padding: 14px;
+
+  opacity: 0;
+  transform: rotateX(-90deg);
+
+  transition: all 1s ease;
+}
+
+.open-submit-desc {
+
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
 /* icons CSS */
+
+.nav-icon-wrap {
+
+  width: auto;
+  max-width: 20px;
+  height: 20px;
+
+  position: relative;
+  float: left;
+
+  padding: 30px 10px;
+  box-sizing: content-box;
+
+  display: grid;
+  grid-template-columns: 20px auto;
+
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.open-nav-icon-wrap {
+
+  max-width: 400px;
+}
+
+.nav-icon {
+
+  opacity: 0.6;
+
+  transition: opacity .2s ease;
+}
+
+.nav-icon-wrap:hover .nav-icon {
+
+  opacity: 1;
+}
+
+.nav-icon-desc {
+
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+  -moz-user-select: none;
+
+  padding: 2px 4px;
+
+  opacity: 0;
+
+  transition: opacity .2s ease;
+}
+
+.open-nav-icon-desc {
+
+  opacity: 1;
+}

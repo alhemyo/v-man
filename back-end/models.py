@@ -19,7 +19,8 @@ class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(255), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    surname = Column(String(255), nullable=False)
     email = Column(String(255), unique=True)
     password = Column(String(255), nullable=False)
     gender = Column(String(10))
@@ -45,12 +46,17 @@ class User(Base):
 
     @property
     def serialize(self):
+        day = "%02d" % self.birthday.day
+        month = "%02d" % self.birthday.month
+        year = self.birthday.year
         return {
             'id': self.id,
-            'username': self.username,
-            'password': self.password,
+            'name': self.name,
+            'surname': self.surname,
             'email': self.email,
-            'birth_info': self.birthday,
+            'day': day,
+            'month': month,
+            'year': year,
             'gender': self.gender,
             'education': self.education,
             'umcn': self.umcn,

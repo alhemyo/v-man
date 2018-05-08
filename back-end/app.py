@@ -83,7 +83,12 @@ def create_user():
     is_admin = False
     if data["is_admin"] == 'True':
         is_admin=True
-    new_user = User(username=data['username'],
+    day = int(data['day'])
+    month = int(data['month'])
+    year = int(data['year'])
+    birthday = datetime.datetime(year, month, day)
+    new_user = User(name=data['name'],
+                    surname=data['surname'],
                     email=data['email'],
                     position=data['position'],
                     gender = data['gender'],
@@ -91,17 +96,17 @@ def create_user():
                     address = data['address'],
                     city = data['city'],
                     phone = data['phone_number'],
-                    birthday = datetime.date.today(),
+                    birthday = birthday,
                     umcn = data['address'],
                     is_admin=is_admin,
-                    admin_type = data['admin_type'],
-                    status=data['status'],
-                    avatar=data['avatar'],
-                    projects=[]
+                    admin_type = data['admin_type']
                     )
-    new_user.set_password(data['password'])
+    #new_user.set_password(data['password'])
+    new_user.set_password('123')
     session.add(new_user)
     session.commit()
+
+    # data.headers.add('Access-Control-Allow-Origin', '*')
 
     return jsonify({'message': 'new user created'})
 
@@ -133,7 +138,7 @@ def login():
     if not auth or not auth.username or not auth.password:
         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
 
-    user = session.query(User).filter_by(username=auth.username).first()
+    user = session.query(User).filter_by(email=auth.username).first()
 
     if not user:
         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})

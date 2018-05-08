@@ -70,18 +70,10 @@
 
       validate: _.debounce( function() {
 
-        // Letters, numbers and spaces only REGEX
-        let regex = /^[\w\s]+$/
 
         if( this.username === "" )
           {
             $('#username-input').attr( 'placeholder', 'You forgot somethin?' )
-          }
-
-        else if ( !this.username.match(regex) )
-          {
-            this.username = ""
-            $('#username-input').attr( 'placeholder', 'Aha! a hacker!' )
           }
 
         else if ( this.password === "" )

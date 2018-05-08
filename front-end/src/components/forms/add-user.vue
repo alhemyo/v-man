@@ -25,7 +25,7 @@
 
       <div class="input-select-wrap adminType" :class="{ 'rollIn': this.postBody.is_admin }" >
 
-          <ul class="input-select-list">
+          <ul class="input-select-list" name="admin_type">
 
               <p class="input-select-desc">{{ this.postBody.admin_type }} <span>▼</span></p>
 
@@ -40,7 +40,7 @@
 
       <div class="input-select-wrap">
 
-          <ul class="input-select-list">
+          <ul class="input-select-list" name="position">
 
               <p class="input-select-desc">{{ this.postBody.position }} <span>▼</span></p>
 
@@ -58,7 +58,7 @@
 
       <div class="input-select-wrap">
 
-          <ul class="input-select-list">
+          <ul class="input-select-list" name="gender">
 
               <p class="input-select-desc">{{ this.postBody.gender }} <span>▼</span></p>
 
@@ -73,7 +73,7 @@
 
       <div class="input-select-wrap">
 
-          <ul class="input-select-list">
+          <ul class="input-select-list" name="education">
 
               <p class="input-select-desc">{{ this.postBody.education }} <span>▼</span></p>
 
@@ -140,7 +140,7 @@
 
     		<p class="input-desc">Contact</p>
     		<input class="input" type="phone" name="phone" placeholder="phone" v-model="postBody.phone_number" />
-    		<input class="input" type="email" name="address" placeholder="email" v-model="postBody.email" />
+    		<input class="input" type="email" name="email" placeholder="email" v-model="postBody.email" />
 
     	</div>
 
@@ -150,7 +150,9 @@
 
     <div class="column column-05">
 
-    	<div class="submit-wrap" title="add user" @click="addUser" >
+			<p class="submit-desc" :class="{ 'open-submit-desc': showMessage }" >{{ this.message }}</p>
+
+    	<div class="submit-wrap" title="add user" @click="addUserValidate" >
 
     		<img class="submit-icon" src="/static/images/icons/add.png" alt="add user" />
 
@@ -164,7 +166,10 @@
 
 <script>
 
+	import Vue from 'vue'
+
 	export default {
+
 		name: 'add-user',
 
 		data() {
@@ -177,19 +182,21 @@
 					name: "",
 					surname: "",
 					email: "",
-					position: "Position",
+					position: "position",
 					is_admin: false,
 					admin_type: "Admin type",
 				  gender: "Gender",
 				  education: "Education",
 				  address: "",
 				  city: "",
-				  phone_number: "",
+				  phone_number: "00389",
 				  day: "",
 					month: "",
 					year: "",
 				  umcn: ""
-				}
+				},
+				showMessage: false,
+				message: ""
 			}
 		}, // end data
 
@@ -211,8 +218,252 @@
 				this.postBody.education = $($event.currentTarget).html()
 				this.educationSelected = true
 			},
+			addUserValidate() {
+
+				// Regular Expresions
+				let lettersOnly = /^[a-zA-Z]*$/
+				let numbersOnly = /^[\s/0-9]+$/
+				let alphanumeric = /^[\s/a-z0-9]+$/
+				let mailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+				let validateName = false
+				let validateSurname = false
+				let validateDay = false
+				let validateMonth = false
+				let validateYear = false
+				let validateUmcn = false
+				let validateCity = false
+				let validateAddress = false
+				let validatePhone = false
+				let validateMail = false
+				let validateAdmin = false
+				let validatePosition = false
+				let validateGender = false
+				let validateEducation = false
+
+				// Validate name
+				if ( this.postBody.name === "" || !lettersOnly.test(this.postBody.name) )
+					{
+						validateName = false
+						$(".input[name='name']").addClass('not-valid-input')
+					}
+				else
+					{
+						validateName = true
+						$(".input[name='name']").removeClass('not-valid-input')
+					}
+
+				// Validate surname
+				if ( this.postBody.surname === "" || !lettersOnly.test(this.postBody.surname) )
+					{
+						validateSurname = false
+						$(".input[name='surname']").addClass('not-valid-input')
+					}
+				else
+					{
+						validateSurname = true
+						$(".input[name='surname']").removeClass('not-valid-input')
+					}
+
+				// Validate day
+				if ( this.postBody.day === "" || !numbersOnly.test(this.postBody.day) )
+					{
+						validateDay = false
+						$('.input[name="day"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateDay = true
+						$('.input[name="day"]').removeClass('not-valid-input')
+					}
+
+				// Validate month
+				if ( this.postBody.month === "" || !numbersOnly.test(this.postBody.month) )
+					{
+						validateMonth = false
+						$('.input[name="month"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateMonth = true
+						$('.input[name="month"]').removeClass('not-valid-input')
+					}
+
+				// Validate year
+				if ( this.postBody.year === "" || !numbersOnly.test(this.postBody.year) )
+					{
+						validateYear = false
+						$('.input[name="year"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateYear = true
+						$('.input[name="year"]').removeClass('not-valid-input')
+					}
+
+				// Validate UMCN
+				if ( this.postBody.umcn === "" || !numbersOnly.test(this.postBody.umcn) )
+					{
+						validateUmcn = false
+						$('.input[name="umcn"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateUmcn = true
+						$('.input[name="umcn"]').removeClass('not-valid-input')
+					}
+
+				// Validate city
+				if ( this.postBody.city === "" || !lettersOnly.test(this.postBody.city) )
+					{
+						validateCity = false
+						$(".input[name='city']").addClass('not-valid-input')
+					}
+				else
+					{
+						validateCity = true
+						$(".input[name='city']").removeClass('not-valid-input')
+					}
+
+				// Validate Address
+				if ( this.postBody.address == "" || !alphanumeric.test(this.postBody.address) )
+					{
+						validateAddress = false
+						$(".input[name='address']").addClass('not-valid-input')
+					}
+				else
+					{
+						validateAddress = true
+						$(".input[name='address']").removeClass('not-valid-input')
+					}
+
+				// Validate phone
+				if ( this.postBody.phone_number === "" || !numbersOnly.test(this.postBody.phone_number) )
+					{
+						validatePhone = false
+						$('.input[name="phone"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validatePhone = true
+						$('.input[name="phone"]').removeClass('not-valid-input')
+					}
+
+				// Validate email
+				if ( this.postBody.email === "" || !mailRegex.test(this.postBody.email) )
+					{
+						validateMail = false
+						$('.input[name="email"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateMail = true
+						$('.input[name="email"]').removeClass('not-valid-input')
+					}
+
+				// Validate admin
+				if ( this.postBody.admin_type === "Admin type" )
+					{
+						validateAdmin = false
+						$('.input-select-list[name="admin_type"]').addClass('not-valid-input-select-list')
+					}
+				else
+					{
+						validateAdmin = true
+						$('.input-select-list[name="admin_type"]').removeClass('not-valid-input-select-list')
+					}
+
+				// Validate position
+				if ( this.postBody.position === "position" )
+					{
+						validatePosition = false
+						$('.input-select-list[name="position"]').addClass('not-valid-input-select-list')
+					}
+				else
+					{
+						validatePosition = true
+						$('.input-select-list[name="position"]').removeClass('not-valid-input-select-list')
+					}
+
+				// Validate gender
+				if ( this.postBody.gender === "Gender" )
+					{
+						validateGender = false
+						$('.input-select-list[name="gender"]').addClass('not-valid-input-select-list')
+					}
+				else
+					{
+						validateGender = true
+						$('.input-select-list[name="gender"]').removeClass('not-valid-input-select-list')
+					}
+
+				// Validate education
+				if ( this.postBody.education === "Education" )
+					{
+						validateEducation = false
+						$('.input-select-list[name="education"]').addClass('not-valid-input-select-list')
+					}
+				else
+					{
+						validateEducation = true
+						$('.input-select-list[name="education"]').removeClass('not-valid-input-select-list')
+					}
+
+				// If form is valid make API request
+				if ( validateName && validateSurname && validateDay && validateMonth && validateYear && validateUmcn && validateCity && validateAddress && validatePhone && validateMail && validatePosition && validateGender && validateEducation === true )
+					{
+						addUser()
+					}
+
+			},
 			addUser() {
-				console.log(this.postBody)
+
+				let data = {
+					name: this.postBody.name,
+					surname: this.postBody.surname,
+					email: this.postBody.email,
+					position: this.postBody.position,
+					gender: this.postBody.gender,
+					education: this.postBody.education,
+					address: this.postBody.address,
+					city: this.postBody.city,
+					phone_number: this.postBody.phone_number,
+					day: this.postBody.day,
+					month: this.postBody.month,
+					year: this.postBody.year,
+					umcn: this.postBody.umcn,
+					is_admin: this.postBody.is_admin,
+					admin_type: this.postBody.admin_type
+				}
+
+				// API call
+				this.$http.post( this.$store.state.api + 'user', this.postBody )
+					.then( response => {
+
+						if( response.status === 200 )
+							{
+								this.showMessage = true
+								this.message = response.body.message
+
+								setTimeout(() => {
+
+									this.showMessage = false
+
+								},5000)
+							}
+
+					}).catch( error => {
+
+						this.showMessage = true
+						this.message = "Ups, something went wrong :("
+
+						setTimeout(() => {
+
+							this.showMessage = false
+
+						},5000)
+
+					})
 			}
 		} // end methods
 

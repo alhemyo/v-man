@@ -5,6 +5,34 @@
 
     <p class="nav-bar-title">V<span>-MAN</span></p>
 
+    <div class="nav-main-wrap">
+
+      <div class="nav-icon-wrap" title="dashboard" @click="openDashboard" :class="{ 'open-nav-icon-wrap': activeDashboard }" >
+
+        <img v-if="activeDashboard" :src="activeDashboardSrc" />
+        <img class="nav-icon" v-else :src="defaultDashboardSrc" />
+        <p class="nav-icon-desc" :class="{ 'open-nav-icon-desc': activeDashboard }" >| dashboard</p>
+
+      </div>
+
+      <div class="nav-icon-wrap" title="projects" @click="openProjects" :class="{ 'open-nav-icon-wrap': activeProjects }">
+
+        <img v-if="activeProjects" :src="activeProjectsSrc" />
+        <img class="nav-icon" v-else :src="defaultProjectsSrc" />
+        <p class="nav-icon-desc" :class="{ 'open-nav-icon-desc': activeProjects }" >| projects</p>
+
+      </div>
+
+      <div class="nav-icon-wrap" title="chat" @click="openChat" :class="{ 'open-nav-icon-wrap': activeChat }" >
+
+        <img v-if="activeChat" :src="activeChatSrc" />
+        <img class="nav-icon" v-else :src="defaultChatSrc" />
+        <p class="nav-icon-desc" :class="{ 'open-nav-icon-desc': activeChat }" >| chat</p>
+
+      </div>
+
+    </div>
+
     <div class="nav-settings" title="settings" @click="openSettings" :class="{ 'nav-settings-open': this.activeSettings }">
 
       <img v-if="activeSettings" :src="activeSettingsSrc" />
@@ -23,16 +51,57 @@
     name: 'nav-bar',
 
     computed: {
+
+        // Computed settings
         activeSettings: {
           get() { return this.$store.state.nav.settings.active },
-          set(value) { this.$store.commit('updateActiveSettings', value) }
+          set(value) { this.$store.commit( 'updateActiveSettings', value ) }
         },
         defaultSettingSrc: { get() { return this.$store.state.nav.settings.defaultSrc } },
-        activeSettingsSrc: { get() { return this.$store.state.nav.settings.activeSrc } }
+        activeSettingsSrc: { get() { return this.$store.state.nav.settings.activeSrc } },
+
+        // Computed dashboard
+        activeDashboard: {
+          get() { return this.$store.state.nav.dashboard.active },
+          set(value) { this.$store.commit( 'updateActiveDashboard', value ) }
+        },
+        defaultDashboardSrc: { get() { return this.$store.state.nav.dashboard.defaultSrc } },
+        activeDashboardSrc: { get() { return this.$store.state.nav.dashboard.activeSrc } },
+
+        // Computed projects
+        activeProjects: {
+          get() { return this.$store.state.nav.projects.active },
+          set(value) { this.$store.commit( 'updateActiveProjects', value ) }
+        },
+        defaultProjectsSrc: { get() { return this.$store.state.nav.projects.defaultSrc } },
+        activeProjectsSrc: { get() { return this.$store.state.nav.projects.activeSrc } },
+
+        // Computed Chat
+        activeChat: {
+          get() { return this.$store.state.nav.chat.active },
+          set(value) { this.$store.commit( 'updateActiveChat', value ) }
+        },
+        defaultChatSrc: { get() { return this.$store.state.nav.chat.defaultSrc } },
+        activeChatSrc: { get() { return this.$store.state.nav.chat.activeSrc } }
     },
 
     methods: {
-      openSettings: function() { this.activeSettings = !this.activeSettings }
+      openSettings: function() { this.activeSettings = !this.activeSettings },
+      openDashboard: function() {
+        this.activeDashboard = true
+        this.activeProjects = false
+        this.activeChat = false
+      },
+      openProjects: function() {
+        this.activeProjects = true
+        this.activeDashboard = false
+        this.activeChat = false
+      },
+      openChat: function() {
+        this.activeChat = true
+        this.activeDashboard = false
+        this.activeProjects = false
+      }
     }
 
   }
@@ -73,6 +142,12 @@
     color: #B50000;
   }
 
+  .nav-main-wrap {
+
+    position: relative;
+    float: left;
+  }
+
   .nav-settings {
 
     width: 20px;
@@ -110,6 +185,5 @@
     filter: grayscale(0);
     opacity: 1;
   }
-
 
 </style>

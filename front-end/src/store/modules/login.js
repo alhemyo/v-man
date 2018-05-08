@@ -43,15 +43,14 @@ export default {
               { headers: { 'x-access-token' : response.body.token } }
             ).then( data => {
               $('.login-input').prop('disabled', true) // Disable login inputs on success
-              let name = data.body.username.split(" ") // Split username
-              commit( 'updateName', name[0] )
-              commit( 'updateSurname', name[1] )
+              commit( 'updateName', data.body.name )
+              commit( 'updateSurname', data.body.surname )
               commit( 'updateId', data.body.id )
               commit( 'updateDashUsername', data.body.username )
               commit( 'updateEmail', data.body.email )
               commit( 'updateAdmin', data.body.is_admin )
               commit( 'updatePosition', data.body.position.toUpperCase() )
-              commit( 'updateStatus', data.body.status )
+              commit( 'updateStatus', 'online' )
               commit( 'updateValidation', 'success' )
 
               setTimeout( () => {
