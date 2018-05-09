@@ -51,7 +51,7 @@
       loginBoard,
       dashboard,
       addProject,
-      userConfig
+      userConfig,
     }
 
   }
