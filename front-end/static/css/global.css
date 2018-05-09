@@ -67,7 +67,7 @@ font-family: 'Roboto', sans-serif;
 
 .not-valid-input {
 
-  border: 2px solid tomato;
+  border: 2px solid rgba(255,99,71,0.3);
 }
 
 /* input select CSS */
@@ -129,12 +129,12 @@ font-family: 'Roboto', sans-serif;
 .input-select-item:hover {
 
     font-weight: 500;
-    color: #FFC107;
+    color: dimgray;
 }
 
 .not-valid-input-select-list {
 
-  border: 2px solid tomato;
+  border: 2px solid rgba(255,99,71,0.3);
 }
 
 /* input checkbox CSS */

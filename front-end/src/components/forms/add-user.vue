@@ -139,7 +139,7 @@
     	<div class="input-wrap double">
 
     		<p class="input-desc">Contact</p>
-    		<input class="input" type="phone" name="phone" placeholder="phone" v-model="postBody.phone_number" />
+    		<input class="input" type="phone" name="phone" placeholder="phone : ex:0038975 000 000" v-model="postBody.phone_number" />
     		<input class="input" type="email" name="email" placeholder="email" v-model="postBody.email" />
 
     	</div>
@@ -189,7 +189,7 @@
 				  education: "Education",
 				  address: "",
 				  city: "",
-				  phone_number: "00389",
+				  phone_number: "",
 				  day: "",
 					month: "",
 					year: "",
@@ -220,12 +220,6 @@
 			},
 			addUserValidate() {
 
-				// Regular Expresions
-				let lettersOnly = /^[a-zA-Z]*$/
-				let numbersOnly = /^[\s/0-9]+$/
-				let alphanumeric = /^[\s/a-z0-9]+$/
-				let mailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-
 				let validateName = false
 				let validateSurname = false
 				let validateDay = false
@@ -242,7 +236,7 @@
 				let validateEducation = false
 
 				// Validate name
-				if ( this.postBody.name === "" || !lettersOnly.test(this.postBody.name) )
+				if ( this.postBody.name === "" || !this.$store.state.regex.letters.test(this.postBody.name) )
 					{
 						validateName = false
 						$(".input[name='name']").addClass('not-valid-input')
@@ -254,7 +248,7 @@
 					}
 
 				// Validate surname
-				if ( this.postBody.surname === "" || !lettersOnly.test(this.postBody.surname) )
+				if ( this.postBody.surname === "" || !this.$store.state.regex.letters.test(this.postBody.surname) )
 					{
 						validateSurname = false
 						$(".input[name='surname']").addClass('not-valid-input')
@@ -266,7 +260,7 @@
 					}
 
 				// Validate day
-				if ( this.postBody.day === "" || !numbersOnly.test(this.postBody.day) )
+				if ( this.postBody.day === "" || !this.$store.state.regex.numbers.test(this.postBody.day) )
 					{
 						validateDay = false
 						$('.input[name="day"]').addClass('not-valid-input')
@@ -278,7 +272,7 @@
 					}
 
 				// Validate month
-				if ( this.postBody.month === "" || !numbersOnly.test(this.postBody.month) )
+				if ( this.postBody.month === "" || !this.$store.state.regex.numbers.test(this.postBody.month) )
 					{
 						validateMonth = false
 						$('.input[name="month"]').addClass('not-valid-input')
@@ -290,7 +284,7 @@
 					}
 
 				// Validate year
-				if ( this.postBody.year === "" || !numbersOnly.test(this.postBody.year) )
+				if ( this.postBody.year === "" || !this.$store.state.regex.numbers.test(this.postBody.year) )
 					{
 						validateYear = false
 						$('.input[name="year"]').addClass('not-valid-input')
@@ -302,7 +296,7 @@
 					}
 
 				// Validate UMCN
-				if ( this.postBody.umcn === "" || !numbersOnly.test(this.postBody.umcn) )
+				if ( this.postBody.umcn === "" || !this.$store.state.regex.numbers.test(this.postBody.umcn) )
 					{
 						validateUmcn = false
 						$('.input[name="umcn"]').addClass('not-valid-input')
@@ -314,7 +308,7 @@
 					}
 
 				// Validate city
-				if ( this.postBody.city === "" || !lettersOnly.test(this.postBody.city) )
+				if ( this.postBody.city === "" || !this.$store.state.regex.alphanumeric.test(this.postBody.city) )
 					{
 						validateCity = false
 						$(".input[name='city']").addClass('not-valid-input')
@@ -326,7 +320,7 @@
 					}
 
 				// Validate Address
-				if ( this.postBody.address == "" || !alphanumeric.test(this.postBody.address) )
+				if ( this.postBody.address == "" || !this.$store.state.regex.alphanumeric.test(this.postBody.address) )
 					{
 						validateAddress = false
 						$(".input[name='address']").addClass('not-valid-input')
@@ -338,7 +332,7 @@
 					}
 
 				// Validate phone
-				if ( this.postBody.phone_number === "" || !numbersOnly.test(this.postBody.phone_number) )
+				if ( this.postBody.phone_number === "" || !this.$store.state.regex.numbers.test(this.postBody.phone_number) )
 					{
 						validatePhone = false
 						$('.input[name="phone"]').addClass('not-valid-input')
@@ -350,7 +344,7 @@
 					}
 
 				// Validate email
-				if ( this.postBody.email === "" || !mailRegex.test(this.postBody.email) )
+				if ( this.postBody.email === "" || !this.$store.state.regex.mail.test(this.postBody.email) )
 					{
 						validateMail = false
 						$('.input[name="email"]').addClass('not-valid-input')
@@ -412,36 +406,38 @@
 				// If form is valid make API request
 				if ( validateName && validateSurname && validateDay && validateMonth && validateYear && validateUmcn && validateCity && validateAddress && validatePhone && validateMail && validatePosition && validateGender && validateEducation === true )
 					{
-						addUser()
+						this.addUser()
 					}
 
 			},
 			addUser() {
 
-				let data = {
-					name: this.postBody.name,
-					surname: this.postBody.surname,
-					email: this.postBody.email,
-					position: this.postBody.position,
-					gender: this.postBody.gender,
-					education: this.postBody.education,
-					address: this.postBody.address,
-					city: this.postBody.city,
-					phone_number: this.postBody.phone_number,
-					day: this.postBody.day,
-					month: this.postBody.month,
-					year: this.postBody.year,
-					umcn: this.postBody.umcn,
-					is_admin: this.postBody.is_admin,
-					admin_type: this.postBody.admin_type
-				}
-
-				// API call
+				// API request
 				this.$http.post( this.$store.state.api + 'user', this.postBody )
 					.then( response => {
 
 						if( response.status === 200 )
 							{
+								this.adminTypeSelected = false,
+								this.positonSelected = false,
+								this.genderSelected = false,
+								this.educationSelected = false,
+								this.postBody.name = "",
+								this.postBody.surname = "",
+								this.postBody.email = "",
+								this.postBody.position = "position",
+								this.postBody.is_admin = false,
+								this.postBody.admin_type = "Admin type",
+							  this.postBody.gender = "Gender",
+							  this.postBody.education = "Education",
+							  this.postBody.address = "",
+							  this.postBody.city = "",
+							  this.postBody.phone_number = "",
+							  this.postBody.day = "",
+								this.postBody.month = "",
+								this.postBody.year = "",
+							  this.postBody.umcn = ""
+
 								this.showMessage = true
 								this.message = response.body.message
 

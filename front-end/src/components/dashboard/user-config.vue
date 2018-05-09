@@ -150,7 +150,7 @@
   .user-config-nav-link:hover {
     color: #9E9E9E;
 
-    border-bottom: 4px solid #FFC107;
+    border-bottom: 4px solid #BDBDBD;
   }
 
   .user-config-loader {
