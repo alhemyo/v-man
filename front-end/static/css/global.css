@@ -36,6 +36,11 @@ font-family: 'Roboto', sans-serif;
     grid-template-columns: 110px minmax( 90px, auto ) minmax( 90px, auto );
 }
 
+.tripple {
+
+    grid-template-columns: 110px minmax( 90px, auto ) minmax( 90px, auto ) minmax( 90px, auto );
+}
+
 .quadro {
 
     grid-template-columns: 110px minmax( 90px, auto ) minmax( 90px, auto ) minmax( 90px, auto ) auto;
@@ -63,11 +68,43 @@ font-family: 'Roboto', sans-serif;
     padding: 12px 20px;
     border: 1px solid #E0E0E0;
     border-radius: 20px;
+
+    transition: all .3s ease;
+}
+
+.file-input {
+
+  width: 0px;
+
+  position: absolute;
+  right: 0px;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.file-label {
+
+  color: white;
+
+  background-color: #BDBDBD;
+  border: none;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.file-label:hover {
+
+  background-color: tomato;
 }
 
 .not-valid-input {
 
-  border: 2px solid rgba(255,99,71,0.3);
+  background-color: rgba(255,99,71,0.1);
+  border: 1px solid rgba(255,99,71,0.3);
 }
 
 /* input select CSS */
@@ -94,7 +131,7 @@ font-family: 'Roboto', sans-serif;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 
     overflow: hidden;
 }
@@ -134,7 +171,8 @@ font-family: 'Roboto', sans-serif;
 
 .not-valid-input-select-list {
 
-  border: 2px solid rgba(255,99,71,0.3);
+  background-color: rgba(255,99,71,0.1);
+  border: 1px solid rgba(255,99,71,0.3);
 }
 
 /* input checkbox CSS */

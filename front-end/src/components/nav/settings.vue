@@ -8,6 +8,19 @@
 
     </div>
 
+    <ul class="settings-list settings-list-user">
+      
+      <li class="settings-item">edit profile</li>
+
+    </ul>
+
+    <ul class="settings-list settings-list-admin">
+      
+      <li class="settings-item">user configuration</li>
+      <li class="settings-item">time configuration</li>
+
+    </ul>
+
   </div>
 
 </template>
@@ -61,6 +74,36 @@
   .open-settings-title {
 
     opacity: 1;
+  }
+
+  .settings-list {
+
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    list-style: none;
+
+    padding: 20px 40px;
+
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .settings-list:nth-last-child(1) {
+
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .settings-item {
+
+    padding: 10px 0px;
+
+    transition: color .2s ease;
+  }
+
+  .settings-item:hover {
+
+    color: white;
+
+    cursor: pointer;
   }
 
 </style>

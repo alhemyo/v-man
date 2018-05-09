@@ -118,9 +118,38 @@
 
     </div>
 
-    <!-- address -->
+    <!-- ID -->
 
     <div class="column column-04">
+
+    	<div class="input-wrap tripple">
+
+    		<p class="input-desc">ID info</p>
+    		<input class="input" type="text" name="id_number" placeholder="id number" v-model="postBody.id_number" />
+    		<input class="input" type="text" name="id_valid_date" placeholder="valid date" v-model="postBody.id_valid_date" />
+    		<input class="input file-input" type="file" name="id_scan" id="id_scan" /><label class="input file-label" for="id_scan" title="add ID scan">Choose image</label>
+
+    	</div>
+
+    </div>
+
+    <!-- Bank info -->
+
+    <div class="column column-05">
+
+    	<div class="input-wrap double">
+
+    		<p class="input-desc">Bank info</p>
+    		<input class="input" type="text" name="acc_number" placeholder="account number" v-model="postBody.acc_number" />
+    		<input class="input" type="text" name="bank_name" placeholder="Bank name" v-model="postBody.bank_name" />
+
+    	</div>
+
+    </div>
+
+    <!-- address -->
+
+    <div class="column column-06">
 
     	<div class="input-wrap double">
 
@@ -134,7 +163,7 @@
 
     <!-- contact -->
 
-    <div class="column column-04">
+    <div class="column column-07">
 
     	<div class="input-wrap double">
 
@@ -146,9 +175,25 @@
 
     </div>
 
+    <!-- Employment info -->
+
+    <div class="column column-08">
+
+    	<div class="input-wrap quadro">
+
+    		<p class="input-desc">Employment</p>
+    		<input class="input" type="text" name="employment_day" placeholder="day" maxlength="2" v-model="postBody.employment_day" />
+    		<input class="input" type="text" name="employment_month" placeholder=" month" maxlength="2" v-model="postBody.employment_month" />
+    		<input class="input" type="text" name="employment_year" placeholder="year" maxlength="4" v-model="postBody.employment_year" />
+    		<input class="input" type="text" name="payment" placeholder="payment amount" v-model="postBody.payment" />
+
+    	</div>
+
+    </div>
+
     <!-- submit -->
 
-    <div class="column column-05">
+    <div class="column column-09">
 
 			<p class="submit-desc" :class="{ 'open-submit-desc': showMessage }" >{{ this.message }}</p>
 
@@ -174,10 +219,12 @@
 
 		data() {
 			return {
+
 				adminTypeSelected: false,
 				positonSelected: false,
 				genderSelected: false,
 				educationSelected: false,
+
 				postBody: {
 					name: "",
 					surname: "",
@@ -193,10 +240,21 @@
 				  day: "",
 					month: "",
 					year: "",
-				  umcn: ""
+				  umcn: "",
+				  id_number: "",
+				  id_valid_date: "",
+				  id_scan: "",
+				  acc_number: "",
+				  bank_name: "",
+				  employment_day: "",
+				  employment_month: "",
+				  employment_year: "",
+				  payment: ""
 				},
+
 				showMessage: false,
 				message: ""
+				
 			}
 		}, // end data
 
@@ -226,10 +284,19 @@
 				let validateMonth = false
 				let validateYear = false
 				let validateUmcn = false
+				let validateIdNumber = false
+				let validateIdValidDate = false
+				let validateIdScan = false
+				let validateAccNumber = false
+				let validateBankName = false
 				let validateCity = false
 				let validateAddress = false
 				let validatePhone = false
 				let validateMail = false
+				let validateEmploymentDay = false
+				let validateEmploymentMonth = false
+				let validateEmploymentYear = false
+				let validatePayment = false
 				let validateAdmin = false
 				let validatePosition = false
 				let validateGender = false
@@ -307,6 +374,56 @@
 						$('.input[name="umcn"]').removeClass('not-valid-input')
 					}
 
+				// Validate ID number
+				if ( this.postBody.id_number === "" || !this.$store.state.regex.alphanumeric.test(this.postBody.id_number) )
+					{
+						validateIdNumber = false
+						$('.input[name="id_number"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateIdNumber = true
+						$('.input[name="id_number"]').removeClass('not-valid-input')
+					}
+
+				// Validate ID valid date
+				if ( this.postBody.id_valid_date === "" || !this.$store.state.regex.numbers.test(this.postBody.id_valid_date) )
+					{
+						validateIdValidDate = false
+						$('.input[name="id_valid_date"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateIdValidDate = true
+						$('.input[name="id_valid_date"]').removeClass('not-valid-input')
+					}
+
+				// Validate ID scan
+
+				// Validate Account number
+				if ( this.postBody.acc_number === "" || !this.$store.state.regex.numbers.test(this.postBody.acc_number) )
+					{
+						validateAccNumber = false
+						$('.input[name="acc_number"]').addClass('not-valid-input')						
+					}
+				else
+					{
+						validateAccNumber = true
+						$('.input[name="acc_number"]').removeClass('not-valid-input')
+					}
+
+				// Validate Bank name
+				if ( this.postBody.bank_name === "" || !this.$store.state.regex.letters.test(this.postBody.bank_name) )
+					{
+						validateBankName = false
+						$('.input[name="bank_name"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateBankName = true
+						$('.input[name="bank_name"]').removeClass('not-valid-input')
+					}
+
 				// Validate city
 				if ( this.postBody.city === "" || !this.$store.state.regex.alphanumeric.test(this.postBody.city) )
 					{
@@ -355,8 +472,56 @@
 						$('.input[name="email"]').removeClass('not-valid-input')
 					}
 
+				// Validate Employment day
+				if ( this.postBody.employment_day === "" || !this.$store.state.regex.numbers.test(this.postBody.employment_day) )
+					{
+						validateEmploymentDay = false
+						$('.input[name="employment_day"]').addClass('not-valid-input')					
+					}
+				else
+					{
+						validateEmploymentDay = true
+						$('.input[name="employment_day"]').removeClass('not-valid-input')	
+					}
+
+				// Validate Employment month
+				if ( this.postBody.employment_month === "" || !this.$store.state.regex.numbers.test(this.postBody.employment_month) )
+					{
+						validateEmploymentMonth = false
+						$('.input[name="employment_month"]').addClass('not-valid-input')					
+					}
+				else
+					{
+						validateEmploymentMonth = true
+						$('.input[name="employment_month"]').removeClass('not-valid-input')	
+					}
+
+				// Validate Employment year
+				if ( this.postBody.employment_year === "" || !this.$store.state.regex.numbers.test(this.postBody.employment_year) )
+					{
+						validateEmploymentYear = false
+						$('.input[name="employment_year"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validateEmploymentYear = true
+						$('.input[name="employment_year"]').removeClass('not-valid-input')
+					}
+
+				// Validate Payment
+				if ( this.postBody.payment === "" || !this.$store.state.regex.numbers.test(this.postBody.payment) )
+					{
+						validatePayment = false
+						$('.input[name="payment"]').addClass('not-valid-input')
+					}
+				else
+					{
+						validatePayment = true
+						$('.input[name="payment"]').removeClass('not-valid-input')
+					}
+
 				// Validate admin
-				if ( this.postBody.admin_type === "Admin type" )
+				if ( this.postBody.is_admin === true && this.postBody.admin_type === "Admin type" )
 					{
 						validateAdmin = false
 						$('.input-select-list[name="admin_type"]').addClass('not-valid-input-select-list')
@@ -404,9 +569,22 @@
 					}
 
 				// If form is valid make API request
-				if ( validateName && validateSurname && validateDay && validateMonth && validateYear && validateUmcn && validateCity && validateAddress && validatePhone && validateMail && validatePosition && validateGender && validateEducation === true )
+				if ( validateName && validateSurname && validateDay && validateMonth && validateYear && validateUmcn && validateIdNumber && validateIdValidDate && validateAccNumber && validateBankName && validateCity && validateAddress && validatePhone && validateMail && validateEmploymentDay && validateEmploymentMonth && validateEmploymentYear && validatePosition && validateGender && validateEducation === true )
 					{
 						this.addUser()
+					}
+				else
+					{
+						this.showMessage = true
+						this.message = "Please fill all the marked fileds."
+
+						setTimeout(() => {
+
+							this.showMessage = false
+							$('.input').removeClass('not-valid-input')
+							$('.input-select-list').removeClass('not-valid-input-select-list')
+
+						},3000)
 					}
 
 			},
@@ -500,7 +678,7 @@
 		border-bottom: 1px solid whitesmoke;
 	}
 
-	.column-05 {
+	.column-09 {
 
 		position: relative;
 
