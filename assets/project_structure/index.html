@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>v-man</title>
+
+    <!-- import CSS -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+
+    <!-- import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700" rel="stylesheet">
+
+    <!-- import JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  </head>
+
+  <body>
+      
+    <script type="text/x-template" id="item-template">
+        
+        <li>
+        
+            <div class="wrap" :class="{ bold: isFolder }" @click="toggle">
+                
+                <img v-show="isFolder" src="images/folder.png" />
+                <p class="text">{{ model.name }}</p>
+                <span class="open-button" v-if="isFolder"> [ {{ open ? '-' : '+' }} ] </span>
+
+            </div>
+
+            <ul v-show="open" v-if="isFolder">
+                <item class="item" v-for="(model, index) in model.children" :key="index" :model="model"></item>
+            </ul>
+
+        </li>
+
+    </script>
+
+    <ul id="demo">
+        <item class="item" :model="treeData"></item>
+    </ul>
+
+    <script type="text/JAVASCRIPT">
+        
+        let data = {
+          name: 'Root [ project name ]',
+          children: [
+
+            { 
+                name: '3D',
+                children: [
+                    { 
+                        name: 'assets',
+                        children: [
+                            { 
+                                name: 'export',
+                                children: [
+                                    { 
+                                        name: 'cameras',
+                                        children: [
+                                            { name: 'sc01_sh01_camera_export_01.ma' },
+                                            { name: 'sc03_sh02_camera_export_01.ma' }
+                                        ]
+                                    }, // end root/3D/assets/export/cameras
+                                    { 
+                                        name: 'lights',
+                                        children: [
+                                            { name: 'sc01_sh01_lights_export_01.ma' },
+                                            { name: 'sc03_sh02_lights_export_01.ma' }
+                                        ]
+                                    }, // end root/3D/assets/export/lights
+                                    { 
+                                        name: 'shaders',
+                                        children: [
+                                            { name: 'sc01_sh01_shaders_export_01.ma' },
+                                            { name: 'sc03_sh02_shaders_export_01.ma' }
+                                        ]
+                                    }, // end root/3D/assets/export/shaders
+                                ] 
+                            }, // end root/3D/assets/export
+                            { 
+                                name: 'models',
+                                children: [
+                                    { 
+                                        name: 'someModel',
+                                        children: [
+                                            { 
+                                                name: 'fbx',
+                                                children: [
+                                                    { name: 'someModel_v01_01.fbx' },
+                                                    { name: 'someModel_v01_02.fbx' }
+                                                ]
+                                            }, // end root/3D/assets/models/someModel/fbx
+                                            { 
+                                                name: 'maya',
+                                                children: [
+                                                    { name: 'someModel_v01_01.ma' },
+                                                    { name: 'someModel_v01_02.ma' }
+                                                ]
+                                            }, // end root/3D/assets/models/someModel/maya
+                                            { 
+                                                name: 'obj',
+                                                children: [
+                                                    { name: 'someModel_v01_01.obj' },
+                                                    { name: 'someModel_v01_02.obj' }
+                                                ]
+                                            }, // end root/3D/assets/models/someModel/obj
+                                            { 
+                                                name: 'zbr',
+                                                children: [
+                                                    { name: 'someModel_v01_01.zbr' },
+                                                    { name: 'someModel_v01_02.zbr' }
+                                                ] 
+                                            } // end root/3D/assets/models/someModel/obj
+                                        ]
+                                    }, // end root/3D/assets/models/someModel
+                                    { 
+                                        name: 'otherModel',
+                                        children: [
+                                            { 
+                                                name: 'fbx',
+                                                children: [
+                                                    { name: 'otherModel_v01_01.fbx' },
+                                                    { name: 'otherModel_v01_02.fbx' }
+                                                ]
+                                            }, // end root/3D/assets/models/otherModel/fbx
+                                            { 
+                                                name: 'maya',
+                                                children: [
+                                                    { name: 'otherModel_v01_01.ma' },
+                                                    { name: 'otherModel_v01_02.ma' }
+                                                ]
+                                            }, // end root/3D/assets/models/otherModel/maya
+                                            { 
+                                                name: 'obj',
+                                                children: [
+                                                    { name: 'otherModel_v01_01.obj' },
+                                                    { name: 'otherModel_v01_02.obj' }
+                                                ]
+                                            }, // end root/3D/assets/models/otherModel/obj
+                                            { 
+                                                name: 'zbr',
+                                                children: [
+                                                    { name: 'otherModel_v01_01.zbr' },
+                                                    { name: 'otherModel_v01_02.zbr' }
+                                                ] 
+                                            } // end root/3D/assets/models/otherModel/obj
+                                        ]
+                                    } // end root/3D/assets/models/otherModel
+                                ] 
+                            }, // end root/3D/assets/models
+                            { 
+                                name: 'textures',
+                                children: [
+                                    { 
+                                        name: 'someModel',
+                                        children: [
+                                            { 
+                                                name: 'psd',
+                                                children: [
+                                                    { name: 'someModel_base_v01_01.psd' }
+                                                ]
+                                            }, // end root/3D/assets/textures/someModel/psd
+                                            { 
+                                                name: 'jpeg',
+                                                children: [
+                                                    { name: 'someModel_difuse_v01_01.jpeg' },
+                                                    { name: 'someModel_specular_v01_01.jpeg' },
+                                                    { name: 'someModel_displacement_v01_01.jpeg' },
+                                                    { name: 'someModel_bump_v01_01.jpeg' },
+                                                    { name: 'someModel_mask_v01_01.jpeg' }
+                                                ]
+                                            }, // end root/3D/assets/textures/someModel/jpeg
+                                            { 
+                                                name: 'tif',
+                                                children: [
+                                                    { name: 'someModel_difuse_v01_01.tif' },
+                                                    { name: 'someModel_specular_v01_01.tif' },
+                                                    { name: 'someModel_displacement_v01_01.tif' },
+                                                    { name: 'someModel_bump_v01_01.tif' },
+                                                    { name: 'someModel_mask_v01_01.tif' }
+                                                ]
+                                            } // end root/3D/assets/textures/someModel/tif
+                                        ]
+                                    }, // end root/3D/assets/textures/someModel
+                                    { 
+                                        name: 'otherModel',
+                                        children: [
+                                            { 
+                                                name: 'psd',
+                                                children: [
+                                                    { name: 'otherModel_base_v01_01.psd' }
+                                                ]
+                                            }, // end root/3D/assets/textures/otherModel/psd
+                                            { 
+                                                name: 'jpeg',
+                                                children: [
+                                                    { name: 'otherModel_difuse_v01_01.jpeg' },
+                                                    { name: 'otherModel_specular_v01_01.jpeg' },
+                                                    { name: 'otherModel_displacement_v01_01.jpeg' },
+                                                    { name: 'otherModel_bump_v01_01.jpeg' },
+                                                    { name: 'otherModel_mask_v01_01.jpeg' }
+                                                ]
+                                            }, // end root/3D/assets/textures/otherModel/jpeg
+                                            { 
+                                                name: 'tif',
+                                                children: [
+                                                    { name: 'otherModel_difuse_v01_01.tif' },
+                                                    { name: 'otherModel_specular_v01_01.tif' },
+                                                    { name: 'otherModel_displacement_v01_01.tif' },
+                                                    { name: 'otherModel_bump_v01_01.tif' },
+                                                    { name: 'otherModel_mask_v01_01.tif' }
+                                                ]
+                                            } // end root/3D/assets/textures/otherModel/tif
+                                        ]
+                                    } // end root/3D/assets/textures/otherModel
+                                ]
+                            } // end root/3D/assets/textures
+                        ]
+                    }, // end root/3D/assets
+                    { 
+                        name: 'init',
+                        children: [
+                            { 
+                                name: 'autosave',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/autosave
+                            { 
+                                name: 'cache',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/cache
+                            { 
+                                name: 'clips',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/clips
+                            { 
+                                name: 'data',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/data
+                            { 
+                                name: 'renderData',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/renderData
+                            { 
+                                name: 'sceneAssembly',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/sceneAssembly
+                            { 
+                                name: 'scripts',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/scripts
+                            { 
+                                name: 'sound',
+                                children: [
+                                    { name: '...' }
+                                ]
+                            }, // end root/3D/init/sound
+                        ]
+                    }, // end root/3D/init
+                    { 
+                        name: 'render',
+                        children: [
+                            { 
+                                name: 'sc01',
+                                children: [
+                                    { 
+                                        name: 'sc01_sh01',
+                                        children: [
+                                            { 
+                                                name: 'sc01_sh01_v01_01',
+                                                children: [
+                                                    { 
+                                                        name: 'sc01_sh01_v01_01_beauty',
+                                                        children: [
+                                                            { name: 'sc01_sh01_v01_01_beauty.0001.exr' },
+                                                            { name: 'sc01_sh01_v01_01_beauty.0002.exr' },
+                                                            { name: 'sc01_sh01_v01_01_beauty.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh01_v01_01_beauty
+                                                    { 
+                                                        name: 'sc01_sh01_v01_01_specular',
+                                                        children: [
+                                                            { name: 'sc01_sh01_v01_01_specular.0001.exr' },
+                                                            { name: 'sc01_sh01_v01_01_specular.0002.exr' },
+                                                            { name: 'sc01_sh01_v01_01_specular.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh01_v01_01_specular
+                                                    { 
+                                                        name: 'sc01_sh01_v01_01_reflection',
+                                                        children: [
+                                                            { name: 'sc01_sh01_v01_01_reflection.0001.exr' },
+                                                            { name: 'sc01_sh01_v01_01_reflection.0002.exr' },
+                                                            { name: 'sc01_sh01_v01_01_reflection.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh01_v01_01_reflection
+                                                ]
+                                            }, // end root/3D/render/sc01/sc01_sh01/sc01_sh01_v01_01
+                                        ] 
+                                    }, // end root/3D/render/sc01/sc01_sh01
+                                    { 
+                                        name: 'sc01_sh02',
+                                        children: [
+                                            { 
+                                                name: 'sc01_sh02_v01_01',
+                                                children: [
+                                                    { 
+                                                        name: 'sc01_sh02_v01_01_beauty',
+                                                        children: [
+                                                            { name: 'sc01_sh02_v01_01_beauty.0001.exr' },
+                                                            { name: 'sc01_sh02_v01_01_beauty.0002.exr' },
+                                                            { name: 'sc01_sh02_v01_01_beauty.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh02_v01_01_beauty
+                                                    { 
+                                                        name: 'sc01_sh02_v01_01_specular',
+                                                        children: [
+                                                            { name: 'sc01_sh02_v01_01_specular.0001.exr' },
+                                                            { name: 'sc01_sh02_v01_01_specular.0002.exr' },
+                                                            { name: 'sc01_sh02_v01_01_specular.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh02_v01_01_specular
+                                                    { 
+                                                        name: 'sc01_sh02_v01_01_reflection',
+                                                        children: [
+                                                            { name: 'sc01_sh02_v01_01_reflection.0001.exr' },
+                                                            { name: 'sc01_sh02_v01_01_reflection.0002.exr' },
+                                                            { name: 'sc01_sh02_v01_01_reflection.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc01/sc01_sh01/sc01_sh02_v01_01_reflection
+                                                ]
+                                            }, // end root/3D/render/sc01/sc01_sh01/sc01_sh02_v01_01
+                                        ] 
+                                    }, // end root/3D/render/sc01/sc01_sh02
+                                ]
+                            }, // end root/3D/render/sc01
+                            { 
+                                name: 'sc02',
+                                children: [
+                                    { 
+                                        name: 'sc02_sh01',
+                                        children: [
+                                            { 
+                                                name: 'sc02_sh01_v01_01',
+                                                children: [
+                                                    { 
+                                                        name: 'sc02_sh01_v01_01_beauty',
+                                                        children: [
+                                                            { name: 'sc02_sh01_v01_01_beauty.0001.exr' },
+                                                            { name: 'sc02_sh01_v01_01_beauty.0002.exr' },
+                                                            { name: 'sc02_sh01_v01_01_beauty.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh01_v01_01_beauty
+                                                    { 
+                                                        name: 'sc02_sh01_v01_01_specular',
+                                                        children: [
+                                                            { name: 'sc02_sh01_v01_01_specular.0001.exr' },
+                                                            { name: 'sc02_sh01_v01_01_specular.0002.exr' },
+                                                            { name: 'sc02_sh01_v01_01_specular.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh01_v01_01_specular
+                                                    { 
+                                                        name: 'sc02_sh01_v01_01_reflection',
+                                                        children: [
+                                                            { name: 'sc02_sh01_v01_01_reflection.0001.exr' },
+                                                            { name: 'sc02_sh01_v01_01_reflection.0002.exr' },
+                                                            { name: 'sc02_sh01_v01_01_reflection.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh01_v01_01_reflection
+                                                ]
+                                            }, // end root/3D/render/sc02/sc02_sh01/sc02_sh01_v01_01
+                                        ] 
+                                    }, // end root/3D/render/sc02/sc02_sh01
+                                    { 
+                                        name: 'sc02_sh02',
+                                        children: [
+                                            { 
+                                                name: 'sc02_sh02_v01_01',
+                                                children: [
+                                                    { 
+                                                        name: 'sc02_sh02_v01_01_beauty',
+                                                        children: [
+                                                            { name: 'sc02_sh02_v01_01_beauty.0001.exr' },
+                                                            { name: 'sc02_sh02_v01_01_beauty.0002.exr' },
+                                                            { name: 'sc02_sh02_v01_01_beauty.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh02_v01_01_beauty
+                                                    { 
+                                                        name: 'sc02_sh02_v01_01_specular',
+                                                        children: [
+                                                            { name: 'sc02_sh02_v01_01_specular.0001.exr' },
+                                                            { name: 'sc02_sh02_v01_01_specular.0002.exr' },
+                                                            { name: 'sc02_sh02_v01_01_specular.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh02_v01_01_specular
+                                                    { 
+                                                        name: 'sc02_sh02_v01_01_reflection',
+                                                        children: [
+                                                            { name: 'sc02_sh02_v01_01_reflection.0001.exr' },
+                                                            { name: 'sc02_sh02_v01_01_reflection.0002.exr' },
+                                                            { name: 'sc02_sh02_v01_01_reflection.0003.exr' }
+                                                        ]
+                                                    }, // end root/3D/render/sc02/sc02_sh01/sc02_sh02_v01_01_reflection
+                                                ]
+                                            }, // end root/3D/render/sc02/sc02_sh01/sc02_sh02_v01_01
+                                        ] 
+                                    }, // end root/3D/render/sc02/sc02_sh02
+                                ]
+                            }, // end root/3D/render/sc02
+                        ]
+                    }, // end root/3D/render
+                    { 
+                        name: 'scripts',
+                        children: [
+                            { 
+                                name: 'sc01',
+                                children: [
+                                    { 
+                                        name: 'sc01_sh01',
+                                        children: [
+                                            { 
+                                                name: 'work',
+                                                children: [
+                                                    { name: 'sc01_sh01_work_v01_01.ma' },
+                                                    { name: 'sc01_sh01_work_v01_02.ma' }
+                                                ]
+                                            }, // end root/3D/scripts/sc01_sh01/work
+                                            { 
+                                                name: 'rnd',
+                                                children: [
+                                                    { name: 'sc01_sh01_rnd_v01_01.ma' },
+                                                    { name: 'sc01_sh01_rnd_v01_02.ma' }
+                                                ]
+                                            }, // end root/3D/scripts/sc01_sh01/work
+                                        ]
+                                    } // end root/3D/scripts/sc01_sh01
+                                ]
+                            } // end root/3D/scripts/sc01
+                        ]
+                    }, // end root/3D/scripts
+                    { name: 'workspace.mel' }
+                ] 
+            }, // end root/3D
+            { name: 'AUDIO' },
+            { name: 'COMP' },
+            { name: 'DESIGN' },
+            { name: 'EDIT' },
+            { name: 'GRADE' },
+            { name: 'INPUT' },
+            { name: 'MGFX' },
+            { name: 'OUTPUT' },
+            { 
+                name: 'PRODUCTION',
+                children: [
+                    { 
+                        name: 'storyboard',
+                        children: [
+                            { name: '...' }
+                        ]
+                    }, // end root/PRODUCTION/storyboard
+                    { 
+                        name: 'presentation',
+                        children: [
+                            { name: '...' }
+                        ]
+                    }, // end root/PRODUCTION/presentation
+                    { 
+                        name: 'references',
+                        children: [
+                            { name: '...' }
+                        ]
+                    }, // end root/PRODUCTION/references
+                ]
+            }, // end root/PRODUCTION
+            { 
+                name: 'TEMP [ temporary files / deleted on backup ]',
+                children: [
+                    { name: '...' }
+                ]
+            } // end root/TEMP
+          ]
+        }
+
+        Vue.component( 'item', {
+            template: '#item-template',
+            props: {
+                model: Object
+            },
+            data: function () {
+                return {
+                    open: false
+                }
+            },
+            computed: {
+                isFolder: function () {
+                    return this.model.children && this.model.children.length
+                }
+            },
+            methods: {
+                toggle: function () {
+                    if (this.isFolder) {
+                        this.open = !this.open
+                    }
+                }
+
+            }
+        })
+
+        let demo = new Vue({
+            el: '#demo',
+            data: {
+                treeData: data
+            }
+        })
+
+    </script>
+
+  </body>
+
+  </html>
