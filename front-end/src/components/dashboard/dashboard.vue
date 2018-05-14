@@ -29,7 +29,12 @@
 
       <ul>
 
-        <li><dash-project /></li>
+        <li
+          v-for="project in projects">
+          <dash-project
+            :projectName="project.name"
+            :current = "project.current" />
+        </li>
 
       </ul>
 
@@ -59,8 +64,18 @@
         name: 'Jane Doe',
         position: 'DESIGN',
         status: 'online',
-        timeLog: '06 | 34 | 23'
+        timeLog: '06 : 34 : 23',
       }
+    },
+
+    computed: {
+      projects: {
+        get() { return this.$store.state.projects.projects }
+      }
+    },
+
+    beforeCreate() {
+      this.$store.dispatch('GET_PROJECTS')
     }
 
   }

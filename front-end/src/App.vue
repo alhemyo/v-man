@@ -2,6 +2,8 @@
 
   <div class="app-wrap">
 
+    <nav-bar />
+
     <dashboard />
 
   </div>
@@ -10,6 +12,7 @@
 
 <script>
 
+  import navBar from './components/nav/nav-bar'
   import dashboard from './components/dashboard/dashboard'
 
   export default {
@@ -17,6 +20,7 @@
     name: 'App',
 
     components: {
+      navBar,
       dashboard
     }
 
