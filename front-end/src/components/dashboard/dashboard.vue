@@ -2,9 +2,9 @@
 
   <div class="dashboard">
 
-    <div class="nav-split"></div>
+    <div class="nav-space"></div>
 
-    <div class="user-info">
+    <div class="user-card">
 
       <div class="avatar">
 
@@ -12,18 +12,28 @@
 
       </div>
 
-      <div class="info">
+      <div class="user-card-info">
 
-        <p class="info-slot info-name"><span class="info-admin" v-if="admin">ADMIN |</span> {{ name + ' ' + surname }} </p>
-        <p class="info-slot info-position"> {{ position }} </p>
-        <p class="info-slot info-status"> {{ status }} </p>
-        <p class="info-slot info-time"> 00:00:00 </p>
+        <p class="user-card-info-name">{{ name }}</p>
+        <p class="user-card-info-position">{{ position }}</p>
+        <p class="user-card-info-status">{{ status }}</p>
+        <p class="user-card-info-timelog">{{ timeLog }}</p>
 
       </div>
 
     </div>
 
-    <div class="user-projects"></div>
+    <div class="user-projects">
+
+      <p class="user-projects-title">MY PROJECTS</p>
+
+      <ul>
+
+        <li><dash-project /></li>
+
+      </ul>
+
+    </div>
 
     <div class="dash-footer"></div>
 
@@ -33,17 +43,27 @@
 
 <script>
 
-  export default {
-    name: "dashboard",
+  import dashProject from '../dashboard/dash-project'
 
-    computed: {
-      avatar: { get() { return this.$store.state.user.avatar } },
-      name: { get() { return this.$store.state.user.name } },
-      surname: { get() { return this.$store.state.user.surname } },
-      position: { get() { return this.$store.state.user.position } },
-      status: { get() { return this.$store.state.user.status } },
-      admin: { get() { return this.$store.state.user.admin } }
+  export default {
+
+    name: 'dashboard',
+    components: {
+      dashProject
+    },
+    data() {
+      return {
+        avatar: '/static/images/janeDoe.png',
+        name: 'Jane Doe',
+        position: 'DESIGN',
+        status: 'online',
+        timeLog: '06 | 34 | 23'
+      }
+    },
+    beforeCreate() {
+      this.$store.dispatch('GET_PROJECTS')
     }
+
   }
 
 </script>
@@ -52,54 +72,58 @@
 
   .dashboard {
 
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 80px 150px auto 80px;
-
-    background-color: #E74040;
-  }
-
-  .user-info {
-
-    display: grid;
-    grid-template-columns: 150px auto;
-    grid-template-rows: 100%;
-
-    padding: 0px 20px;
-
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-  }
-
-  .avatar {
-
-    padding: 20px;
-  }
-
-  .info {
-
-    padding: 24px 20px;
+    width: 338px;
+    height: 100vh;
 
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 80px 180px auto 80px;
+
+    padding: 0px 40px;
+
+    background-color: #FBFBFB;
   }
 
-  .info-slot {
+  .user-card {
 
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-    color: white;
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: auto;
+
+    padding: 40px 0px;
   }
 
-  .info-position, .info-admin {
+  .user-card-info {
+
+    font-size: 14px;
+    color: #757575;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-row-gap: 10px;
+
+    padding: 4px 20px;
+    padding-right: 0px;
+  }
+
+  .user-card-info-position {
 
     font-weight: bold;
-    color: #B50000;
   }
 
-  .dash-footer {
+  .user-projects-title {
 
-    border-top: 1px solid rgba(0,0,0,0.05);
+    font-weight: bold;
+    color: #757575;
+    font-size: 14px;
+
+    width: 100%;
+    height: 74px;
+
+    padding: 30px 0px;
+
+    border-bottom: 1px solid #E1E1E1;
   }
 
 </style>
