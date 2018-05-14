@@ -2,7 +2,7 @@
 
   <div class="dash-project">
 
-    <p>{{}}</p>
+    <p></p>
 
   </div>
 

@@ -15,9 +15,9 @@ export default {
   },
 
   actions: {
-    GET_PROJECTS() {
+    GET_PROJECTS({commit}) {
       Vue.http.get( this.state.testApi + 'projects' ).then(response => {
-        console.log(response.body)
+        commit('updateProjects', response.body)
       })
     }
   }

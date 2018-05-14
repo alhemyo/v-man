@@ -48,9 +48,11 @@
   export default {
 
     name: 'dashboard',
+
     components: {
       dashProject
     },
+
     data() {
       return {
         avatar: '/static/images/janeDoe.png',
@@ -59,9 +61,6 @@
         status: 'online',
         timeLog: '06 | 34 | 23'
       }
-    },
-    beforeCreate() {
-      this.$store.dispatch('GET_PROJECTS')
     }
 
   }
