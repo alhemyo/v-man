@@ -25,6 +25,7 @@
 
       <p>3D</p>
       <p>MGFX</p>
+      <p>DESIGN</p>
       <p>COMP</p>
       <p>AUDIO</p>
 
@@ -119,6 +120,7 @@
     height: 10px;
 
     background-color: #C5C5C5;
+    border-radius: 10px;
   }
 
   .dash-project-status-current {
@@ -131,7 +133,7 @@
     color: lightgray;
 
     display: grid;
-    grid-template-columns: min-content min-content min-content min-content;
+    grid-template-columns: min-content min-content min-content min-content min-content;
     grid-template-rows: 74px;
 
     justify-content: space-between;

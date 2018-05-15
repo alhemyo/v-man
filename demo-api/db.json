@@ -44,6 +44,21 @@
                     "backup": null
                 }
             ]
+        },
+        {
+            "id": 3,
+            "name": "Hotel Park",
+            "admin": "Maja Stamenkovska",
+            "client": "Vertigo Visual",
+            "current": false,
+            "backup": false,
+            "date": [
+                {
+                    "created": "2018-09-01T18:25:43.511Z",
+                    "deadline": "2018-10-03T12:00:00.000Z",
+                    "backup": null
+                }
+            ]
         }
     ]
 }

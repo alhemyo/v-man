@@ -23,24 +23,33 @@
 
     </div>
 
-    <div class="user-projects">
+    <div data-simplebar class="scroll-wrap">
 
-      <p class="user-projects-title">MY PROJECTS</p>
+        <div class="user-projects">
 
-      <ul>
+          <p class="user-projects-title">MY PROJECTS</p>
 
-        <li
-          v-for="project in projects">
-          <dash-project
-            :projectName="project.name"
-            :current = "project.current" />
-        </li>
+          <ul>
 
-      </ul>
+            <li
+              v-for="project in projects">
+              <dash-project
+                :projectName="project.name"
+                :current = "project.current" />
+            </li>
+
+          </ul>
+
+        </div>
 
     </div>
 
-    <div class="dash-footer"></div>
+    <div class="dash-footer">
+
+      <img src="/static/images/icons/dashboard/add.png" />
+      <p>New project</p>
+
+    </div>
 
   </div>
 
@@ -93,8 +102,6 @@
     grid-template-columns: 100%;
     grid-template-rows: 80px 180px auto 80px;
 
-    padding: 0px 40px;
-
     background-color: #FBFBFB;
   }
 
@@ -104,7 +111,7 @@
     grid-template-columns: 100px auto;
     grid-template-rows: auto;
 
-    padding: 40px 0px;
+    padding: 40px 40px;
   }
 
   .user-card-info {
@@ -138,6 +145,49 @@
     padding: 30px 0px;
 
     border-bottom: 1px solid #E1E1E1;
+  }
+
+  .dash-footer {
+
+    padding: 0px 40px;
+
+    overflow: hidden;
+  }
+
+  .user-projects {
+
+    padding: 40px;
+    overflow: hidden;
+  }
+
+  .dash-footer img {
+
+    position: relative;
+    float: right;
+    filter: grayscale(1);
+
+    padding: 30px;
+    padding-right: 0px;
+
+    cursor: pointer;
+    transition: all .1s ease;
+  }
+
+  .dash-footer p {
+
+    font-size: 14px;
+    font-weight: lighter;
+    color: #757575;
+
+    position: relative;
+    float: right;
+
+    padding: 33px 0px;
+  }
+
+  .dash-footer img:hover {
+
+    filter: grayscale(0);
   }
 
 </style>

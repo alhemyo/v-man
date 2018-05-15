@@ -4,7 +4,12 @@
 
     <nav-bar />
 
-    <dashboard />
+    <div class="dashboard-loader">
+
+      <dashboard />
+      <current-project />
+
+    </div>
 
   </div>
 
@@ -14,6 +19,7 @@
 
   import navBar from './components/nav/nav-bar'
   import dashboard from './components/dashboard/dashboard'
+  import currentProject from './components/dashboard/currentProject'
 
   export default {
 
@@ -21,7 +27,8 @@
 
     components: {
       navBar,
-      dashboard
+      dashboard,
+      currentProject
     }
 
   }
@@ -36,12 +43,27 @@
     -moz-user-select: none;
   }
 
+  .app-wrap {
+
+    overflow: hidden;
+  }
+
   .nav-space {
 
     width: 100%;
     height: 80px;
 
     position: relative;
+  }
+
+  .dashboard-loader {
+
+    width: 100%;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: auto 100%;
+    grid-template-rows: auto;
   }
 
 </style>
