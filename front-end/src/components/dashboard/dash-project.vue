@@ -140,4 +140,18 @@
     align-items: center;
   }
 
+  .dash-project-nav p {
+
+    padding: 30px 0px;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+  }
+
+  .dash-project-nav p:hover {
+
+    color: gray;
+  }
+
 </style>
