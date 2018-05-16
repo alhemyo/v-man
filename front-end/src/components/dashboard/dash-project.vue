@@ -5,7 +5,7 @@
     <div class="dash-project-main">
 
       <p class="dash-project-name">{{ projectName }}</p>
-      <img src="/static/images/icons/dashboard/dashProjectArrow.png" title="Open project folder" />
+      <img class="dash-project-img" :class="{ 'dash-project-img-current' : current }" src="/static/images/icons/dashboard/dashProjectArrow.png" title="Open project folder" />
 
       <div class="dash-project-status-wrap" v-if="current" :title="currentTitle">
 
@@ -59,9 +59,9 @@
   .dash-project {
 
     font-size: 14px;
-    font-weight: lighter;
+    font-weight: normal;
     white-space: nowrap;
-    color: #757575;
+    color: #131215;
 
     width: 100%;
     height: 74px;
@@ -70,7 +70,7 @@
     grid-template-columns: 100%;
     grid-template-rows: 74px;
 
-    border-bottom: 1px solid #E1E1E1;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 
     overflow: hidden;
     transition: height .2s ease;
@@ -87,10 +87,11 @@
     height: 74px;
 
     display: grid;
-    grid-template-columns: min-content max-content 40px;
+    grid-template-columns: 200px 30px 30px;
     grid-template-rows: 74px;
 
     justify-content: space-between;
+    align-items: center;
   }
 
   .dash-project-name {
@@ -98,18 +99,25 @@
     padding: 30px 0px;
   }
 
-  .dash-project img {
+  .dash-project-img {
 
-    padding: 32px 20px;
+    padding: 32px 10px;
 
     cursor: pointer;
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+  }
+
+  .dash-project-img-current {
+
+    opacity: 1;
   }
 
   .dash-project-status-wrap {
 
-    padding: 32px;
-    padding-left: 30px;
-    padding-right: 0px;
+    padding: 32px 10px;
 
     cursor: pointer;
   }
@@ -119,18 +127,21 @@
     width: 10px;
     height: 10px;
 
-    background-color: #C5C5C5;
+    position: relative;
+    margin: auto;
+
+    background-color: #58565C;
     border-radius: 10px;
   }
 
   .dash-project-status-current {
 
-    background-color: #E74040;
+    background-color: #FF312E;
   }
 
   .dash-project-nav {
 
-    color: lightgray;
+    color: #58565C;
 
     display: grid;
     grid-template-columns: min-content min-content min-content min-content min-content;
@@ -151,7 +162,7 @@
 
   .dash-project-nav p:hover {
 
-    color: gray;
+    color: #7D7B80;
   }
 
 </style>

@@ -45,7 +45,12 @@
 
   .app-wrap {
 
+    position: relative;
+    margin: auto;
+
     overflow: hidden;
+
+    background-color: #FFFFFA;
   }
 
   .nav-space {
@@ -62,7 +67,7 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: auto 100%;
+    grid-template-columns: min-content auto;
     grid-template-rows: auto;
   }
 

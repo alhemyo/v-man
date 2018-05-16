@@ -70,7 +70,7 @@
     data() {
       return {
         avatar: '/static/images/janeDoe.png',
-        name: 'Jane Doe',
+        name: 'Jane',
         position: 'DESIGN',
         status: 'online',
         timeLog: '06 : 34 : 23',
@@ -102,7 +102,12 @@
     grid-template-columns: 100%;
     grid-template-rows: 80px 180px auto 80px;
 
-    background-color: #FBFBFB;
+    background-color: #3A383F;
+  }
+
+  .dashboard .nav-space {
+
+    background-color: rgba(0,0,0,0.1);
   }
 
   .user-card {
@@ -112,31 +117,36 @@
     grid-template-rows: auto;
 
     padding: 40px 40px;
+
+    background-color: rgba(0,0,0,0.1);
   }
 
   .user-card-info {
 
     font-size: 14px;
-    color: #757575;
+    font-weight: normal;
+    color: #FFFFFA;
+    white-space: nowrap;
+    opacity: 0.5;
 
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: auto;
     grid-row-gap: 10px;
 
-    padding: 4px 20px;
-    padding-right: 0px;
+    padding: 4px 40px;
   }
 
-  .user-card-info-position {
+  .user-card-info-status {
 
-    font-weight: bold;
+    font-weight: lighter;
+    color: #9FC490;
   }
 
   .user-projects-title {
 
     font-weight: bold;
-    color: #757575;
+    color: #131215;
     font-size: 14px;
 
     width: 100%;
@@ -144,7 +154,7 @@
 
     padding: 30px 0px;
 
-    border-bottom: 1px solid #E1E1E1;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 
   .dash-footer {
@@ -152,6 +162,8 @@
     padding: 0px 40px;
 
     overflow: hidden;
+
+    background-color: rgba(0,0,0,0.1);
   }
 
   .user-projects {
@@ -176,8 +188,8 @@
   .dash-footer p {
 
     font-size: 14px;
-    font-weight: lighter;
-    color: #757575;
+    font-weight: normal;
+    color: #000103;
 
     position: relative;
     float: right;

@@ -62,7 +62,7 @@
   .app-title {
 
     font-size: 24px;
-    color: #E74040;
+    color: #FF312E;
 
     position: relative;
     float: left;
@@ -73,7 +73,7 @@
   .app-title span {
 
     font-weight: normal;
-    color: #757575;
+    color: #58565C;
   }
 
   .nav-bar-main {
