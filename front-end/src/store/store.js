@@ -21,10 +21,17 @@ export const store = new Vuex.Store({
       mail: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     },
 
+    // temp
+    validation: "success"
+
   },
 
   modules: {
     projects
+  },
+
+  getters: {
+    validation(state) { return state.validation }
   }
 
 })

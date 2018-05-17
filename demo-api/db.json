@@ -7,11 +7,21 @@
             "client": "Vertigo Visual",
             "current": true,
             "backup": false,
-            "date": [
+            "date": 
                 {
-                    "created": "2018-09-01T18:25:43.511Z",
-                    "deadline": "2018-10-03T12:00:00.000Z",
+                    "created": "2018-09-01",
+                    "deadline": "2018-10-03",
                     "backup": null
+                },
+            "tasks": [
+                {
+                    "name": "task-01"
+                },
+                {
+                    "name": "task-02"
+                },
+                {
+                    "name": "task-03"
                 }
             ]
         },
@@ -22,13 +32,12 @@
             "client": "Alkaloid",
             "current": false,
             "backup": false,
-            "date": [
+            "date":
                 {
-                    "created": "2018-09-01T18:25:43.511Z",
-                    "deadline": "2018-10-03T12:00:00.000Z",
+                    "created": "2018-09-01",
+                    "deadline": "2018-10-03",
                     "backup": null
                 }
-            ]
         },
         {
             "id": 2,
@@ -37,13 +46,12 @@
             "client": "Vertigo Visual",
             "current": false,
             "backup": false,
-            "date": [
+            "date":
                 {
-                    "created": "2018-09-01T18:25:43.511Z",
-                    "deadline": "2018-10-03T12:00:00.000Z",
+                    "created": "2018-09-01",
+                    "deadline": "2018-10-03",
                     "backup": null
                 }
-            ]
         },
         {
             "id": 3,
@@ -52,13 +60,12 @@
             "client": "Vertigo Visual",
             "current": false,
             "backup": false,
-            "date": [
+            "date":
                 {
-                    "created": "2018-09-01T18:25:43.511Z",
-                    "deadline": "2018-10-03T12:00:00.000Z",
+                    "created": "2018-09-01",
+                    "deadline": "2018-10-03",
                     "backup": null
                 }
-            ]
         }
     ]
 }

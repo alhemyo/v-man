@@ -1,6 +1,6 @@
 <template>
 
-  <div class="dashboard">
+  <div class="dash-bar">
 
     <div class="nav-space"></div>
 
@@ -61,7 +61,7 @@
 
   export default {
 
-    name: 'dashboard',
+    name: 'dash-bar',
 
     components: {
       dashProject
@@ -81,10 +81,6 @@
       projects: {
         get() { return this.$store.state.projects.projects }
       }
-    },
-
-    beforeCreate() {
-      this.$store.dispatch('GET_PROJECTS')
     }
 
   }
@@ -93,7 +89,7 @@
 
 <style scoped>
 
-  .dashboard {
+  .dash-bar {
 
     width: 338px;
     height: 100vh;
@@ -105,7 +101,7 @@
     background-color: #3A383F;
   }
 
-  .dashboard .nav-space {
+  .dash-bar .nav-space {
 
     background-color: rgba(0,0,0,0.1);
   }

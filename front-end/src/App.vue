@@ -2,12 +2,15 @@
 
   <div class="app-wrap">
 
-    <nav-bar />
+    <login />
 
-    <div class="dashboard-loader">
+    <div class="main-app">
 
-      <dashboard />
-      <current-project />
+      <nav-bar />
+
+      <dash-bar />
+
+      <!-- <loader /> -->
 
     </div>
 
@@ -17,18 +20,23 @@
 
 <script>
 
+  import login from './components/login/login'
   import navBar from './components/nav/nav-bar'
-  import dashboard from './components/dashboard/dashboard'
-  import currentProject from './components/dashboard/currentProject'
+  import dashBar from './components/dashboard/dash-bar'
 
   export default {
 
     name: 'App',
 
     components: {
+      login,
       navBar,
-      dashboard,
-      currentProject
+      dashBar
+    },
+
+    // Initial API requests
+    beforeCreate() {
+      this.$store.dispatch('GET_PROJECTS')
     }
 
   }
@@ -45,6 +53,9 @@
 
   .app-wrap {
 
+    width: 100%;
+    height: 100vh;
+
     position: relative;
     margin: auto;
 
@@ -53,22 +64,19 @@
     background-color: #FFFFFA;
   }
 
+  .main-app {
+
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: 100vh;
+  }
+
   .nav-space {
 
     width: 100%;
     height: 80px;
 
     position: relative;
-  }
-
-  .dashboard-loader {
-
-    width: 100%;
-    height: 100vh;
-
-    display: grid;
-    grid-template-columns: min-content auto;
-    grid-template-rows: auto;
   }
 
 </style>
