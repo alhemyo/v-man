@@ -1,8 +1,8 @@
 {
-  "name": "v-man",
+  "name": "front-end",
   "version": "1.0.0",
-  "description": "project manager",
-  "author": "Vanja Sheremetkoski",
+  "description": "project assistant application",
+  "author": "Vanja Sheremetkoski <alhemyos@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

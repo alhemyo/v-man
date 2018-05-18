@@ -1,18 +1,8 @@
 <template>
 
-  <div class="app-wrap">
+  <div id="app">
 
     <login />
-
-    <div class="main-app">
-
-      <nav-bar />
-
-      <dash-bar />
-
-      <!-- <loader /> -->
-
-    </div>
 
   </div>
 
@@ -20,23 +10,15 @@
 
 <script>
 
+  // Import components
   import login from './components/login/login'
-  import navBar from './components/nav/nav-bar'
-  import dashBar from './components/dashboard/dash-bar'
 
   export default {
 
     name: 'App',
 
     components: {
-      login,
-      navBar,
-      dashBar
-    },
-
-    // Initial API requests
-    beforeCreate() {
-      this.$store.dispatch('GET_PROJECTS')
+      login
     }
 
   }
@@ -46,37 +28,26 @@
 <style>
 
   * {
-    font-family: 'Bahnschrift';
-    user-select: none;
-    -moz-user-select: none;
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #131515;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .app-wrap {
+  #app {
 
     width: 100%;
     height: 100vh;
 
     position: relative;
-    margin: auto;
+    margin: none;
+    padding: none;
+
+    background-color: #FDFFFC;
 
     overflow: hidden;
-
-    background-color: #FFFFFA;
-  }
-
-  .main-app {
-
-    display: grid;
-    grid-template-columns: min-content auto;
-    grid-template-rows: 100vh;
-  }
-
-  .nav-space {
-
-    width: 100%;
-    height: 80px;
-
-    position: relative;
   }
 
 </style>

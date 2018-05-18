@@ -1,6 +1,6 @@
-# v-man
+# front-end
 
-> project manager
+> project assistant application
 
 ## Build Setup
 
