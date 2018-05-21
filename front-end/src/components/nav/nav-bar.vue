@@ -2,7 +2,11 @@
 
   <div class="nav-bar">
 
-    <h1><span>V</span>-MAN<span v-show="!validation" > | project assistant</span></h1>
+    <transition name="fade">
+
+      <h1><span>V</span>-MAN<span v-show="login" > | project assistant</span></h1>
+
+    </transition>
 
   </div>
 
@@ -15,7 +19,8 @@
     name: 'nav-bar',
 
     computed: {
-      validation: { get() { return this.$store.state.login.validation } }
+      validation: { get() { return this.$store.state.login.validation } },
+      login: { get() { return this.$store.state.components.login } }
     }
 
   }
@@ -23,6 +28,16 @@
 </script>
 
 <style scoped>
+
+  .fade-enter-active, .fade-leave-active {
+
+    transition: all 0.3s ease 0.6s;
+  }
+
+  .fade-leave-to {
+
+    opacity: 0;
+  }
 
   .nav-bar {
 

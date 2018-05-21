@@ -1,54 +1,58 @@
 <template>
 
-  <div class="login">
+  <transition name="fade">
 
-    <transition>
+    <div class="login" v-show="login">
 
-      <div class="login-bar">
+      <transition name="slide-left">
 
-        <form class="login-form" name="login">
+        <div class="login-bar" v-if="login">
 
-          <input v-model="username" @keypress="active = true" @keyup="validate" class="input username" type="text" name="username" placeholder="username" />
+          <form class="login-form" name="login">
 
-          <input v-model="password" @keypress="active = true" @keyup="validate" class="input password" type="password" name="password" placeholder="password" />
+            <input v-model="username" @keypress="active = true" @keyup="validate" class="input username" type="text" name="username" placeholder="username" />
 
-          <p class="password-link">forgot my password</p>
+            <input v-model="password" @keypress="active = true" @keyup="validate" class="input password" type="password" name="password" placeholder="password" />
 
-          <div class="loader">
+            <p class="password-link">forgot my password</p>
 
-            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
-            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
-            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
+            <div class="loader">
 
-          </div>
+              <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
+              <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
+              <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
 
-        </form>
+            </div>
 
-      </div>
-
-    </transition>
-
-    <transition>
-
-      <div class="login-board">
-
-        <img class="logo" src="/static/images/logo/vertigo_logo_lines.png" />
-
-        <div class="circles">
-
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
+          </form>
 
         </div>
 
-      </div>
+      </transition>
 
-    </transition>
+      <transition name="slide-right">
 
-  </div>
+        <div class="login-board" v-if="login">
+
+          <img class="logo" src="/static/images/logo/vertigo_logo_lines.png" />
+
+          <div class="circles">
+
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+
+          </div>
+
+        </div>
+
+      </transition>
+
+    </div>
+
+  </transition>
 
 </template>
 
@@ -67,6 +71,7 @@
     },
 
     computed: {
+      login: { get() { return this.$store.state.components.login } },
       username: {
         get() { return this.$store.state.login.username },
         set(value) { this.$store.commit( 'updateUsername', value ) }
@@ -170,6 +175,36 @@
 
   }
 
+  .slide-left-enter-active, .slide-left-leave-active, .slide-right-enter-active, .slide-right-leave-active {
+
+    transition: all .6s ease;
+  }
+
+  .slide-left-enter, .slide-left-leave-to {
+
+    transform: translateX( -338px );
+  }
+
+  .slide-right-enter, .slide-right-leave-to {
+
+    transform: translateX( calc( 100vw - 338px ) );
+  }
+
+  .fade-leave-active {
+
+    transition: all 0.6s ease;
+  }
+
+  .fade-enter-active {
+
+    transition: all 0.6s ease;
+  }
+
+  .fade-enter, .fade-leave-to {
+
+    opacity: 0;
+  }
+
   .login {
 
     width: 100%;
@@ -178,6 +213,8 @@
     display: grid;
     grid-template-columns: 338px auto;
     grid-template-rows: 1fr;
+
+    background-color: transparent;
   }
 
   .login-bar {
@@ -185,6 +222,8 @@
     position: relative;
 
     background-color: white;
+
+    box-shadow: 0px 0px 40px rgba(0,0,0,0.3);
   }
 
   .login-form {
@@ -227,6 +266,13 @@
     position: absolute;
     bottom: -5px;
     left: 60px;
+
+    cursor: pointer;
+  }
+
+  .password-link:hover {
+
+    color: gray;
   }
 
   .loader {
@@ -255,12 +301,12 @@
 
   .loader-item:nth-child(2) {
 
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
   }
 
   .loader-item:nth-child(3) {
 
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
   }
 
   .load {

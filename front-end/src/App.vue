@@ -6,6 +6,12 @@
 
     <login />
 
+    <div v-if="!login" class="app-wrap">
+
+      <dashboard />
+
+    </div>
+
   </div>
 
 </template>
@@ -15,6 +21,7 @@
   // Import components
   import navBar from './components/nav/nav-bar'
   import login from './components/login/login'
+  import dashboard from './components/dash/dashboard'
 
   export default {
 
@@ -22,7 +29,12 @@
 
     components: {
       navBar,
-      login
+      login,
+      dashboard
+    },
+
+    computed: {
+      login: { get() { return this.$store.state.components.login } }
     }
 
   }
@@ -52,6 +64,15 @@
     background-color: #FDFFFC;
 
     overflow: hidden;
+  }
+
+  .app-wrap {
+
+    display: grid;
+    grid-template-columns: 338px auto;
+    grid-template-rows: 100vh;
+
+    background-color: whitesmoke;
   }
 
 </style>

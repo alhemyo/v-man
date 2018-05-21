@@ -30,6 +30,11 @@ export default {
         {
           $('.input').prop('disabled', true)
           commit( 'updateValidation', true )
+
+          setTimeout(()=>{
+            commit( 'updateLogin', false )
+            commit( 'updateDashboard', true )
+          },2000)
         }
       else
         {
