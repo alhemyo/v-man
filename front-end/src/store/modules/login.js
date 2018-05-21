@@ -4,44 +4,48 @@ export default {
   state: {
 
     username: "",
-    usernameActive: false,
-    usernameSuccess: false,
-    usernameError: false,
     password: "",
-    passwordActive: false,
-    passwordSuccess: false,
-    passwordError: false,
-    validation: false
+    validation: false,
+    error: false
 
   },
 
   getters: {
     username(state) { return state.username },
-    usernameActive(state) { return state.usernameActive },
-    usernameSuccess(state) { return state.usernameSuccess },
-    usernameError(state) { return state.usernameError },
     password(state) { return state.password },
-    passwordActive(state) { return state.passwordActive },
-    passwordSuccess(state) { return state.passwordSuccess },
-    passwordError(state) { return state.passwordError },
-    validation(state) { return state.validation }
+    validation(state) { return state.validation },
+    error(state) { return state.error }
   },
 
   mutations: {
     updateUsername( state, username ) { state.username = username },
-    updateUsernameActive( state, usernameActive ) { state.usernameActive = usernameActive },
-    updateUsernameSuccess( state, usernameSuccess ) { state.usernameSuccess = usernameSuccess },
-    updateUsernameError( state, usernameError ) { state.usernameError = usernameError },
     updatePassword( state, password ) { state.password = password },
-    updatePasswordActive( state, passwordActive ) { state.passwordActive = passwordActive },
-    updatePasswordSuccess( state, passwordSuccess ) { state.passwordSuccess = passwordSuccess },
-    updatePasswordError( state, passwordError ) { state.passwordError = passwordError },
-    updateValidation( state, validation ) { state.validation = validation }
+    updateValidation( state, validation ) { state.validation = validation },
+    updateError( state, error ) { state.error = error }
   },
 
   actions: {
     LOGIN_API({commit}) {
+      if ( this.state.login.username === "jane doe" && this.state.login.password === 'password' )
+        {
+          $('.input').prop('disabled', true)
+          commit( 'updateValidation', true )
+        }
+      else
+        {
+          commit( 'updateError', true )
+          $('.input').prop('disabled', true)
 
+          setTimeout(() => {
+
+            this.state.login.username = ""
+            this.state.login.password = ""
+            commit( 'updateError', false )
+            $('.input').prop('disabled', false)
+            $('.username').focus()
+
+          },2000)
+        }
     }
   }
 

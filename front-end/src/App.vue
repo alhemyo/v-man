@@ -2,6 +2,8 @@
 
   <div id="app">
 
+    <nav-bar />
+
     <login />
 
   </div>
@@ -11,6 +13,7 @@
 <script>
 
   // Import components
+  import navBar from './components/nav/nav-bar'
   import login from './components/login/login'
 
   export default {
@@ -18,6 +21,7 @@
     name: 'App',
 
     components: {
+      navBar,
       login
     }
 

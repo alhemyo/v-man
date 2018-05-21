@@ -2,45 +2,51 @@
 
   <div class="login">
 
-    <div class="circles">
+    <transition>
 
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
+      <div class="login-bar">
 
-    </div>
+        <form class="login-form" name="login">
 
-    <form class="login-form" name="login">
+          <input v-model="username" @keypress="active = true" @keyup="validate" class="input username" type="text" name="username" placeholder="username" />
 
-      <img src="/static/images/logo/vertigo_logo_white.png" />
+          <input v-model="password" @keypress="active = true" @keyup="validate" class="input password" type="password" name="password" placeholder="password" />
 
-      <div class="input-wrap">
+          <p class="password-link">forgot my password</p>
 
-        <input class="input username" type="text" name="username" placeholder="username" v-model="username" @keypress="toggleUsernameActive" @keyup="validateUsername" />
+          <div class="loader">
 
-        <div class="input-loader">
+            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
+            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
+            <div class="loader-item" :class="{ load : active, success : validation, error : error }"></div>
 
-          <div :class="{ 'load' : usernameActive, 'error' : usernameError }" class="loader-item"></div>
-          <div :class="{ 'load' : usernameActive, 'error' : usernameError }" class="loader-item"></div>
-          <div :class="{ 'load' : usernameActive, 'error' : usernameError }" class="loader-item"></div>
+          </div>
 
-        </div>
+        </form>
 
-        <input class="input password" type="password" name="password" placeholder="password" v-model="password" @keypress="togglePasswordActive" @keyup="validatePassword" />
+      </div>
 
-        <div class="input-loader">
+    </transition>
 
-          <div :class="{ 'load' : passwordActive }" class="loader-item"></div>
-          <div :class="{ 'load' : passwordActive }" class="loader-item"></div>
-          <div :class="{ 'load' : passwordActive }" class="loader-item"></div>
+    <transition>
+
+      <div class="login-board">
+
+        <img class="logo" src="/static/images/logo/vertigo_logo_lines.png" />
+
+        <div class="circles">
+
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
 
         </div>
 
       </div>
 
-    </form>
+    </transition>
 
   </div>
 
@@ -54,89 +60,70 @@
 
     name: 'login',
 
+    data() {
+      return {
+        active: false
+      }
+    },
+
     computed: {
       username: {
         get() { return this.$store.state.login.username },
-        set( value ) { this.$store.commit( 'updateUsername', value ) }
+        set(value) { this.$store.commit( 'updateUsername', value ) }
       },
-      usernameActive: {
-        get() { return this.$store.state.login.usernameActive }
-      },
-      usernameSuccess: { get() { return this.$store.state.login.usernameSuccess } },
-      usernameError: { get() { return this.$store.state.login.usernameError } },
       password: {
         get() { return this.$store.state.login.password },
-        set( value ) { this.$store.commit( 'updatePassword', value ) }
+        set(value) { this.$store.commit( 'updatePassword', value ) }
       },
-      passwordActive: {
-        get() { return this.$store.state.login.passwordActive }
-      },
-      passwordSuccess: { get() { return this.$store.state.login.passwordSuccess } },
-      passwordError: { get() { return this.$store.state.login.passwordError } },
-      validation: { get() { return this.$store.state.login.validation } }
+      validation: { get() { return this.$store.state.login.validation } },
+      error: { get() { return this.$store.state.login.error } }
     },
 
     methods: {
+      validate: _.debounce(function() {
 
-      validateUsername: _.debounce(function() {
+        this.active = false
 
-        this.$store.commit( 'updateUsernameActive', false )
-
-        // REGEX check | letters only
-        if ( !this.username.match(this.$store.state.regex.letters) )
+        if( this.username.match(this.$store.state.regex.login) )
           {
             this.username = ""
-            $('.username').prop('placeholder', 'No numbers !')
-            this.$store.commit( 'updateUsernameError', true )
+            $('.username').prop('placeholder', 'What are you writing?')
 
-            setTimeout( () => {
-
-              $('.username').prop('placeholder', 'username')
-              this.$store.commit( 'updateUsernameError', false )
-
-            },3000)
+            setTimeout(()=>{
+              $('.username').focus().prop('placeholder', 'username')
+            },2000)
           }
 
-        else
-          {
-            this.$store.commit( 'updateUsernameSuccess', true )
-          }
-
-      },500),
-
-      validatePassword: _.debounce(function() {
-
-        this.$store.commit( 'updatePasswordActive', false )
-
-        if ( !this.password.match(this.$store.state.regex.alphanumeric) )
+        else if ( this.password.match(this.$store.state.regex.login) )
           {
             this.password = ""
-            $('.password').prop('placeholder', 'Aha ! A hacker !')
-            this.$store.commit( 'updatePasswordError', true )
+            $('.password').prop('placeholder', 'Aha! A hacker!')
 
-            setTimeout( () => {
+            setTimeout(()=>{
+              $('.password').focus().prop('placeholder', 'password')
+            },2000)
+          }
 
-              $('.password').prop('placeholder', 'password')
-              this.$store.commit( 'updatePasswordError', false )
+        else if ( this.username === "" )
+          {
+            $('.username').focus()
+          }
 
-            },3000)
+        else if ( this.password === "" )
+          {
+            $('.password').focus()
           }
 
         else
           {
-            this.$store.commit( 'updatePasswordSuccess', true )
+            this.$store.dispatch('LOGIN_API')
           }
 
-      },500),
+      },1000)
+    },
 
-      toggleUsernameActive() {
-        this.$store.commit( 'updateUsernameActive', true )
-      },
-
-      togglePasswordActive() {
-        this.$store.commit( 'updatePasswordActive', true )
-      }
-
+    mounted() {
+      $('.username').focus()
     }
 
   }
@@ -151,23 +138,23 @@
       width: 0vw;
       height: 0vw;
       opacity: 0;
-      border-color: rgba(0,0,0,0.3);
+      border-color: #FF312E;
     }
 
-    20% {
-      opacity: 1;
+    50% {
+      opacity: 0.6;
     }
 
     100% {
-      width: 150vw;
-      height: 150vw;
+      width: 100vw;
+      height: 100vw;
       opacity: 0;
       border-color: #FF312E;
     }
 
   }
 
-  @keyframes loader {
+  @keyframes load {
 
     0% {
       transform: translateY( 0px );
@@ -180,6 +167,7 @@
     100% {
       transform: translateY( 0px );
     }
+
   }
 
   .login {
@@ -187,20 +175,22 @@
     width: 100%;
     height: 100vh;
 
-    position: relative;
-    margin: none;
-
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100vh;
+    grid-template-columns: 338px auto;
+    grid-template-rows: 1fr;
+  }
 
-    background-color: #333138;
+  .login-bar {
+
+    position: relative;
+
+    background-color: white;
   }
 
   .login-form {
 
-    width: auto;
-    height: 150px;
+    width: 100%;
+    height: auto;
 
     position: absolute;
     top: 50%;
@@ -208,76 +198,79 @@
 
     transform: translateY( -50% );
 
-    padding: 0px 40px;
+    padding: 40px;
 
     display: grid;
-    grid-template-columns: 150px auto;
-    grid-template-rows: 150px;
-    grid-column-gap: 40px;
-  }
-
-  .login-form img {
-
-    padding: 10px;
-  }
-
-  .input-wrap {
-
-    padding: 20px 0px;
-
-    display: grid;
-    grid-template-columns: 300px 40px;
+    grid-template-columns: 100%;
     grid-template-rows: 40px 40px;
-    grid-row-gap: 30px;
-    grid-column-gap: 10px;
+    grid-row-gap: 20px;
   }
 
   .input {
 
     font-size: 14px;
-    font-weight: lighter;
-    color: #FFFFFA;
+    color: dimgray;
 
-    background-color: transparent;
+    background-color: whitesmoke;
+
+    padding: 0px 20px;
+
     border: none;
-    border-bottom: 4px solid #FFFFFA;
+    border-radius: 40px;
   }
 
-  .input::placeholder {
+  .password-link {
 
-    color: rgba(255,255,255,0.3)
+    font-size: 12px;
+    color: lightgray;
+
+    position: absolute;
+    bottom: -5px;
+    left: 60px;
   }
 
-  .input-loader {
+  .loader {
+
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    bottom: -20px;
+    right: 60px;
 
     display: grid;
-    grid-template-columns: 4px 4px 4px;
-    grid-template-rows: 4px;
-    justify-content: space-around;
-    align-content: flex-end;
+    grid-template-columns: 6px 6px 6px;
+    grid-template-rows: 6px;
+    justify-content: space-between;
+    align-content: center;
   }
 
   .loader-item {
 
-    background-color: #FFFFFA;
-  }
+    background-color: #171A1E;
+    border-radius: 12px;
 
-  .loader-item:nth-child(1) {
-    animation-delay: 0.2s;
+    transition: all .3s ease;
   }
 
   .loader-item:nth-child(2) {
+
+    animation-delay: 0.2s;
+  }
+
+  .loader-item:nth-child(3) {
+
     animation-delay: 0.4s;
   }
 
   .load {
 
-    animation: loader 0.6s linear infinite;
+    animation: load 0.6s linear infinite;
   }
 
   .success {
 
-    background-color: #C8E087;
+    background-color: #2FBF71;
   }
 
   .error {
@@ -285,16 +278,33 @@
     background-color: #FF312E;
   }
 
-  .circles {
+  .login-board {
 
-    width: 0px;
-    height: 0px;
+    position: relative;
+
+    background-color: #171A1E;
+  }
+
+  .logo {
+
+    width: 100px;
+    height: 100px;
 
     position: absolute;
     top: 50%;
-    left: 120px;
+    left: 50%;
 
-    transform: translateY( -50% );
+    transform: translate( -50%,-50% );
+  }
+
+  .circles {
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    overflow: hidden;
   }
 
   .circle {
@@ -305,30 +315,30 @@
 
     transform: translate( -50%,-50% );
 
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid #FF312E;
     border-radius: 100%;
 
-    animation: pulse 5s linear infinite;
+    animation: pulse 10s linear infinite;
   }
 
   .circle:nth-child(2) {
 
-    animation-delay: 1s;
+    animation-delay: 2s;
   }
 
   .circle:nth-child(3) {
 
-    animation-delay: 2s;
+    animation-delay: 4s;
   }
 
   .circle:nth-child(4) {
 
-    animation-delay: 3s;
+    animation-delay: 6s;
   }
 
   .circle:nth-child(5) {
 
-    animation-delay: 4s;
+    animation-delay: 8s;
   }
 
 </style>

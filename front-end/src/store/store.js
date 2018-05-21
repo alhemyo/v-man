@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
 
     // regex
     regex: {
+      login: /[~`<>|\n/\\/\/\\]+$/,
       letters: /^[\s/a-zA-Z]*$/,
       numbers: /^[\s/0-9.]+$/,
       alphanumeric: /^[\s/0-9a-zA-Z/ -]+$/,
