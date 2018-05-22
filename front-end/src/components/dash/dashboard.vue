@@ -4,6 +4,14 @@
 
     <div v-if="dashboard" class="dashboard">
 
+      <div class="nav-space"></div>
+
+      <div class="user-card"></div>
+
+      <div class="user-projects"></div>
+
+      <div class="dash-footer"></div>
+
     </div>
 
   </transition>
@@ -53,12 +61,11 @@
 
     width: 338px;
 
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80px 180px auto 80px;
+
     background-color: white;
-  }
-
-  p {
-
-    padding: 80px;
   }
 
 </style>

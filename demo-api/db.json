@@ -1,4 +1,13 @@
 {
+    "users": [
+        {
+            "id": 0,
+            "name": "Jane",
+            "surname": "Doe",
+            "admin": true,
+        }
+    ],
+
     "projects": [
         {
             "id": 0,
