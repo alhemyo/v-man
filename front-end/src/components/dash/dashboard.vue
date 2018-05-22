@@ -16,8 +16,8 @@
 
         <div class="user-info">
 
-          <p class="user-name"><span>★ </span>Jane</p>
-          <p class="user-position">DESIGN</p>
+          <p class="user-name"><span>AD | </span>Jane</p>
+          <p class="user-position">design</p>
           <p class="user-status">online</p>
           <p class="user-time-log">06:42:00</p>
 
@@ -113,6 +113,11 @@
     transform: translateX( -338px );
   }
 
+  .nav-space {
+
+    background-color: whitesmoke;
+  }
+
   .dashboard {
 
     width: 338px;
@@ -122,7 +127,7 @@
     grid-template-columns: 100%;
     grid-template-rows: 80px 180px auto 80px;
 
-    background-color: whitesmoke;
+    background-color: white;
 
     overflow: hidden;
   }
@@ -131,6 +136,8 @@
 
     display: grid;
     grid-template-columns: 170px 1fr;
+
+    background-color: whitesmoke;
   }
 
   .avatar {
@@ -154,9 +161,25 @@
     align-content: space-around;
   }
 
-  .user-name span, .user-position {
+  .user-name {
 
     font-weight: bold;
+    color: var(--black);
+  }
+
+  .user-name span {
+
+    color: var(--dashText);
+  }
+
+  .user-position {
+
+    font-weight: bold;
+  }
+
+  .user-status {
+
+    color: var(--green);
   }
 
   .user-projects {
@@ -197,6 +220,7 @@
     padding-right: 40px;
 
     filter: grayscale(1);
+    opacity: 0.6;
 
     cursor: pointer;
     transition: all .2s ease;
@@ -205,6 +229,7 @@
   .dash-footer img:hover {
 
     filter: grayscale(0);
+    opacity: 1;
   }
 
   .dash-footer p {

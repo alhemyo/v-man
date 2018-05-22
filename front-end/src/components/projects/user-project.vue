@@ -80,6 +80,8 @@
 
     font-weight: bold;
     height: 148px;
+
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 
   .dash-project-main {
@@ -130,7 +132,7 @@
     position: relative;
     margin: auto;
 
-    background-color: #58565C;
+    background-color: var(--dashText);
     border-radius: 10px;
   }
 
@@ -141,8 +143,6 @@
 
   .dash-project-nav {
 
-    color: #58565C;
-
     display: grid;
     grid-template-columns: min-content min-content min-content min-content min-content;
     grid-template-rows: 74px;
@@ -152,6 +152,8 @@
   }
 
   .dash-project-nav p {
+
+    color: rgba(0,0,0,0.3);
 
     padding: 30px 0px;
 

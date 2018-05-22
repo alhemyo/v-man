@@ -316,7 +316,7 @@
 
   .success {
 
-    background-color: #2FBF71;
+    background-color: var(--green);
   }
 
   .error {

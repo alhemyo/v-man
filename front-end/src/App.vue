@@ -58,7 +58,7 @@
     --black: #171A1E;
     --dash: #3C4046;
     --dashText: #969697;
-    --default: #58565C;
+    --green: #2FBF71;
   }
 
   #app {
