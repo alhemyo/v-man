@@ -46,10 +46,19 @@
   * {
     font-family: 'Bahnschrift', sans-serif;
     font-size: 14px;
-    font-weight: normal;
-    color: #131515;
+    font-weight: 400;
+    color: var(--dashText);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  :root {
+
+    --red: #FF312E;
+    --black: #171A1E;
+    --dash: #3C4046;
+    --dashText: #969697;
+    --default: #58565C;
   }
 
   #app {
@@ -61,7 +70,7 @@
     margin: none;
     padding: none;
 
-    background-color: #FDFFFC;
+    background-color: var(--dash);
 
     overflow: hidden;
   }
@@ -72,7 +81,7 @@
     grid-template-columns: 338px auto;
     grid-template-rows: 100vh;
 
-    background-color: whitesmoke;
+    background-color: var(--dash);
   }
 
 </style>

@@ -221,7 +221,7 @@
 
     position: relative;
 
-    background-color: white;
+    background-color: whitesmoke;
 
     box-shadow: 0px 0px 40px rgba(0,0,0,0.3);
   }
@@ -248,14 +248,14 @@
   .input {
 
     font-size: 14px;
-    color: dimgray;
+    color: var(--dashText);
 
     background-color: whitesmoke;
 
     padding: 0px 20px;
 
     border: none;
-    border-radius: 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.1)
   }
 
   .password-link {
@@ -328,7 +328,7 @@
 
     position: relative;
 
-    background-color: #171A1E;
+    background-color: var(--dash);
   }
 
   .logo {

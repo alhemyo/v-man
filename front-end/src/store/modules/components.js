@@ -2,7 +2,9 @@ export default {
 
   state: {
     login: true,
-    dashboard: false
+    dashboard: false,
+    projects: false,
+    chat: false
   },
 
   getters: {
