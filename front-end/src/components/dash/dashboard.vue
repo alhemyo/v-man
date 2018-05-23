@@ -27,21 +27,17 @@
 
       <div class="user-projects">
 
-        <div class="scroll">
+        <p class="projects-title">MY PROJECTS</p>
 
-          <p class="projects-title">MY PROJECTS</p>
+        <ul>
 
-          <ul>
+          <li v-for="project in projects" >
+            <user-project
+            :project-name="project.name"
+            :current="project.current" />
+          </li>
 
-            <li v-for="project in projects" >
-              <user-project
-              :project-name="project.name"
-              :current="project.current" />
-            </li>
-
-          </ul>
-
-        </div>
+        </ul>
 
       </div>
 
@@ -68,12 +64,6 @@
 
     components: {
       userProject
-    },
-
-    data() {
-      return {
-        scroll
-      }
     },
 
     computed: {
@@ -113,11 +103,6 @@
     transform: translateX( -338px );
   }
 
-  .nav-space {
-
-    background-color: whitesmoke;
-  }
-
   .dashboard {
 
     width: 338px;
@@ -127,7 +112,7 @@
     grid-template-columns: 100%;
     grid-template-rows: 80px 180px auto 80px;
 
-    background-color: white;
+    background-color: whitesmoke;
 
     overflow: hidden;
   }
@@ -150,7 +135,7 @@
 
   .user-info {
 
-    font-size: 14px;
+    font-size: 12px;
     color: dimgray;
 
     padding: 40px 0px;
@@ -163,6 +148,7 @@
 
   .user-name {
 
+    font-size: 16px;
     font-weight: bold;
     color: var(--black);
   }
@@ -187,6 +173,8 @@
     width: calc(100% + 17px);
 
     padding: 0px 40px;
+
+    background-color: rgba(0,0,0,0.05);
 
     overflow-y: scroll;
   }

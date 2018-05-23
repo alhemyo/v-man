@@ -21,6 +21,17 @@
 
     </transition>
 
+    <transition name="menu-nav">
+      
+      <div v-show="!login" class="menu-nav">
+        
+        <img v-show="settings" :src="menuNav.menu.active" title="settings" />
+        <img v-show="!settings" :src="menuNav.menu.default" title="settings" />
+
+      </div>
+
+    </transition>
+
   </div>
 
 </template>
@@ -45,6 +56,12 @@
           chat: {
             active: '/static/images/icons/navbar/active/chat_active.png',
             default: '/static/images/icons/navbar/default/chat.png'
+          }
+        },
+        menuNav: {
+          menu: {
+            active: '/static/images/icons/navbar/active/menu_active.png',
+            default: '/static/images/icons/navbar/default/menu.png'
           }
         }
       }
@@ -114,11 +131,29 @@
 
   .main-nav {
 
+    position: relative;
+    float: left;
+
     display: grid;
     grid-template-columns: repeat(3, 60px);
   }
 
   .main-nav > img {
+
+    padding: 30px 20px;
+
+    cursor: pointer;
+  }
+
+  .menu-nav {
+
+    position: relative;
+    float: right;
+
+    padding-right: 10px;
+  }
+
+  .menu-nav > img {
 
     padding: 30px 20px;
 

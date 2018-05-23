@@ -10,6 +10,8 @@
 
       <dashboard />
 
+      <current-project />
+
     </div>
 
   </div>
@@ -22,6 +24,7 @@
   import navBar from './components/nav/nav-bar'
   import login from './components/login/login'
   import dashboard from './components/dash/dashboard'
+  import currentProject from './components/projects/current-project'
 
   export default {
 
@@ -30,7 +33,8 @@
     components: {
       navBar,
       login,
-      dashboard
+      dashboard,
+      currentProject
     },
 
     computed: {
