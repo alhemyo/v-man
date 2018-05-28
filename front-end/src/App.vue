@@ -1,18 +1,14 @@
 <template>
 
   <div id="app">
+  	
+  	<nav-bar />
 
-    <nav-bar />
+  	<div class="app-loader">
 
-    <login />
+  		<dashboard />
 
-    <div v-if="!login" class="app-wrap">
-
-      <dashboard />
-
-      <current-project />
-
-    </div>
+  	</div>
 
   </div>
 
@@ -20,25 +16,16 @@
 
 <script>
 
-  // Import components
-  import navBar from './components/nav/nav-bar'
-  import login from './components/login/login'
-  import dashboard from './components/dash/dashboard'
-  import currentProject from './components/projects/current-project'
+	import navBar from './components/nav-bar'
+	import dashboard from './components/dashboard'
 
   export default {
 
     name: 'App',
 
     components: {
-      navBar,
-      login,
-      dashboard,
-      currentProject
-    },
-
-    computed: {
-      login: { get() { return this.$store.state.components.login } }
+    	navBar,
+    	dashboard
     }
 
   }
@@ -47,45 +34,37 @@
 
 <style>
 
-  * {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--dashText);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+:root {
+	--mainFont: 'Roboto', sans-serif;
+	--jet: #3A383F;
+	--red: #FF312E;
+	--dashGray: #F6F6F6;
+}
 
-  :root {
+* {
+	font-family: var(--mainFont);
+	font-weight: 400;
+	color: var(--jet);
+}
 
-    --red: #FF312E;
-    --black: #171A1E;
-    --dash: #3C4046;
-    --dashText: #969697;
-    --green: #2FBF71;
-  }
+#app {
 
-  #app {
+	width: 100%;
+	height: 100vh;
 
-    width: 100%;
-    height: 100vh;
+	position: relative;
+}
 
-    position: relative;
-    margin: none;
-    padding: none;
+.app-loader {
 
-    background-color: var(--dash);
+	width: 100%;
+	height: 100vh;
 
-    overflow: hidden;
-  }
+	position: relative;
 
-  .app-wrap {
-
-    display: grid;
-    grid-template-columns: 338px auto;
-    grid-template-rows: 100vh;
-
-    background-color: var(--dash);
-  }
+	display: grid;
+	grid-template-columns: 264px auto;
+	grid-template-rows: 100vh;
+}
 
 </style>

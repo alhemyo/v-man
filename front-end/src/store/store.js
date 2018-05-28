@@ -2,10 +2,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import login from './modules/login'
-import components from './modules/components'
-import projects from './modules/projects'
-
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -27,10 +23,6 @@ export const store = new Vuex.Store({
 
   },
 
-  modules: {
-    login,
-    components,
-    projects
-  }
+  modules: {}
 
 })
