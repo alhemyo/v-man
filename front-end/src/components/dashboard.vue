@@ -23,17 +23,37 @@
 
 		</div> <!-- end .user-card -->
 
-		<div class="item">MY PROJECTS</div>
+		<div class="item projects-title">MY PROJECTS</div>
 
 		<div class="item current">
 			
-			<p class="current-project-name">Current Project</p>
+			<p 
+			class="current-project-name" 
+			v-for="project in this.projects" 
+			v-if="project.current">
+				{{ project.name }}
+			</p>
 
 			<img class="current-project-menu" src="/static/images/icons/dashboard/down-arrow.png" />
 
-		</div>
+		</div> <!-- end .item .current -->
 
-		<div class="user-projects"></div>
+		<div class="user-projects">
+			
+			<ul class="user-projects-list">
+				
+				<li 
+				class="user-projects-list-item"
+				v-for="project in this.projects"
+				v-if="!project.current">
+					<div>
+						<p>{{project.name}}</p>
+					</div>
+				</li>
+
+			</ul>
+
+		</div>
 
 		<div class="dash-footer"></div>
 
@@ -45,7 +65,15 @@
 	
 	export default {
 
-		name: 'dashboard'
+		name: 'dashboard',
+
+		computed: {
+			projects: { get() { return this.$store.state.projects.projects } }
+		},
+
+		created() {
+			this.$store.dispatch('GET_PROJECTS')
+		}
 
 	}
 
@@ -102,10 +130,17 @@
 		font-weight: 600;
 	}
 
-	.dashboard > .item {
+	.user-status {
+
+		color: var(--green);
+	}
+
+	.projects-title {
 
 		font-size: 12px;
 		font-weight: 500;
+
+		padding: 23px 20px;
 	}
 
 	.dashboard > .current {
@@ -133,6 +168,57 @@
 		box-sizing: content-box;
 
 		cursor: pointer;
+	}
+
+	.user-projects {
+
+		position: relative;
+
+		border-left: none !important;
+	}
+
+	.user-projects:before {
+
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 0;
+
+		border-left: 4px solid var(--jet);
+	}
+
+	.user-projects-list {
+
+		position: relative;
+		z-index: 1;
+	}
+
+	.user-projects-list-item {
+
+		width: 100%;
+		height: 60px;
+
+		border-left: 4px solid var(--defaultGray);
+	}
+
+	.user-projects-list-item > div {
+		width: calc(100% - 40px);
+		height: 60px;
+
+		margin-left: 20px;
+
+		border-bottom: 1px solid rgba(0,0,0,0.05);
+	}
+
+	.user-projects-list-item > div > p {
+
+		font-size: 12px;
+		color: var(--defaultGray);
+
+		padding: 23px 0px;
 	}
 
 </style>

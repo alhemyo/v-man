@@ -38,7 +38,10 @@
 	--mainFont: 'Roboto', sans-serif;
 	--jet: #3A383F;
 	--red: #FF312E;
+	--green: #8BC34A;
+	--yellow: #FFC107;
 	--dashGray: #F6F6F6;
+	--defaultGray: #AAA9AC;
 }
 
 * {
