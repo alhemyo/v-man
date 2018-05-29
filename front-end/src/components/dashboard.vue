@@ -55,7 +55,13 @@
 
 		</div>
 
-		<div class="dash-footer"></div>
+		<div class="dash-footer">
+			
+			<img src="/static/images/icons/dashboard/add.png" />
+
+			<p>new project</p>
+
+		</div> <!-- end .dash-footer -->
 
 	</div> <!-- end .dashboard -->
 
@@ -83,16 +89,18 @@
 	
 	.dashboard {
 
-		background-color: var(--dashGray);
+		background-color: var(--jet);
 
 		display: grid;
-		grid-template-columns: 1fr;
+		grid-template-columns: 264px;
 		grid-template-rows: 60px 120px 60px 60px auto 60px;
+
+		overflow: hidden;
 	}
 
 	.dashboard > div {
 
-		border-left: 4px solid var(--jet);
+		border-left: 4px solid black;
 	}
 
 	.user-card {
@@ -126,8 +134,15 @@
 
 	.user-name {
 
+		color: white;
+
 		font-size: 14px;
-		font-weight: 600;
+		font-weight: 500;
+	}
+
+	.user-position, .user-time {
+
+		color: var(--defaultGray);
 	}
 
 	.user-status {
@@ -145,7 +160,7 @@
 
 	.dashboard > .current {
 
-		background-color: white;
+		background-color: var(--dashGray);
 		border-left: 4px solid var(--red);
 
 		display: grid;
@@ -172,9 +187,14 @@
 
 	.user-projects {
 
+		width: calc(100% + 17px);
+
 		position: relative;
 
 		border-left: none !important;
+
+		overflow: hidden;
+		overflow-y: scroll;
 	}
 
 	.user-projects:before {
@@ -187,7 +207,7 @@
 		top: 0px;
 		z-index: 0;
 
-		border-left: 4px solid var(--jet);
+		border-left: 4px solid black;
 	}
 
 	.user-projects-list {
@@ -202,6 +222,13 @@
 		height: 60px;
 
 		border-left: 4px solid var(--defaultGray);
+
+		cursor: pointer;
+	}
+
+	.user-projects-list-item:hover {
+
+		background-color: rgba(0,0,0,0.05);
 	}
 
 	.user-projects-list-item > div {
@@ -210,7 +237,7 @@
 
 		margin-left: 20px;
 
-		border-bottom: 1px solid rgba(0,0,0,0.05);
+		border-bottom: 1px solid rgba(0,0,0,0.15);
 	}
 
 	.user-projects-list-item > div > p {
@@ -219,6 +246,45 @@
 		color: var(--defaultGray);
 
 		padding: 23px 0px;
+	}
+
+	.dash-footer img {
+
+		position: relative;
+		float: right;
+
+		padding: 23px 20px;
+
+		filter: grayscale(1);
+		opacity: 1;
+
+		cursor: pointer;
+	}
+
+	.dash-footer img:hover {
+
+		filter: grayscale(0);
+		opacity: 1;
+	}
+
+	.dash-footer p {
+
+		font-size: 12px;
+		color: var(--defaultGray);
+
+		position: relative;
+		float: right;
+
+		padding: 23px 0px;
+
+		opacity: 0;
+
+		transition: all 0.2s ease;
+	}
+
+	.dash-footer:hover > p {
+
+		opacity: 1;
 	}
 
 </style>

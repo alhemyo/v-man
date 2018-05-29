@@ -36,6 +36,7 @@
 		font-weight: 600;
 		font-size: 16px;
 		color: var(--red);
+		user-select: none;
 
 		position: relative;
 		float: left;
@@ -45,7 +46,8 @@
 
 	.app-name span {
 
-		font-weight: 600;
+		font-weight: 500;
+		color: white;
 	}
 
 </style>

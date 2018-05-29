@@ -48,6 +48,7 @@
 	font-family: var(--mainFont);
 	font-weight: 400;
 	color: var(--jet);
+	user-select: none;
 }
 
 #app {
@@ -56,6 +57,8 @@
 	height: 100vh;
 
 	position: relative;
+
+	background-color: var(--dashGray);
 }
 
 .app-loader {
