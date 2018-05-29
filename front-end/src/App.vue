@@ -4,6 +4,8 @@
   	
   	<nav-bar />
 
+  	<login />
+
   	<div class="app-loader">
 
   		<dashboard />
@@ -16,6 +18,7 @@
 
 <script>
 
+	import login from './components/login'
 	import navBar from './components/nav-bar'
 	import dashboard from './components/dashboard'
 
@@ -24,6 +27,7 @@
     name: 'App',
 
     components: {
+    	login,
     	navBar,
     	dashboard
     }
