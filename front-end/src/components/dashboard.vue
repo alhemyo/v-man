@@ -1,69 +1,73 @@
 <template>
+
+	<transition name="dash-fade">
 	
-	<div class="dashboard">
-		
-		<div class="nav-space"></div>
-
-		<div class="user-card">
+		<div v-show="dashboard" class="dashboard">
 			
-			<div class="user-avatar">
+			<div class="nav-space"></div>
+
+			<div class="user-card">
 				
-				<img class="avatar" src="/static/images/janeDoe.png" />
+				<div class="user-avatar">
+					
+					<img class="avatar" src="/static/images/janeDoe.png" />
 
-			</div> <!-- end .user-avatar -->
+				</div> <!-- end .user-avatar -->
 
-			<div class="user-info">
+				<div class="user-info">
+					
+					<p class="user-name">Jane Doe</p>
+					<p class="user-position">design</p>
+					<p class="user-status">online</p>
+					<p class="user-time">06:32:12</p>
+
+				</div> <!-- end .user-info -->
+
+			</div> <!-- end .user-card -->
+
+			<div class="item projects-title">MY PROJECTS</div>
+
+			<div class="item current">
 				
-				<p class="user-name">Jane Doe</p>
-				<p class="user-position">design</p>
-				<p class="user-status">online</p>
-				<p class="user-time">06:32:12</p>
+				<p 
+				class="current-project-name" 
+				v-for="project in this.projects" 
+				v-if="project.current">
+					{{ project.name }}
+				</p>
 
-			</div> <!-- end .user-info -->
+				<img class="current-project-menu" src="/static/images/icons/dashboard/down-arrow.png" />
 
-		</div> <!-- end .user-card -->
+			</div> <!-- end .item .current -->
 
-		<div class="item projects-title">MY PROJECTS</div>
-
-		<div class="item current">
-			
-			<p 
-			class="current-project-name" 
-			v-for="project in this.projects" 
-			v-if="project.current">
-				{{ project.name }}
-			</p>
-
-			<img class="current-project-menu" src="/static/images/icons/dashboard/down-arrow.png" />
-
-		</div> <!-- end .item .current -->
-
-		<div class="user-projects">
-			
-			<ul class="user-projects-list">
+			<div class="user-projects">
 				
-				<li 
-				class="user-projects-list-item"
-				v-for="project in this.projects"
-				v-if="!project.current">
-					<div>
-						<p>{{project.name}}</p>
-					</div>
-				</li>
+				<ul class="user-projects-list">
+					
+					<li 
+					class="user-projects-list-item"
+					v-for="project in this.projects"
+					v-if="!project.current">
+						<div>
+							<p>{{project.name}}</p>
+						</div>
+					</li>
 
-			</ul>
+				</ul>
 
-		</div>
+			</div>
 
-		<div class="dash-footer">
-			
-			<img src="/static/images/icons/dashboard/add.png" />
+			<div class="dash-footer">
+				
+				<img src="/static/images/icons/dashboard/add.png" />
 
-			<p>new project</p>
+				<p>new project</p>
 
-		</div> <!-- end .dash-footer -->
+			</div> <!-- end .dash-footer -->
 
-	</div> <!-- end .dashboard -->
+		</div> <!-- end .dashboard -->
+
+	</transition>
 
 </template>
 
@@ -74,7 +78,8 @@
 		name: 'dashboard',
 
 		computed: {
-			projects: { get() { return this.$store.state.projects.projects } }
+			projects: { get() { return this.$store.state.projects.projects } },
+			dashboard: { get() { return this.$store.state.components.dashboard } }
 		},
 
 		created() {
@@ -86,6 +91,16 @@
 </script>
 
 <style scoped>
+
+	.dash-fade-enter-active, .dash-fade-leave-active {
+
+		transition: all 0.3s ease 0.3s;
+	}
+
+	.dash-fade-enter, .dash-fade-leave-to {
+
+		opacity: 0;
+	}
 	
 	.dashboard {
 

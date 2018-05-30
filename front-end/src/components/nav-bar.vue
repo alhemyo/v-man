@@ -2,7 +2,7 @@
 	
 	<div class="nav-bar">
 		
-		<p class="app-name">V<span>-MAN</span></p>
+		<p @click="logout" class="app-name">V<span>-MAN</span></p>
 
 	</div>
 
@@ -12,7 +12,17 @@
 	
 	export default {
 
-		name: 'nav-bar'
+		name: 'nav-bar',
+
+		computed: {
+			login: { get() { return this.$store.state.components.login } }
+		},
+
+		methods: {
+			logout() {
+				this.$store.commit('updateLogin', true)
+			}
+		}
 
 	}
 

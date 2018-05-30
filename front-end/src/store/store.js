@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import components from './modules/components'
 import user from './modules/user'
 import projects from './modules/projects'
 
@@ -27,8 +28,9 @@ export const store = new Vuex.Store({
   },
 
   modules: {
-    projects,
-    user
+    components,
+    user,
+    projects
   }
 
 })
