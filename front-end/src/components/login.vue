@@ -69,6 +69,8 @@
     },
 
 		computed: {
+
+			// get user
 			username: {
 				get() { return this.$store.state.user.username },
 				set(value) { this.$store.commit('updateUsername', value) }
@@ -79,6 +81,8 @@
 			},
 			validation: { get() { return this.$store.state.user.validation } },
       error: { get() { return this.$store.state.user.error } },
+
+      // get components
       login: { get() { return this.$store.state.components.login } }
 		},
 

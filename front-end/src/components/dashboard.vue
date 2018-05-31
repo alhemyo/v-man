@@ -79,11 +79,15 @@
 
 		computed: {
 			projects: { get() { return this.$store.state.projects.projects } },
-			dashboard: { get() { return this.$store.state.components.dashboard } }
+			dashboard: { get() { return this.$store.state.components.dashboard } },
+			validation: { get() { return this.$store.state.user.validation } }
 		},
 
-		created() {
-			this.$store.dispatch('GET_PROJECTS')
+		watch: {
+			validation: {
+				handler() { this.$store.dispatch('GET_PROJECTS') },
+				immediate: true
+			}
 		}
 
 	}
@@ -169,6 +173,7 @@
 
 		font-size: 12px;
 		font-weight: 500;
+		color: var(--defaultGray);
 
 		padding: 23px 20px;
 	}

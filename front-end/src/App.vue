@@ -10,6 +10,8 @@
 
   		<dashboard />
 
+  		<current-project />
+
   	</div>
 
   </div>
@@ -21,6 +23,7 @@
 	import login from './components/login'
 	import navBar from './components/nav-bar'
 	import dashboard from './components/dashboard'
+	import currentProject from './components/current-project'
 
   export default {
 
@@ -29,7 +32,8 @@
     components: {
     	login,
     	navBar,
-    	dashboard
+    	dashboard,
+    	currentProject
     }
 
   }
@@ -75,6 +79,8 @@
 	display: grid;
 	grid-template-columns: 264px auto;
 	grid-template-rows: 100vh;
+
+	overflow: hidden;
 }
 
 </style>
