@@ -38,7 +38,7 @@
 						<div class="task-nav task-nav-main">TASK LIST</div>
 						<p class="task-nav task-nav-state">task state</p>
 						<div></div>
-						<p class="task-nav task-nav-quick">go</p>
+						<p class="task-nav task-nav-quick">open</p>
 						<p class="task-nav task-nav-deadline">deadline</p>
 						<div class="task-nav task-nav-add">add task</div>
 
@@ -52,11 +52,18 @@
 
 								<div class="task-priority-wrap"></div>
 								
-								<p class="task-text task-name">{{task.name}}</p>
+								<p @click="openTask" class="task-text task-name">{{task.name}}</p>
 								<p class="task-text task-state">state</p>
 								<div></div>
 								<p class="task-text task-go">open</p>
-								<p class="task-text task-date">03 | 10 | 2018</p>
+								<p class="task-text task-date"><span>03 | 10 | 2018</span></p>
+								<div class="task-menu">
+									
+									<img src="/static/images/icons/task/add.png"  title="assign user" />
+									<img src="/static/images/icons/task/edit.png" title="edit task" />
+									<img src="/static/images/icons/task/delete.png" title="delete task" />
+
+								</div> <!-- end .task-menu -->
 
 							</div> <!-- end .task-main -->
 
@@ -93,6 +100,16 @@
 
 			// Get components
 			dashboard: { get() { return this.$store.state.components.dashboard } }
+		},
+
+		methods: {
+			openTask($event) {
+
+				let currentTask = $($event.currentTarget).parent().parent()
+
+				$('.task').not(currentTask).removeClass('task-extend')
+				$(currentTask).toggleClass('task-extend')
+			}
 		}
 
 	}
@@ -221,12 +238,19 @@
 		width: 100%;
 		height: 60px;
 
+		background-color: var(--dashGray);
 		border-bottom: 1px solid rgba(0,0,0,0.1);
+
+		transition: height .3s ease;
+
+		overflow: hidden;
 	}
 
-	.task:hover {
+	.task-extend {
 
-		background-color: rgba(0,0,0,0.01);
+		height: 300px;
+
+		border-bottom: 2px solid rgba(0,0,0,0.1);
 	}
 
 	.task-main {
@@ -235,6 +259,10 @@
 		grid-template-columns: 20px minmax(130px, 280px) 160px auto 80px 140px 100px;
 		grid-template-rows: 60px;
 		align-items: center;
+
+		position: relative;
+
+		border-bottom: 1px solid rgba(0,0,0,0.05);
 	}
 
 	.task-priority-wrap {
@@ -250,11 +278,80 @@
 		font-size: 12px;
 		color: var(--defaultGray);
 		text-align: center;
+
+		position: relative;
+
+		padding: 23px 0px;
+
+		cursor: pointer;
+	}
+
+	.task-text:hover {
+
+		color: var(--jet);
 	}
 
 	.task-name {
 
 		text-align: left;
+	}
+
+	.task-name::after {
+
+		content: "▼";
+		position: absolute;
+		right: 20px;
+	}
+
+	.task-main > .task-text:hover {
+
+		background-color: rgba(0,0,0,0.01);
+	}
+
+	.task-date span {
+
+		color: var(--defaultGray);
+	}
+
+	.task-date span:before {
+
+		content: "⯇ ";
+		color: var(--red);
+	}
+
+	.task-menu {
+
+		display: grid;
+		grid-template-columns: 34px 34px 34px;
+		grid-template-rows: 60px;
+
+		justify-content: space-around;
+	}
+
+	.task-menu img {
+
+		padding: 20px 10px;
+
+		opacity: 0.3;
+
+		cursor: pointer;
+	}
+
+	.task-menu img:hover {
+
+		opacity: 0.8;
+	}
+
+	.task-mid {
+
+		height: 180px;
+	}
+
+	.task-footer {
+
+		height: 60px;
+
+		border-top: 1px solid rgba(0,0,0,0.05);
 	}
 
 	.current-footer {
