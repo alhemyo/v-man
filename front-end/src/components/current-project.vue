@@ -54,9 +54,23 @@
 								
 								<p @click="openTask" class="task-text task-name">{{task.name}}</p>
 								<p class="task-text task-state">state</p>
-								<div></div>
+								<div class="empty" @click="openTask"></div>
 								<p class="task-text task-go">open</p>
-								<p class="task-text task-date"><span>03 | 10 | 2018</span></p>
+
+								<div class="task-date">
+									
+									<p class="task-deadline">03 | 10 | 2018</p>
+									
+									<ul class="drop-date">
+										
+										<li><p class="task-created">03 | 10 | 2018</p></li>
+										<li><p class="task-download">03 | 10 | 2018</p></li>
+										<li><p class="task-upload">03 | 10 | 2018</p></li>
+
+									</ul>
+
+								</div> <!-- end .task-date -->
+
 								<div class="task-menu">
 									
 									<img src="/static/images/icons/task/add.png"  title="assign user" />
@@ -67,9 +81,29 @@
 
 							</div> <!-- end .task-main -->
 
-							<div class="task-mid"></div>
+							<div class="task-mid">
+								
+								<div class="task-note-wrap"></div> <!-- end .task-note-wrap -->
 
-							<div class="task-footer"></div>
+								<div class="task-thumbnail">
+									
+									<img class="thumbnail" src="/static/images/thumb.jpg" />
+
+								</div> <!-- end.task-thumbnail -->
+
+							</div> <!-- end .task-mid -->
+
+							<div class="task-footer">
+								
+								<input class="note-input" type="text" name="note" placeholder="add note">
+
+								<button class="note-button">
+									
+									<img src="/static/images/icons/add.png" />
+
+								</button>
+
+							</div> <!-- end .task-footer -->
 
 						</div> <!-- end .task -->
 
@@ -208,7 +242,7 @@
 		grid-template-rows: 60px;
 		align-items: center;
 
-		border-bottom: 2px solid rgba(0,0,0,0.1);
+		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 
 	.task-nav {
@@ -249,8 +283,6 @@
 	.task-extend {
 
 		height: 300px;
-
-		border-bottom: 2px solid rgba(0,0,0,0.1);
 	}
 
 	.task-main {
@@ -283,6 +315,8 @@
 
 		padding: 23px 0px;
 
+		transition: all .1s ease;
+
 		cursor: pointer;
 	}
 
@@ -291,9 +325,20 @@
 		color: var(--jet);
 	}
 
+	.task-extend .task-name {
+
+		font-weight: 500;
+		color: var(--jet);
+	}
+
 	.task-name {
 
 		text-align: left;
+	}
+
+	.task-extend .task-name::after {
+
+		content: "▲";
 	}
 
 	.task-name::after {
@@ -303,20 +348,93 @@
 		right: 20px;
 	}
 
-	.task-main > .task-text:hover {
+	.empty {
 
-		background-color: rgba(0,0,0,0.01);
+		height: 60px;
+
+		cursor: pointer;
 	}
 
-	.task-date span {
+	.task-date {
+
+		position: relative;
+	}
+
+	.drop-date {
+
+		width: 100%;
+		height: auto;
+		max-height: 0px;
+
+		font-size: 12px;
+		text-align: center;
+
+		position: absolute;
+		top: 60px;
+
+		background-color: var(--dashGray);
+
+		transition: all .1s ease;
+
+		overflow: hidden;
+	}
+
+	.task-extend .task-date:hover {
+
+		background-color: white;
+	}
+
+	.task-extend .task-date:hover .drop-date {
+
+		max-height: 300px;
+
+		padding: 20px 0px;
+
+		background-color: white;
+	}
+
+	.drop-date > li > p {
 
 		color: var(--defaultGray);
+		padding: 10px 0px;
 	}
 
-	.task-date span:before {
+	.task-deadline {
+
+		font-size: 12px;
+		text-align: center;
+		color: var(--defaultGray);
+
+		position: relative;
+		z-index: 1;
+
+		padding: 23px 0px;
+
+		cursor: pointer;
+	}
+
+	.task-deadline::before {
 
 		content: "⯇ ";
 		color: var(--red);
+	}
+
+	.task-created::before {
+
+		content: "► ";
+		color: var(--yellow);
+	}
+
+	.task-download::before {
+
+		content: "▼ ";
+		color: var(--defaultGray);
+	}
+
+	.task-upload::before {
+
+		content: "▲ ";
+		color: var(--green);
 	}
 
 	.task-menu {
@@ -345,13 +463,72 @@
 	.task-mid {
 
 		height: 180px;
+
+		display: grid;
+		grid-template-columns: auto 240px;
+		grid-template-rows: 100%;
+
+		background-color: rgba(0,0,0,0.01);
+	}
+
+	.task-note-wrap {
+	}
+
+	.task-thumbnail {
+
+		display: flex;
+	}
+
+	.thumbnail {
+
+		padding: 20px;
+
+		border-radius: 25px;
 	}
 
 	.task-footer {
 
 		height: 60px;
 
+		display: grid;
+		grid-template-columns: auto 60px;
+		grid-template-rows: 60px;
+		align-items: center;
+
 		border-top: 1px solid rgba(0,0,0,0.05);
+	}
+
+	.note-input {
+
+		height: 30px;
+
+		padding: 0px 20px;
+
+		background-color: rgba(0,0,0,0.05);
+		border: none;
+		border-radius: 30px;
+	}
+
+	.note-button {
+
+		width: 30px;
+		height: 30px;
+
+		justify-self: center;
+		padding: 10px;
+
+		background-color: var(--defaultGray);
+		border: none;
+		border-radius: 30px;
+
+		transition: all .1s ease;
+
+		cursor: pointer;
+	}
+
+	.note-button:hover {
+
+		background-color: var(--green);
 	}
 
 	.current-footer {
