@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
 
   state: {
@@ -5,7 +7,9 @@ export default {
     username: "",
     password: "",
     validation: false,
-    error: false
+    error: false,
+
+    users: []
 
   },
 
@@ -13,14 +17,18 @@ export default {
     username(state) { return state.username },
     password(state) { return state.password },
     validation(state) { return state.validation },
-    error(state) { return state.error }
+    error(state) { return state.error },
+
+    users(state) { return state.users }
   },
 
   mutations: {
     updateUsername( state, username ) { state.username = username },
     updatePassword( state, password ) { state.password = password },
     updateValidation( state, validation ) { state.validation = validation },
-    updateError( state, error ) { state.error = error }
+    updateError( state, error ) { state.error = error },
+
+    updateUsers( state, users ) { state.users = users }
   },
 
   actions: {
@@ -50,6 +58,12 @@ export default {
 
           },2000)
         }
+    },
+
+    GET_USERS({commit}) {
+      Vue.http.get( this.state.testApi + 'users' ).then( response => {
+        commit('updateUsers', response.body)
+      })
     }
   }
 

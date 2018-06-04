@@ -5,6 +5,36 @@
             "name": "Jane",
             "surname": "Doe",
             "admin": true
+        },
+        {
+            "id": 1,
+            "name": "Ignat",
+            "surname": "Petrov",
+            "admin": true
+        },
+        {
+            "id": 2,
+            "name": "Vanja",
+            "surname": "Sheremetkoski",
+            "admin": true
+        },
+        {
+            "id": 3,
+            "name": "Aleksandar",
+            "surname": "Miloshevski",
+            "admin": true
+        },
+        {
+            "id": 4,
+            "name": "Bojan",
+            "surname": "Stojcevski",
+            "admin": false
+        },
+        {
+            "id": 5,
+            "name": "Maja",
+            "surname": "Stamenkovska",
+            "admin": true
         }
     ],
 

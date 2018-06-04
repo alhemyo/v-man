@@ -85,7 +85,10 @@
 
 		watch: {
 			validation: {
-				handler() { this.$store.dispatch('GET_PROJECTS') },
+				handler() { 
+					this.$store.dispatch('GET_PROJECTS') 
+					this.$store.dispatch('GET_USERS')
+				},
 				immediate: true
 			}
 		}

@@ -111,11 +111,11 @@
 								
 								<input class="note-input" type="text" name="note" placeholder="add note">
 
-								<button class="note-button">
+								<div class="note-button">
 									
 									<img src="/static/images/icons/add.png" />
 
-								</button>
+								</div>
 
 							</div> <!-- end .task-footer -->
 
@@ -128,6 +128,31 @@
 				</div> <!-- end .scroll-wrap -->
 
 			</div> <!-- end .current-project -->
+
+			<div class="user-wrap">
+
+				<div class="nav-space"></div>
+
+				<div></div>
+
+				<p class="user-title">Assigned users</p>
+				
+				<ul class="user-list">
+					
+					<li class="user-item" v-for="user in users">
+						
+						<div class="user-avater">
+
+						</div>
+						<p class="user-info">{{ user.name }}</p>
+
+					</li>
+
+				</ul><!-- end .user-list -->
+
+				<div></div>
+
+			</div> <!-- end .user-wrap -->
 
 		</div> <!-- end .current-project-wrap -->
 
@@ -145,6 +170,9 @@
 
 			// Get Projects
 			projects: { get() { return this.$store.state.projects.projects } },
+
+			// Get Users
+			users: { get() { return this.$store.state.user.users } },
 
 			// Get components
 			dashboard: { get() { return this.$store.state.components.dashboard } }
@@ -563,6 +591,8 @@
 
 		height: 60px;
 
+		position: relative;
+
 		display: grid;
 		grid-template-columns: auto 60px;
 		grid-template-rows: 60px;
@@ -574,6 +604,8 @@
 	.note-input {
 
 		height: 30px;
+
+		position: relative;
 
 		padding: 0px 20px;
 
@@ -602,6 +634,63 @@
 	.note-button:hover {
 
 		background-color: var(--green);
+	}
+
+	/* USER-WRAP CSS */
+
+	.user-wrap {
+
+		position: relative;
+
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 60px 180px 60px auto 60px;
+	}
+
+	.user-title {
+
+		font-size: 12px;
+		font-weight: 500;
+
+		align-self: center;
+
+		padding: 0px 20px;
+	}
+
+	.user-list {
+
+		padding: 0px 20px;
+
+		border-left: 1px solid rgba(0,0,0,0.1);
+	}
+
+	.user-item {
+
+		font-size: 12px;
+
+		display: grid;
+		grid-template-columns: 30px auto;
+		grid-template-rows: 30px;
+		grid-column-gap: 20px;
+		align-items: center;
+
+		padding: 15px 0px;
+	}
+
+	.user-avater {
+
+		width: 30px;
+		height: 30px;
+
+		position: relative;
+
+		background-color: rgba(0,0,0,0.1);
+		border-radius: 30px;
+	}
+
+	.user-info {
+
+		color: var(--defaultGray);
 	}
 
 </style>
