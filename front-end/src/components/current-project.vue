@@ -53,9 +53,23 @@
 								<div class="task-priority-wrap"></div>
 								
 								<p @click="openTask" class="task-text task-name">{{task.name}}</p>
+
 								<p class="task-text task-state">state</p>
+
 								<div class="empty" @click="openTask"></div>
-								<p class="task-text task-go">open</p>
+								
+								<div class="task-open">
+								
+									<img src="/static/images/icons/navbar/default/dashboard.png" />
+
+									<ul class="task-open-menu-list">
+										
+										<li class="task-open-menu-item">Maya</li>
+										<li class="task-open-menu-item">Syntheyes</li>
+
+									</ul> <!-- end .task-open-menu-list -->
+
+								</div> <!-- end .task-open -->
 
 								<div class="task-date">
 									
@@ -245,6 +259,13 @@
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 
+	.current-footer {
+
+		background-color: whitesmoke;
+	}
+
+	/* -------------- TASK CSS ------------------ */
+
 	.task-nav {
 
 		font-size: 12px;
@@ -353,6 +374,58 @@
 		height: 60px;
 
 		cursor: pointer;
+	}
+
+	.task-extend .task-open:hover {
+
+		background-color: white;
+	}
+
+	.task-extend .task-open:hover .task-open-menu-list {
+
+		max-height: 300px;
+
+		padding: 20px;
+	}
+
+	.task-open {
+
+		width: auto;
+		height: 60px;
+
+		padding: 23px;
+
+		position: relative;
+
+		cursor: pointer;
+	}
+
+	.task-open-menu-list {
+
+		height: auto;
+		max-height: 0px;
+
+		position: absolute;
+		top: 61px;
+		left: 50%;
+
+		padding: 0px 20px;
+
+		background-color: white;
+
+		transition: all .1s ease;
+		transform: translateX(-50%);
+
+		overflow: hidden;
+	}
+
+	.task-open-menu-item {
+
+		font-size: 12px;
+		color: var(--defaultGray);
+		text-align: center;
+
+		padding: 10px 0px;
 	}
 
 	.task-date {
@@ -529,11 +602,6 @@
 	.note-button:hover {
 
 		background-color: var(--green);
-	}
-
-	.current-footer {
-
-		background-color: whitesmoke;
 	}
 
 </style>

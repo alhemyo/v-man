@@ -1,8 +1,8 @@
 export default {
 
   state: {
-    login: true,
-    dashboard: false,
+    login: false,
+    dashboard: true,
     projects: false,
     chat: false
   },
