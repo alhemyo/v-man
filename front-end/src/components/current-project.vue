@@ -2,7 +2,7 @@
 
 	<transition name="comp-in">
 	
-		<div v-show="dashboard" class="current-project-wrap">
+		<div v-show="currentProject" class="current-project-wrap">
 			
 			<div v-for="current in projects" v-if="current.current" class="current-project">
 
@@ -171,6 +171,9 @@
 			// Get Projects
 			projects: { get() { return this.$store.state.projects.projects } },
 
+			// Get current Project
+			currentProject: { get() {return this.$store.state.components.currentProject} },
+
 			// Get Users
 			users: { get() { return this.$store.state.user.users } },
 
@@ -193,19 +196,10 @@
 </script>
 
 <style scoped>
-
-	.comp-in-enter-active, .comp-in-leave-active {
-
-		transition: all .5s ease .6s;
-	}
-
-	.comp-in-enter, .comp-in-leave-to {
-
-		transform: translateX(100px);
-		opacity: 0;
-	}
 	
 	.current-project-wrap {
+
+		height: 100vh;
 
 		display: grid;
 		grid-template-columns: auto 200px;

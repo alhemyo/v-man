@@ -10,7 +10,12 @@
 
   		<dashboard />
 
-  		<current-project />
+  		<div class="loader">
+  			
+  			<current-project />
+  			<user-config />
+
+  		</div>
 
   	</div>
 
@@ -24,6 +29,7 @@
 	import navBar from './components/nav-bar'
 	import dashboard from './components/dashboard'
 	import currentProject from './components/current-project'
+	import userConfig from './components/user-config'
 
   export default {
 
@@ -33,7 +39,8 @@
     	login,
     	navBar,
     	dashboard,
-    	currentProject
+    	currentProject,
+    	userConfig
     }
 
   }
@@ -82,5 +89,29 @@
 
 	overflow: hidden;
 }
+
+.loader {
+
+	width: 100%;
+	height: 100vh;
+}
+
+.comp-in-enter-active {
+
+		transition: all .5s ease .6s;
+}
+
+.comp-in-leave-active {
+
+		transition: all .5s ease;
+}
+
+.comp-in-enter, .comp-in-leave-to {
+
+		transform: translateX(50px);
+		opacity: 0;
+}
+
+ 
 
 </style>

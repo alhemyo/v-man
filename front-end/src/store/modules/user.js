@@ -41,6 +41,7 @@ export default {
           setTimeout(()=>{
             commit( 'updateLogin', false )
             commit( 'updateDashboard', true )
+            commit( 'updateCurrentProject', true )
           },2000)
         }
       else
