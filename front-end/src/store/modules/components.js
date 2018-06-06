@@ -3,9 +3,9 @@ export default {
   state: {
     login: false,
     dashboard: true,
-    currentProject: false,
+    currentProject: true,
     projects: false,
-    userConfig: true,
+    userConfig: false,
     chat: false
   },
 
