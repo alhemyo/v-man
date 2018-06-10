@@ -12,7 +12,9 @@
 	"address": "bul.Partizanski odredi",
 	"city": "Skopje",
 	"phone_number": "070111111",
-	"birthday": "05.04.1988",
+    "day": "05",
+	"month": "04",
+	"year": "1988",
 	"umcn": "192894785792"
 }
 
