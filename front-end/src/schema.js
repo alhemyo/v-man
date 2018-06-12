@@ -9,17 +9,12 @@ project: {
 	client: "VT",
 	state: "state",
 	priority: "high",
-
-	backup: {
-
-		backupState: false,
-		backupDisk: ""
-
-	},
+	backupDisk: "",
 
 	timesheet: {
 
 		created: "day - month - year",
+		finished: "day - month - year",
 		deadline: "day - month - year",
 		backup: "day - month - year"
 
