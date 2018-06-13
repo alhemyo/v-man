@@ -2,33 +2,50 @@
 
   <div id="app">
 
-    APP
+    <login />
 
   </div>
 
 </template>
 
+<script>
+
+	import login from './components/auth/login'
+	
+	export default {
+
+		name: 'app',
+
+		components: {
+
+			login
+
+		}
+
+	}
+
+</script>
+
 <style>
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+	* {
 
-#nav {
-  padding: 30px;
-}
+		--mainFont: 'Roboto', sans-serif;
+		--white: #F9F8F8;
+		--black: #3A383F;
+		--dark: #5B5961;
+		--gray: #DBDBDB;
+		--darkRed: #E3170A;
+		--red: #FF312E;
+		--green: #8BC34A;
+	}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  #app {
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  }
 
 </style>

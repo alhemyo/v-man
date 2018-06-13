@@ -74,7 +74,7 @@ def get_this_users(current_user):
     #if not current_user.is_admin:
         #return jsonify({'message': 'User not authorized!'})
 
-    return jsonify(current_user.serialize)
+    return jsonify(current_user)
 
 @app.route('/user/<user_id>', methods=['GET'])
 #@token_required
