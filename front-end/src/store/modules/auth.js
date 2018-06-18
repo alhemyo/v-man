@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from 'axios'
 
 export default {
@@ -23,8 +24,15 @@ export default {
 
 		// Login API request
 		LOGIN({ commit }) {
-
 			
+			let data = {
+          url: this.state.api + 'login',
+          method: 'POST',
+          headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + ':' + this.state.auth.password ) }
+        }
+
+      axios(data).then(response => console.log(response))
+
 		}
 
 	}

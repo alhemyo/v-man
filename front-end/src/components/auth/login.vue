@@ -18,11 +18,11 @@
 						v-model="username" />
 
 					<input 
-					class="login-input password" 
-					type="password" 
-					placeholder="password"
-					@keyup="validate"
-					v-model="password" />
+						class="login-input password" 
+						type="password" 
+						placeholder="password"
+						@keyup="validate"
+						v-model="password" />
 
 					<div class="login-form-footer">
 						
@@ -103,52 +103,52 @@
 				// Check username for invalid characters
 				if ( this.username.match( this.$store.state.regex.login ) )
 
-					{
+				{
 
-						this.username = ""
-						$('.username').addClass('error').prop( 'placeholder', "Invalid characters" )
+					this.username = ""
+					$('.username').addClass('error').prop( 'placeholder', "Invalid characters" )
 
-						setTimeout( () => {
+					setTimeout( () => {
 
-							$('.username').removeClass('error').prop( 'placeholder', "username" )
+						$('.username').removeClass('error').prop( 'placeholder', "username" )
 
-						},2000)
+					},2000)
 
-					}
+				}
 
 				// Check password for invalid characters
 				else if ( this.password.match( this.$store.state.regex.login ) )
 
-					{
+				{
 
-						this.password = ""
-						$('.password').addClass('error').prop( 'placeholder', "Invalid characters" )
+					this.password = ""
+					$('.password').addClass('error').prop( 'placeholder', "Invalid characters" )
 
-						setTimeout( () => {
+					setTimeout( () => {
 
-							$('.password').removeClass('error').prop( 'placeholder', "username" )
+						$('.password').removeClass('error').prop( 'placeholder', "username" )
 
-						},2000)
-						
-					}
+					},2000)
+					
+				}
 
 				// Check if inputs are empty
 				else if ( this.username === "" || this.password === "" )
 
-					{
+				{
 
-						// Do nothing
+					// Do nothing
 
-					}
+				}
 
 				// Dispatch API request for login
 				else
 
-					{
+				{
 
-						this.$store.dispatch('LOGIN')
+					this.$store.dispatch('LOGIN')
 
-					}
+				}
 
 			},1000)
 
