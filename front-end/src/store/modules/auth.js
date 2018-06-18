@@ -8,7 +8,8 @@ export default {
 		// User authentication
 		username: "",
 		password: "",
-		token: null
+		token: localStorage.getItem('token') || null,
+		auth: false
 
 	},
 
@@ -17,7 +18,8 @@ export default {
 		// User auth mutations
 		updateUsername(state, username) { return state.username = username },
 		updatePassword(state, password) { return state.password = password },
-		updateToken(state, token) { return state.token = token }
+		updateToken(state, token) { return state.token = token },
+		updateAuth(state, auth) { return state.auth = auth }
 	},
 
 	actions: {
@@ -31,7 +33,26 @@ export default {
           headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + ':' + this.state.auth.password ) }
         }
 
-      axios(data).then(response => console.log(response))
+      return new Promise((resolve,reject) => {
+
+      	axios(data).then( response => {
+
+	      	localStorage.setItem( 'token', this.state.auth.token )
+	      	commit( 'updateToken', response.data.token )
+	      	commit( 'updateAuth', true )
+
+	      	console.log('user logged in')
+
+	      	resolve(response)
+
+      	}).catch(error => {
+
+      		console.log(error)
+      		reject(error)
+
+      	})
+
+      })
 
 		}
 

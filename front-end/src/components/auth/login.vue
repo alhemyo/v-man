@@ -146,7 +146,11 @@
 
 				{
 
-					this.$store.dispatch('LOGIN')
+					this.$store.dispatch('LOGIN').then(response => {
+
+						this.$router.push({ name: 'dashboard' })
+
+					})
 
 				}
 
