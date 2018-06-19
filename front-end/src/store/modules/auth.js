@@ -9,8 +9,13 @@ export default {
 		username: "",
 		password: "",
 		token: localStorage.getItem('token') || null,
-		auth: false
 
+	},
+
+	getters: {
+		isAuth(state) {
+			return state.token !== null
+		}
 	},
 
 	mutations: {
@@ -28,31 +33,42 @@ export default {
 		LOGIN({ commit }) {
 			
 			let data = {
-          url: this.state.api + 'login',
-          method: 'POST',
-          headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + ':' + this.state.auth.password ) }
-        }
+				url: this.state.api + 'login',
+				method: 'POST',
+				headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + ':' + this.state.auth.password ) }
+			}
 
-      return new Promise((resolve,reject) => {
+      		return new Promise((resolve,reject) => {
 
-      	axios(data).then( response => {
+				axios(data).then( response => {
 
-	      	localStorage.setItem( 'token', this.state.auth.token )
-	      	commit( 'updateToken', response.data.token )
-	      	commit( 'updateAuth', true )
+					localStorage.setItem( 'token', this.state.auth.token )
+					//localStorage.removeItem('token')
+					commit( 'updateToken', response.data.token )
 
-	      	console.log('user logged in')
+					resolve(response)
 
-	      	resolve(response)
+      			}).catch(error => {
 
-      	}).catch(error => {
+					reject(error)
+					
+      			})
 
-      		console.log(error)
-      		reject(error)
+      		})
 
-      	})
+		},
 
-      })
+		LOGOUT({ commit }) {
+
+			return new Promise((resolve) => {
+
+				localStorage.removeItem('token')
+				commit( 'updateToken', null)
+				commit( 'updateUsername', "" )
+				commit( 'updatePassword', "" )
+
+				resolve()
+			})
 
 		}
 

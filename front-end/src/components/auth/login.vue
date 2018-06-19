@@ -1,9 +1,9 @@
 <template>
 
 	<div id="login" class="login-wrap">
-		
+
 		<div class="login-pane login-left-pane">
-			
+		
 			<div class="left-pane">
 				
 				<form class="login-form">
@@ -91,6 +91,10 @@
 				get() { return this.$store.state.auth.password },
 				set(value) { this.$store.commit('updatePassword', value) }
 
+			},
+
+			isAuth: {
+				get() { return this.$store.getters.isAuth }
 			}
 
 		},
@@ -145,11 +149,36 @@
 				else
 
 				{
+					$('.username, .password').prop( 'disabled', true )
 
-					this.$store.dispatch('LOGIN').then(response => {
+					this.$store.dispatch('LOGIN')
+					.then( response => {
 
-						this.$router.push({ name: 'dashboard' })
+						$('.username, .password').addClass('success')
 
+						setTimeout( () => {
+
+							this.$router.push({ name: 'dashboard' }) // redirect to dashboard
+
+						},1500 )
+
+						
+
+					})
+					.catch(error => {
+
+						$('.username, .password').addClass('error')
+
+						setTimeout(() => {
+
+							$('.username, .password').removeClass('error').prop('disabled', false)
+	
+							this.$store.commit('updateUsername', '')
+							this.$store.commit('updatePassword', '')
+
+							$('.username').focus()
+
+						}, 1000)
 					})
 
 				}
@@ -162,7 +191,7 @@
 
 </script>
 
-<style scoped>
+<style>
 
 	@keyframes pulse {
 

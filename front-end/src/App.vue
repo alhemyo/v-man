@@ -2,31 +2,30 @@
 
   <div id="app">
 
-    <router-view></router-view>
+		<transition mode="out-in" name="test">
+			<router-view />
+		</transition>
 
   </div>
 
 </template>
 
 <script>
-
-	import login from './components/auth/login'
 	
 	export default {
 
-		name: 'app',
-
-		components: {
-
-			login
-
-		}
+		name: 'app'
 
 	}
 
 </script>
 
 <style>
+
+	html, body {
+
+		overflow: hidden;
+	}
 
 	* {
 
@@ -47,5 +46,21 @@
     -moz-osx-font-smoothing: grayscale;
 
   }
+
+	.test-enter-active, .test-leave-active {
+
+		transition: all 0.5s ease;
+	}
+
+	.test-enter, .test-leave-to {
+		opacity: 0;
+		transform: translateX(100px);
+	}
+
+	.test-leave-to {
+
+		opacity: 0;
+		transform: translateX(-100px);
+	}
 
 </style>

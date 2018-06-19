@@ -4,6 +4,8 @@
 		
 		DASHBOARD
 
+		<p @click="logout">logout</p>
+
 	</div>
 
 </template>
@@ -12,10 +14,35 @@
 	
 	export default {
 
-		name: 'dashboard'
+		name: 'dashboard',
+
+		methods: {
+
+			logout() {
+				this.$store.dispatch('LOGOUT')
+				.then(response => {
+					this.$router.push({ name: 'login' })
+				})
+				.catch(error => {
+					console.log(error)
+				})
+			}
+		}
 
 	}
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+	.dashboard {
+
+		width: 100%;
+		height: 100vh;
+	}
+
+	p {
+		display: inline;
+	}
+
+</style>
