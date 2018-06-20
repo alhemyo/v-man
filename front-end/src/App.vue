@@ -54,13 +54,11 @@
 
 	.test-enter, .test-leave-to {
 		opacity: 0;
-		transform: translateX(100px);
 	}
 
 	.test-leave-to {
 
 		opacity: 0;
-		transform: translateX(-100px);
 	}
 
 </style>

@@ -2,7 +2,7 @@
 
 	<div id="login" class="login-wrap">
 
-		<div class="login-pane login-left-pane">
+		<div class="login-pane login-left-pane" :class="{ 'login-left-pane-leave' : isAuth }">
 		
 			<div class="left-pane">
 				
@@ -44,7 +44,7 @@
 
 		</div> <!-- end .login-pane login-left-pane -->
 
-		<div class="login-pane login-right-pane">
+		<div class="login-pane login-right-pane" :class="{ 'login-right-pane-leave' : isAuth }">
 			
 			<div class="right-pane">
 				
@@ -223,7 +223,8 @@
 		width: 100%;
 		height: 100vh;
 
-		position: relative;
+		position: absolute;
+		z-index: 100;
 
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -240,11 +241,25 @@
 	.login-left-pane {
 
 		background-color: var(--white);
+
+		transition: all 1s ease 0.5s;
+	}
+
+	.login-left-pane-leave {
+
+		transform: translateX(-100%);
 	}
 
 	.login-right-pane {
 
 		background-color: var(--darkRed);
+
+		transition: all 1s ease 0.5s;
+	}
+
+	.login-right-pane-leave {
+
+		transform: translateX(100%);
 	}
 
 	.left-pane {
