@@ -2,7 +2,14 @@
 	
 	<div class="dashboard">
 		
-		DASHBOARD
+		<nav-bar />
+		<side-bar />
+
+		<div class="dash-loader">
+
+			<router-view></router-view>
+
+		</div>
 
 		<p @click="logout">logout</p>
 
@@ -11,10 +18,20 @@
 </template>
 
 <script>
+
+	import navBar from './nav/nav-bar'
+	import sideBar from './nav/side-bar'
 	
 	export default {
 
 		name: 'dashboard',
+
+		components: {
+
+			navBar,
+			sideBar
+
+		},
 
 		methods: {
 
@@ -39,10 +56,28 @@
 
 		width: 100%;
 		height: 100vh;
+
+		position: relative;
+
+		display: grid;
+		grid-template-columns: 300px auto;
+		grid-template-rows: 80px auto;
 	}
 
 	p {
-		display: inline;
+		
+		font-size: 12px;
+		color: white;
+
+		position: absolute;
+		right: 20px;
+		top: 100px;
+
+		padding: 10px;
+		background-color: var(--green);
+		border-radius: 5px;
+
+		cursor: pointer;
 	}
 
 </style>

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
-import app from '../App'
 import login from '../components/auth/login'
 import dashboard from '../components/dashboard'
 
@@ -16,18 +15,37 @@ export default new Router({
     { 
       path: '/login', 
       name: 'login', 
-      component: login
+      component: login,
+      beforeEnter: ((to, from, next) => {
+
+        if ( store.getters.isAuth )
+        {
+
+          next({ name: 'dashboard' })
+
+        }
+
+        next()
+
+      })
     },
+    
     { 
       path: '/dashboard',
       alias: '/',
       name: 'dashboard',
       component: dashboard,
       beforeEnter: ((to, from, next) => {
-        if( !store.getters.isAuth ) {
+
+        if ( !store.getters.isAuth ) 
+        {
+
           next({ name: 'login' })
+
         }
+
         next()
+
       })
     }
 

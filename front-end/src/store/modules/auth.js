@@ -8,7 +8,7 @@ export default {
 		// User authentication
 		username: "",
 		password: "",
-		token: localStorage.getItem('token') || null,
+		token: localStorage.getItem('token') || null
 
 	},
 
@@ -35,7 +35,7 @@ export default {
 			let data = {
 				url: this.state.api + 'login',
 				method: 'POST',
-				headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + ':' + this.state.auth.password ) }
+				headers: { Authorization: 'Basic ' + btoa( this.state.auth.username + $('.input-static').html()  + ':' + this.state.auth.password ) }
 			}
 
       		return new Promise((resolve,reject) => {

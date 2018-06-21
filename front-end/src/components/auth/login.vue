@@ -10,12 +10,18 @@
 					
 					<h1><span>V</span>-MAN | <span>project assistant</span></h1>
 
-					<input 
+					<div class="input-wrap">
+
+						<input 
 						class="login-input username" 
 						type="text" 
 						placeholder="username"
 						@keyup="validate"
 						v-model="username" />
+
+						<p class="input-static">@vertigo.com.mk</p>
+
+					</div> <!-- end .input-wrap -->
 
 					<input 
 						class="login-input password" 
@@ -82,7 +88,7 @@
 			username: {
 
 				get() { return this.$store.state.auth.username },
-				set(value) { this.$store.commit('updateUsername', value) }
+				set(value) { this.$store.commit( 'updateUsername', value ) }
 
 			},
 
@@ -110,11 +116,11 @@
 				{
 
 					this.username = ""
-					$('.username').addClass('error').prop( 'placeholder', "Invalid characters" )
+					$('.username, .input-static').addClass('error').prop( 'placeholder', "Invalid characters" )
 
 					setTimeout( () => {
 
-						$('.username').removeClass('error').prop( 'placeholder', "username" )
+						$('.username, .input-static').removeClass('error').prop( 'placeholder', "username" )
 
 					},2000)
 
@@ -154,7 +160,7 @@
 					this.$store.dispatch('LOGIN')
 					.then( response => {
 
-						$('.username, .password').addClass('success')
+						$('.username, .password, .input-static').addClass('success')
 
 						setTimeout( () => {
 
@@ -167,11 +173,11 @@
 					})
 					.catch(error => {
 
-						$('.username, .password').addClass('error')
+						$('.username, .password, .input-static').addClass('error')
 
 						setTimeout(() => {
 
-							$('.username, .password').removeClass('error').prop('disabled', false)
+							$('.username, .password, .input-static').removeClass('error').prop('disabled', false)
 	
 							this.$store.commit('updateUsername', '')
 							this.$store.commit('updatePassword', '')
@@ -185,13 +191,17 @@
 
 			},1000)
 
+		},
+
+		mounted() {
+			$('.username').focus()
 		}
 
 	}
 
 </script>
 
-<style>
+<style scoped>
 
 	@keyframes pulse {
 
@@ -328,12 +338,36 @@
 		white-space: nowrap;
 	}
 
+	.input-wrap {
+
+		display: grid;
+		grid-template-columns: auto min-content;
+
+		align-items: center;
+
+	}
+
+	.input-static {
+
+		font-size: 14px;
+		color: var(--dark);
+
+		padding: 13px 20px;
+		padding-left: 0px;
+
+		background-color: rgba(0,0,0,0.05);
+		border-radius: 0px 30px 30px 0px;
+
+		transition: all .2s ease;
+	}
+
 	.login-input {
 
 		font-family: var(--mainFont);
 		font-size: 14px;
 		font-weight: 400;
 		color: var(--dark);
+		text-align: right;
 
 		width: 100%;
 		height: 40px;
@@ -342,11 +376,18 @@
 
 		padding: 0px 20px;
 
-		background-color: var(--gray);
+		background-color: rgba(0,0,0,0.05);
 		border: none;
 		border-radius: 30px;
 
 		transition: all .2s ease;
+	}
+
+	.username {
+
+		padding-right: 0px;
+
+		border-radius: 30px 0px 0px 30px;
 	}
 
 	.login-input::placeholder {
