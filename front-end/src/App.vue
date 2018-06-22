@@ -25,6 +25,8 @@
 	html, body {
 
 		overflow: hidden;
+		margin: 0px;
+		padding: 0px;
 	}
 
 	* {

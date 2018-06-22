@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '../store/store'
 import login from '../components/auth/login'
 import dashboard from '../components/dashboard'
+import userConfig from '../components/app-config/user-config'
 
 Vue.use(Router)
 
@@ -46,7 +47,13 @@ export default new Router({
 
         next()
 
-      })
+      }),
+      children: [
+        {
+          path: 'user-config',
+          component: userConfig
+        }
+      ]
     }
 
   ]

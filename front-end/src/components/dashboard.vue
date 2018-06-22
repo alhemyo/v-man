@@ -58,6 +58,8 @@
 		height: 100vh;
 
 		position: relative;
+		
+		margin: 0px;
 
 		display: grid;
 		grid-template-columns: 300px auto;
@@ -78,6 +80,18 @@
 		border-radius: 5px;
 
 		cursor: pointer;
+	}
+
+	.dash-loader {
+
+		width: 100%;
+		height: 100%;
+
+		position: relative;
+
+		margin: 0px;
+
+		overflow: hidden;
 	}
 
 </style>
