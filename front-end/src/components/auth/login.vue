@@ -160,15 +160,17 @@
 					this.$store.dispatch('LOGIN')
 					.then( response => {
 
-						$('.username, .password, .input-static').addClass('success')
+						this.$store.dispatch('GET_USER').then(() => {
 
-						setTimeout( () => {
+							$('.username, .password, .input-static').addClass('success')
+
+							setTimeout( () => {
 
 							this.$router.push({ name: 'dashboard' }) // redirect to dashboard
 
-						},1500 )
+							},1500 )
 
-						
+						})
 
 					})
 					.catch(error => {

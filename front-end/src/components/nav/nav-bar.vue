@@ -2,7 +2,19 @@
     
     <div class="nav-bar">
 
-        <h1><span>V</span>-MAN</h1>
+        <div class="nav-bar-main">
+
+            <h1><span>V</span>-MAN</h1>
+
+        </div> <!-- end .nav-bar-main -->
+
+        <div class="nav-bar-route"></div> <!-- end. nav-bar-route -->
+
+        <div class="nav-bar-settings" @click="openSettings" :class="{ 'nav-bar-settings-open' : settings }" >
+
+            <img src="/images/assets/icons/settings.png" />    
+                
+        </div> <!-- end. nav-bar-settings -->
 
     </div>
 
@@ -12,7 +24,20 @@
 
     export default {
         
-        name: "nav-bar"
+        name: "nav-bar",
+
+        data() {
+            return {
+                settings: false
+            }
+        },
+
+        methods: {
+            openSettings() {
+                this.settings = !this.settings
+                this.$store.commit('updateSettings', this.settings)
+            }
+        }
 
     }
 
@@ -24,6 +49,9 @@
 
         width: 100%;
         height: 80px;
+
+        display: grid;
+        grid-template-columns: 300px auto 80px;
 
         background-color: var(--black);
 
@@ -44,6 +72,29 @@
 
         font-weight: 400;
         color: var(--red);
+    }
+
+    .nav-bar-settings {
+
+        position: relative;
+        z-index: 6;
+
+        display: grid;
+        grid-template-columns: 80px;
+        grid-template-rows: 80px;
+        justify-content: center;
+        align-items: center;
+
+        background-color: var(--red);
+
+        cursor: pointer;
+
+        transition: all 0.5s ease;
+    }
+
+    .nav-bar-settings-open {
+
+        transform: translateX(-120px) rotate(90deg);
     }
 
 </style>

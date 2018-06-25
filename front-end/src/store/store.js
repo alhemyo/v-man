@@ -14,6 +14,8 @@ export default new Vuex.Store({
 
 	state: {
 
+    settings: false,
+
 		// API
     api: "http://127.0.0.1:5000/",
     testApi: "http://127.0.0.1:3000/",
@@ -27,6 +29,10 @@ export default new Vuex.Store({
       mail: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     }
 
-	}
+  },
+  
+  mutations: {
+    updateSettings(state, settings) { this.state.settings = settings }
+  }
   
 })

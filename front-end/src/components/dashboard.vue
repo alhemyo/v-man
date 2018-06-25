@@ -9,9 +9,9 @@
 
 			<router-view></router-view>
 
-		</div>
+		</div> <!-- end .dash-loader -->
 
-		<p @click="logout">logout</p>
+		<settings />
 
 	</div>
 
@@ -21,6 +21,7 @@
 
 	import navBar from './nav/nav-bar'
 	import sideBar from './nav/side-bar'
+	import settings from './nav/settings'
 	
 	export default {
 
@@ -29,21 +30,13 @@
 		components: {
 
 			navBar,
-			sideBar
+			sideBar,
+			settings
 
 		},
 
-		methods: {
-
-			logout() {
-				this.$store.dispatch('LOGOUT')
-				.then(response => {
-					this.$router.push({ name: 'login' })
-				})
-				.catch(error => {
-					console.log(error)
-				})
-			}
+		mounted() {
+			this.$store.dispatch('GET_USER')
 		}
 
 	}
@@ -90,6 +83,8 @@
 		position: relative;
 
 		margin: 0px;
+
+		background-color: var(--white);
 
 		overflow: hidden;
 	}
