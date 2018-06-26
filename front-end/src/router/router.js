@@ -4,6 +4,9 @@ import store from '../store/store'
 import login from '../components/auth/login'
 import dashboard from '../components/dashboard'
 import userConfig from '../components/app-config/user-config'
+import addUser from '../components/app-config/add-user'
+import editUser from '../components/app-config/edit-user'
+import deleteUser from '../components/app-config/delete-user'
 
 Vue.use(Router)
 
@@ -49,10 +52,36 @@ export default new Router({
 
       }),
       children: [
+
         {
           path: 'user-config',
-          component: userConfig
+          name: 'user-config',
+          component: userConfig,
+
+          children: [
+
+            {
+              path: 'add-user',
+              name: 'add-user',
+              component: addUser
+            },
+
+            {
+              path: 'edit-user',
+              name: 'edit-user',
+              component: editUser
+            },
+
+            {
+              path: 'delete-user',
+              name: 'delete-user',
+              component: deleteUser
+            }
+
+          ]
+
         }
+
       ]
     }
 

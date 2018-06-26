@@ -14,7 +14,11 @@
 	
 	export default {
 
-		name: 'app'
+		name: 'app',
+		
+		mounted() {
+			this.$store.dispatch('GET_USER')
+		}
 
 	}
 
