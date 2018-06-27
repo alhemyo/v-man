@@ -91,6 +91,8 @@
 
 <script>
 
+    import axios from 'axios'
+
     export default {
 
         name: 'add-user',
@@ -150,7 +152,19 @@
 
             // POST request / add user
             addUser() {
-                console.log( JSON.stringify(this.userBody) )
+                let data = {
+                    url: this.$store.state.api + 'user',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'x-access-token' : this.$store.state.auth.token 
+                    },
+                    body: JSON.stringify(this.userBody)
+                }
+
+                //console.log(data)
+
+                axios(data).then(response => console.log(response)).catch(error => console.log(error))
             }
 
         }
