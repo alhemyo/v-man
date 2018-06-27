@@ -18,22 +18,23 @@
 	"umcn": "192894785792"
 }
 
- // 
 
 {
-	name: "",
-	surname: "",
-	email: "",
-	position: "",
-	is_admin: false,
-	admin_type: "",
-	gender: "",
-	education: "",
-	address: "",
-	city: "",
-	phone_number: "",
-	day: "",
-	month: "",
-	year: "",
-	umcn: ""
+	"gender":"Male",
+	"name":"Ignat",
+	"surname":"Petrov",
+	"city":"Skopje",
+	"phone":"070555555",
+	"address":"bul. Partizanski odredi 109/3-2",
+	"email":"ignat14@gmail.com",
+	"IdNumber":"123",
+	"IdExpireDate":"02.02.2020",
+	"umcn":"123",
+	"bank":"nlb",
+	"accNumber":"123231",
+	"is_admin":true,
+	"admin_type":"uber admin",
+	"position":"3D",
+	"employmentDate":"",
+	"payment":""
 }

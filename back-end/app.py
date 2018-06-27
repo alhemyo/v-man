@@ -104,19 +104,23 @@ def create_user():
                     name=data['name'],
                     surname=data['surname'],
                     email=data['email'],
-                    password=generate_password_hash(data['password']),
+                    #password=generate_password_hash(data['password']),
                     position=data['position'],
                     gender=data['gender'],
-                    education=data['education'],
+                    #education=data['education'],
+                    #birthday=data['birthday'],
                     address=data['address'],
                     city=data['city'],
-                    phone=data['phone_number'],
-                    day=data['day'],
-                    month=data['month'],
-                    year=data['year'],
+                    phone=data['phone'],
                     umcn=data['address'],
                     is_admin=is_admin,
-                    admin_type=data['admin_type']
+                    admin_type=data['admin_type'],
+                    IdNumber=data['IdNumber'],
+                    IdExpireDate=data['IdExpireDate'],
+                    bank=data['bank'],
+                    accNumber=data['accNumber'],
+                    employmentDate=data['employmentDate'],
+                    payment=data['payment']
                     )
 
     graph.create(new_user)
