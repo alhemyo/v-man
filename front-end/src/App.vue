@@ -43,15 +43,16 @@
 		--darkRed: #E3170A;
 		--red: #FF312E;
 		--green: #8BC34A;
+		--yellow: #FFC107;
 	}
 
-  #app {
+	#app {
 
-    font-family: 'Roboto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+		font-family: 'Roboto', sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 
-  }
+	}
 
 	.test-enter-active, .test-leave-active {
 

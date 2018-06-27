@@ -16,6 +16,7 @@
 						class="login-input username" 
 						type="text" 
 						placeholder="username"
+						@keypress="load"
 						@keyup="validate"
 						v-model="username" />
 
@@ -27,6 +28,7 @@
 						class="login-input password" 
 						type="password" 
 						placeholder="password"
+						@keypress="load"
 						@keyup="validate"
 						v-model="password" />
 
@@ -107,6 +109,12 @@
 
 		methods: {
 
+			load() {
+
+				$('.loader-item').addClass('load')
+
+			},
+ 
 			// User auth validation
 			validate: _.debounce( function() {
 
@@ -228,6 +236,20 @@
 			opacity: 0;
 		}
 
+	}
+
+	@keyframes load {
+		0% {
+			transform: translateY( 0px );
+		}
+
+		50% {
+			transform: translateY( -7px );
+		}
+
+		100% {
+			transform: translateY( 0px );
+		}
 	}
 
 	.login-wrap {
@@ -427,7 +449,45 @@
 		padding: 0px 20px;
 
 		display: grid;
-		grid-template-rows: 1fr 1fr;
+		grid-template-columns: 1fr min-content;
+		align-items: center;
+	}
+
+	.login-loader {
+
+		width: 40px;
+		height: 40px;
+
+		position: relative;
+
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-items: center;
+		align-items: center;
+	}
+
+	.loader-item {
+
+		width: 6px;
+		height: 6px;
+
+		background-color: var(--dark);
+		border-radius: 10px;
+	}
+
+	.load {
+
+		animation: load 1s linear infinite;
+	}
+
+	.loader-item:nth-child(2) {
+
+		animation-delay: 0.33s;
+	}
+
+	.loader-item:nth-child(3) {
+
+		animation-delay: 0.66s;
 	}
 
 	.logo {

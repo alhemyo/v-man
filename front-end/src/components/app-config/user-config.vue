@@ -20,6 +20,8 @@
 
         </transition>
 
+        <div class="user-config-footer"></div> <!-- end .user-config-footer -->
+
     </div>
 
 </template>
@@ -68,7 +70,7 @@
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 180px 60px auto;
+        grid-template-rows: 80px 60px auto 80px;
     }
 
     .user-config-nav {
@@ -105,6 +107,25 @@
     .router-link-exact-active:hover {
 
         border-bottom: 4px solid var(--red);
+    }
+    
+    .user-config-view {
+
+        width: 100%;
+        min-height: 0;
+        height: auto;
+        max-height: 100%;
+
+        overflow-y: auto;
+    }
+
+    .user-config-footer {
+
+        height: 80px;
+
+        z-index: 5;
+
+        background-color: var(--white);
     }
 
 </style>

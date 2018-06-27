@@ -6,77 +6,75 @@
 
         <div class="form-select form-4">
 
-            <ul class="form-select-drawer">
+            <ul class="form-select-drawer" @click="openSelect">
 
-                <p class="form-select-placeholder">Select Gender ▼</p>
+                <p class="form-select-placeholder">{{ userBody.gender }}</p>
 
-                <li class="form-select-value">Female</li>
+                <li class="form-select-value" @click="selectGender">Female</li>
 
-                <li class="form-select-value">Male</li>
+                <li class="form-select-value" @click="selectGender">Male</li>
 
             </ul>
 
         </div> <!-- end .form-select -->
 
-        <input class="form-input form-1" type="text" placeholder="Name" />
-        <input class="form-input form-2" type="text" placeholder="Surname" />
-        <input class="form-input form-3" type="text" placeholder="City" />
-        <input class="form-input form-4" type="text" placeholder="Phone" />
+        <input class="form-input form-1" type="text" placeholder="Name" v-model="userBody.name" />
+        <input class="form-input form-2" type="text" placeholder="Surname" v-model="userBody.surname" />
+        <input class="form-input form-3" type="text" placeholder="City" v-model="userBody.city" />
+        <input class="form-input form-4" type="text" placeholder="Phone" v-model="userBody.phone" />
 
-        <input class="form-input form-half-1" type="text" placeholder="Address" />
-        <input class="form-input form-half-2" type="text" placeholder="E-mail" />
+        <input class="form-input form-half-1" type="text" placeholder="Address" v-model="userBody.address" />
+        <input class="form-input form-half-2" type="text" placeholder="E-mail" v-model="userBody.email" />
 
-        <input class="form-input form-1" type="text" placeholder="ID number" />
-        <input class="form-input form-2" type="text" placeholder="ID expire date" />
-        <input class="form-input form-half-2" type="text" placeholder="UMCN" />
+        <input class="form-input form-1" type="text" placeholder="ID number" v-model="userBody.IdNumber" />
+        <input class="form-input form-2" type="text" placeholder="ID expire date" v-model="userBody.IdExpireDate" />
+        <input class="form-input form-half-2" type="text" placeholder="UMCN" v-model="userBody.umcn" />
 
-        <input class="form-input form-half-1" type="text" placeholder="bank name" />
-        <input class="form-input form-half-2" type="text" placeholder="account number" />
+        <input class="form-input form-half-1" type="text" placeholder="bank name" v-model="userBody.bank" />
+        <input class="form-input form-half-2" type="text" placeholder="account number" v-model="userBody.accNumber" />
 
         <hr />
 
         <p class="form-sub-title">Work info</p>
 
-        <div class="form-select form-4">
+        <div class="form-radio form-4 admin" :class="{ 'is-admin' : userBody.is_admin }">
 
-            <ul class="form-select-drawer">
+            <p class="form-radio-placeholder">Admin</p>
 
-                <p class="form-select-placeholder">Admin ▼</p>
+            <div class="radio" @click="userBody.is_admin = !userBody.is_admin" :class="{ true : userBody.is_admin }"></div>
 
-                <li class="form-select-value">Female</li>
+        </div> <!-- end .form-radio -->
 
-                <li class="form-select-value">Male</li>
-
-            </ul>
-
-        </div> <!-- end .form-select -->
-
-        <input class="form-input form-1" type="text" placeholder="Employment date" />
-        <input class="form-input form-2" type="text" placeholder="Payment" />
+        <input class="form-input form-1" type="text" placeholder="Employment date" v-model="userBody.employmentDate" />
+        <input class="form-input form-2" type="text" placeholder="Payment" v-model="userBody.payment" />
 
         <div class="form-select form-3">
 
-            <ul class="form-select-drawer">
+            <ul class="form-select-drawer" @click="openSelect">
 
-                <p class="form-select-placeholder">Select position ▼</p>
+                <p class="form-select-placeholder">{{ userBody.position }}</p>
 
-                <li class="form-select-value">Female</li>
-
-                <li class="form-select-value">Male</li>
+                <li class="form-select-value" @click="selectPosition">3D</li>
+                <li class="form-select-value" @click="selectPosition">MGFX</li>
+                <li class="form-select-value" @click="selectPosition">COMP</li>
+                <li class="form-select-value" @click="selectPosition">AUDIO</li>
+                <li class="form-select-value" @click="selectPosition">ACCOUNT</li>
+                <li class="form-select-value" @click="selectPosition">OFFICE</li>
+                <li class="form-select-value" @click="selectPosition">SYS ADMIN</li>
 
             </ul>
 
         </div> <!-- end .form-select -->
 
-        <div class="form-select form-4">
+        <div v-show="userBody.is_admin" class="form-select form-4">
 
-            <ul class="form-select-drawer">
+            <ul class="form-select-drawer" @click="openSelect">
 
-                <p class="form-select-placeholder">Select admin type ▼</p>
+                <p class="form-select-placeholder">{{ userBody.admin_type }}</p>
 
-                <li class="form-select-value">Female</li>
-
-                <li class="form-select-value">Male</li>
+                <li class="form-select-value" @click="selectAdminType">project admin</li>
+                <li class="form-select-value" @click="selectAdminType">user admin</li>
+                <li class="form-select-value" @click="selectAdminType">uber admin</li>
 
             </ul>
 
@@ -84,10 +82,8 @@
 
         <hr />
 
-        <p class="form-message form-full-1">Displayed message about errors or success</p>
-        <div class="form-button">Add User</div>
-
-
+        <p class="form-message form-full-1">{{ message }}</p>
+        <div class="form-button" @click="addUser">Add User</div>
 
     </form>
     
@@ -97,9 +93,69 @@
 
     export default {
 
-        name: 'add-user'
+        name: 'add-user',
+
+        data() {
+
+            return {
+
+                userBody: {
+
+                    // Personal info
+                    gender: "Select gender ▼",
+                    name: "",
+                    surname: "",
+                    city: "",
+                    phone: "",
+                    address: "",
+                    email: "",
+                    IdNumber: "",
+                    IdExpireDate: "",
+                    umcn: "",
+                    bank: "",
+                    accNumber: "",
+
+                    // Work info
+                    is_admin: false,
+                    admin_type: "Select admin type ▼",
+                    position: "Select position ▼",
+                    employmentDate: "",
+                    payment: ""
+
+                },
+
+                // success/error message
+                message: "Displayed message about errors or success"
+
+            }
+
+        },
+
+        methods: {
+
+            // form-select
+            openSelect(event) {
+                $('.form-select-drawer').not(event.currentTarget).removeClass('open-select')
+                $(event.currentTarget).toggleClass('open-select')
+            },
+            selectGender(event) {
+                this.userBody.gender = $(event.currentTarget).html()
+            },
+            selectAdminType(event) {
+                this.userBody.admin_type = $(event.currentTarget).html()
+            },
+            selectPosition(event) {
+                this.userBody.position = $(event.currentTarget).html()
+            },
+
+            // POST request / add user
+            addUser() {
+                console.log( JSON.stringify(this.userBody) )
+            }
+
+        }
         
-    }
+    } // export default
 
 </script>
 
@@ -120,7 +176,6 @@
 
         position: relative;
         margin: auto;
-        margin-top: 40px;
 
         padding: 40px;
 
@@ -180,6 +235,7 @@
         max-height: 40px;
 
         position: absolute;
+        z-index: 1;
 
         padding: 13px;
 
@@ -188,6 +244,15 @@
         border-radius: 30px;
 
         overflow: hidden;
+
+        transition: 0.1s ease;
+    }
+
+    .open-select {
+
+        max-height: 1000px;
+
+        z-index: 100;
     }
 
     .form-select-placeholder {
@@ -199,7 +264,79 @@
 
     .form-select-value {
 
+        color: rgba(0,0,0,0.4);
+
         padding: 10px;
+    }
+
+    .form-select-value:hover {
+
+        color: var(--dark);
+    }
+
+    /* ------------- FORM RADIO CSS ------------- */
+
+    .form-radio {
+
+        text-align: left;
+
+        width: 100%;
+        height: 40px;
+
+        position: relative;
+        z-index: 2;
+
+        padding: 0px 20px;
+        padding-right: 10px;
+
+        display: grid;
+        grid-template-columns: auto min-content;
+        align-items: center;
+
+        background-color: var(--gray);
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 30px;
+    }
+
+    .radio {
+
+        width: 20px;
+        height: 20px;
+
+        background-color: var(--dark);
+        border: 2px solid darkgray;
+        border-radius: 30px;
+
+        cursor: pointer;
+
+        transition: 0.1s ease;
+    }
+
+    .radio:hover {
+
+        background-color: var(--yellow);
+    }
+
+    .true {
+
+        background-color: var(--green);
+    }
+
+    .true:hover {
+
+        background-color: var(--red);
+    }
+
+    .admin {
+
+        transform: translateY(65px);
+
+        transition: all 0.3s ease;
+    }
+
+    .is-admin {
+
+        transform: translateY(0px);
     }
 
     /* ------------ FORM INPUT CSS -------------- */
