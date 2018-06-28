@@ -100,15 +100,30 @@ def create_user():
     if data["is_admin"] == 'True':
         is_admin = True
 
+    birthday_day = data['birthday']['day']
+    birthday_month = data['birthday']['month']
+    birthday_year = data['birthday']['year']
+    birthday = f"{birthday_day}.{birthday_month}.{birthday_year}"
+
+    IdExpireDate_day = data['IdExpireDate']['day']
+    IdExpireDate_month = data['IdExpireDate']['month']
+    IdExpireDate_year = data['IdExpireDate']['year']
+    IdExpireDate = f"{IdExpireDate_day}.{IdExpireDate_month}.{IdExpireDate_year}"
+
+    employmentDate_day = data['employmentDate']['day']
+    employmentDate_month = data['employmentDate']['month']
+    employmentDate_year = data['employmentDate']['year']
+    employmentDate = f"{employmentDate_day}.{employmentDate_month}.{employmentDate_year}"
+
     new_user = Node("Person",
                     name=data['name'],
                     surname=data['surname'],
                     email=data['email'],
-                    #password=generate_password_hash(data['password']),
+                    password=generate_password_hash("123"),
                     position=data['position'],
                     gender=data['gender'],
-                    #education=data['education'],
-                    #birthday=data['birthday'],
+                    education=data['education'],
+                    birthday=birthday,
                     address=data['address'],
                     city=data['city'],
                     phone=data['phone'],
@@ -116,10 +131,10 @@ def create_user():
                     is_admin=is_admin,
                     admin_type=data['admin_type'],
                     IdNumber=data['IdNumber'],
-                    IdExpireDate=data['IdExpireDate'],
+                    IdExpireDate=IdExpireDate,
                     bank=data['bank'],
                     accNumber=data['accNumber'],
-                    employmentDate=data['employmentDate'],
+                    employmentDate=employmentDate,
                     payment=data['payment']
                     )
 
