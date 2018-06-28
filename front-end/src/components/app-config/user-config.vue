@@ -70,7 +70,7 @@
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 80px 60px auto 80px;
+        grid-template-rows: 40px 60px auto 80px;
     }
 
     .user-config-nav {
