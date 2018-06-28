@@ -152,19 +152,24 @@
 
             // POST request / add user
             addUser() {
-                let data = {
+                let postBody = {
                     url: this.$store.state.api + 'user',
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
                         'x-access-token' : this.$store.state.auth.token 
                     },
-                    body: JSON.stringify(this.userBody)
+                    data: JSON.stringify(this.userBody)
                 }
 
                 //console.log(data)
 
-                axios(data).then(response => console.log(response)).catch(error => console.log(error))
+                axios(postBody)
+                .then(response => {
+                    this.message = response.data.message
+                }).catch(error => {
+                    this.message = "Ups, something whent wrong, please try again."
+                })
             }
 
         }
