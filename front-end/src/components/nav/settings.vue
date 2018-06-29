@@ -8,6 +8,8 @@
 
             <li><router-link class="settings-item" to="/dashboard/user-config">user configuration</router-link></li>
 
+            <li><router-link class="settings-item" to="/dashboard/project-config">project configuration</router-link></li>
+
         </ul>
 
         <div class="settings-footer" @click="logout">

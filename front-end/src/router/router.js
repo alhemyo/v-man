@@ -3,10 +3,18 @@ import Router from 'vue-router'
 import store from '../store/store'
 import login from '../components/auth/login'
 import dashboard from '../components/dashboard'
-import userConfig from '../components/app-config/user-config'
-import addUser from '../components/app-config/add-user'
-import editUser from '../components/app-config/edit-user'
-import deleteUser from '../components/app-config/delete-user'
+
+// User configuration components
+import userConfig from '../components/app-config/user-config/user-config'
+import addUser from '../components/app-config/user-config/add-user'
+import editUser from '../components/app-config/user-config/edit-user'
+import deleteUser from '../components/app-config/user-config/delete-user'
+
+// Project configuration components
+import projectConfig from '../components/app-config/project-config/project-config'
+import addProject from '../components/app-config/project-config/add-project'
+import editProject from '../components/app-config/project-config/edit-project'
+import deleteProject from '../components/app-config/project-config/delete-project'
 
 Vue.use(Router)
 
@@ -81,11 +89,40 @@ export default new Router({
 
           ]
 
+        },
+
+        {
+          path: 'project-config',
+          name: 'project-config',
+          component: projectConfig,
+
+          children: [
+
+            {
+              path: 'add-project',
+              name: 'add-project',
+              component: addProject
+            },
+
+            {
+              path: 'edit-project',
+              name: 'edit-project',
+              component: editProject
+            },
+
+            {
+              path: 'delete-project',
+              name: 'delete-project',
+              component: deleteProject
+            }
+
+          ]
+
         }
 
       ]
     }
 
-  ]
+  ] // routes
 
 })

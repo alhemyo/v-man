@@ -77,8 +77,9 @@
 		height: calc(100vh - 80px);
 
 		position: relative;
-
 		margin: 0px;
+
+		padding: 0px 40px;
 
 		background-color: var(--white);
 

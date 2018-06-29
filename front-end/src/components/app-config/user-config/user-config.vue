@@ -12,17 +12,21 @@
 
             <router-link to="/dashboard/user-config/delete-user" class="user-config-link">Delete user</router-link>
 
-        </div>
+        </div> <!-- end .user-config-nav -->
 
-        <transition mode="out-in" name="side-fade">
+        <div class="user-config-loader">
 
-            <router-view class="user-config-view"></router-view>
+            <transition mode="out-in" name="side-fade">
 
-        </transition>
+                <router-view class="user-config-view"></router-view>
+
+            </transition>
+
+        </div> <!-- end .user-config-loader -->
 
         <div class="user-config-footer"></div> <!-- end .user-config-footer -->
 
-    </div>
+    </div> <!-- end .user-config -->
 
 </template>
 
@@ -66,11 +70,13 @@
 
         position: relative;
 
-        padding: 0px 40px;
-
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 40px 60px auto 80px;
+
+        background-color: var(--white);
+
+        overflow: hidden;
     }
 
     .user-config-nav {
@@ -108,15 +114,17 @@
 
         border-bottom: 4px solid var(--red);
     }
-    
-    .user-config-view {
 
-        width: 100%;
+    .user-config-loader {
+
+        width: calc(100% + 17px);
         min-height: 0;
         height: auto;
-        max-height: 100%;
 
-        overflow-y: auto;
+        position: relative;
+
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     .user-config-footer {
@@ -126,6 +134,8 @@
         z-index: 5;
 
         background-color: var(--white);
+        border-top: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0px -5px 20px rgba(0,0,0,0.1);
     }
 
 </style>

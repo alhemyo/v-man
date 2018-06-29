@@ -16,6 +16,10 @@ export default new Vuex.Store({
 
     settings: false,
 
+    // Form Pop up
+    pop: false,
+    popTarget: "",
+
 		// API
     api: "http://127.0.0.1:5000/",
     testApi: "http://127.0.0.1:3000/",
@@ -32,7 +36,19 @@ export default new Vuex.Store({
   },
   
   mutations: {
-    updateSettings(state, settings) { this.state.settings = settings }
+    updateSettings(state, settings) { this.state.settings = settings },
+    updatePop(state, pop) { this.state.pop = pop },
+    updatePopTarget(state, popTarget) { this.state.popTarget = popTarget }
+  },
+
+  actions: {
+
+    POP({commit}) {
+
+      let target = $(event.currentTarget).find('p').html()
+
+      commit('updatePop', target)
+    }
   }
   
 })
