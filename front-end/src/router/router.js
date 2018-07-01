@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
+
+// Auth components
 import login from '../components/auth/login'
 import dashboard from '../components/dashboard'
 

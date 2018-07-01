@@ -34,9 +34,12 @@ export default {
 	},
 
 	getters: {
+		isAuth: state => !!state.token
+		/*
 		isAuth(state) {
 			return state.token !== null
 		}
+		*/
 	},
 
 	mutations: {
@@ -87,6 +90,8 @@ export default {
 
       			}).catch(error => {
 
+					localStorage.clear()
+
 					reject(error)
 					
       			})
@@ -103,25 +108,28 @@ export default {
 				headers: {
 					'x-access-token' : this.state.auth.token
 				}
-			}).then(data => {
+			})
+				.then(data => {
 
-				// Fill user info from response
-				commit( 'updateName', data.data.name )
-				commit( 'updateSurname', data.data.surname )
-				commit( 'updateAddress', data.data.address )
-				commit( 'updatePhone', data.data.phone )
-				commit( 'updateGender', data.data.gender )
-				commit( 'updateEmail', data.data.email )
-				commit( 'updateEducation', data.data.education )
-				commit( 'updateUmcn', data.data.umcn )
-				commit( 'updateDay', data.data.day )
-				commit( 'updateMonth', data.data.month )
-				commit( 'updateYear', data.data.year )
-				commit( 'updateAdminType', data.data.admin_type )
-				commit( 'updateIsAdmin', data.data.is_admin )
-				commit( 'updatePosition', data.data.position )
+					// Fill user info from response
+					commit( 'updateName', data.data.name )
+					commit( 'updateSurname', data.data.surname )
+					commit( 'updateAddress', data.data.address )
+					commit( 'updatePhone', data.data.phone )
+					commit( 'updateGender', data.data.gender )
+					commit( 'updateEmail', data.data.email )
+					commit( 'updateEducation', data.data.education )
+					commit( 'updateUmcn', data.data.umcn )
+					commit( 'updateDay', data.data.day )
+					commit( 'updateMonth', data.data.month )
+					commit( 'updateYear', data.data.year )
+					commit( 'updateAdminType', data.data.admin_type )
+					commit( 'updateIsAdmin', data.data.is_admin )
+					commit( 'updatePosition', data.data.position )
 
-			}).catch(error => console.log(error))
+
+				})
+					.catch(error => console.log(error))
 
 		},
 

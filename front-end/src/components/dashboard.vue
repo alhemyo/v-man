@@ -33,7 +33,11 @@
 			sideBar,
 			settings
 
-		}
+		},
+
+		mounted() {
+            this.$store.dispatch('GET_USER')
+        }
 
 	}
 
