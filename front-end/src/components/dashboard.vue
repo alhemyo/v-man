@@ -7,6 +7,8 @@
 
 		<div class="dash-loader">
 
+			<pop />
+
 			<router-view></router-view>
 
 		</div> <!-- end .dash-loader -->
@@ -22,6 +24,7 @@
 	import navBar from './nav/nav-bar'
 	import sideBar from './nav/side-bar'
 	import settings from './nav/settings'
+	import pop from './micro/pop'
 	
 	export default {
 
@@ -31,7 +34,8 @@
 
 			navBar,
 			sideBar,
-			settings
+			settings,
+			pop
 
 		},
 

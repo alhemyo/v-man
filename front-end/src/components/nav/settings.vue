@@ -57,11 +57,13 @@
         height: 100vh;
 
         position: absolute;
-        right: -200px;
+        right: 0px;
         z-index: 5;
 
         display: grid;
         grid-template-rows: 80px auto 80px;
+
+        transform: translateX(200px);
 
         background-color: var(--red);
         box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
@@ -71,7 +73,7 @@
 
     .open-settings {
 
-        right: 0px;
+        transform: translateX(0px);
     }
 
     .settings-title {

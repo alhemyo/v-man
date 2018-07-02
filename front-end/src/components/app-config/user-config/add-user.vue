@@ -4,81 +4,65 @@
 
         <p class="form-sub-title">Personal info</p>
 
-        <input class="form-input form-2" type="text" placeholder="Name" v-model="userBody.name" />
-        <input class="form-input form-3" type="text" placeholder="Surname" v-model="userBody.surname" />
+        <input class="form-input form-2" type="text" placeholder="Name" v-model="name" />
+        <input class="form-input form-3" type="text" placeholder="Surname" v-model="surname" />
 
-        <div class="form-select form-4">
+        <form-select>
 
-            <ul class="form-select-drawer" @click="openSelect">
+            <p @click="testSelect" slot="title">gender</p>
+            <p slot="value">{{ gender.value }}</p>
 
-                <p class="form-select-placeholder">{{ userBody.gender }}</p>
-
-                <li class="form-select-value" @click="selectGender">Female</li>
-
-                <li class="form-select-value" @click="selectGender">Male</li>
-
-            </ul>
-
-        </div> <!-- end .form-select -->
+        </form-select>
 
         <div class="form-input-date form-1" title="birthday">
 
             <span @click="hideEl" class="form-input-date-placeholder">Birthday</span>
 
-            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="userBody.birthday.day" />
-            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="userBody.birthday.month" />
-            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="userBody.birthday.year" />
+            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="birthDay" />
+            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="birthMonth" />
+            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="birthYear" />
 
         </div> <!-- end .form-input-date -->
         
-        <input class="form-input form-2" type="text" placeholder="City" v-model="userBody.city" />
-        <input class="form-input form-3" type="text" placeholder="Phone" v-model="userBody.phone" />
+        <input class="form-input form-2" type="text" placeholder="City" v-model="city" />
+        <input class="form-input form-3" type="text" placeholder="Phone" v-model="phone" />
 
-        <div class="form-select form-4">
+        <form-select>
 
-            <ul class="form-select-drawer" @click="openSelect">
+            <p @click="testSelect" slot="title">education</p>
+            <p slot="value">{{ education.value }}</p>
 
-                <p class="form-select-placeholder">{{ userBody.education }}</p>
+        </form-select>
 
-                <li class="form-select-value" @click="selectEducation">high</li>
+        <input class="form-input form-half-1" type="text" placeholder="Address" v-model="address" />
+        <input class="form-input form-half-2" type="text" placeholder="E-mail" v-model="email" />
 
-                <li class="form-select-value" @click="selectEducation">mid</li>
-
-                <li class="form-select-value" @click="selectEducation">low</li>
-
-            </ul>
-
-        </div> <!-- end .form-select -->
-
-        <input class="form-input form-half-1" type="text" placeholder="Address" v-model="userBody.address" />
-        <input class="form-input form-half-2" type="text" placeholder="E-mail" v-model="userBody.email" />
-
-        <input class="form-input form-1" type="text" placeholder="ID number" v-model="userBody.IdNumber" />
+        <input class="form-input form-1" type="text" placeholder="ID number" v-model="IdNumber" />
 
         <div class="form-input-date form-2" title="ID expire date">
 
             <span @click="hideEl" class="form-input-date-placeholder">ID expire date</span>
 
-            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="userBody.IdExpireDate.day" />
-            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="userBody.IdExpireDate.month" />
-            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="userBody.IdExpireDate.year" />
+            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="IdExpireDay" />
+            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="IdExpireMonth" />
+            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="IdExpireYear" />
 
         </div> <!-- end .form-input-date -->
 
-        <input class="form-input form-half-2" type="text" placeholder="UMCN" v-model="userBody.umcn" />
+        <input class="form-input form-half-2" type="text" placeholder="UMCN" v-model="umcn" />
 
-        <input class="form-input form-half-1" type="text" placeholder="bank name" v-model="userBody.bank" />
-        <input class="form-input form-half-2" type="text" placeholder="account number" v-model="userBody.accNumber" />
+        <input class="form-input form-half-1" type="text" placeholder="bank name" v-model="bank" />
+        <input class="form-input form-half-2" type="text" placeholder="account number" v-model="accNumber" />
 
         <hr />
 
         <p class="form-sub-title">Work info</p>
 
-        <div class="form-radio form-4 admin" :class="{ 'is-admin' : userBody.is_admin }">
+        <div class="form-radio form-4 admin" :class="{ 'is-admin' : is_admin }">
 
             <p class="form-radio-placeholder">Admin</p>
 
-            <div class="radio" @click="userBody.is_admin = !userBody.is_admin" :class="{ true : userBody.is_admin }"></div>
+            <div @click="is_admin = !is_admin" :class="{ true : is_admin }" class="radio"></div>
 
         </div> <!-- end .form-radio -->
 
@@ -86,45 +70,27 @@
 
             <span @click="hideEl" class="form-input-date-placeholder">Employment date</span>
 
-            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="userBody.employmentDate.day" />
-            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="userBody.employmentDate.month" />
-            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="userBody.employmentDate.year" />
+            <input class="form-input form-input-date-day" type="text" maxlength="2" placeholder="D" v-model="employmentDay" />
+            <input class="form-input form-input-date-month" type="text" maxlength="2" placeholder="M" v-model="employmentMonth" />
+            <input class="form-input form-input-date-year" type="text" maxlength="4" placeholder="Y" v-model="employmentYear" />
 
         </div> <!-- end .form-input-date -->
 
-        <input class="form-input form-2" type="text" placeholder="Payment" v-model="userBody.payment" />
+        <input class="form-input form-2" type="text" placeholder="Payment" v-model="payment" />
 
-        <div class="form-select form-3">
+        <form-select>
 
-            <ul class="form-select-drawer" @click="openSelect">
+            <p @click="testSelect" slot="title">position</p>
+            <p slot="value">{{ position.value }}</p>
 
-                <p class="form-select-placeholder">{{ userBody.position }}</p>
+        </form-select>
 
-                <li class="form-select-value" @click="selectPosition">3D</li>
-                <li class="form-select-value" @click="selectPosition">MGFX</li>
-                <li class="form-select-value" @click="selectPosition">COMP</li>
-                <li class="form-select-value" @click="selectPosition">AUDIO</li>
-                <li class="form-select-value" @click="selectPosition">ACCOUNT</li>
-                <li class="form-select-value" @click="selectPosition">OFFICE</li>
-                <li class="form-select-value" @click="selectPosition">SYS ADMIN</li>
+        <form-select>
 
-            </ul>
+            <p @click="testSelect" slot="title">admin_type</p>
+            <p slot="value">{{ admin_type.value }}</p>
 
-        </div> <!-- end .form-select -->
-
-        <div v-show="userBody.is_admin" class="form-select form-4">
-
-            <ul class="form-select-drawer" @click="openSelect">
-
-                <p class="form-select-placeholder">{{ userBody.admin_type }}</p>
-
-                <li class="form-select-value" @click="selectAdminType">project admin</li>
-                <li class="form-select-value" @click="selectAdminType">user admin</li>
-                <li class="form-select-value" @click="selectAdminType">uber admin</li>
-
-            </ul>
-
-        </div> <!-- end .form-select -->
+        </form-select>
 
         <hr />
 
@@ -151,79 +117,114 @@
         },
 
         data() {
-
             return {
-
-                userBody: {
-
-                    // Personal info
-                    gender: "Select gender ▼",
-                    education: "Select education ▼",
-                    name: "",
-                    surname: "",
-                    birthday: {
-
-                        day: "",
-                        month: "",
-                        year: ""
-
-                    },
-                    city: "",
-                    phone: "",
-                    address: "",
-                    email: "",
-                    IdNumber: "",
-                    IdExpireDate: {
-
-                        day: "",
-                        month: "",
-                        year: ""
-
-                    },
-                    umcn: "",
-                    bank: "",
-                    accNumber: "",
-
-                    // Work info
-                    is_admin: false,
-                    admin_type: "Select admin type ▼",
-                    position: "Select position ▼",
-                    employmentDate: {
-
-                        day: "",
-                        month: "",
-                        year: ""
-
-                    },
-                    payment: ""
-
-                },
-
                 // success/error message
                 message: ""
+            }
+        },
 
+        computed: {
+            gender: { get() { return this.$store.state.user.gender } },
+            education: { get() { return this.$store.state.user.education } },
+            name: { 
+                get() { return this.$store.state.user.name },
+                set(value) { this.$store.commit('updateUserName', value ) }
+            },
+            surname: { 
+                get() { return this.$store.state.user.surname },
+                set(value) { this.$store.commit('updateUserSurname', value) }
+            },
+            birthDay: {
+                get() { return this.$store.state.user.birthday.day },
+                set(value) { this.$store.commit('updateUserBirthDay', value) }
+            },
+            birthMonth: {
+                get() { return this.$store.state.user.birthday.month },
+                set(value) { this.$store.commit('updateUserBirthMonth', value) }
+            },
+            birthYear: {
+                get() { return this.$store.state.user.birthday.year },
+                set(value) { this.$store.commit('updateUserBirthYear', value) }
+            },
+            city: { 
+                get() { return this.$store.state.user.city },
+                set(value) { this.$store.commit('updateUserCity', value ) }
+            },
+            phone: { 
+                get() { return this.$store.state.user.phone },
+                set(value) { this.$store.commit('updateUserPhone', value ) }
+            },
+            address: { 
+                get() { return this.$store.state.user.address },
+                set(value) { this.$store.commit('updateUserAddress', value ) }
+            },
+            email: { 
+                get() { return this.$store.state.user.email },
+                set(value) { this.$store.commit('updateUserEmail', value ) }
+            },
+            IdNumber: { 
+                get() { return this.$store.state.user.IdNumber },
+                set(value) { this.$store.commit('updateUserIdNumber', value ) }
+            },
+            IdExpireDay: { 
+                get() { return this.$store.state.user.IdExpireDate.day },
+                set(value) { this.$store.commit('updateUserIdExpireDay', value ) }
+            },
+            IdExpireMonth: { 
+                get() { return this.$store.state.user.IdExpireDate.month },
+                set(value) { this.$store.commit('updateUserIdExpireMonth', value ) }
+            },
+            IdExpireYear: { 
+                get() { return this.$store.state.user.IdExpireDate.year },
+                set(value) { this.$store.commit('updateUserIdExpireYear', value ) }
+            },
+            umcn: {
+                get() { return this.$store.state.user.umcn },
+                set(value) { this.$store.commit('updateUserUmcn', value ) }
+            },
+            bank: {
+                get() { return this.$store.state.user.bank },
+                set(value) { this.$store.commit('updateUserBank', value ) }
+            },
+            accNumber: {
+                get() { return this.$store.state.user.accNumber },
+                set(value) { this.$store.commit('updateUserAccNumber', value ) }
+            },
+            position: { get() { return this.$store.state.user.position } },
+            is_admin: {
+                 get() { return this.$store.state.user.is_admin },
+                 set(value) { this.$store.commit('updateUserIsAdmin', value) }
+            },
+            admin_type: { get() { return this.$store.state.user.admin_type } },
+            employmentDay: {
+                get() { return this.$store.state.user.employmentDate.day },
+                set(value) { this.$store.commit('updateUserEmploymentDay', value) }
+            },
+            employmentMonth: {
+                get() { return this.$store.state.user.employmentDate.month },
+                set(value) { this.$store.commit('updateUserEmploymentMonth', value) }
+            },
+            employmentYear: {
+                get() { return this.$store.state.user.employmentDate.year },
+                set(value) { this.$store.commit('updateUserEmploymentYear', value) }
+            },
+            payment: {
+                get() { return this.$store.state.user.payment },
+                set(value) { this.$store.commit('updateUserPayment', value) }
             }
 
         },
 
         methods: {
 
-            // form-select
-            openSelect(event) {
-                $('.form-select-drawer').not(event.currentTarget).removeClass('open-select')
-                $(event.currentTarget).toggleClass('open-select')
-            },
-            selectGender(event) {
-                this.userBody.gender = $(event.currentTarget).html()
-            },
-            selectEducation(event) {
-                this.userBody.education = $(event.currentTarget).html()
-            },
-            selectAdminType(event) {
-                this.userBody.admin_type = $(event.currentTarget).html()
-            },
-            selectPosition(event) {
-                this.userBody.position = $(event.currentTarget).html()
+            testSelect(event) {
+                
+                let clickedKey = $(event.currentTarget).text()
+
+                this.$store.commit('updatePopValue', clickedKey)
+
+                this.$store.commit( 'updatePopData', this.$store.state.user[clickedKey] )
+
             },
 
             // form-input-date

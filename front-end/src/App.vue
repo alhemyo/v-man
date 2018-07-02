@@ -221,7 +221,7 @@
 
     .is-admin {
 
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 
     /* ------------ FORM INPUT CSS -------------- */

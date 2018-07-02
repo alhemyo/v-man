@@ -5,20 +5,18 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 import auth from './modules/auth'
+import user from './modules/user'
 
 export default new Vuex.Store({
 
 	modules: {
-		auth
+    auth,
+    user
 	},
 
 	state: {
 
     settings: false,
-
-    // Form Pop up
-    pop: false,
-    popTarget: "",
 
 		// API
     api: "http://127.0.0.1:5000/",
@@ -31,24 +29,18 @@ export default new Vuex.Store({
       numbers: /^[\s/0-9.]+$/,
       alphanumeric: /^[\s/0-9a-zA-Z/ -]+$/,
       mail: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    }
+    },
+
+    // Pop
+    popData: {},
+    popValue: ""
 
   },
   
   mutations: {
-    updateSettings(state, settings) { this.state.settings = settings },
-    updatePop(state, pop) { this.state.pop = pop },
-    updatePopTarget(state, popTarget) { this.state.popTarget = popTarget }
-  },
-
-  actions: {
-
-    POP({commit}) {
-
-      let target = $(event.currentTarget).find('p').html()
-
-      commit('updatePop', target)
-    }
+    updateSettings( state, settings ) { this.state.settings = settings },
+    updatePopData( state, popData ) { this.state.popData = popData },
+    updatePopValue( state, popValue ) { this.state.popValue = popValue }
   }
   
 })
