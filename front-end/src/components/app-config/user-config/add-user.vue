@@ -234,24 +234,122 @@
 
             // POST request / add user
             addUser() {
-                let postBody = {
-                    url: this.$store.state.api + 'user',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json',
-                        'x-access-token' : this.$store.state.auth.token 
-                    },
-                    data: JSON.stringify(this.userBody)
+
+                //User object for the post body
+                let userBody = {
+                    name: this.$store.state.user.name,
+                    surname: this.$store.state.user.surname,
+                    gender: this.$store.state.user.gender.value,
+                    birthday: this.$store.state.user.birthday,
+                    city: this.$store.state.user.city,
+                    phone: this.$store.state.user.phone,
+                    education: this.$store.state.user.education.value,
+                    address: this.$store.state.user.address,
+                    email: this.$store.state.user.email,
+                    IdNumber: this.$store.state.user.IdNumber,
+                    IdExpireDate: this.$store.state.user.IdExpireDate,
+                    umcn: this.$store.state.user.umcn,
+                    bank: this.$store.state.user.bank,
+                    accNumber: this.$store.state.user.accNumber,
+                    employmentDate: this.$store.state.user.employmentDate,
+                    payment: this.$store.state.user.payment,
+                    position: this.$store.state.user.position.value,
+                    is_admin: this.$store.state.user.is_admin,
+                    admin_type: this.$store.state.user.admin_type.value
                 }
 
-                //console.log(postBody.data)
+                // User body validation
+                if(userBody.name != "" && userBody.name.match(this.$store.state.regex.letters)
+                && userBody.surname != "" && userBody.surname.match(this.$store.state.regex.letters)
+                && userBody.gender != ""
+                && userBody.birthday.day != "" && userBody.birthday.day.match(this.$store.state.regex.numbers)
+                && userBody.birthday.month != "" && userBody.birthday.month.match(this.$store.state.regex.numbers)
+                && userBody.birthday.year != "" && userBody.birthday.year.match(this.$store.state.regex.numbers)
+                && userBody.city != "" && userBody.city.match(this.$store.state.regex.letters)
+                && userBody.phone != "" && !userBody.phone.match(this.$store.state.regex.login)
+                && userBody.education != ""
+                && userBody.address != "" && !userBody.address.match(this.$store.state.regex.login)
+                && userBody.email != "" && userBody.city.match(this.$store.state.regex.email)
+                && userBody.IdNumber != "" && userBody.IdNumber.match(this.$store.state.regex.alphanumeric)
+                && userBody.IdExpireDate.day != "" && userBody.IdExpireDate.day.match(this.$store.state.regex.numbers)
+                && userBody.IdExpireDate.month != "" && userBody.IdExpireDate.month.match(this.$store.state.regex.numbers)
+                && userBody.IdExpireDate.year != "" && userBody.IdExpireDate.year.match(this.$store.state.regex.numbers)
+                && userBody.umcn != "" && userBody.umcn.match(this.$store.state.regex.numbers)
+                && userBody.bank != "" && !userBody.umcn.match(this.$store.state.regex.login)
+                && userBody.accNumber != "" && userBody.umcn.match(this.$store.state.regex.numbers)
+                && userBody.employmentDate.day != "" && userBody.employmentDate.day.match(this.$store.state.regex.numbers)
+                && userBody.employmentDate.month != "" && userBody.employmentDate.month.match(this.$store.state.regex.numbers)
+                && userBody.employmentDate.year != "" && userBody.employmentDate.year.match(this.$store.state.regex.numbers)
+                && userBody.payment != "" && !userBody.payment.match(this.$store.state.regex.login)
+                && userBody.position != "" )
 
-                axios(postBody)
-                .then(response => {
-                    this.message = response.data.message
-                }).catch(error => {
-                    this.message = "Ups, something whent wrong, please try again."
-                })
+                {
+                    // If validation is ok send post request
+                    axios({
+
+                        url: this.$store.state.api + 'user',
+                        method: 'POST',
+                        headers: {
+                            'Content-Type' : 'application/json',
+                            'x-access-token' : this.$store.state.auth.token 
+                        },
+                        data: JSON.stringify(userBody)
+
+                    })
+
+                    .then(response => {
+
+                        this.message = response.data.message
+                        setInterval(() => { this.message = "" },3000)
+
+                        // reset user form fields
+                        this.$store.commit('updateUserName', "")
+                        this.$store.commit('updateUserSurname', "")
+                        this.$store.commit('updateUsergender', "")
+                        this.$store.commit('updateUserBirthDay', "")
+                        this.$store.commit('updateUserBirthMonth', "")
+                        this.$store.commit('updateUserBirthYear', "")
+                        this.$store.commit('updateUserCity', "")
+                        this.$store.commit('updateUserPhone', "")
+                        this.$store.commit('updateUsereducation', "")
+                        this.$store.commit('updateUserAddress', "")
+                        this.$store.commit('updateUserEmail', "")
+                        this.$store.commit('updateUserIdNumber', "")
+                        this.$store.commit('updateUserIdExpireDay', "")
+                        this.$store.commit('updateUserIdExpireMonth', "")
+                        this.$store.commit('updateUserIdExpireYear', "")
+                        this.$store.commit('updateUserUmcn', "")
+                        this.$store.commit('updateUserBank', "")
+                        this.$store.commit('updateUserAccNumber', "")
+                        this.$store.commit('updateUserEmploymentDay', "")
+                        this.$store.commit('updateUserEmploymentMonth', "")
+                        this.$store.commit('updateUserEmploymentYear', "")
+                        this.$store.commit('updateUserPayment', "")
+                        this.$store.commit('updateUserposition', "")
+                        this.$store.commit('updateUserIsAdmin', false)
+                        this.$store.commit('updateUseradmin_type', "")
+
+                    })
+
+                    .catch(error => {
+
+                        this.message = "Ups, something whent wrong, please try again."
+                        setInterval(() => { this.message = "" },3000)
+
+                    })
+                }
+
+                else
+
+                {
+                    this.message = "Empty or invalid fields"
+                    setInterval(() => { this.message = "" },3000)
+                }
+
+                /*
+                
+                */
+
             }
 
         }
@@ -287,6 +385,14 @@
         grid-template-rows: repeat(60px);
         grid-gap: 20px;
         align-items: center;
+    }
+
+    .form-message {
+
+        font-size: 14px;
+        color: var(--red);
+
+        padding: 13px 20px;
     }
 
 </style>

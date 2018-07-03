@@ -66,7 +66,7 @@
 
 	/* -------------------------------- FORM CSS -------------------------------------- */
 
-	.form-sub-title, .form-message {
+	.form-sub-title {
 
         font-size: 12px;
         color: rgba(0,0,0,0.5);

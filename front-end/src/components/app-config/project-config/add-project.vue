@@ -87,6 +87,12 @@
         
         name: 'add-project',
 
+        data() {
+            return {
+                message: ""
+            }
+        },
+
         methods: {
 
             // form-select
