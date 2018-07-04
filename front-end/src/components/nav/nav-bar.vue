@@ -85,8 +85,6 @@
         justify-content: center;
         align-items: center;
 
-        background-color: var(--red);
-
         cursor: pointer;
 
         transition: all 0.5s ease;

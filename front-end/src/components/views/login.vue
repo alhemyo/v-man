@@ -1,213 +1,156 @@
 <template>
 
-	<div id="login" class="login-wrap">
+    <div id="login" class="login-wrap">
 
-		<div class="login-pane login-left-pane" :class="{ 'login-left-pane-leave' : isAuth }">
-		
-			<div class="left-pane">
-				
-				<form class="login-form">
+		<transition name="left-pane">
+
+			<div class="login-pane login-left-pane">
+			
+				<div class="left-pane">
 					
-					<h1><span>V</span>-MAN | <span>project assistant</span></h1>
+					<form class="login-form">
+						
+						<h1><span>V</span>-MAN | <span>project assistant</span></h1>
 
-					<div class="input-wrap">
+						<div class="input-wrap">
+
+							<input 
+							class="login-input username" 
+							type="text" 
+							placeholder="username"
+							@keypress="load"
+							@keyup="validate"
+							v-model="username" />
+
+							<p class="input-static">@vertigo.com.mk</p>
+
+						</div> <!-- end .input-wrap -->
 
 						<input 
-						class="login-input username" 
-						type="text" 
-						placeholder="username"
-						@keypress="load"
-						@keyup="validate"
-						v-model="username" />
+							class="login-input password" 
+							type="password" 
+							placeholder="password"
+							@keypress="load"
+							@keyup="validate"
+							v-model="password" />
 
-						<p class="input-static">@vertigo.com.mk</p>
-
-					</div> <!-- end .input-wrap -->
-
-					<input 
-						class="login-input password" 
-						type="password" 
-						placeholder="password"
-						@keypress="load"
-						@keyup="validate"
-						v-model="password" />
-
-					<div class="login-form-footer">
-						
-						<p>I forgot my password</p>
-
-						<div class="login-loader">
+						<div class="login-form-footer">
 							
-							<div class="loader-item"></div>
-							<div class="loader-item"></div>
-							<div class="loader-item"></div>
+							<p>I forgot my password</p>
 
-						</div> <!-- end .login-loader -->
+							<div class="login-loader">
+								
+								<div class="loader-item" :class="{ load : loader }" ></div>
+								<div class="loader-item" :class="{ load : loader }" ></div>
+								<div class="loader-item" :class="{ load : loader }" ></div>
 
-					</div> <!-- end .login-form-footer -->
+							</div> <!-- end .login-loader -->
 
-				</form> <!-- end .login-form -->
+						</div> <!-- end .login-form-footer -->
 
-			</div> <!-- end .left-pane -->
+					</form> <!-- end .login-form -->
 
-		</div> <!-- end .login-pane login-left-pane -->
+				</div> <!-- end .left-pane -->
 
-		<div class="login-pane login-right-pane" :class="{ 'login-right-pane-leave' : isAuth }">
-			
-			<div class="right-pane">
+			</div> <!-- end .login-pane login-left-pane -->
+
+		</transition>
+
+		<transition name="right-pane">
+
+			<div class="login-pane login-right-pane">
 				
-				<img class="logo" src="/images/assets/logo/logo.png" />
-
-				<div class="circles">
+				<div class="right-pane">
 					
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
+					<img class="logo" src="/images/assets/logo/logo.png" />
 
-				</div> <!-- end .circles -->
+					<div class="circles">
+						
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
 
-			</div> <!-- end .right-pane -->
+					</div> <!-- end .circles -->
 
-		</div> <!-- end .login-pane login-right-pane -->
+				</div> <!-- end .right-pane -->
+
+			</div> <!-- end .login-pane login-right-pane -->
+
+		</transition>
 
 	</div> <!-- end .login-wrap -->
-	
+    
 </template>
 
 <script>
 
 	import _ from 'lodash'
-	
-	export default {
 
+    export default {
+    
 		name: 'login',
 
+		data() {
+			return {
+				loader: false
+			}
+		},
+		
 		computed: {
 
-			// User auth
+			// Login user credentials
 			username: {
-
-				get() { return this.$store.state.auth.username },
-				set(value) { this.$store.commit( 'updateUsername', value ) }
-
+				get() { return this.$store.state.users.auth.username },
+				set(value) { this.$store.commit( 'updateAuthUsername', value ) }
 			},
-
 			password: {
-
-				get() { return this.$store.state.auth.password },
-				set(value) { this.$store.commit('updatePassword', value) }
-
-			},
-
-			isAuth: {
-				get() { return this.$store.getters.isAuth }
+				get() { return this.$store.state.users.auth.password },
+				set(value) { this.$store.commit( 'updateAuthPassword', value ) }
 			}
 
 		},
 
 		methods: {
 
-			load() {
+			load() { this.loader = true },
 
-				$('.loader-item').addClass('load')
+			validate: _.debounce(function() {
 
-			},
- 
-			// User auth validation
-			validate: _.debounce( function() {
+				this.loader = false
 
-				// Check username for invalid characters
-				if ( this.username.match( this.$store.state.regex.login ) )
-
+				if ( this.username.match(this.$store.state.regex.login) )
+				
 				{
-
 					this.username = ""
-					$('.username, .input-static').addClass('error').prop( 'placeholder', "Invalid characters" )
-
-					setTimeout( () => {
-
-						$('.username, .input-static').removeClass('error').prop( 'placeholder', "username" )
-
-					},2000)
-
+					$('.username, .input-static').prop('placeholder', 'Invalid username').addClass('error')
+					setInterval(() => { $('.username, .input-static').prop('placeholder', 'username').removeClass('error') },2000)
 				}
 
-				// Check password for invalid characters
-				else if ( this.password.match( this.$store.state.regex.login ) )
+				else if ( this.username != "" && this.password != "" ) 
 
 				{
+					this.$store.dispatch( 'AUTHENTICATE_USER' )
+						
+						.then(() => {
 
-					this.password = ""
-					$('.password').addClass('error').prop( 'placeholder', "Invalid characters" )
-
-					setTimeout( () => {
-
-						$('.password').removeClass('error').prop( 'placeholder', "username" )
-
-					},2000)
-					
-				}
-
-				// Check if inputs are empty
-				else if ( this.username === "" || this.password === "" )
-
-				{
-
-					// Do nothing
-
-				}
-
-				// Dispatch API request for login
-				else
-
-				{
-					$('.username, .password').prop( 'disabled', true )
-
-					this.$store.dispatch('LOGIN')
-					.then( response => {
-
-						this.$store.dispatch('GET_USER').then(() => {
-
-							$('.username, .password, .input-static').addClass('success')
-
-							setTimeout( () => {
-
-							this.$router.push({ name: 'dashboard' }) // redirect to dashboard
-
-							},1500 )
+							this.$store.dispatch('GET_USER')
+							this.$router.push({ name: 'dashboard' })
 
 						})
+						
+						.catch( error => {
 
-					})
-					.catch(error => {
+							console.log(error)
 
-						$('.username, .password, .input-static').addClass('error')
-
-						setTimeout(() => {
-
-							$('.username, .password, .input-static').removeClass('error').prop('disabled', false)
-	
-							this.$store.commit('updateUsername', '')
-							this.$store.commit('updatePassword', '')
-
-							$('.username').focus()
-
-						}, 1000)
-					})
-
+						})
 				}
 
 			},1000)
-
-		},
-
-		mounted() {
-			$('.username').focus()
 		}
-
-	}
+    
+    }
 
 </script>
 
@@ -258,7 +201,7 @@
 		height: 100vh;
 
 		position: absolute;
-		z-index: 100;
+		z-index: 1;
 
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -275,25 +218,11 @@
 	.login-left-pane {
 
 		background-color: var(--white);
-
-		transition: all 1s ease 0.5s;
-	}
-
-	.login-left-pane-leave {
-
-		transform: translateX(-100%);
 	}
 
 	.login-right-pane {
 
 		background-color: var(--darkRed);
-
-		transition: all 1s ease 0.5s;
-	}
-
-	.login-right-pane-leave {
-
-		transform: translateX(100%);
 	}
 
 	.left-pane {
@@ -375,6 +304,7 @@
 
 		font-size: 14px;
 		color: var(--dark);
+		user-select: none;
 
 		padding: 13px 20px;
 		padding-left: 0px;
@@ -556,3 +486,5 @@
 	}
 	
 </style>
+
+

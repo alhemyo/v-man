@@ -1,46 +1,51 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
 
-import auth from './modules/auth'
-import user from './modules/user'
+// Import STORE modules
+import users from './modules/users'
+import projects from './modules/projects'
 
 export default new Vuex.Store({
 
-	modules: {
-    auth,
-    user
-	},
+  modules: {
+    users,
+    projects
+  },
 
-	state: {
+  state: {
 
-    settings: false,
-
-		// API
+    // API
     api: "http://127.0.0.1:5000/",
     testApi: "http://127.0.0.1:3000/",
 
     // Regex
 		regex: {
+
       login: /[~`<>|\n/\\/\/\\]+$/,
       letters: /^[\s/a-zA-Z]*$/,
       numbers: /^[\s/0-9.]+$/,
       alphanumeric: /^[\s/0-9a-zA-Z/ -]+$/,
       mail: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+      
     },
 
     // Pop
-    popData: {},
-    popValue: ""
+    popValue: "",
+    popData: {}
 
   },
   
   mutations: {
-    updateSettings( state, settings ) { this.state.settings = settings },
-    updatePopData( state, popData ) { this.state.popData = popData },
-    updatePopValue( state, popValue ) { this.state.popValue = popValue }
+
+    // Pop mutations
+    updatePopValue( state, popValue ) { return state.popValue = popValue },
+    updatePopData( state, popData ) { return state.popData = popData }
+  },
+
+  actions: {
+
   }
-  
+
 })

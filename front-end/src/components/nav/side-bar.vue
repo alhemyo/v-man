@@ -12,8 +12,8 @@
 
             <div class="user-info-wrap">
 
-                <p class="user-info user-info-name">{{ cu_name + " " + cu_surname }}</p>
-                <p class="user-info">{{ cu_position }}</p>
+                <p class="user-info user-info-name">{{ username }}</p>
+                <p class="user-info">{{ position }}</p>
                 <p class="user-info user-info-status">online</p>
                 <p class="user-info">06:14:45</p>
 
@@ -40,9 +40,8 @@
         name: 'side-bar',
 
         computed: {
-            cu_name: { get() { return this.$store.state.auth.name } },
-            cu_surname: { get() { return this.$store.state.auth.surname } },
-            cu_position: { get() { return this.$store.state.auth.position } }
+            username: { get() { return this.$store.state.users.user.name + ' ' + this.$store.state.users.user.surname } },
+            position: { get() { return this.$store.state.users.user.position } }
         }
 
     }

@@ -2,23 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
 
-// Auth components
-import login from '../components/auth/login'
-import dashboard from '../components/dashboard'
-
-// User configuration components
-import userConfig from '../components/app-config/user-config/user-config'
-import addUser from '../components/app-config/user-config/add-user'
-import editUser from '../components/app-config/user-config/edit-user'
-import deleteUser from '../components/app-config/user-config/delete-user'
-
-// Project configuration components
-import projectConfig from '../components/app-config/project-config/project-config'
-import addProject from '../components/app-config/project-config/add-project'
-import editProject from '../components/app-config/project-config/edit-project'
-import deleteProject from '../components/app-config/project-config/delete-project'
-
 Vue.use(Router)
+
+// Import view components
+import login from '../components/views/login'
+import dashboard from '../components/views/dashboard'
+
+// Import children components
+import userSettings from '../components/settings/user/user-settings'
+import addUser from '../components/settings/user/forms/add-user'
+import editUser from '../components/settings/user/forms/edit-user'
+import deleteUser from '../components/settings/user/forms/delete-user'
+
 
 export default new Router({
 
@@ -26,54 +21,57 @@ export default new Router({
 
   routes: [
 
-    { 
-      path: '/login', 
-      name: 'login', 
+    {
+      path: '/login',
+      name: 'login',
       component: login,
-      beforeEnter: ((to, from, next) => {
+
+      // route guard
+      beforeEnter: ( ( to, from, next ) => {
 
         if ( store.getters.isAuth )
+
         {
-
           next({ name: 'dashboard' })
-
         }
 
         next()
 
       })
     },
-    
-    { 
+
+    {
       path: '/dashboard',
       alias: '/',
       name: 'dashboard',
       component: dashboard,
-      beforeEnter: ((to, from, next) => {
 
-        if ( !store.getters.isAuth ) 
+      // route guard
+      beforeEnter: ( ( to, from, next ) => {
+
+        if ( !store.getters.isAuth )
+
         {
-
           next({ name: 'login' })
-
         }
 
         next()
 
       }),
-      
+
       children: [
 
         {
-          path: 'user-config',
-          name: 'user-config',
-          component: userConfig,
+          path: 'user-settings',
+          name: 'user-settings',
+          component: userSettings,
 
           children: [
 
             {
               path: 'add-user',
-              name: 'add-user',
+              name: 'addUser',
+              alias: '',
               component: addUser
             },
 
@@ -90,41 +88,10 @@ export default new Router({
             }
 
           ]
-
-        },
-
-        {
-          path: 'project-config',
-          name: 'project-config',
-          component: projectConfig,
-
-          children: [
-
-            {
-              path: 'add-project',
-              name: 'add-project',
-              component: addProject
-            },
-
-            {
-              path: 'edit-project',
-              name: 'edit-project',
-              component: editProject
-            },
-
-            {
-              path: 'delete-project',
-              name: 'delete-project',
-              component: deleteProject
-            }
-
-          ]
-
         }
 
       ]
     }
 
-  ] // routes
-
+  ]
 })
