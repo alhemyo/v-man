@@ -82,8 +82,8 @@ export default {
             phone: "",
             address: "",
             email: "",
-            IdNumber: "",
-            IdExpireDate: {
+            idNumber: "",
+            idExpireDate: {
                 day: "",
                 month: "",
                 year: ""
@@ -174,7 +174,7 @@ export default {
         updateAddUserEmploymentMonth( state, month ) { return state.addUser.employmentDate.month = month },
         updateAddUserEmploymentYear( state, year ) { return state.addUser.employmentDate.year = year },
         updateAddUserPayment( state, payment ) { return state.addUser.payment = payment },
-        updateAddUserAdmin( state, is_admin ) { return state.addUser.is_admin = is_admin },
+        updateAddUserAdmin( state, admin ) { return state.addUser.admin = admin },
         updateAddUserAdminType( state, admintype ) { return state.addUser.admintype.value = admintype }
 
     },
@@ -219,8 +219,6 @@ export default {
             })
 
             .then(response => {
-
-                console.log(response.data)
 
                 if ( response.status === 200 )
 
