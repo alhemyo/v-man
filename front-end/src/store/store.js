@@ -33,7 +33,8 @@ export default new Vuex.Store({
 
     // Pop
     popValue: "",
-    popData: {}
+    popData: {},
+    multi: false
 
   },
   
@@ -41,7 +42,8 @@ export default new Vuex.Store({
 
     // Pop mutations
     updatePopValue( state, popValue ) { return state.popValue = popValue },
-    updatePopData( state, popData ) { return state.popData = popData }
+    updatePopData( state, popData ) { return state.popData = popData },
+    updateMulti( state, multi ) { return state.multi = multi }
   },
 
   actions: {

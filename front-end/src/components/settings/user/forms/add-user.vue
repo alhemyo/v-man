@@ -10,7 +10,7 @@
 
         <input class="form-input" type="text" placeholder="Surname" />
 
-        <form-select :name="'Gender'" />
+        <form-select :name="'Gender'" :value="gender" :multiSelect="false" />
 
         <!-------------------- SECOND COLUMN -------------------->
 
@@ -20,7 +20,7 @@
 
         <input class="form-input" type="text" placeholder="Phone" />
 
-        <form-select :name="'Education'" />
+        <form-select :name="'Education'" :value="education" :multiSelect="false" />
 
         <!-------------------- THIRD COLUMN -------------------->
 
@@ -56,9 +56,9 @@
 
         <input class="form-input form-2" type="text" placeholder="Payment" />
 
-        <form-select class="form-3" :name="'Position'" />
+        <form-select class="form-3" :name="'Position'" :value="position" :multiSelect="false" />
 
-        <form-select class="form-4" :name="'AdminType'" />
+        <form-select class="form-4" :name="'AdminType'" :value="admintype" :multiSelect="false" />
 
         <hr />
 
@@ -83,6 +83,14 @@
         components: {
 
             formSelect
+        },
+
+        computed: {
+
+            gender: { get() { return this.$store.state.users.addUser.gender.value } },
+            education: { get() { return this.$store.state.users.addUser.education.value } },
+            position: { get() { return this.$store.state.users.addUser.position.value } },
+            admintype: { get() { return this.$store.state.users.addUser.admintype.value } }
         }
 
     }
@@ -159,6 +167,7 @@
     .form-input {
 
         font-size: 12px;
+        color: var(--dark);
 
         width: 100%;
         min-width: 150px;

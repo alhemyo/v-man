@@ -16,7 +16,8 @@
 
         props: {
             name: "",
-            value: ""
+            value: "",
+            multiSelect: null
         },
         
         name: 'form-select',
@@ -24,36 +25,57 @@
         computed: {
 
             popValue: { get() { return this.$store.state.popValue } },
-            popData: { get() { return this.$store.state.popData } }
+            popData: { get() { return this.$store.state.popData } },
+
         },
 
         methods: {
 
+            mSelect() {
+
+                let multi = this.multiSelect
+
+                if ( multi === true )
+
+                {
+                    this.$store.commit( 'updateMulti', true )
+                }
+
+                else
+
+                {
+                    this.$store.commit( 'updateMulti', false )
+                }
+
+            },
+
             pop() {
 
-                let clicked = this.name.toLowerCase()
+                let clicked = this.name
                 let name = this.$route.name
-                let parent 
-                
+                let parent
+
+                this.mSelect()
 
                 if ( name === 'addUser' || name === 'editUser' || name === 'deleteUser' )
+                
                 {
                     parent = 'users'
                 }
 
                 else if ( name === 'createProject' || name === 'editProject' || name === 'deleteProject' )
+                
                 {
                     parent = 'projects'
                 }
                 
-                let data = this.$store.state[parent].addUser[clicked]
+                let data = this.$store.state[parent][name][clicked.toLowerCase()]
 
                 this.$store.commit( 'updatePopValue', clicked )
                 this.$store.commit( 'updatePopData', data )
 
             }
         }
-
     }
 
 </script>

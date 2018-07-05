@@ -61,14 +61,15 @@ export default {
 
             gender: {
                 value: '',
+                options: [ 'female', 'male' ]
+                /*
                 option01: 'female',
                 option02: 'male'
+                */
             },
             education: {
                 value: '',
-                option01: 'low',
-                option02: 'mid',
-                option03: 'high'
+                options: [ 'low', 'mid', 'high' ]
             },
             name: "",
             surname: "",
@@ -92,22 +93,12 @@ export default {
             accNumber: "",
             position: {
                 value: '',
-                option01: '3D',
-                option02: 'MGFX',
-                option03: 'DESIGN',
-                option04: 'AUDIO',
-                option05: 'ACCOUNT',
-                option06: 'SYS ADMIN',
-                option07: 'COMP',
-                option08: 'OFFICE',
-                option09: 'MATCHMOVE'
+                options: [ '3d', 'mgfx', 'comp', 'design', 'audio', 'sys admin', 'account', 'office', 'matchmove' ]
             },
             admin: false,
             admintype: {
                 value: '',
-                option01: 'project admin',
-                option02: 'user admin',
-                option03: 'uber admin'
+                options: [ 'user admin', 'project admin', 'uber admin' ]
             },
             employmentDate: {
                 day: "",
@@ -184,7 +175,7 @@ export default {
         updateAddUserEmploymentYear( state, year ) { return state.addUser.employmentDate.year = year },
         updateAddUserPayment( state, payment ) { return state.addUser.payment = payment },
         updateAddUserAdmin( state, is_admin ) { return state.addUser.is_admin = is_admin },
-        updateAddUserAdminType( state, admin_type ) { return state.addUser.admin_type.value = admin_type }
+        updateAddUserAdminType( state, admintype ) { return state.addUser.admintype.value = admintype }
 
     },
 

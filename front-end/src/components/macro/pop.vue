@@ -8,7 +8,7 @@
 
             <div class="pop-container">
 
-                <badge class="pop-item" :key="option" v-for="option in popData" :name="option" />
+                <badge class="pop-item" :key="option" v-for="option in popData.options" :name="option" />
 
             </div>
 
@@ -33,7 +33,8 @@
         computed: {
             popValue: { get() { return this.$store.state.popValue } },
             popData: { get() { return this.$store.state.popData } },
-            pop: function() { return $.isEmptyObject(this.popData) }
+            pop: function() { return $.isEmptyObject(this.popData) },
+            multi: { get() { return this.$store.state.multi } }
         },
 
         methods: {
@@ -45,7 +46,6 @@
                 {
                     this.$store.commit( 'updatePopData', {} )
                 }
-
                 
             }
         }
@@ -114,11 +114,11 @@
     .pop h1 {
 
         text-align: center;
-        color: var(--white);
+        color: var(--dark);
 
         padding: 20px;
 
-        background-color: var(--dark);
+        background-color: rgba(0,0,0,0.03);
     }
 
     .pop-container {
@@ -129,11 +129,6 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 40px;
         grid-gap: 30px;
-    }
-
-    .pop-item:first-child {
-
-        display: none;
     }
 
 </style>
