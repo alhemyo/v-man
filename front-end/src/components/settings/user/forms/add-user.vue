@@ -94,7 +94,9 @@
 
         <!-------------------- EIGHTH COLUMN -------------------->
 
-        <p class="form-message form-third-1">{{ message }}</p>
+        <transition name="fade">
+            <p v-show="message" class="form-message form-third-1">{{ message }}</p>
+        </transition>
 
         <p class="form-button form-4" @click="addUser" >Add user</p>
         
@@ -104,6 +106,10 @@
 
 <script>
 
+    // Import modules
+    import axios from 'axios'
+
+    // Import components
     import formSelect from '../../../macro/form-select'
     import formRadio from '../../../macro/form-radio'
 
@@ -237,7 +243,7 @@
 
             addUser() {
 
-                let data = {
+                let postBody = {
 
                     name: this.$store.state.users.addUser.name,
                     surname: this.$store.state.users.addUser.surname,
@@ -252,8 +258,8 @@
                     phone: this.$store.state.users.addUser.phone,
                     address: this.$store.state.users.addUser.address,
                     email: this.$store.state.users.addUser.email,
-                    idNumber: this.$store.state.users.addUser.idNumber,
-                    idExpireDate: {
+                    IdNumber: this.$store.state.users.addUser.idNumber,
+                    IdExpireDate: {
                         day: this.$store.state.users.addUser.idExpireDate.day,
                         month: this.$store.state.users.addUser.idExpireDate.month,
                         year: this.$store.state.users.addUser.idExpireDate.year
@@ -273,7 +279,42 @@
 
                 }
 
-                console.log( JSON.stringify(data) )
+                // Add User API post request
+                axios({
+
+                    url: this.$store.state.api + 'user',
+                    method: 'POST',
+                    data: JSON.stringify(postBody),
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    }
+
+                }).then( response => {
+
+                    this.message = response.data.message
+
+                }).catch( error => {
+
+                    this.message = "Oops, something went wrong, please try again :("
+
+                })
+            }
+        },
+
+        watch: {
+
+            message() {
+
+                if ( this.message != "" )
+
+                {
+                    setTimeout(() => {
+
+                        this.message = ""
+
+                    },3000)
+                }
+
             }
         }
 
@@ -282,6 +323,16 @@
 </script>
 
 <style scoped>
+
+    .fade-enter-active, .fade-leave-active {
+
+        transition: 0.2s ease;
+    }
+
+    .fade-enter, .fade-leave-to {
+
+        opacity: 0;
+    }
 
     hr {
 

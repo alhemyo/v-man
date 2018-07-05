@@ -2,23 +2,23 @@
 
     <div class="settings" :class="{ 'open-settings' : settings }">
 
-        <p class="settings-title">SETTINGS</p>
+        <h1>Settings</h1>
 
         <ul>
 
-            <li><router-link class="settings-item" to="/dashboard/user-config">user configuration</router-link></li>
-
-            <li><router-link class="settings-item" to="/dashboard/project-config">project configuration</router-link></li>
+            <li><router-link class="settings-link" to="/dashboard/user-settings">user settings</router-link></li>
+            
+            <li><router-link class="settings-link" to="/dashboard/project-settings">project settings</router-link></li>
 
         </ul>
 
-        <div class="settings-footer" @click="logout">
+        <div class="settings-footer">
 
             <img src="/images/assets/icons/off.png" />
 
         </div>
-
-    </div>
+        
+    </div> <!-- end .settings -->
     
 </template>
 
@@ -29,20 +29,8 @@
         name: "settings",
 
         computed: {
-            settings: { get() { return this.$store.state.settings } }
-        },
 
-        methods: {
-            logout() {
-				this.$store.dispatch('LOGOUT')
-				.then(response => {
-                    this.$router.push({ name: 'login' })
-                    this.$store.commit('updateSettings', false)
-				})
-				.catch(error => {
-					console.log(error)
-				})
-			}
+            settings: { get() { return this.$store.state.settings } }
         }
 
     }
@@ -53,22 +41,25 @@
 
     .settings {
 
+        user-select: none;
+
         width: 200px;
         height: 100vh;
 
         position: absolute;
+        top: 0px;
         right: 0px;
-        z-index: 5;
+        z-index: 10;
 
-        display: grid;
-        grid-template-rows: 80px auto 80px;
+        transition: 0.3s ease;
 
         transform: translateX(200px);
 
-        background-color: var(--red);
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 80px auto 80px;
 
-        transition: all 0.5s ease;
+        background-color: var(--red);
     }
 
     .open-settings {
@@ -76,50 +67,40 @@
         transform: translateX(0px);
     }
 
-    .settings-title {
+    h1 {
 
-        font-size: 14px;
+        font-size: 16px;
         color: var(--white);
+        text-align: right;
+        user-select: none;
 
-        width: 200px;
-        height: 80px;
-
-        padding: 32px 80px;
-        padding-right: 0px;
+        padding: 30px 40px;
     }
 
-    .settings > ul > li {
+    ul {
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px;
+
+        padding: 40px 20px;
+    }
+
+    .settings-link {
 
         font-size: 12px;
+        text-align: center;
         color: var(--white);
+        user-select: none;
 
-        display: grid;
-        grid-template-rows: 60px;
-        justify-content: center;
-        align-items: center;
+        padding: 24px 0px;
 
-        padding: 0px 40px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .settings-item {
+    .settings-footer img {
 
-        padding: 20px 0px;
-
-        color: rgba(255,255,255,0.5);
-
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .settings-item:hover {
-
-        color: var(--white);
-    }
-
-    .settings-footer {
-
-        display: grid;
-        justify-content: center;
-        align-items: center;
+        padding: 28px;
 
         cursor: pointer;
     }

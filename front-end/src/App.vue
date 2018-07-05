@@ -1,12 +1,36 @@
 <template>
 
-  <div id="app">
+  <div id="app" @click="close">
 
     <router-view />
 
   </div>
 
 </template>
+
+<script>
+
+	export default {
+	
+		name: 'app',
+
+		methods: {
+
+			close(event) {
+
+				if ( !$(event.target).hasClass('nav-bar-settings') )
+
+				{
+					this.$store.commit( 'updateSettings', false )
+				}
+
+			}
+		}
+
+	}
+
+</script>
+
 
 <style>
 

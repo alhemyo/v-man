@@ -26,16 +26,17 @@
         
         name: "nav-bar",
 
-        data() {
-            return {
-                settings: false
+        computed: {
+
+            settings: {
+                get() { return this.$store.state.settings },
+                set(settings) { this.$store.commit( 'updateSettings', settings ) }
             }
         },
 
         methods: {
             openSettings() {
                 this.settings = !this.settings
-                this.$store.commit('updateSettings', this.settings)
             }
         }
 
@@ -77,7 +78,7 @@
     .nav-bar-settings {
 
         position: relative;
-        z-index: 6;
+        z-index: 20;
 
         display: grid;
         grid-template-columns: 80px;
@@ -87,12 +88,12 @@
 
         cursor: pointer;
 
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
 
     .nav-bar-settings-open {
 
-        transform: translateX(-120px) rotate(90deg);
+        transform: translateX(-110px) rotate(90deg);
     }
 
 </style>

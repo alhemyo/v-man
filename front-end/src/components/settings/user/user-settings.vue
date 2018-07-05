@@ -36,6 +36,10 @@
 
         components: {
             pop
+        },
+
+        created() {
+            this.$router.push({ name: 'addUser' })
         }
 
     }

@@ -9,7 +9,9 @@
 
             <router-view></router-view>
 
-        </div>
+        </div> <!-- end .loader -->
+
+        <settings />
         
     </div>
 
@@ -19,8 +21,7 @@
 
     import navBar from '../nav/nav-bar'
     import sideBar from '../nav/side-bar'
-    import formSelect from '../macro/form-select'
-    import pop from '../macro/pop'
+    import settings from '../nav/settings'
 
     export default {
     
@@ -29,8 +30,7 @@
         components: {
             navBar,
             sideBar,
-            formSelect,
-            pop
+            settings
         },
 
         beforeMount() {
