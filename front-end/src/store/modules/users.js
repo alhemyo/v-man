@@ -60,6 +60,7 @@ export default {
         addUser: {
 
             gender: {
+                userBadge: false,
                 value: '',
                 options: [ 'female', 'male' ]
                 /*
@@ -68,6 +69,7 @@ export default {
                 */
             },
             education: {
+                userBadge: false,
                 value: '',
                 options: [ 'low', 'mid', 'high' ]
             },
@@ -92,11 +94,13 @@ export default {
             bank: "",
             accNumber: "",
             position: {
+                userBadge: false,
                 value: '',
                 options: [ '3d', 'mgfx', 'comp', 'design', 'audio', 'sys admin', 'account', 'office', 'matchmove' ]
             },
             admin: false,
             admintype: {
+                userBadge: false,
                 value: '',
                 options: [ 'user admin', 'project admin', 'uber admin' ]
             },

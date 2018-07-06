@@ -14,7 +14,11 @@
 
         <div class="settings-loader">
 
-            <router-view />
+            <transition mode="out-in" name="swipe">
+
+                <router-view />
+
+            </transition>
 
         </div> <!-- end .settings-loader -->
 
@@ -81,6 +85,8 @@
 
         padding: 22px 20px;
 
+        transition: 0.2s ease;
+
         border-bottom: 4px solid rgba(0,0,0,0.1);
     }
 
@@ -111,6 +117,7 @@
         padding-top: 40px;
 
         overflow-y: scroll;
+        overflow-x: hidden;
     }
 
 </style>

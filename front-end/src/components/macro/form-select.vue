@@ -108,11 +108,15 @@
 
     .form-select-name {
 
+        user-select: none;
+
         padding: 12px;
         color: var(--dark);
     }
 
     .form-select-value {
+
+        user-select: none;
 
         padding: 12px;
         color: var(--dark);

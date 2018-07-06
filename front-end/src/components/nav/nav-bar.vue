@@ -96,6 +96,11 @@
         transform: translateX(-110px) rotate(90deg);
     }
 
+    .nav-bar-settings img {
+
+        pointer-events: none;
+    }
+
 </style>
 
 

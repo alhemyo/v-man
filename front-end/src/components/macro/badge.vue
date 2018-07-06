@@ -85,6 +85,8 @@
         border-radius: 30px;
 
         cursor: pointer;
+
+        overflow: hidden;
     }
 
     .badge:hover {
@@ -113,9 +115,12 @@
         width: auto;
 
         font-size: 12px;
+        font-weight: 500;
         color: var(--dark);
         white-space: nowrap;
         text-align: center;
+        user-select: none;
+        text-overflow: ellipsis;
 
         position: relative;
 

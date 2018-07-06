@@ -79,6 +79,8 @@
 
     .form-radio-name {
 
+        user-select: none;
+
         font-size: 12px;
         color: var(--dark);
 

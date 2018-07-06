@@ -6,15 +6,25 @@
 
             <h1>{{ popValue }}</h1>
 
+            <div v-if="multi" class="pop-nav"></div>
+
             <div class="pop-container">
 
-                <badge class="pop-item" :key="option" v-for="option in popData.options" :name="option" />
+                <badge v-if="object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option.name" :avatar="option.avatar" />
 
-            </div>
+                <badge v-if="!object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option" />
 
-        </div>
+            </div> <!-- end .pop-container -->
 
-    </div>
+            <div v-if="multi" class="pop-footer">
+
+                <p class="pop-button">DONE</p>    
+                
+            </div> <!-- end. pop-footer -->
+
+        </div> <!-- end .pop -->
+
+    </div> <!-- end .pop-wrap -->
 
 </template>
 
@@ -28,6 +38,14 @@
 
         components: {
             badge
+        },
+
+        data() {
+            return {
+
+                // If pop data select options are objects togle object
+                object: false
+            }
         },
 
         computed: {
@@ -46,6 +64,33 @@
                 {
                     this.$store.commit( 'updatePopData', {} )
                 }
+                
+            }
+        },
+
+        watch: {
+            popData() {
+
+                // If select value is object togle object
+                Object.keys(this.popData).forEach((key) => {
+
+                    if ( key === 'userBadge' )
+
+                    {
+                        if ( this.popData[key] )
+
+                        {
+                            this.object = true
+                        }
+
+                        else 
+
+                        {
+                            this.object = false
+                        }
+                    }
+
+                })
                 
             }
         }
@@ -115,20 +160,58 @@
 
         text-align: center;
         color: var(--dark);
+        user-select: none;
 
         padding: 20px;
 
         background-color: rgba(0,0,0,0.03);
     }
 
+    .pop-nav {
+
+        width: 100%;
+        height: 40px;
+
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
     .pop-container {
 
+        width: calc(100% + 17px);
+        max-height: 220px;
+
+        position: relative;
         padding: 20px;
 
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 40px;
         grid-gap: 30px;
+
+        overflow-y: scroll;
+    }
+
+    .pop-footer {
+
+        width: 100%;
+        height: 60px;
+
+        position: relative;
+
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .pop-button {
+
+        font-size: 12px;
+        color: var(--dark);
+        text-align: center;
+
+        position: relative;
+
+        padding: 23px 40px;
+
+        cursor: pointer;
     }
 
 </style>

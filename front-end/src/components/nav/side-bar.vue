@@ -59,7 +59,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: 180px 60px auto 80px;
 
-        background-color: var(--white);
+        background-color: white;
 
         border-right: 1px solid rgba(0,0,0,0.05);
     }

@@ -14,6 +14,11 @@ import addUser from '../components/settings/user/forms/add-user'
 import editUser from '../components/settings/user/forms/edit-user'
 import deleteUser from '../components/settings/user/forms/delete-user'
 
+import projectSettings from '../components/settings/project/project-settings'
+import createProject from '../components/settings/project/forms/create-project'
+import editProject from '../components/settings/project/forms/edit-project'
+import deleteProject from '../components/settings/project/forms/delete-project'
+
 
 export default new Router({
 
@@ -77,14 +82,43 @@ export default new Router({
 
             {
               path: 'edit-user',
-              name: 'edit-user',
+              name: 'editUser',
               component: editUser
             },
 
             {
               path: 'delete-user',
-              name: 'delete-user',
+              name: 'deleteUser',
               component: deleteUser
+            }
+
+          ]
+        },
+
+        {
+          path: 'project-settings',
+          name: 'project-settings',
+          component: projectSettings,
+
+          children: [
+
+            {
+              path: 'create-project',
+              name: 'createProject',
+              alias: '',
+              component: createProject
+            },
+
+            {
+              path: 'edit-project',
+              name: 'editProject',
+              component: editProject
+            },
+
+            {
+              path: 'delete-project',
+              name: 'deleteProject',
+              component: deleteProject
             }
 
           ]

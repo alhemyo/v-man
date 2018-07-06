@@ -7,7 +7,11 @@
 
         <div class="loader">
 
-            <router-view></router-view>
+            <transition mode="out-in" name="swipe">
+
+                <router-view></router-view>
+
+            </transition>
 
         </div> <!-- end .loader -->
 
