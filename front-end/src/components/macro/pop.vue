@@ -10,13 +10,13 @@
 
             <div class="pop-container">
 
-                <badge v-if="object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option.name" :avatar="option.avatar" />
+                <badge v-if="object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option.name" :avatar="option.avatar" :id="option.id" />
 
                 <badge v-if="!object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option" />
 
             </div> <!-- end .pop-container -->
 
-            <div v-if="multi" class="pop-footer">
+            <div v-if="multi" @click="addValueList" class="pop-footer">
 
                 <p class="pop-button">DONE</p>    
                 
@@ -52,10 +52,35 @@
             popValue: { get() { return this.$store.state.popValue } },
             popData: { get() { return this.$store.state.popData } },
             pop: function() { return $.isEmptyObject(this.popData) },
-            multi: { get() { return this.$store.state.multi } }
+            multi: { get() { return this.$store.state.multi } },
+            valueList: { get() { return this.$store.state.valueList } }
         },
 
         methods: {
+
+            addValueList() {
+
+                let routeName = this.$route.name
+                let moduleName 
+
+                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
+
+                {
+                    moduleName = 'AddUser'
+                }
+
+                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
+
+                {
+                    moduleName = 'CreateProject'
+                }
+
+                this.$store.commit( 'update' + moduleName + this.popValue, this.valueList )
+
+                this.$store.commit( 'updateValueList', [] )
+                this.$store.commit( 'updatePopData', {} )
+
+            },
 
             emptyPopData(event) {
 
@@ -63,6 +88,7 @@
 
                 {
                     this.$store.commit( 'updatePopData', {} )
+                    this.$store.commit( 'updateValueList', [] )
                 }
                 
             }

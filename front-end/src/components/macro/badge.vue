@@ -1,6 +1,6 @@
 <template>
 
-    <div @click="badge" class="badge">
+    <div @click="badgeSetValue" class="badge" :class="{ selected : clicked }">
 
         <div v-if="avatar" class="badge-avatar">
 
@@ -19,50 +19,81 @@
     export default {
 
         props: {
+
+            // Object props
             id: null,
             name: "",
-            avatar: null
+            avatar: null,
+            
         },
-    
+
+        data() {
+            return {
+                clicked: false
+            }
+        },
+
         name: 'badge',
 
         computed: {
             
             popValue: { get() { return this.$store.state.popValue } },
             popData: { get() { return this.$store.state.popData } },
-            multi: { get() { return this.$store.state.multi } }
+            multi: { get() { return this.$store.state.multi } },
+            valueList: { get() { return this.$store.state.valueList } }
         },
 
         methods: {
 
-            mBadge() {
-
-                if ( this.multi === false )
-
-                {
-                    this.$store.commit( 'updatePopData', {} )
-                }
-
-            },
-
-            badge() {
+            badgeSetValue() {
 
                 let routeName = this.$route.name
-                let value = this.name
-                let route
+                let moduleName // module to update mutations
 
-                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
+                let value = {} // Object to hold clicked badge data
+
+                if ( this.multi === true && this.clicked === false ) // Add to value list
+
                 {
-                    route = 'AddUser'
+                    this.clicked = true
+
+                    value.name = this.name
+                    value.avatar = this.avatar
+                    value.id = this.id
+
+                    this.$store.commit( 'pushValueList', value )
                 }
 
-                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
+                else if ( this.multi === true && this.clicked === true ) // Remove from value list
+
                 {
-                    route = 'CreateProject'
+                    this.clicked = false
+
+                    let filter = this.valueList.filter( (item, name) => {
+                        return item.name === this.name
+                    })
+
+                    this.$store.commit( 'popValueList', filter )
                 }
 
-                this.$store.commit( 'update' + route + this.popValue, value )
-                this.mBadge()
+                else if ( this.multi === false ) // If single select add value and close
+
+                {
+                    this.clicked = false
+
+                    if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
+                    {
+                        moduleName = 'AddUser'
+                    }
+
+                    else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
+                    {
+                        moduleName = 'CreateProject'
+                    }
+
+                    this.$store.commit( 'update' + moduleName + this.popValue, this.name )
+                    this.$store.commit( 'updatePopData', {} )
+                }
             }
         }
     }
@@ -92,6 +123,11 @@
     .badge:hover {
 
         background-color: rgba(0,0,0,0.01);
+    }
+
+    .selected {
+
+        border: 2px solid var(--red);
     }
 
     .badge-avatar {

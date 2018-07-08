@@ -36,6 +36,9 @@ export default new Vuex.Store({
     popData: {},
     multi: false,
 
+    // Badge
+    valueList: [],
+
     // Settings
     settings: false
 
@@ -47,6 +50,11 @@ export default new Vuex.Store({
     updatePopValue( state, popValue ) { return state.popValue = popValue },
     updatePopData( state, popData ) { return state.popData = popData },
     updateMulti( state, multi ) { return state.multi = multi },
+
+    // Badge mutations
+    pushValueList( state, valueList ) { state.valueList.push(valueList) },
+    popValueList( state, valueList ) { state.valueList.pop(valueList) },
+    updateValueList( state, valueList ) { return state.valueList = valueList },
 
     // Settings mutations
     updateSettings( state, settings ) { return state.settings = settings }

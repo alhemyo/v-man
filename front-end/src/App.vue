@@ -12,13 +12,18 @@
 
 	export default {
 	
-		name: 'app',
+        name: 'app',
+        
+        computed: {
+            
+            settings: { get() { return this.$store.state.settings } }
+        },
 
 		methods: {
 
 			close(event) {
 
-				if ( !$(event.target).hasClass('nav-bar-settings') )
+				if ( !$(event.target).hasClass('nav-bar-settings') && this.settings )
 
 				{
 					this.$store.commit( 'updateSettings', false )

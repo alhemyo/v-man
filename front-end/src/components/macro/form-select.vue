@@ -52,24 +52,24 @@
             pop() {
 
                 let clicked = this.name
-                let name = this.$route.name
-                let parent
+                let routeName = this.$route.name
+                let moduleName
 
                 this.mSelect()
 
-                if ( name === 'addUser' || name === 'editUser' || name === 'deleteUser' )
+                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
                 
                 {
-                    parent = 'users'
+                    moduleName = 'users'
                 }
 
-                else if ( name === 'createProject' || name === 'editProject' || name === 'deleteProject' )
+                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
                 
                 {
-                    parent = 'projects'
+                    moduleName = 'projects'
                 }
                 
-                let data = this.$store.state[parent][name][clicked.toLowerCase()]
+                let data = this.$store.state[moduleName][routeName][clicked.toLowerCase()]
 
                 this.$store.commit( 'updatePopValue', clicked )
                 this.$store.commit( 'updatePopData', data )
