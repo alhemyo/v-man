@@ -209,8 +209,8 @@ def get_all_projects(current_user):
     #if not current_user.is_admin:
         #return jsonify({'message': 'User not authorized!'})
 
-    projects = session.query(Project).all()
-    return jsonify(Projects=[p.serialize for p in projects])
+    projects = graph.run("MATCH (project:Project) RETURN project").data()
+    return jsonify(Projects=projects)
 
 
 @app.route('/project', methods=['POST'])
@@ -219,13 +219,41 @@ def create_project(current_user):
     data = request.get_json()
     print(data)
 
-    new_project = Project(name=data['name'],
-                        users=[current_user]
+    deadline_day = data['deadline']['day']
+    deadline_month = data['deadline']['month']
+    deadline_year = data['deadline']['year']
+    deadline = f"{deadline_day}.{deadline_month}.{deadline_year}"
+
+
+
+    new_project = Node("Project",
+                    name=data['name'],
+                    deadline=deadline,
+                    priority=data['priority'],
+                    client=data['client']
                     )
-    session.add(new_project)
-    session.commit()
+
+    graph.create(new_project)
+
+    admin_id = data['admin_id']
+    admin = graph.run("MATCH (user:Person) WHERE ID(user) = {user_id} RETURN user".format(user_id=admin_id)).data()[0]["user"]
+
+    user_admin_project = Relationship(admin, 'IS_ADMIN', new_project)
+    graph.create(user_admin_project)
+
+
+    user_ids = data['user_ids']
+    print(user_ids)
+    for user_id in user_ids:
+        user = graph.run("MATCH (user:Person) WHERE ID(user)={id} RETURN user".format(id=user_id)).data()[0]["user"]
+        user_project = Relationship(user, 'IS_USER', new_project)
+        graph.create(user_project)
+
 
     return jsonify({'message': 'new project created'})
+
+
+
 
 
 if __name__ == '__main__':
