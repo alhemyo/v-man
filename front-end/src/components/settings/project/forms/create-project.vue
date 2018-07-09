@@ -32,6 +32,26 @@
 
         <!-------------------- THIRD COLUMN -------------------->
 
+        <p v-if="admin" class="form-subtitle form form-full">Selected admins</p>
+
+        <div v-if="admin" class="settings-form">
+
+            <display-badge :key="adminIndex" v-for="(admin, adminIndex) in adminList" :name="admin.name" :avatar="admin.avatar" :id="admin.id" />
+
+        </div>
+
+        <hr v-if="admin" />
+
+        <!-------------------- FORTH COLUMN -------------------->
+
+        <p v-if="users" class="form-subtitle form form-full">Selected users</p>
+
+        <display-badge :key="userIndex" v-for="(user, userIndex) in userList" :name="user.name" :avatar="user.avatar" :id="user.id" />
+
+        <hr v-if="users" />
+
+        <!-------------------- FIFTH COLUMN -------------------->
+
         <transition name="fade">
             <p v-show="message" class="form-message form-third-1">{{ message }}</p>
         </transition>
@@ -50,13 +70,15 @@
     // Import components
     import formSelect from '../../../macro/form-select'
     import formRadio from '../../../macro/form-radio'
+    import displayBadge from '../../../macro/display-badge'
 
     export default {
     
         name: 'create-project',
 
         components: {
-            formSelect
+            formSelect,
+            displayBadge
         },
 
         data() {
@@ -86,22 +108,23 @@
             priority: { get() { return this.$store.state.projects.createProject.priority.value } },
             admin: { get() { 
 
-                let adminsNumber = this.$store.state.projects.createProject.admin.value.length
+                    let adminsNumber = this.$store.state.projects.createProject.admin.value.length
 
-                if ( adminsNumber === 1 )
+                    if ( adminsNumber === 1 )
 
-                {
-                    return this.$store.state.projects.createProject.admin.value[0].name
+                    {
+                        return this.$store.state.projects.createProject.admin.value[0].name
+                    }
+
+                    else if ( adminsNumber > 1 )
+
+                    {
+                        return this.$store.state.projects.createProject.admin.value.length + ' admins'
+                    }
+
                 }
-
-                else if ( adminsNumber > 1 )
-
-                {
-                    return this.$store.state.projects.createProject.admin.value.length + ' admins'
-                }
-
-            }
-        },
+            },
+            adminList: { get() { return this.$store.state.projects.createProject.admin.value } },
             client: { get() { return this.$store.state.projects.createProject.client.value } },
             users: { 
                 get() {
@@ -121,14 +144,29 @@
                     }
 
                 }
-            }
+             },
+            userList: { get() { return this.$store.state.projects.createProject.users.value } }
         },
 
         methods: {
 
             createProject() {
 
+                let postBody = {
 
+                    name: this.projectName,
+                    deadline: {
+                        day: this.deadlineDay,
+                        month: this.deadlineMonth,
+                        year: this.deadlineYear
+                    },
+                    priority: this.priority,
+                    admin: this.$store.state.projects.createProject.admin.value,
+                    client: this.client,
+                    users: this.$store.state.projects.createProject.users.value
+                }
+
+                console.log(JSON.stringify(postBody))
             }
         }
 

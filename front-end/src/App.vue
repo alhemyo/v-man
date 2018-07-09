@@ -137,6 +137,11 @@
         grid-column: 1/4;
     }
 
+    .form-full {
+
+        grid-column: 1/5;
+    }
+
     .form-subtitle, .form-message {
 
         font-size: 12px;
