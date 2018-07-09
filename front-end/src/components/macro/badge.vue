@@ -24,13 +24,16 @@
             id: null,
             name: "",
             avatar: null,
-            selected: false
             
         },
 
         data() {
             return {
-                clicked: false
+
+                clicked: false,
+                value: {},
+
+                routeName: this.$route.name
             }
         },
 
@@ -42,46 +45,70 @@
             popData: { get() { return this.$store.state.popData } },
             multi: { get() { return this.$store.state.multi } },
             valueList: { get() { return this.$store.state.valueList } },
+
+            moduleName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser' )
+                
+                {
+                    return 'users'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'projects'
+                }
+
+            },
+
+            objectName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser' )
+                
+                {
+                    return 'addUser'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'createProject'
+                }
+
+            },
+
+            mutationName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser' )
+                
+                {
+                    return 'AddUser'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'CreateProject'
+                }
+
+            }
         },
 
         methods: {
 
             badgeSetValue() {
 
-                console.log(this.selected)
-
-                let routeName = this.$route.name
-                let moduleName // module to update mutations
-                let mutationObjectName // Upper case Object name
-                let objectName // object inside module
-
-                // Get current store module
-                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
-                {
-                    moduleName = 'users'
-                    mutationObjectName = 'AddUser'
-                    objectName = 'addUser'
-                }
-
-                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
-                {
-                    moduleName = 'projects'
-                    mutationObjectName = 'CreateProject'
-                    objectName = 'createProject'
-                }
-
-                let value = {} // Object to hold clicked badge data
-
                 if ( this.multi === true && this.clicked === false ) // Add to value list
 
                 {
                     this.clicked = true
 
-                    value.name = this.name
-                    value.avatar = this.avatar
-                    value.id = this.id
+                    this.value.name = this.name
+                    this.value.avatar = this.avatar
+                    this.value.id = this.id
 
-                    this.$store.commit( 'pushValueList', value )
+                    this.$store.commit( 'pushValueList', this.value )
                 }
 
                 else if ( this.multi === true && this.clicked === true ) // Remove from value list
@@ -89,11 +116,11 @@
                 {
                     this.clicked = false
 
-                    let filter = this.valueList.filter( (item, name) => {
-                        return item.name === this.name
+                    let filter = this.valueList.filter( (item, id) => {
+                        return item.id != this.id
                     })
 
-                    this.$store.commit( 'popValueList', filter )
+                    this.$store.commit( 'updateValueList', filter )
                 }
 
                 else if ( this.multi === false ) // If single select add value and close
@@ -101,11 +128,38 @@
                 {
                     this.clicked = false
 
-                    this.$store.commit( 'update' + mutationObjectName + this.popValue, this.name )
+                    this.$store.commit( 'update' + this.mutationName + this.popValue, this.name )
                     this.$store.commit( 'updatePopData', {} )
                 }
             }
+        },
+
+        mounted() {
+
+            if ( this.multi === true )
+
+            {
+                let selectedBadge = this.$store.state[this.moduleName][this.objectName][this.popValue.toLowerCase()].value.filter((item, id) => {
+
+                    return item.id === this.id
+
+                })
+
+                Object.keys(selectedBadge).forEach((key) => {
+
+                    if ( selectedBadge[key].id === this.id )
+
+                    {
+                        this.$store.commit( 'pushValueList', selectedBadge[key] )
+                        this.clicked = true
+                    }
+
+                })
+
+            }
+
         }
+
     }
 
 </script>

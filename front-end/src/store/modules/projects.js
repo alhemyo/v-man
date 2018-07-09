@@ -71,62 +71,62 @@ export default {
                         id: "3"
                     },
                     {
-                        name: "Jane",
+                        name: "Ivana",
                         avatar: "/images/janeDoe.png",
                         id: "4"
                     },
                     {
-                        name: "Ignat",
+                        name: "Nevena",
                         avatar: "/images/johnDoe.png",
                         id: "5"
                     },
                     {
-                        name: "Vanja",
+                        name: "Nikola",
                         avatar: "/images/johnDoe.png",
                         id: "6"
                     },
                     {
-                        name: "Jane",
+                        name: "Jovana",
                         avatar: "/images/janeDoe.png",
                         id: "7"
                     },
                     {
-                        name: "Ignat",
+                        name: "Joco",
                         avatar: "/images/johnDoe.png",
-                        id: "2"
+                        id: "15"
                     },
                     {
-                        name: "Vanja",
+                        name: "Dejan",
                         avatar: "/images/johnDoe.png",
                         id: "8"
                     },
                     {
-                        name: "Jane",
+                        name: "Maja",
                         avatar: "/images/janeDoe.png",
                         id: "9"
                     },
                     {
-                        name: "Ignat",
+                        name: "Filip",
                         avatar: "/images/johnDoe.png",
                         id: "10"
                     },
                     {
-                        name: "Vanja",
+                        name: "Macko",
                         avatar: "/images/johnDoe.png",
                         id: "11"
                     },
                     {
-                        name: "Jane",
+                        name: "Kosta",
                         avatar: "/images/janeDoe.png",
                         id: "12"
                     },
                     {
-                        name: "Ignat",
+                        name: "Bojan",
                         avatar: "/images/johnDoe.png",
                         id: "13"
                     },
                     {
-                        name: "Vanja",
+                        name: "Ana",
                         avatar: "/images/johnDoe.png",
                         id: "14"
                     }

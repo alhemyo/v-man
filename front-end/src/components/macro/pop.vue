@@ -10,9 +10,21 @@
 
             <div class="pop-container">
 
-                <badge v-if="object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option.name" :avatar="option.avatar" :id="option.id" />
+                <badge 
+                    v-if="object" 
+                    class="pop-item" 
+                    :key="index" 
+                    v-for="(option, index) in popData.options" 
+                    :name="option.name" 
+                    :avatar="option.avatar" 
+                    :id="option.id" />
 
-                <badge v-if="!object" class="pop-item" :key="index" v-for="(option, index) in popData.options" :name="option" />
+                <badge 
+                    v-if="!object" 
+                    class="pop-item" 
+                    :key="index" 
+                    v-for="(option, index) in popData.options" 
+                    :name="option" />
 
             </div> <!-- end .pop-container -->
 
@@ -43,39 +55,78 @@
         data() {
             return {
 
-                // If pop data select options are objects togle object
-                object: false
+                object: false, // If pop data select options are objects togle object
+
+                routeName: this.$route.name
             }
         },
 
         computed: {
+
             popValue: { get() { return this.$store.state.popValue } },
             popData: { get() { return this.$store.state.popData } },
             pop: function() { return $.isEmptyObject(this.popData) },
             multi: { get() { return this.$store.state.multi } },
-            valueList: { get() { return this.$store.state.valueList } }
+            valueList: { get() { return this.$store.state.valueList } },
+
+            // Get current store module name
+            moduleName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser'  )
+
+                {
+                    return 'users'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'projects'
+                }
+
+            },
+
+            // Get object in current store module
+            objectName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser'  )
+
+                {
+                    return 'addUser'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'createProject'
+                }
+
+            },
+
+            // Get object mutation name
+            mutationName() {
+
+                if ( this.routeName === 'addUser' || this.routeName === 'editUser' || this.routeName === 'deleteUser'  )
+
+                {
+                    return 'AddUser'
+                }
+
+                else if ( this.routeName === 'createProject' || this.routeName === 'editProject' || this.routeName === 'deleteProject' )
+
+                {
+                    return 'CreateProject'
+                }
+
+            }
+
         },
 
         methods: {
 
             addValueList() {
 
-                let routeName = this.$route.name
-                let moduleName 
-
-                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
-
-                {
-                    moduleName = 'AddUser'
-                }
-
-                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
-
-                {
-                    moduleName = 'CreateProject'
-                }
-
-                this.$store.commit( 'update' + moduleName + this.popValue, this.valueList )
+                this.$store.commit( 'update' + this.mutationName + this.popValue, this.valueList )
 
                 this.$store.commit( 'updateValueList', [] )
                 this.$store.commit( 'updatePopData', {} )
@@ -95,6 +146,7 @@
         },
 
         watch: {
+
             popData() {
 
                 // If select value is object togle object
@@ -117,8 +169,9 @@
                     }
 
                 })
-                
+
             }
+
         }
 
     }
