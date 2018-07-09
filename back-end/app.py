@@ -127,7 +127,7 @@ def create_user():
                     address=data['address'],
                     city=data['city'],
                     phone=data['phone'],
-                    umcn=data['address'],
+                    umcn=data['umcn'],
                     is_admin=is_admin,
                     admin_type=data['admin_type'],
                     IdNumber=data['IdNumber'],
@@ -236,7 +236,7 @@ def create_project(current_user):
     graph.create(new_project)
 
     admin_id = data['admin_id']
-    admin = graph.run("MATCH (user:Person) WHERE ID(user) = {user_id} RETURN user".format(user_id=admin_id)).data()[0]["user"]
+    admin = graph.run("MATCH (user:Person) WHERE user.umcn = '{user_id}' RETURN user".format(user_id=admin_id)).data()[0]["user"]
 
     user_admin_project = Relationship(admin, 'IS_ADMIN', new_project)
     graph.create(user_admin_project)
@@ -245,7 +245,7 @@ def create_project(current_user):
     user_ids = data['user_ids']
     print(user_ids)
     for user_id in user_ids:
-        user = graph.run("MATCH (user:Person) WHERE ID(user)={id} RETURN user".format(id=user_id)).data()[0]["user"]
+        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
         user_project = Relationship(user, 'IS_USER', new_project)
         graph.create(user_project)
 
