@@ -24,6 +24,7 @@
             id: null,
             name: "",
             avatar: null,
+            selected: false
             
         },
 
@@ -40,15 +41,34 @@
             popValue: { get() { return this.$store.state.popValue } },
             popData: { get() { return this.$store.state.popData } },
             multi: { get() { return this.$store.state.multi } },
-            valueList: { get() { return this.$store.state.valueList } }
+            valueList: { get() { return this.$store.state.valueList } },
         },
 
         methods: {
 
             badgeSetValue() {
 
+                console.log(this.selected)
+
                 let routeName = this.$route.name
                 let moduleName // module to update mutations
+                let mutationObjectName // Upper case Object name
+                let objectName // object inside module
+
+                // Get current store module
+                if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
+                {
+                    moduleName = 'users'
+                    mutationObjectName = 'AddUser'
+                    objectName = 'addUser'
+                }
+
+                else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
+                {
+                    moduleName = 'projects'
+                    mutationObjectName = 'CreateProject'
+                    objectName = 'createProject'
+                }
 
                 let value = {} // Object to hold clicked badge data
 
@@ -81,17 +101,7 @@
                 {
                     this.clicked = false
 
-                    if ( routeName === 'addUser' || routeName === 'editUser' || routeName === 'deleteUser' )
-                    {
-                        moduleName = 'AddUser'
-                    }
-
-                    else if ( routeName === 'createProject' || routeName === 'editProject' || routeName === 'deleteProject' )
-                    {
-                        moduleName = 'CreateProject'
-                    }
-
-                    this.$store.commit( 'update' + moduleName + this.popValue, this.name )
+                    this.$store.commit( 'update' + mutationObjectName + this.popValue, this.name )
                     this.$store.commit( 'updatePopData', {} )
                 }
             }

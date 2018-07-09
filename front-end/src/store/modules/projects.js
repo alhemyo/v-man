@@ -73,22 +73,22 @@ export default {
                     {
                         name: "Jane",
                         avatar: "/images/janeDoe.png",
-                        id: "1"
+                        id: "4"
                     },
                     {
                         name: "Ignat",
                         avatar: "/images/johnDoe.png",
-                        id: "2"
+                        id: "5"
                     },
                     {
                         name: "Vanja",
                         avatar: "/images/johnDoe.png",
-                        id: "3"
+                        id: "6"
                     },
                     {
                         name: "Jane",
                         avatar: "/images/janeDoe.png",
-                        id: "1"
+                        id: "7"
                     },
                     {
                         name: "Ignat",
@@ -98,37 +98,37 @@ export default {
                     {
                         name: "Vanja",
                         avatar: "/images/johnDoe.png",
-                        id: "3"
+                        id: "8"
                     },
                     {
                         name: "Jane",
                         avatar: "/images/janeDoe.png",
-                        id: "1"
+                        id: "9"
                     },
                     {
                         name: "Ignat",
                         avatar: "/images/johnDoe.png",
-                        id: "2"
+                        id: "10"
                     },
                     {
                         name: "Vanja",
                         avatar: "/images/johnDoe.png",
-                        id: "3"
+                        id: "11"
                     },
                     {
                         name: "Jane",
                         avatar: "/images/janeDoe.png",
-                        id: "1"
+                        id: "12"
                     },
                     {
                         name: "Ignat",
                         avatar: "/images/johnDoe.png",
-                        id: "2"
+                        id: "13"
                     },
                     {
                         name: "Vanja",
                         avatar: "/images/johnDoe.png",
-                        id: "3"
+                        id: "14"
                     }
 
                 ]
