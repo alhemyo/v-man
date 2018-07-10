@@ -96,9 +96,6 @@ def get_one_user(user_id):
 def create_user():
     data = request.get_json()
     print(data)
-    is_admin = False
-    if data["is_admin"] == 'true':
-        is_admin = True
 
     birthday_day = data['birthday']['day']
     birthday_month = data['birthday']['month']
@@ -128,7 +125,7 @@ def create_user():
                     city=data['city'],
                     phone=data['phone'],
                     umcn=data['umcn'],
-                    is_admin=is_admin,
+                    is_admin=str(data['is_admin']).lower(),
                     admin_type=data['admin_type'],
                     IdNumber=data['IdNumber'],
                     IdExpireDate=IdExpireDate,
