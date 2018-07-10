@@ -2,6 +2,7 @@
 
 // import modules
 import axios from 'axios'
+import router from '../../router/router'
 
 export default {
 
@@ -231,11 +232,46 @@ export default {
                     commit( 'updateUserName', response.data.name )
                     commit( 'updateUserSurname', response.data.surname )
                     commit( 'updateUserPosition', response.data.position )
+                    commit( 'updateUserUmcn', response.data.umcn )
 
                     // TODO: ADD REST OF THE MUTATIONS
                 }
 
             })
+        },
+
+        GET_USERS({ commit }) {
+
+            axios({
+                url: `${ this.state.api }user`,
+                method: 'GET',
+                headers: {
+                    'x-access-token' : localStorage.getItem('token')
+                }
+            })
+
+            .then(response => {
+
+                let adminList = []
+
+                for ( let user in response.data.Users )
+                {
+                    adminList.push(response.data.Users[user])
+
+                    commit( 'updateCreateProjectUsersOptions', response.data.Users[user] )
+                    commit( 'updateCreateProjectAdminOptions', response.data.Users[user] )
+                }
+
+                //console.log( JSON.stringify(adminList) )
+
+            })
+
+        },
+
+        LOG_OUT() {
+
+            localStorage.removeItem( 'token' )
+            router.push({ name : 'login' })
         }
 
     }

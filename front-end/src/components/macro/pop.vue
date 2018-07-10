@@ -15,9 +15,9 @@
                     class="pop-item" 
                     :key="index" 
                     v-for="(option, index) in popData.options" 
-                    :name="option.name" 
-                    :avatar="option.avatar" 
-                    :id="option.id" />
+                    :name="option.user.name" 
+                    :avatar="option.user.avatar || '/images/johnDoe.png'" 
+                    :id="option.user.umcn" />
 
                 <badge 
                     v-if="!object" 

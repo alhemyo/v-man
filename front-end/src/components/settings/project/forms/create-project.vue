@@ -161,12 +161,13 @@
                         year: this.deadlineYear
                     },
                     priority: this.priority,
-                    admin: this.$store.state.projects.createProject.admin.value,
+                    admin: this.adminList,
                     client: this.client,
-                    users: this.$store.state.projects.createProject.users.value
+                    users: this.userList.map((item, id) => { return item.id })
                 }
 
                 console.log(JSON.stringify(postBody))
+
             }
         }
 

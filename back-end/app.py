@@ -97,7 +97,7 @@ def create_user():
     data = request.get_json()
     print(data)
     is_admin = False
-    if data["is_admin"] == 'True':
+    if data["is_admin"] == 'true':
         is_admin = True
 
     birthday_day = data['birthday']['day']

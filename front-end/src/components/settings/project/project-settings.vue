@@ -44,6 +44,7 @@
 
         created() {
             this.$router.push({ name: 'createProject' })
+            this.$store.dispatch( 'GET_USERS' )
         }
 
     }

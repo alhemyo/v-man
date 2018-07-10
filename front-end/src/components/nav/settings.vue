@@ -14,7 +14,7 @@
 
         <div class="settings-footer">
 
-            <img src="/images/assets/icons/off.png" />
+            <img @click="logout" src="/images/assets/icons/off.png" />
 
         </div>
         
@@ -31,6 +31,14 @@
         computed: {
 
             settings: { get() { return this.$store.state.settings } }
+        },
+
+        methods: {
+
+            logout() {
+
+                this.$store.dispatch('LOG_OUT')
+            }
         }
 
     }
