@@ -120,6 +120,11 @@
         overflow-x: hidden;
     }
 
+    .settings-footer {
+
+        height: 80px;
+    }
+
 </style>
 
 

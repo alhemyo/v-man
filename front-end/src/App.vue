@@ -90,8 +90,24 @@
         width: 660px;
         height: auto;
 
-        position: relative;
-        margin: auto;
+        position: absolute;
+        left: 50%;
+
+        transform: translateX( -50% );
+
+        display: grid;
+        grid-template-columns: 150px 150px 150px 150px;
+        grid-template-rows: 60px;
+        grid-column-gap: 20px;
+        grid-row-gap: 30px;
+        align-items: center;
+        align-content: center;
+    }
+
+    .settings-form-loader {
+
+        width: 100%;
+        height: auto;
 
         display: grid;
         grid-template-columns: 150px 150px 150px 150px;

@@ -63,6 +63,10 @@
 
     .loader {
 
+        min-height: 0;
+        height: 100%;
+        max-height: 100%;
+
         position: relative;
 
         padding: 0px 40px;

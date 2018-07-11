@@ -34,7 +34,7 @@
 
         <p v-if="admin" class="form-subtitle form form-full">Selected admins</p>
 
-        <div v-if="admin" class="settings-form">
+        <div v-if="admin" class="settings-form-loader">
 
             <display-badge :key="adminIndex" v-for="(admin, adminIndex) in adminList" :name="admin.name" :avatar="admin.avatar" :id="admin.id" />
 
@@ -46,7 +46,11 @@
 
         <p v-if="users" class="form-subtitle form form-full">Selected users</p>
 
-        <display-badge :key="userIndex" v-for="(user, userIndex) in userList" :name="user.name" :avatar="user.avatar" :id="user.id" />
+        <div v-if="users" class="settings-form-loader">
+
+            <display-badge :key="userIndex" v-for="(user, userIndex) in userList" :name="user.name" :avatar="user.avatar" :id="user.id" />
+
+        </div>
 
         <hr v-if="users" />
 
