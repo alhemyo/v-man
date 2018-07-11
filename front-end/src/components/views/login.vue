@@ -102,11 +102,11 @@
 
 			// Login user credentials
 			username: {
-				get() { return this.$store.state.users.auth.username },
+				get() { return this.$store.state.auth.username },
 				set(value) { this.$store.commit( 'updateAuthUsername', value ) }
 			},
 			password: {
-				get() { return this.$store.state.users.auth.password },
+				get() { return this.$store.state.auth.password },
 				set(value) { this.$store.commit( 'updateAuthPassword', value ) }
 			}
 

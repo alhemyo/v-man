@@ -161,7 +161,7 @@
                         year: this.deadlineYear
                     },
                     priority: this.priority,
-                    admin: this.adminList,
+                    admin: this.adminList.map((item, id) => { return item.id }),
                     client: this.client,
                     users: this.userList.map((item, id) => { return item.id })
                 }

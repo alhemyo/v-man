@@ -1,8 +1,8 @@
 // Project base store
 
-export default {
+const getDefaultProjectsState = () => {
 
-    state: {
+    return {
 
         // Create roject
         createProject: {
@@ -40,7 +40,15 @@ export default {
 
         }
 
-    },
+    }
+
+} // end getDefaultProjectsState()
+
+const state = getDefaultProjectsState()
+
+export default {
+
+    state,
 
     mutations: {
 
@@ -53,8 +61,13 @@ export default {
         updateCreateProjectAdmin( state, admin ) { return state.createProject.admin.value = admin },
         updateCreateProjectClient( state, client ) { return state.createProject.client.value = client },
         updateCreateProjectUsers( state, users ) { return state.createProject.users.value = users },
-        updateCreateProjectUsersOptions( state, users ) { state.createProject.users.options.push( users ) },
-        updateCreateProjectAdminOptions( state, admin ) { state.createProject.admin.options.push( admin ) }
+        updateCreateProjectUsersOptions( state, users ) { return state.createProject.users.options = users },
+        pushCreateProjectUsersOptions( state, users ) { state.createProject.users.options.push( users ) },
+        updateCreateProjectAdminOptions( state, admin ) { return state.createProject.admin.options = admin },
+        pushCreateProjectAdminOptions( state, admin ) { state.createProject.admin.options.push( admin ) },
+
+        // Reset projects state mutation
+        resetProjectsState(state) { Object.assign( state, getDefaultProjectsState() ) } 
 
     },
     actions: {}

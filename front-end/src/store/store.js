@@ -4,12 +4,14 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // Import STORE modules
+import auth from './modules/auth'
 import users from './modules/users'
 import projects from './modules/projects'
 
 export default new Vuex.Store({
 
   modules: {
+    auth,
     users,
     projects
   },
@@ -43,7 +45,7 @@ export default new Vuex.Store({
     settings: false
 
   },
-  
+
   mutations: {
 
     // Pop mutations

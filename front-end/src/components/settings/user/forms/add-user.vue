@@ -292,6 +292,7 @@
                 }).then( response => {
 
                     this.message = response.data.message
+                    this.$store.commit( 'resetState' )
 
                 }).catch( error => {
 

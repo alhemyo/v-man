@@ -4,18 +4,9 @@
 import axios from 'axios'
 import router from '../../router/router'
 
-export default {
+const getDefaultUsersState = () => {
 
-    state: {
-
-        // User authentication
-        auth: {
-
-            username: "",
-            password: "",
-            token: localStorage.getItem('token') || null
-
-        },
+    return {
 
         // Current user
         user: {
@@ -114,20 +105,18 @@ export default {
 
         }
 
-    },
+    }
 
-    getters: {
+} // end getDefaultState()
 
-        isAuth: state => !!state.auth.token
+const state = getDefaultUsersState()
 
-    },
+export default {
+
+    state,
 
     mutations: {
-
-        // Auth Mutations
-        updateAuthUsername( state, username ) { return state.auth.username = username },
-        updateAuthPassword( state, password ) { return state.auth.password = password },
-
+        
         // Current user mutations
         updateUserName( state, name ) { return state.user.name = name },
         updateUserSurname( state, surname ) { return state.user.surname = surname },
@@ -180,7 +169,10 @@ export default {
         updateAddUserEmploymentYear( state, year ) { return state.addUser.employmentDate.year = year },
         updateAddUserPayment( state, payment ) { return state.addUser.payment = payment },
         updateAddUserAdmin( state, admin ) { return state.addUser.admin = admin },
-        updateAddUserAdminType( state, admintype ) { return state.addUser.admintype.value = admintype }
+        updateAddUserAdminType( state, admintype ) { return state.addUser.admintype.value = admintype },
+
+        // Reset state mutation
+        resetUsersState(state) { Object.assign( state, getDefaultUsersState() ) }
 
     },
 
@@ -194,7 +186,7 @@ export default {
 
                     url: `${ this.state.api }login`,
                     method: 'POST',
-                    headers: { Authorization: "Basic " + btoa(this.state.users.auth.username + "@vertigo.com.mk:" + this.state.users.auth.password) }
+                    headers: { Authorization: "Basic " + btoa(this.state.auth.username + "@vertigo.com.mk:" + this.state.auth.password) }
 
                 })
                 .then( response => {
@@ -252,17 +244,20 @@ export default {
 
             .then(response => {
 
-                let adminList = []
+                commit( 'updateCreateProjectUsersOptions', [] )
+                commit( 'updateCreateProjectAdminOptions', [] )
 
                 for ( let user in response.data.Users )
+                
                 {
-                    adminList.push(response.data.Users[user])
+                    commit( 'pushCreateProjectUsersOptions', response.data.Users[user] )
 
-                    commit( 'updateCreateProjectUsersOptions', response.data.Users[user] )
-                    commit( 'updateCreateProjectAdminOptions', response.data.Users[user] )
+                    if ( response.data.Users[user].user.is_admin === "true" )
+
+                    {
+                        commit( 'pushCreateProjectAdminOptions', response.data.Users[user] )
+                    }
                 }
-
-                //console.log( JSON.stringify(adminList) )
 
             })
 
