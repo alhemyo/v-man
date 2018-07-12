@@ -165,12 +165,34 @@
                         year: this.deadlineYear
                     },
                     priority: this.priority,
-                    admin: this.adminList.map((item, id) => { return item.id }),
+                    admin_id: this.adminList.map((item, id) => { return item.id }),
                     client: this.client,
-                    users: this.userList.map((item, id) => { return item.id })
+                    users_ids: this.userList.map((item, id) => { return item.id })
                 }
 
                 console.log(JSON.stringify(postBody))
+
+                axios({
+                    url: this.$store.state.api + 'project',
+                    method: 'POST',
+                    data: JSON.stringify(postBody),
+                    headers: { 
+
+                        'Content-Type' : 'application/json',
+                        'x-access-token' : this.$store.state.auth.token
+                    }
+                })
+
+                .then(response => {
+
+                    console.log(response)
+
+                })
+
+                .catch(error => {
+
+                    console.log(error)
+                })
 
             }
         }
