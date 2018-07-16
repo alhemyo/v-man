@@ -13,7 +13,7 @@
                     <div class="login-input-wrap">
 
                         <input 
-                            class="login-input" 
+                            class="login-input username" 
                             type="text" name="username" 
                             placeholder="username"
                             v-model="username"
@@ -32,7 +32,7 @@
                     <div class="login-input-wrap">
 
                         <input 
-                            class="login-input" 
+                            class="login-input password" 
                             type="password" name="password" 
                             placeholder="password"
                             v-model="password"
@@ -173,6 +173,8 @@
 
                                 setTimeout(() => {
 
+                                    this.$store.dispatch('GET_USER')
+
                                     this.login = true
                                     
                                     setTimeout(() => {
@@ -195,6 +197,7 @@
 
                         setTimeout(() => {
 
+                            $('.username').focus()
                             $('.login-input').prop('disabled', false)
                             this.$store.commit( 'resetAuthState' )
                             this.message = ''

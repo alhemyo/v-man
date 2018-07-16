@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import modules
 import auth from './modules/auth'
+import user from './modules/user/user'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,8 @@ export default new Vuex.Store({
 
   modules: {
 
-    auth
+    auth,
+    user
   },
 
   state: {
@@ -30,6 +32,17 @@ export default new Vuex.Store({
       
     },
 
+    // components
+    sidebar: true,
+    menubar: false
+
+  },
+
+  mutations: {
+
+    // components mutations
+    updateSidebar( state, sidebar ) { state.sidebar = sidebar },
+    updateMenubar( state, menubar ) { state.menubar = menubar }
   }
 
 })

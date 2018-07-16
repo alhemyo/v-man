@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import router from '../../router/router'
 
 const defaultAuthState = () => {
 
@@ -7,7 +8,7 @@ const defaultAuthState = () => {
 
         username: '',
         password: '',
-        token: localStorage.getItem('token') || null
+        token: localStorage.getItem('token')
 
     }
 
@@ -51,13 +52,23 @@ export default {
 
                  })
 
-                 .catch( error => {
+                .catch( error => {
 
-                     reject(error)
+                    reject(error)
 
-                 })
+                })
 
             })
+
+        },
+
+        LOG_OUT({commit}) {
+
+            localStorage.clear()
+
+            commit('resetAuthState')
+
+            router.push({ name: 'login' })
 
         }
     }

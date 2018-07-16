@@ -1,6 +1,6 @@
 <template>
 
-  <div id="app">
+  <div id="app" @click="closeMenu" >
 
     <transition name="parent-route">
 
@@ -11,6 +11,36 @@
   </div>
 
 </template>
+
+<script>
+
+	export default {
+
+		name: 'app',
+
+		computed: {
+
+			menubar: {
+				get() { return this.$store.state.menubar },
+				set(menubar) { this.$store.commit( 'updateMenubar', menubar ) }
+			}
+		},
+
+		methods: {
+
+			closeMenu(event) {
+
+				if ( !$(event.target).parents('.menu-bar').length > 0 && !$(event.target).hasClass('menu-button') && this.menubar ) {
+
+					this.$store.commit( 'updateMenubar', false )
+				}
+			}
+		}
+
+	}
+
+</script>
+
 
 <style>
 

@@ -9,6 +9,7 @@ import login from '../components/auth/login'
 
 // Import dashboard
 import dashboard from '../components/dashboard'
+import users from '../components/users/users'
 
 export default new Router({
 
@@ -48,7 +49,16 @@ export default new Router({
 
         next()
 
-      })
+      }),
+      children: [
+
+        {
+          path: 'users',
+          name: 'users',
+          component: users
+        }
+
+      ]
     }
 
   ]
