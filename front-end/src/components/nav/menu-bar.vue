@@ -6,33 +6,9 @@
 
         <div class="menu">
  
-            <ul class="sub-menu">
+            <router-link class="menu-link" to="/dashboard/users">Users</router-link>
 
-                <p class="sub-menu-title" @click="expandSubMenu" >Users</p>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="add-user">user list</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="add-user">add user</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="edit-user">edit user</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="delete-user">delete user</router-link></li>
-
-            </ul> <!-- end .sub-menu -->
-
-            <ul class="sub-menu">
-
-                <p class="sub-menu-title" @click="expandSubMenu" >Projects</p>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="add-user">project list</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="add-user">add project</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="edit-user">edit project</router-link></li>
-
-                <li class="sub-menu-item"><router-link class="sub-menu-link" to="delete-user">delete project</router-link></li>
-
-            </ul> <!-- end .sub-menu -->
+            <router-link class="menu-link" to="/dashboard/projects">Projects</router-link>
             
         </div> <!-- end .menu -->
 
@@ -62,29 +38,9 @@
 
         methods: {
 
-            expandSubMenu(event) {
-
-                let subMenu = $(event.currentTarget).parent()
-
-                $('.sub-menu').not(subMenu).removeClass('sub-menu-expand')
-
-                $(subMenu).toggleClass('sub-menu-expand')
-            },
-
             logout() {
 
                 this.$store.dispatch('LOG_OUT')
-            }
-        },
-
-        watch: {
-
-            menubar() {
-
-                if ( !this.menubar ) {
-
-                    $('.sub-menu').removeClass('sub-menu-expand')
-                }
             }
         }
 
@@ -129,58 +85,28 @@
 
     .menu {
 
-        padding: 0px 40px;
+        padding: 0px 30px;
     }
 
-    .sub-menu {
-
-        text-align: right;
-        white-space: nowrap;
-
-        width: 100%;
-        height: auto;
-        max-height: 45px;
-        
-        padding: 0px 0px;
-
-        position: relative;
-
-        transition: 0.3s ease;
-
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-
-        overflow: hidden;
-    }
-
-    .sub-menu-expand {
-
-        max-height: 800px;
-    }
-
-    .sub-menu-title {
-
-        font-size: 14px;
-        color: rgba(0,0,0,0.5);
-
-        padding: 15px 0px;
-
-        cursor: pointer;
-    }
-
-    .sub-menu-link {
+    .menu-link {
 
         font-size: 12px;
-        color: rgba(255,255,255,0.6);
+        text-align: right;
+        color: rgba(255,255,255,0.5);
 
-        padding: 5px 0px;
-        margin-bottom: 10px;
+        padding: 10px 10px;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    .sub-menu-link:hover {
+    .menu-link:hover {
 
-        color: rgba(255,255,255,1);
+        color: var(--white);
+    }
 
-        background-color: rgba(0,0,0,0.05);
+    .router-link-active {
+
+        color: var(--white);
     }
 
     .menu-bar-footer img {

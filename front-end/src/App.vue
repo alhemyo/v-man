@@ -44,7 +44,7 @@
 
 <style>
 
-  html, body {
+  	html, body {
 
 		overflow: hidden;
 		margin: 0px;
@@ -58,18 +58,19 @@
 		--black: #3A383F;
 		--dark: #5B5961;
 		--gray: #DBDBDB;
+		--darkGray: #BABABA;
 		--darkRed: #E3170A;
 		--red: #FF312E;
 		--green: #8BC34A;
 		--yellow: #FFC107;
 	}
 
-  #app {
+	#app {
 
-    font-family: var(--mainFont);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+		font-family: var(--mainFont);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 
 	.parent-route-enter-active, .parent-route-leave-active {
 
@@ -80,5 +81,22 @@
 
 		opacity: 0;
 	}
+
+	.routes-enter-active, .routes-leave-active {
+
+        transition: 0.3s ease;
+    }
+
+	.routes-enter {
+
+		transform: translateX( 20px );
+		opacity: 0;
+	}
+
+    .routes-leave-to {
+
+        transform: translateX( -20px );
+        opacity: 0;
+    }
 
 </style>

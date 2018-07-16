@@ -8,7 +8,7 @@
 
         <div class="dash-loader">
 
-            <transition name="dash-routes">
+            <transition name="routes">
 
                 <router-view />
 
@@ -44,17 +44,6 @@
 </script>
 
 <style scoped>
-
-    .dash-routes-enter-active, .dash-routes-leave-active {
-
-        transition: 0.3s ease;
-    }
-
-    .dash-routes-enter, .dash-routes-leave-to {
-
-        transform: translateX( -20px );
-        opacity: 0;
-    }
 
     .dashboard {
 

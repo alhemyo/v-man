@@ -10,6 +10,10 @@ import login from '../components/auth/login'
 // Import dashboard
 import dashboard from '../components/dashboard'
 import users from '../components/users/users'
+import allUsers from '../components/users/all-users'
+import addUser from '../components/users/add-user'
+import editUser from '../components/users/edit-user'
+import deleteUser from '../components/users/delete-user'
 
 export default new Router({
 
@@ -55,7 +59,34 @@ export default new Router({
         {
           path: 'users',
           name: 'users',
-          component: users
+          component: users,
+          children: [
+
+            {
+              path: 'all-users',
+              name: 'all-users',
+              component: allUsers
+            },
+
+            {
+              path: 'add-user',
+              name: 'add-user',
+              component: addUser
+            },
+
+            {
+              path: 'edit-user',
+              name: 'edit-user',
+              component: editUser
+            },
+
+            {
+              path: 'delete-user',
+              name: 'delete-user',
+              component: deleteUser
+            }
+
+          ]
         }
 
       ]
