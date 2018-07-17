@@ -86,6 +86,8 @@
         box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
 
         transition: 0.3s ease;
+
+        overflow: hidden;
     }
 
     .side-bar-expand {
@@ -96,6 +98,8 @@
     /* --------------- USER CARD CSS --------------- */
 
     .user-card {
+
+        width: 100%;
 
         display: grid;
         grid-template-columns: minmax(80px, 1fr) minmax(0px, 1.8fr);

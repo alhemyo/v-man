@@ -9,11 +9,20 @@ import login from '../components/auth/login'
 
 // Import dashboard
 import dashboard from '../components/dashboard'
+
+// import user routes
 import users from '../components/users/users'
 import allUsers from '../components/users/all-users'
-import addUser from '../components/users/add-user'
-import editUser from '../components/users/edit-user'
-import deleteUser from '../components/users/delete-user'
+import addUser from '../components/users/forms/add-user'
+import editUser from '../components/users/forms/edit-user'
+import deleteUser from '../components/users/forms/delete-user'
+
+// import project routes
+import projects from '../components/projects/projects'
+import allProjects from '../components/projects/all-projects'
+import addProject from '../components/projects/forms/add-project'
+import editProject from '../components/projects/forms/edit-project'
+import deleteProject from '../components/projects/forms/delete-project'
 
 export default new Router({
 
@@ -64,28 +73,60 @@ export default new Router({
 
             {
               path: 'all-users',
-              name: 'all-users',
+              name: 'allUsers',
               component: allUsers
             },
 
             {
               path: 'add-user',
-              name: 'add-user',
+              name: 'addUser',
               component: addUser
             },
 
             {
               path: 'edit-user',
-              name: 'edit-user',
+              name: 'editUser',
               component: editUser
             },
 
             {
               path: 'delete-user',
-              name: 'delete-user',
+              name: 'deleteUser',
               component: deleteUser
             }
 
+          ]
+        },
+
+        {
+          path: 'projects',
+          name: 'projects',
+          component: projects,
+          children: [
+
+            {
+              path: 'all-projects',
+              name: 'allProjects',
+              component: allProjects
+            },
+
+            {
+              path: 'add-project',
+              name: 'addProject',
+              component: addProject
+            },
+
+            {
+              path: 'edit-project',
+              name: 'editProject',
+              component: editProject
+            },
+
+            {
+              path: 'delete-project',
+              name: 'deleteProject',
+              component: deleteProject
+            }
           ]
         }
 

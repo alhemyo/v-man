@@ -1,22 +1,22 @@
 <template>
     
-    <div class="users-wrap">
+    <div class="projects-wrap">
         
-        <div class="users">
+        <div class="projects">
         
-            <div class="users-nav">
+            <div class="projects-nav">
 
-                <router-link to="/dashboard/users/all-users" class="users-nav-link">All users</router-link>
+                <router-link to="/dashboard/projects/all-projects" class="projects-nav-link">All projects</router-link>
 
-                <router-link to="/dashboard/users/add-user" class="users-nav-link">Add user</router-link> 
+                <router-link to="/dashboard/projects/add-project" class="projects-nav-link">Add project</router-link> 
 
-                <router-link to="/dashboard/users/edit-user" class="users-nav-link">Edit user</router-link> 
+                <router-link to="/dashboard/projects/edit-project" class="projects-nav-link">Edit project</router-link> 
 
-                <router-link to="/dashboard/users/delete-user" class="users-nav-link">Delete user</router-link>    
+                <router-link to="/dashboard/projects/delete-project" class="projects-nav-link">Delete project</router-link>    
                 
-            </div> <!-- end .users-nav -->
+            </div> <!-- end .projects-nav -->
 
-            <div class="users-loader">
+            <div class="projects-loader">
 
                 <transition mode="out-in" name="routes">
 
@@ -24,13 +24,13 @@
                     
                 </transition>    
                 
-            </div> <!-- end .users-loader -->
+            </div> <!-- end .projects-loader -->
             
-        </div> <!-- end .users -->
+        </div> <!-- end .projects -->
 
-        <pop />
+        <pop />    
         
-    </div> <!-- end .users-wrap -->
+    </div> <!-- end .projects-wrap -->
 
 </template>
 
@@ -40,7 +40,7 @@
 
     export default {
     
-        name: 'users',
+        name: 'projects',
 
         components: {
 
@@ -53,7 +53,7 @@
 
 <style scoped>
 
-    .users-wrap {
+    .projects-wrap {
 
         width: calc( 100% + 17px );
         height: 100%;
@@ -65,7 +65,7 @@
         overflow-y: scroll;
     }
 
-    .users {
+    .projects {
 
         width: 100%;
         min-width: 780px;
@@ -78,7 +78,7 @@
         padding: 40px;
     }
 
-    .users-nav {
+    .projects-nav {
 
         width: 100%;
         height: 60px;
@@ -91,7 +91,7 @@
         align-items: center;
     }
 
-    .users-nav-link {
+    .projects-nav-link {
 
         font-size: 12px;
         text-align: center;
@@ -105,7 +105,7 @@
         border-bottom: 4px solid var(--gray);
     }
 
-    .users-nav-link:hover {
+    .projects-nav-link:hover {
 
         border-bottom: 4px solid rgba(0,0,0,0.3);
     }

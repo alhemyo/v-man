@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 // import modules
 import auth from './modules/auth'
 import user from './modules/user/user'
+import addUser from './modules/user/addUser'
+import addProject from './modules/project/addProject'
 
 Vue.use(Vuex)
 
@@ -12,7 +14,9 @@ export default new Vuex.Store({
   modules: {
 
     auth,
-    user
+    user,
+    addUser,
+    addProject
   },
 
   state: {
@@ -34,7 +38,11 @@ export default new Vuex.Store({
 
     // components
     sidebar: true,
-    menubar: false
+    menubar: false,
+
+    // Pop
+    popName: "",
+    popData: "",
 
   },
 
@@ -42,7 +50,11 @@ export default new Vuex.Store({
 
     // components mutations
     updateSidebar( state, sidebar ) { state.sidebar = sidebar },
-    updateMenubar( state, menubar ) { state.menubar = menubar }
+    updateMenubar( state, menubar ) { state.menubar = menubar },
+
+    // Pop mutations
+    updatePopName( state, name ) { state.popName = name },
+    updatePopData( state, data ) { state.popData = data }
   }
 
 })

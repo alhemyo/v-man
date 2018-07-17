@@ -1,6 +1,6 @@
 <template>
     
-    <div class="form-select">
+    <div class="form-select" @click="select" >
 
         <p class="form-select-name" :class="{ 'form-select-name-value' : value }">{{ name }}</p>
 
@@ -18,11 +18,26 @@
 
         props: {
 
-            name: "",
-            value: ""
+            name: null,
+            value: null,
+            multiselect: Boolean
         },
     
-        name: 'form-select'
+        name: 'form-select',
+
+        methods: {
+
+            select() {
+
+                let moduleName = this.$route.name
+                let moduleItem = this.name.toLowerCase()
+
+                let moduleData = this.$store.state[moduleName][moduleItem]
+
+                this.$store.commit( 'updatePopName', this.name )
+                this.$store.commit( 'updatePopData', moduleData )
+            }
+        }
 
     }
 

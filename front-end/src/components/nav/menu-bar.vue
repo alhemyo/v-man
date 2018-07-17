@@ -64,7 +64,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: 80px auto 80px;
 
-        background-color: var(--red);
+        background-color: var(--black);
         box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
     }
 

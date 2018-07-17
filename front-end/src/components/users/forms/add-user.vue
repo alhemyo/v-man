@@ -1,7 +1,7 @@
 <template>
     
     <form class="form add-user">
-        
+
         <!---------------------- FIRST ROW ---------------------->
 
         <p class="form-sub-title form-1">Personal info</p>
@@ -100,8 +100,8 @@
 
 <script>
 
-    import formSelect from '../macro/form/form-select'
-    import formRadio from '../macro/form/form-radio'
+    import formSelect from '../../macro/form/form-select'
+    import formRadio from '../../macro/form/form-radio'
 
     export default {
     
@@ -118,161 +118,5 @@
 </script>
 
 
-<style scoped>
-
-    /* -------------------- Form CSS -------------------- */
-
-    .form {
-
-        width: 100%;
-        max-width: 700px;
-        height: auto;
-
-        position: relative;
-        margin: auto;
-        margin-top: 40px;
-
-        padding: 40px 20px;
-
-        display: grid;
-        grid-template-columns: 150px 150px 150px 150px;
-        grid-template-rows: auto;
-        grid-column-gap: 20px;
-        grid-row-gap: 40px;
-    }
-
-    .form-1 {
-
-        grid-column: 1/2;
-    }
-
-    .form-2 {
-
-        grid-column: 2/3;
-    }
-
-    .form-3 {
-
-        grid-column: 3/4;
-    }
-
-    .form-4 {
-
-        grid-column: 4/5;
-    }
-
-    .form-half-1 {
-
-        grid-column: 1/3;
-    }
-
-    .form-half-2 {
-
-        grid-column: 3/5;
-    }
-
-    .form-third-1 {
-
-        grid-column: 1/4;
-    }
-
-    .form-sub-title {
-
-        font-size: 12px;
-        color: var(--dark);
-
-        align-self: center;
-    }
-
-    /* -------------------- form-input CSS -------------------- */
-
-    .form-input {
-
-        font-size: 12px;
-        color: var(--dark);
-
-        width: 100%;
-        height: 40px;
-
-        padding: 0px 20px;
-
-        border: none;
-        border: 1px solid var(--darkGray);
-        border-radius: 30px;
-    }
-
-    .form-input::placeholder {
-
-        color: var(--darkGray);
-    }
-
-    .form-input::-moz-placeholder {
-
-        color: var(--darkGray);
-    }
-
-    /* -------------------- form-date CSS -------------------- */
-
-    .form-date {
-
-        width: 150px;
-        height: 40px;
-
-        position: relative;
-
-        display: grid;
-        grid-template-columns: 1fr 1fr 1.5fr;
-
-        border: 1px solid var(--darkGray);
-        border-radius: 5px;
-    }
-
-    .form-date > input {
-
-        font-size: 12px;
-        text-align: center;
-        color: var(--dark);
-
-        width: 100%;
-
-        padding: 0px 12px;
-
-        background-color: transparent;
-        border: none;
-    }
-
-    .form-date > input:nth-child(3) {
-
-        border-left: 1px solid var(--darkGray);
-        border-right: 1px solid var(--darkGray);
-    }
-
-    .form-date-name {
-
-        font-size: 12px;
-        color: var(--darkGray);
-
-        position: absolute;
-        top: -20px;
-        left: 20px;
-    }
-
-    /* -------------------- form-button CSS -------------------- */
-
-    .form-button {
-
-        font-size: 12px;
-        text-align: center;
-        color: var(--white);
-
-        width: 150px;
-        height: 40px;
-
-        padding: 12px 0px;
-
-        background-color: var(--dark);
-        border-radius: 30px;
-    }
-
-</style>
+<style scoped></style>
 
