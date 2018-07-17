@@ -6,13 +6,15 @@
 
             <p class="pop-name">{{ popName }}</p>
 
+            <div class="pop-header"></div> <!-- end .pop-header -->
+
             <div class="pop-footer">
 
                 <div class="pop-button">
 
                     <img src="/images/assets/icons/done.png" />
 
-                </div>
+                </div> <!-- end .pop-button -->
                 
             </div> <!-- end .pop-footer -->
             
@@ -116,6 +118,14 @@
         border-radius: 15px 15px 0px 0px;
     }
 
+    .pop-header {
+
+        width: 100%;
+        height: 40px;
+
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
     .pop-footer {
 
         width: 100%;
@@ -134,8 +144,17 @@
         display: grid;
         align-items: center;
 
+        transition: 0.1s ease;
+
         background-color: var(--dark);
         border-radius: 30px;
+
+        cursor: pointer;
+    }
+
+    .pop-button:hover {
+
+        background-color: var(--green);
     }
 
 </style>
