@@ -45,6 +45,7 @@ export default new Vuex.Store({
     // Pop
     popName: "",
     popData: "",
+    valueList: []
 
   },
 
@@ -56,7 +57,9 @@ export default new Vuex.Store({
 
     // Pop mutations
     updatePopName( state, name ) { state.popName = name },
-    updatePopData( state, data ) { state.popData = data }
+    updatePopData( state, data ) { state.popData = data },
+    pushValueList( state, list ) { state.valueList.push(list) },
+    updateValueList( state, list ) { state.valueList = list }
   }
 
 })

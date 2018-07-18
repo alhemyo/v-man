@@ -48,8 +48,16 @@ export default {
 
     mutations: {
 
+        updateAddProjectName( state, name ) { state.name = name },
+        updateAddProjectDeadlineDay( state, day ) { state.deadline.day = day },
+        updateAddProjectDeadlineMonth( state, month ) { state.deadline.month = month },
+        updateAddProjectDeadlineYear( state, year ) { state.deadline.year = year },
+        updateaddProjectPriority( state, priority ) { state.priority.value = priority },
+        updateaddProjectClient( state, client ) { state.client.value = client },
         updateAddProjectAdminOptions( state, options ) { state.admin.options = options },
-        updateAddProjectUsersOptions( state, options ) { state.users.options = options }
+        updateaddProjectAdmin( state, value ) { state.admin.value = value },
+        updateAddProjectUsersOptions( state, options ) { state.users.options = options },
+        updateaddProjectUsers( state, value ) { state.users.value = value }
     },
 
     actions: {}

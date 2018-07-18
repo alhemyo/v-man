@@ -6,7 +6,7 @@
 
             <p class="pop-name">{{ popName }}</p>
 
-            <div class="pop-header"></div> <!-- end .pop-header -->
+            <div v-if="popData.multiselect" class="pop-header"></div> <!-- end .pop-header -->
 
             <div class="pop-loader">
 
@@ -15,28 +15,32 @@
                     :key="index" 
                     v-for="(option, index) in popData.options" 
                     :name="option.user.name"
+                    :surname="option.user.surname"
                     :avatar="option.user.avatar || '/images/johnDoe.png'"
                     :id="option.user.umcn"
                     :edit="false"
-                    :display="false" />
+                    :display="false"
+                    :multiselect="multiselect" />
 
                 <badge 
                     v-if="!object" 
                     :key="index" 
                     v-for="(option, index) in popData.options" 
                     :name="option"
+                    :surname="''"
                     :avatar="null"
                     :id="null"
                     :edit="false"
-                    :display="false" />
+                    :display="false"
+                    :multiselect="multiselect"/>
 
                 <div class="pop-loader-split"></div>
                 
             </div> <!-- end .pop-loader -->
 
-            <div class="pop-footer">
+            <div v-if="popData.multiselect" class="pop-footer">
 
-                <div class="pop-button">
+                <div class="pop-button" @click="addValue" >
 
                     <img src="/images/assets/icons/done.png" />
 
@@ -72,7 +76,9 @@
         computed: {
 
             popName: { get() { return this.$store.state.popName } },
-            popData: { get() { return this.$store.state.popData } }
+            popData: { get() { return this.$store.state.popData } },
+            multiselect: { get() { return this.$store.state.popData.multiselect } },
+            valueList: { get() { return this.$store.state.valueList } }
         },
 
         methods: {
@@ -83,12 +89,22 @@
 
                     this.$store.commit( 'updatePopData', "" )
                 }
+            },
+
+            addValue() {
+
+                this.$store.commit( 'update' + this.$route.name + this.popName, this.valueList  )
+
+                this.$store.commit( 'updatePopData', "" )
+                this.$store.commit( 'updateValueList', [] )
             }
         },
 
         watch: {
 
             popData() {
+
+                console.log(this.popData)
 
                 // If select value is object togle object
                 Object.keys(this.popData).forEach((key) => {
@@ -246,7 +262,7 @@
 
         transition: 0.1s ease;
 
-        background-color: var(--dark);
+        background-color: var(--darkGray);
         border-radius: 30px;
 
         cursor: pointer;
