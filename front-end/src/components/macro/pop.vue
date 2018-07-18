@@ -8,6 +8,32 @@
 
             <div class="pop-header"></div> <!-- end .pop-header -->
 
+            <div class="pop-loader">
+
+                <badge 
+                    v-if="object" 
+                    :key="index" 
+                    v-for="(option, index) in popData.options" 
+                    :name="option.user.name"
+                    :avatar="option.user.avatar || '/images/johnDoe.png'"
+                    :id="option.user.umcn"
+                    :edit="false"
+                    :display="false" />
+
+                <badge 
+                    v-if="!object" 
+                    :key="index" 
+                    v-for="(option, index) in popData.options" 
+                    :name="option"
+                    :avatar="null"
+                    :id="null"
+                    :edit="false"
+                    :display="false" />
+
+                <div class="pop-loader-split"></div>
+                
+            </div> <!-- end .pop-loader -->
+
             <div class="pop-footer">
 
                 <div class="pop-button">
@@ -26,9 +52,22 @@
 
 <script>
 
+    import badge from './badge'
+
     export default {
     
         name: 'pop',
+
+        components: {
+
+            badge
+        },
+
+        data() {
+            return {
+                object: false
+            }
+        },
 
         computed: {
 
@@ -44,6 +83,33 @@
 
                     this.$store.commit( 'updatePopData', "" )
                 }
+            }
+        },
+
+        watch: {
+
+            popData() {
+
+                // If select value is object togle object
+                Object.keys(this.popData).forEach((key) => {
+
+                    if ( key === 'userBadge' )
+
+                    {
+                        if ( this.popData[key] )
+
+                        {
+                            this.object = true
+                        }
+
+                        else 
+
+                        {
+                            this.object = false
+                        }
+                    }
+
+                })
             }
         }
 
@@ -93,9 +159,11 @@
 
         transition: 0.3s ease;
 
-        background-color: white;
+        background-color: var(--white);
         border-radius: 15px;
         box-shadow: 0px 0px 30px rgba(0,0,0,0.3);
+
+        overflow: hidden;
     }
 
     .pop-in {
@@ -114,7 +182,7 @@
 
         padding: 20px 0px;
 
-        background-color: var(--white);
+        background-color: white;
         border-radius: 15px 15px 0px 0px;
     }
 
@@ -123,7 +191,36 @@
         width: 100%;
         height: 40px;
 
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background-color: white;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .pop-loader {
+
+        width: calc( 100% + 17px );
+        height: auto;
+        max-height: 200px;
+
+        padding: 20px;
+        padding-bottom: 0px;
+
+        display: grid;
+        grid-template-columns: 180px 180px 180px;
+        grid-template-rows: auto;
+        grid-gap: 20px;
+
+        background-color: var(--white);
+
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    .pop-loader-split {
+
+        width: 100%;
+        height: 1px;
+
+        grid-column: 1/4;
     }
 
     .pop-footer {
@@ -134,6 +231,9 @@
         display: grid;
         align-items: center;
         justify-content: center;
+
+        background-color: white;
+        border-top: 1px solid rgba(0,0,0,0.05);
     }
 
     .pop-button {

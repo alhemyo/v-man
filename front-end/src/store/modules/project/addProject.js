@@ -13,25 +13,29 @@ const defaultProjectConfigState = () => {
 
             value: "",
             options: [ 'low', 'mid', 'high' ],
-            multiselect: false
+            multiselect: false,
+            userBadge: false
         },
         client: {
 
             value: "",
             options: [ 'VT', 'FT', 'BR', 'CT', 'CS', 'ZZ' ],
-            multiselect: false
+            multiselect: false,
+            userBadge: false
         },
         admin: {
 
             value: "",
             options: [],
-            multiselect: true
+            multiselect: true,
+            userBadge: true
         },
         users: {
 
             value: "",
             options: [],
-            multiselect: true
+            multiselect: true,
+            userBadge: true
         }
     }
 }
@@ -42,7 +46,11 @@ export default {
 
     state,
 
-    mutations: {},
+    mutations: {
+
+        updateAddProjectAdminOptions( state, options ) { state.admin.options = options },
+        updateAddProjectUsersOptions( state, options ) { state.users.options = options }
+    },
 
     actions: {}
 }

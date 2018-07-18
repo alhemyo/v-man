@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 // import modules
 import auth from './modules/auth'
 import user from './modules/user/user'
+import users from './modules/user/users'
 import addUser from './modules/user/addUser'
 import addProject from './modules/project/addProject'
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
 
     auth,
     user,
+    users,
     addUser,
     addProject
   },

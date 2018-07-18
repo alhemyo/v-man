@@ -45,6 +45,11 @@
         components: {
 
             pop
+        },
+
+        created() {
+
+            this.$store.dispatch( 'GET_USERS' )
         }
 
     }

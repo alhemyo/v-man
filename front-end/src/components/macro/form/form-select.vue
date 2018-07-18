@@ -30,7 +30,7 @@
             select() {
 
                 let moduleName = this.$route.name
-                let moduleItem = this.name.toLowerCase()
+                let moduleItem = this.name.toLowerCase().replace(/\s+/g, '');
 
                 let moduleData = this.$store.state[moduleName][moduleItem]
 

@@ -8,7 +8,8 @@ const defaultUserConfigState = () => {
 
             value: "",
             options: [ 'female', 'male' ],
-            multiselect: false
+            multiselect: false,
+            userBadge: false
         },
         birthday: {
 
@@ -18,6 +19,13 @@ const defaultUserConfigState = () => {
         },
         city: "",
         phone: "",
+        education: {
+
+            value: "",
+            options: [ 'low', 'mid', 'high' ],
+            multiselect: false,
+            userBadge: false
+        },
         address: "",
         email: "",
         idNumber: "",
@@ -34,14 +42,16 @@ const defaultUserConfigState = () => {
 
             value: "",
             options: [ '3D', 'mgfx', 'design', 'comp', 'audio', 'office', 'sys admin', 'account' ],
-            multiselect: false
+            multiselect: false,
+            userBadge: false
         },
         admin: false,
         admintype: {
 
             value: "",
             options: [ 'user admin', 'project admin', 'uber admin' ],
-            multiselect: false
+            multiselect: false,
+            userBadge: false
         },
         employmentDate: {
             

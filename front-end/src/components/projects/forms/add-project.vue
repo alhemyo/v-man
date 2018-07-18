@@ -49,6 +49,12 @@
         components: {
 
             formSelect
+        },
+
+        created() {
+
+            this.$store.commit( 'updateAddProjectAdminOptions', this.$store.state.users.users )
+            this.$store.commit( 'updateAddProjectUsersOptions', this.$store.state.users.users )
         }
 
     }
