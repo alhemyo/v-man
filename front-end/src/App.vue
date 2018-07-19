@@ -255,4 +255,16 @@
 		cursor: pointer;
     }
 
+    /* -------------------- form-validation CSS -------------------- */
+
+    .error {
+
+        border: 1px solid var(--red);
+    }
+
+    .success {
+
+        border: 1px solid var(--green);
+    }
+
 </style>

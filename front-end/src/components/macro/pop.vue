@@ -198,7 +198,7 @@
 
         padding: 20px 0px;
 
-        background-color: white;
+        background-color: var(--white);
         border-radius: 15px 15px 0px 0px;
     }
 
@@ -209,6 +209,7 @@
 
         background-color: white;
         border-top: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .pop-loader {
@@ -225,7 +226,7 @@
         grid-template-rows: auto;
         grid-gap: 20px;
 
-        background-color: var(--white);
+        background-color: white;
 
         overflow: hidden;
         overflow-y: scroll;
