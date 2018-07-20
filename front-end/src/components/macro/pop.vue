@@ -104,8 +104,6 @@
 
             popData() {
 
-                console.log(this.popData)
-
                 // If select value is object togle object
                 Object.keys(this.popData).forEach((key) => {
 
