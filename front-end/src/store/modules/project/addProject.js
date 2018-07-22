@@ -25,14 +25,14 @@ const defaultProjectConfigState = () => {
         },
         admin: {
 
-            value: "",
+            value: [],
             options: [],
             multiselect: true,
             userBadge: true
         },
         users: {
 
-            value: "",
+            value: [],
             options: [],
             multiselect: true,
             userBadge: true

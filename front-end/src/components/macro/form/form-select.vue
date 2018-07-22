@@ -89,8 +89,10 @@
         font-size: 12px;
         text-align: left;
         color: var(--dark);
+        white-space: nowrap;
 
         padding: 12px 20px;
+        padding-right: 0px;
     }
 
 </style>

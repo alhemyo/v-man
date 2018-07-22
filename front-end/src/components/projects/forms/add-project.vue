@@ -37,7 +37,7 @@
 
         <p class="form-sub-title form-third-1">{{ message }}</p>
 
-        <p class="form-button form-4">Add Project</p>
+        <p class="form-button form-4" @click="addProject">Add Project</p>
 
     </form> <!-- end .add-project -->
 
@@ -46,6 +46,7 @@
 <script>
 
     import _ from 'lodash'
+    import axios from 'axios'
 
     import formSelect from '../../macro/form/form-select'
 
@@ -125,10 +126,81 @@
             }}
         },
 
+        methods: {
+
+            addProject() {
+
+                const regNumber = this.$store.state.regex.numbers
+
+                // add project form validation
+
+                if ( !this.name ) { this.message = 'Project name is required.' }
+
+                else if ( this.name.match(this.$store.state.regex.login) ) { this.message = 'Invalid project name' }
+
+                else if ( !this.deadlineDay && !this.deadlineMonth && !this.deadlineYear ) { this.message = 'Deadline date is required.' }
+
+                else if ( !this.deadlineDay.match(regNumber) && !this.deadlineMonth.match(regNumber) && !this.deadlineYear.match(regNumber) ) { this.message = 'Invalid date.' }
+
+                else if ( !this.priority ) { this.message = 'Please select priority.' }
+
+                else if ( !this.client ) { this.message = 'Please select client.' }
+
+                else if ( !this.admin ) { this.message = 'Please select admin.' }
+
+                else {
+
+                    // Create new project API request
+
+                    let project = {
+
+                        name: this.$store.state.addProject.name,
+                        deadline: {
+                            day: this.$store.state.addProject.deadline.day,
+                            month: this.$store.state.addProject.deadline.month,
+                            year: this.$store.state.addProject.deadline.year
+                        },
+                        priority: this.$store.state.addProject.priority.value,
+                        client: this.$store.state.addProject.client.value,
+                        admin_id: this.$store.state.addProject.admin.value[0].id,
+                        user_ids: this.$store.state.addProject.users.value.map((item,id) => { return item.id })
+                    }
+
+                    axios({
+
+                        url: this.$store.state.api + 'project',
+                        method: 'POST',
+                        headers: { 'x-access-token' : localStorage.getItem('token') },
+                        data: project
+                    })
+
+                    .then(response => {
+
+                        this.message = response.data.message
+                    })
+
+                    .catch(error => {
+
+                        this.message = 'Ups, something went wrong, please try again.'
+                    })
+                }
+            }
+        },
+
         created() {
+
+            this.$store.dispatch( 'GET_USERS' )
 
             this.$store.commit( 'updateAddProjectAdminOptions', this.$store.state.users.users.filter((item, is_admin) => { return item.user.is_admin === 'true' }) )
             this.$store.commit( 'updateAddProjectUsersOptions', this.$store.state.users.users )
+        },
+
+        watch: {
+
+            message() {
+
+                setTimeout(() => { this.message = "" },2000)
+            }
         }
 
     }

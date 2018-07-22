@@ -88,10 +88,31 @@
 
                     this.selected = false
 
-                    this.$store.commit( 'update' + this.$route.name + this.popName, this.name )
+                    this.$store.commit( 'update' + this.$route.name + this.popName.replace(/\s+/g, ''), this.name )
                     this.$store.commit( 'updatePopData', "" )
                 }
             }
+        },
+
+        mounted() { // If badge is selected in parent component return it to value list
+
+            let selected
+
+            if (this.multiselect === true ) {
+
+                selected = this.$store.state[this.$route.name][this.popName.toLowerCase()].value.filter( (item,id) => { return item.id === this.id })
+
+                    Object.keys(selected).forEach((key) => {
+
+                    if ( selected[key].id === this.id ) {
+
+                        this.$store.commit( 'pushValueList', selected[key] )
+                        this.selected = true
+                    }
+
+                })
+            }
+
         }
 
     }

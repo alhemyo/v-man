@@ -57,6 +57,7 @@
 
         position: absolute;
         right: 0px;
+        z-index: 10;
 
         transition: 0.3s ease;
 
