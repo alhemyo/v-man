@@ -336,8 +336,6 @@
 
                     .then(response => {
 
-                        console.log(response)
-
                         this.message = response.data.message
                         
                         this.$store.commit( 'resetUserConfigState' )
@@ -347,8 +345,6 @@
                     })
 
                     .catch(error => {
-
-                        console.log(error)
 
                         this.message = "Ups! something went wrong, please try again."
 

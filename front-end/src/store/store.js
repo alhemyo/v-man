@@ -6,6 +6,7 @@ import auth from './modules/auth'
 import user from './modules/user/user'
 import users from './modules/user/users'
 import addUser from './modules/user/addUser'
+import projects from './modules/project/projects'
 import addProject from './modules/project/addProject'
 
 Vue.use(Vuex)
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     user,
     users,
     addUser,
+    projects,
     addProject
   },
 

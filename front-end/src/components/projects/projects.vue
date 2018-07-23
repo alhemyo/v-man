@@ -45,6 +45,11 @@
         components: {
 
             pop
+        },
+
+        created() { 
+
+            this.$router.push({ name: 'allProjects' })
         }
 
     }

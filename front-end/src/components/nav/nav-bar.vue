@@ -75,7 +75,7 @@
         height: 80px;
 
         position: relative;
-        z-index: 10;
+        z-index: 15;
 
         display: grid;
         align-items: center;

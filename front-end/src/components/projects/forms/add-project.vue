@@ -179,6 +179,8 @@
                         this.message = response.data.message
 
                         this.$store.commit( 'resetProjectConfigState' )
+
+                        this.$router.push({ name: 'allProjects' })
                     })
 
                     .catch(error => {
