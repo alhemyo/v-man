@@ -177,6 +177,8 @@
                     .then(response => {
 
                         this.message = response.data.message
+
+                        this.$store.commit( 'resetProjectConfigState' )
                     })
 
                     .catch(error => {

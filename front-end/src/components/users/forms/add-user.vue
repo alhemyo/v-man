@@ -339,6 +339,10 @@
                         console.log(response)
 
                         this.message = response.data.message
+                        
+                        this.$store.commit( 'resetUserConfigState' )
+
+                        this.$router.push({ name: 'allUsers' })
 
                     })
 

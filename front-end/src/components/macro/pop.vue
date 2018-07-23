@@ -6,7 +6,13 @@
 
             <p class="pop-name">{{ popName }}</p>
 
-            <div v-if="popData.multiselect" class="pop-header"></div> <!-- end .pop-header -->
+            <div v-if="popData.multiselect" class="pop-header">
+
+                <p>select all</p>
+
+                <p>{{ valueLength + ' ' + popName + ' selected' }}</p>    
+                
+            </div> <!-- end .pop-header -->
 
             <div class="pop-loader">
 
@@ -78,7 +84,8 @@
             popName: { get() { return this.$store.state.popName } },
             popData: { get() { return this.$store.state.popData } },
             multiselect: { get() { return this.$store.state.popData.multiselect } },
-            valueList: { get() { return this.$store.state.valueList } }
+            valueList: { get() { return this.$store.state.valueList } },
+            valueLength: { get() { return this.$store.state.valueList.length } }
         },
 
         methods: {
@@ -88,6 +95,7 @@
                 if ( $(event.target).hasClass('pop-wrap') ) {
 
                     this.$store.commit( 'updatePopData', "" )
+                    this.$store.commit( 'updateValueList', [] )
                 }
             },
 
@@ -206,9 +214,27 @@
         width: 100%;
         height: 40px;
 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 40px;
+        align-items: center;
+
         background-color: white;
         border-top: 1px solid rgba(0,0,0,0.05);
         border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .pop-header > p {
+
+        font-size: 12px;
+        color: var(--dark);
+
+        padding: 0px 40px;
+    }
+
+    .pop-header p:nth-child(2) {
+
+        text-align: right;
     }
 
     .pop-loader {

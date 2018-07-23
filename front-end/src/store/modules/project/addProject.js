@@ -57,7 +57,10 @@ export default {
         updateAddProjectAdminOptions( state, options ) { state.admin.options = options },
         updateaddProjectAdmin( state, value ) { state.admin.value = value },
         updateAddProjectUsersOptions( state, options ) { state.users.options = options },
-        updateaddProjectUsers( state, value ) { state.users.value = value }
+        updateaddProjectUsers( state, value ) { state.users.value = value },
+
+        // reset default project config state
+        resetProjectConfigState(state) { Object.assign( state, defaultProjectConfigState() ) }
     },
 
     actions: {}

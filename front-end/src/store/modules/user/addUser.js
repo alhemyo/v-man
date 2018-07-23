@@ -95,7 +95,10 @@ export default {
         updateAddUserEmploymentDay(state, day) { state.employmentDate.day = day },
         updateAddUserEmploymentMonth(state, month) { state.employmentDate.month = month },
         updateAddUserEmploymentYear(state, year) { state.employmentDate.year = year },
-        updateAddUserPayment(state, payment) { state.payment = payment }
+        updateAddUserPayment(state, payment) { state.payment = payment },
+
+        // GET default add user state
+        resetUserConfigState(state) { Object.assign( state, defaultUserConfigState() ) }
     },
 
     actions: {}
