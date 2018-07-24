@@ -83,7 +83,7 @@
 
         align-items: center;
 
-        border-bottom: 1px solid var(--darkGray);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
         box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
     }
 
@@ -92,6 +92,11 @@
         width: calc(100% + 17px);
 
         position: relative;
+
+        display: grid;
+        grid-template-rows: auto;
+        grid-row-gap: 5px;
+        align-content: flex-start;
 
         overflow-y: scroll;
     }
@@ -107,7 +112,9 @@
         grid-column-gap: 10px;
         align-items: center;
         
+        background-color: white;
         border-bottom: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.05);
     }
 
     .user-avatar {
