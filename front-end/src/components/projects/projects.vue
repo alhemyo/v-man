@@ -1,22 +1,20 @@
 <template>
-    
-    <div class="projects-wrap">
         
-        <div class="projects">
+        <div class="config">
         
-            <div class="projects-nav">
+            <div class="config-nav">
 
-                <router-link to="/dashboard/projects/all-projects" class="projects-nav-link">All projects</router-link>
+                <router-link to="/dashboard/projects/all-projects" class="config-nav-link">All projects</router-link>
 
-                <router-link to="/dashboard/projects/add-project" class="projects-nav-link">Add project</router-link> 
+                <router-link to="/dashboard/projects/add-project" class="config-nav-link">Add project</router-link> 
 
-                <router-link to="/dashboard/projects/edit-project" class="projects-nav-link">Edit project</router-link> 
+                <router-link to="/dashboard/projects/edit-project" class="config-nav-link">Edit project</router-link> 
 
-                <router-link to="/dashboard/projects/delete-project" class="projects-nav-link">Delete project</router-link>    
+                <router-link to="/dashboard/projects/delete-project" class="config-nav-link">Delete project</router-link>    
                 
             </div> <!-- end .projects-nav -->
 
-            <div class="projects-loader">
+            <div class="config-loader">
 
                 <transition mode="out-in" name="routes">
 
@@ -24,13 +22,13 @@
                     
                 </transition>    
                 
-            </div> <!-- end .projects-loader -->
-            
-        </div> <!-- end .projects -->
+            </div> <!-- end .config-loader -->
 
-        <pop />    
-        
-    </div> <!-- end .projects-wrap -->
+            <pop />
+            
+        </div> <!-- end .config -->
+
+            
 
 </template>
 
@@ -58,32 +56,23 @@
 
 <style scoped>
 
-    .projects-wrap {
-
-        width: calc( 100% + 17px );
-        height: 100%;
-
-        position: absolute;
-        top: 0px;
-        left: 0px;
-
-        overflow-y: scroll;
-    }
-
-    .projects {
+    .config {
 
         width: 100%;
         min-width: 780px;
         max-width: 1200px;
-        height: auto;
+        height: 100%;
 
         position: relative;
         margin: auto;
 
-        padding: 40px;
+        display: grid;
+        grid-template-rows: 60px auto;
+
+        overflow: hidden;
     }
 
-    .projects-nav {
+    .config-nav {
 
         width: 100%;
         height: 60px;
@@ -96,7 +85,7 @@
         align-items: center;
     }
 
-    .projects-nav-link {
+    .config-nav-link {
 
         font-size: 12px;
         text-align: center;
@@ -110,7 +99,7 @@
         border-bottom: 4px solid var(--gray);
     }
 
-    .projects-nav-link:hover {
+    .config-nav-link:hover {
 
         border-bottom: 4px solid rgba(0,0,0,0.3);
     }
@@ -123,6 +112,13 @@
     .router-link-active:hover {
 
         border-bottom: 4px solid var(--red);
+    }
+
+    .config-loader {
+
+        width: 100%;
+
+        overflow: hidden;
     }
 
 </style>

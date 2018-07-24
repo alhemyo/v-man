@@ -2,23 +2,33 @@
     
     <div class="all-users">
 
-        <div class="all-users-scroll-wrap">
-            
-            <div :key="index" v-for="(user, index) in users" class="user">
+            <div class="user-nav">
 
-                <div class="user-avatar">
-                    
-                    <img src="/images/janeDoe.png" />    
-                    
-                </div> <!-- end .user-avatar -->
+                <div></div>
 
-                <p class="user-text user-name">{{ user.user.name + ' ' + user.user.surname }}</p>
+                <p class="user-text">Name</p> 
 
-                <p class="user-text user-position">{{ user.user.position }}</p> 
+                <p class="user-text user-position">Position</p>    
                 
-            </div> <!-- end .user -->    
+            </div> <!-- end .user-nav -->
             
-        </div> <!-- end .all-users-scroll-wrap -->
+            <div class="users-scroll-wrap">
+                
+                <div :key="index" v-for="(user, index) in users" class="user">
+
+                    <div class="user-avatar">
+                        
+                        <img src="/images/janeDoe.png" />    
+                        
+                    </div> <!-- end .user-avatar -->
+
+                    <p class="user-text user-name">{{ user.user.name + ' ' + user.user.surname }}</p>
+
+                    <p class="user-text user-position">{{ user.user.position }}</p> 
+                    
+                </div> <!-- end .user -->     
+                
+            </div> <!-- end .users-scroll-wrap -->   
 
     </div> <!-- end .all-projects -->
 
@@ -50,14 +60,40 @@
 
         width: 100%;
         height: 100%;
+        min-height: 0;
+
+        position: relative;
+
+        padding-top: 40px;
+
+        display: grid;
+        grid-template-rows: 60px auto;
+
+        overflow: hidden;
     }
 
-    .all-users-scroll-wrap {
+    .user-nav {
 
         width: 100%;
-        height: auto;
+        height: 60px;
 
-        padding: 40px 0px;
+        display: grid;
+        grid-template-columns: 60px 200px 80px;
+        grid-column-gap: 10px;
+
+        align-items: center;
+
+        border-bottom: 1px solid var(--darkGray);
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+    }
+
+    .users-scroll-wrap {
+
+        width: calc(100% + 17px);
+
+        position: relative;
+
+        overflow-y: scroll;
     }
 
     .user {
@@ -66,10 +102,11 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 60px 150px 100px;
+        grid-template-columns: 60px 200px 80px;
         grid-template-rows: 60px;
+        grid-column-gap: 10px;
         align-items: center;
-
+        
         border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
@@ -85,12 +122,17 @@
 
         font-size: 12px;
         color: var(--dark);
+
+        padding: 8px 5px;
+
+        border-right: 1px solid rgba(0,0,0,0.1);
     }
 
-    .user-position {
+    .user-nav .user-text {
 
-        text-align: center;
+        color: var(--darkGray);
     }
+
 
 </style>
 

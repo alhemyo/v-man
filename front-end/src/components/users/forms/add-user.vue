@@ -1,100 +1,104 @@
 <template>
+
+    <div class="form-scroll-wrap">
     
-    <form class="form add-user">
+        <form class="form add-user">
 
-        <!---------------------- FIRST ROW ---------------------->
+            <!---------------------- FIRST ROW ---------------------->
 
-        <p class="form-sub-title form-1">Personal info</p>
+            <p class="form-sub-title form-1">Personal info</p>
 
-        <input class="form-input form-2" type="text" name="name" placeholder="Name" v-model="name" />
+            <input class="form-input form-2" type="text" name="name" placeholder="Name" v-model="name" />
 
-        <input class="form-input form-3" type="text" name="surname" placeholder="Surname" v-model="surname" />
+            <input class="form-input form-3" type="text" name="surname" placeholder="Surname" v-model="surname" />
 
-        <form-select :name="'Gender'" :value="gender" />
+            <form-select :name="'Gender'" :value="gender" />
 
-        <!---------------------- SECOND ROW ---------------------->
+            <!---------------------- SECOND ROW ---------------------->
 
-        <div class="form-date form-1">
+            <div class="form-date form-1">
 
-            <p class="form-date-name">Birthday</p>
-            
-            <input type="text" name="day" placeholder="D" v-model="birthDay" maxlength="2" />
+                <p class="form-date-name">Birthday</p>
+                
+                <input type="text" name="day" placeholder="D" v-model="birthDay" maxlength="2" />
 
-            <input type="text" name="month" placeholder="M" v-model="birthMonth" maxlength="2" />
+                <input type="text" name="month" placeholder="M" v-model="birthMonth" maxlength="2" />
 
-            <input type="text" name="year" placeholder="Y" v-model="birthYear" maxlength="4" />    
-            
-        </div> <!-- end .form-date -->
+                <input type="text" name="year" placeholder="Y" v-model="birthYear" maxlength="4" />    
+                
+            </div> <!-- end .form-date -->
 
-        <input class="form-input form-2" type="text" name="city" placeholder="City" v-model="city" />
+            <input class="form-input form-2" type="text" name="city" placeholder="City" v-model="city" />
 
-        <input class="form-input form-3" type="text" name="phone" placeholder="Phone" v-model="phone" />
+            <input class="form-input form-3" type="text" name="phone" placeholder="Phone" v-model="phone" />
 
-        <form-select :name="'Education'" :value="education" />
+            <form-select :name="'Education'" :value="education" />
 
-        <!---------------------- THIRD ROW ---------------------->
+            <!---------------------- THIRD ROW ---------------------->
 
-        <input class="form-input form-half-1" type="text" name="address" placeholder="Address" v-model="address" />
+            <input class="form-input form-half-1" type="text" name="address" placeholder="Address" v-model="address" />
 
-        <input class="form-input form-half-2" type="text" name="email" placeholder="E - mail" v-model="email" />
+            <input class="form-input form-half-2" type="text" name="email" placeholder="E - mail" v-model="email" />
 
-        <!---------------------- FORTH ROW ---------------------->
+            <!---------------------- FORTH ROW ---------------------->
 
-        <div class="form-date form-1">
+            <div class="form-date form-1">
 
-            <p class="form-date-name">ID expire date</p>
-            
-            <input type="text" name="day" placeholder="D" v-model="idExpireDay" maxlength="2" />
+                <p class="form-date-name">ID expire date</p>
+                
+                <input type="text" name="day" placeholder="D" v-model="idExpireDay" maxlength="2" />
 
-            <input type="text" name="month" placeholder="M" v-model="idExpireMonth" maxlength="2" />
+                <input type="text" name="month" placeholder="M" v-model="idExpireMonth" maxlength="2" />
 
-            <input type="text" name="year" placeholder="Y" v-model="idExpireYear" maxlength="4" />    
-            
-        </div> <!-- end .form-date -->
+                <input type="text" name="year" placeholder="Y" v-model="idExpireYear" maxlength="4" />    
+                
+            </div> <!-- end .form-date -->
 
-        <input class="form-input form-2" type="text" name="idNumber" placeholder="ID number" v-model="idNumber" />
+            <input class="form-input form-2" type="text" name="idNumber" placeholder="ID number" v-model="idNumber" />
 
-        <input class="form-input form-half-2" type="text" name="umcn" placeholder="UMCN" v-model="umcn" />
+            <input class="form-input form-half-2" type="text" name="umcn" placeholder="UMCN" v-model="umcn" />
 
-        <!---------------------- FIFTH ROW ---------------------->
+            <!---------------------- FIFTH ROW ---------------------->
 
-        <input class="form-input form-half-1" type="text" name="bank" placeholder="Bank" v-model="bank" />
+            <input class="form-input form-half-1" type="text" name="bank" placeholder="Bank" v-model="bank" />
 
-        <input class="form-input form-half-2" type="text" name="accNumber" placeholder="Account number" v-model="accNumber" />
+            <input class="form-input form-half-2" type="text" name="accNumber" placeholder="Account number" v-model="accNumber" />
 
-        <!---------------------- SIXTH ROW ---------------------->
+            <!---------------------- SIXTH ROW ---------------------->
 
-        <p class="form-sub-title form-1">Work info</p>
+            <p class="form-sub-title form-1">Work info</p>
 
-        <form-radio class="admin form-4" :name="'Admin'" :class="{ 'admin-slide' : admin }" />
+            <form-radio class="admin form-4" :name="'Admin'" :class="{ 'admin-slide' : admin }" />
 
-        <!---------------------- SEVENTH ROW ---------------------->
+            <!---------------------- SEVENTH ROW ---------------------->
 
-        <div class="form-date form-1">
+            <div class="form-date form-1">
 
-            <p class="form-date-name">Employment date</p>
-            
-            <input type="text" name="day" placeholder="D" v-model="employmentDay" maxlength="2" />
+                <p class="form-date-name">Employment date</p>
+                
+                <input type="text" name="day" placeholder="D" v-model="employmentDay" maxlength="2" />
 
-            <input type="text" name="month" placeholder="M" v-model="employmentMonth" maxlength="2" />
+                <input type="text" name="month" placeholder="M" v-model="employmentMonth" maxlength="2" />
 
-            <input type="text" name="year" placeholder="Y" v-model="employmentYear" maxlength="4" />    
-            
-        </div> <!-- end .form-date -->
+                <input type="text" name="year" placeholder="Y" v-model="employmentYear" maxlength="4" />    
+                
+            </div> <!-- end .form-date -->
 
-        <input class="form-input form-2" type="text" name="payment" placeholder="Payment" v-model="payment" />
+            <input class="form-input form-2" type="text" name="payment" placeholder="Payment" v-model="payment" />
 
-        <form-select :name="'Position'" :value="position" />
+            <form-select :name="'Position'" :value="position" />
 
-        <form-select :name="'Admin type'" :value="admintype" />
+            <form-select :name="'Admin type'" :value="admintype" />
 
-        <!---------------------- EIGHT ROW ---------------------->
+            <!---------------------- EIGHT ROW ---------------------->
 
-        <p class="form-sub-title form-third-1">{{ message }}</p>
+            <p class="form-sub-title form-third-1">{{ message }}</p>
 
-        <p class="form-button form-4" @click="addUser" >Add User</p>
+            <p class="form-button form-4" @click="addUser" >Add User</p>
 
-    </form>
+        </form>
+
+    </div> <!-- end .form-scroll-wrap -->
 
 </template>
 
@@ -340,7 +344,7 @@
                         
                         this.$store.commit( 'resetUserConfigState' )
 
-                        this.$router.push({ name: 'allUsers' })
+                        setTimeout(() => { this.$router.push({ name: 'allUsers' }) },2000)
 
                     })
 

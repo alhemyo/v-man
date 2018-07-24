@@ -2,13 +2,23 @@
     
     <div class="all-projects">
 
-        <div class="all-projects-scroll-wrap">
+        <div class="project-nav">
+
+            <p class="project-text">Name</p> 
+
+            <p class="project-text">Client</p> 
+
+        </div>
+
+        <div class="projects-scroll-wrap">
             
             <div :key="index" v-for="(project, index) in projects" class="project">
 
                 <p class="project-text project-name">{{ project.project.name }}</p>
+
+                <p class="project-text project-name">{{ project.project.client }}</p>
                 
-            </div> <!-- end .user -->    
+            </div> <!-- end .project -->    
             
         </div> <!-- end .all-projects-scroll-wrap -->
 
@@ -42,14 +52,40 @@
 
         width: 100%;
         height: 100%;
+        min-height: 0;
+
+        position: relative;
+
+        padding-top: 40px;
+
+        display: grid;
+        grid-template-rows: 60px auto;
+
+        overflow: hidden;
     }
 
-    .all-projects-scroll-wrap {
+    .project-nav {
 
         width: 100%;
-        height: auto;
+        height: 60px;
 
-        padding: 40px 0px;
+        display: grid;
+        grid-template-columns: 200px 60px;
+        grid-column-gap: 10px;
+
+        align-items: center;
+
+        border-bottom: 1px solid var(--darkGray);
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+    }
+
+    .projects-scroll-wrap {
+
+        width: calc(100% + 17px);
+
+        position: relative;
+
+        overflow-y: scroll;
     }
 
     .project {
@@ -58,8 +94,9 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 150px;
+        grid-template-columns: 200px 60px;
         grid-template-rows: 60px;
+        grid-column-gap: 10px;
         align-items: center;
 
         border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -69,6 +106,15 @@
 
         font-size: 12px;
         color: var(--dark);
+
+        padding: 8px 5px;
+
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .project-nav .project-text {
+
+        color: var(--darkGray);
     }
 
 </style>

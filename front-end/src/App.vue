@@ -101,6 +101,14 @@
 
 	/* -------------------- Form CSS -------------------- */
 
+    .form-scroll-wrap {
+
+        width: calc(100% + 17px);
+        height: 100%;
+
+        overflow-y: scroll;
+    }
+
     .form {
 
         width: 100%;

@@ -44,13 +44,9 @@
                 
             </div> <!-- end .pop-loader -->
 
-            <div v-if="popData.multiselect" class="pop-footer">
+            <div v-if="popData.multiselect" class="pop-footer" @click="addValue" >
 
-                <div class="pop-button" @click="addValue" >
-
-                    <img src="/images/assets/icons/done.png" />
-
-                </div> <!-- end .pop-button -->
+                <p>Add {{ popName }}</p>
                 
             </div> <!-- end .pop-footer -->
             
@@ -200,12 +196,12 @@
 
         font-size: 16px;
         text-align: center;
-        color: var(--dark);
+        color: var(--white);
         user-select: none;
 
         padding: 20px 0px;
 
-        background-color: var(--white);
+        background-color: var(--dark);
         border-radius: 15px 15px 0px 0px;
     }
 
@@ -219,7 +215,7 @@
         grid-template-rows: 40px;
         align-items: center;
 
-        background-color: white;
+        background-color: var(--white);
         border-top: 1px solid rgba(0,0,0,0.05);
         border-bottom: 1px solid rgba(0,0,0,0.05);
     }
@@ -267,6 +263,9 @@
 
     .pop-footer {
 
+        font-size: 12px;
+        color: var(--dark);
+
         width: 100%;
         height: 60px;
 
@@ -276,27 +275,13 @@
 
         background-color: white;
         border-top: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .pop-button {
-        
-        width: 40px;
-        height: 40px;
-
-        display: grid;
-        align-items: center;
-
-        transition: 0.1s ease;
-
-        background-color: var(--darkGray);
-        border-radius: 30px;
 
         cursor: pointer;
     }
 
-    .pop-button:hover {
+    .pop-footer:hover {
 
-        background-color: var(--green);
+        background-color: var(--white);
     }
 
 </style>

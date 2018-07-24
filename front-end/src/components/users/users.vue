@@ -1,22 +1,20 @@
 <template>
-    
-    <div class="users-wrap">
         
-        <div class="users">
+        <div class="config">
         
-            <div class="users-nav">
+            <div class="config-nav">
 
-                <router-link to="/dashboard/users/all-users" class="users-nav-link">All users</router-link>
+                <router-link to="/dashboard/users/all-users" class="config-nav-link">All users</router-link>
 
-                <router-link to="/dashboard/users/add-user" class="users-nav-link">Add user</router-link> 
+                <router-link to="/dashboard/users/add-user" class="config-nav-link">Add user</router-link> 
 
-                <router-link to="/dashboard/users/edit-user" class="users-nav-link">Edit user</router-link> 
+                <router-link to="/dashboard/users/edit-user" class="config-nav-link">Edit user</router-link> 
 
-                <router-link to="/dashboard/users/delete-user" class="users-nav-link">Delete user</router-link>    
+                <router-link to="/dashboard/users/delete-user" class="config-nav-link">Delete user</router-link>    
                 
             </div> <!-- end .users-nav -->
 
-            <div class="users-loader">
+            <div class="config-loader">
 
                 <transition mode="out-in" name="routes">
 
@@ -25,12 +23,10 @@
                 </transition>    
                 
             </div> <!-- end .users-loader -->
+
+            <pop />
             
         </div> <!-- end .users -->
-
-        <pop />
-        
-    </div> <!-- end .users-wrap -->
 
 </template>
 
@@ -57,32 +53,23 @@
 
 <style scoped>
 
-    .users-wrap {
-
-        width: calc( 100% + 17px );
-        height: 100%;
-
-        position: absolute;
-        top: 0px;
-        left: 0px;
-
-        overflow-y: scroll;
-    }
-
-    .users {
+    .config {
 
         width: 100%;
         min-width: 780px;
         max-width: 1200px;
-        height: auto;
+        height: 100%;
 
         position: relative;
         margin: auto;
 
-        padding: 40px;
+        display: grid;
+        grid-template-rows: 60px auto;
+
+        overflow: hidden;
     }
 
-    .users-nav {
+    .config-nav {
 
         width: 100%;
         height: 60px;
@@ -95,7 +82,7 @@
         align-items: center;
     }
 
-    .users-nav-link {
+    .config-nav-link {
 
         font-size: 12px;
         text-align: center;
@@ -109,7 +96,7 @@
         border-bottom: 4px solid var(--gray);
     }
 
-    .users-nav-link:hover {
+    .config-nav-link:hover {
 
         border-bottom: 4px solid rgba(0,0,0,0.3);
     }
@@ -122,6 +109,13 @@
     .router-link-active:hover {
 
         border-bottom: 4px solid var(--red);
+    }
+
+    .config-loader {
+
+        width: 100%;
+
+        overflow: hidden;
     }
 
 </style>

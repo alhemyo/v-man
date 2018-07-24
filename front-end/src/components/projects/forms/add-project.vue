@@ -1,45 +1,49 @@
 <template>
+
+    <div class="form-scroll-wrap">
     
-    <form class="form add-project">
+        <form class="form add-project">
 
-        <!---------------------- FIRST ROW ---------------------->
+            <!---------------------- FIRST ROW ---------------------->
 
-        <input 
-            class="form-input project-name form-third-1" 
-            type="text" 
-            name="projectName" 
-            placeholder="Project name"
-            v-model="name" />
+            <input 
+                class="form-input project-name form-third-1" 
+                type="text" 
+                name="projectName" 
+                placeholder="Project name"
+                v-model="name" />
 
-        <div class="form-date deadline form-4">
+            <div class="form-date deadline form-4">
 
-            <p class="form-date-name">Deadline</p>
-            
-            <input type="text" name="day" placeholder="D" v-model="deadlineDay" maxlength="2" />
+                <p class="form-date-name">Deadline</p>
+                
+                <input type="text" name="day" placeholder="D" v-model="deadlineDay" maxlength="2" />
 
-            <input type="text" name="month" placeholder="M" v-model="deadlineMonth" maxlength="2" />
+                <input type="text" name="month" placeholder="M" v-model="deadlineMonth" maxlength="2" />
 
-            <input type="text" name="year" placeholder="Y" v-model="deadlineYear" maxlength="4" />    
-            
-        </div> <!-- end .form-date -->
+                <input type="text" name="year" placeholder="Y" v-model="deadlineYear" maxlength="4" />    
+                
+            </div> <!-- end .form-date -->
 
-        <!---------------------- SECOND ROW ---------------------->
+            <!---------------------- SECOND ROW ---------------------->
 
-        <form-select :name="'Priority'" :value="priority" />
+            <form-select :name="'Priority'" :value="priority" />
 
-        <form-select :name="'Client'" :value="client" />
+            <form-select :name="'Client'" :value="client" />
 
-        <form-select :name="'Admin'" :value="admin" />
+            <form-select :name="'Admin'" :value="admin" />
 
-        <form-select :name="'Users'" :value="users" />
+            <form-select :name="'Users'" :value="users" />
 
-        <!---------------------- THIRD ROW ---------------------->
+            <!---------------------- THIRD ROW ---------------------->
 
-        <p class="form-sub-title form-third-1">{{ message }}</p>
+            <p class="form-sub-title form-third-1">{{ message }}</p>
 
-        <p class="form-button form-4" @click="addProject">Add Project</p>
+            <p class="form-button form-4" @click="addProject">Add Project</p>
 
-    </form> <!-- end .add-project -->
+        </form> <!-- end .add-project -->
+
+    </div> <!-- end .add-project-scroll-wrap -->
 
 </template>
 
@@ -180,7 +184,7 @@
 
                         this.$store.commit( 'resetProjectConfigState' )
 
-                        this.$router.push({ name: 'allProjects' })
+                        setTimeout(() => { this.$router.push({ name: 'allProjects' }) },2000)
                     })
 
                     .catch(error => {

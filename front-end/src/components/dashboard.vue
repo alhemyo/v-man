@@ -57,11 +57,17 @@
         grid-template-rows: 80px auto;
 
         background-color: white;
+
+        overflow: hidden;
     }
 
     .dash-loader {
 
         position: relative;
+
+        padding: 40px;
+
+        overflow: hidden;
     }
 
 </style>

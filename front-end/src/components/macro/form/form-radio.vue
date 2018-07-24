@@ -4,7 +4,7 @@
 
         <p class="form-radio-name">{{ name }}</p>
 
-        <div class="form-radio-value" :class="{ 'form-radio-value-on' : value }" ></div>    
+        <div class="form-radio-value" :class="{ 'form-radio-value-on' : storeValue }" ></div>    
         
     </div> <!-- end .form-radio -->
 
@@ -27,6 +27,11 @@
 
                 value: false
             }
+        },
+
+        computed: {
+
+            storeValue() { return this.$store.state[this.$route.name][this.name.toLowerCase()] }
         },
 
         methods: {
