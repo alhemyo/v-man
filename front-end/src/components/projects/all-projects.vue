@@ -4,9 +4,9 @@
 
         <div class="project-nav">
 
-            <p class="project-text">Name</p> 
-
             <p class="project-text">Client</p> 
+
+            <p class="project-text">Project name</p> 
 
         </div>
 
@@ -14,9 +14,9 @@
             
             <div :key="index" v-for="(project, index) in projects" class="project">
 
-                <p class="project-text project-name">{{ project.project.name }}</p>
-
                 <p class="project-text project-name">{{ project.project.client }}</p>
+
+                <p class="project-text project-name">{{ project.project.name }}</p>
                 
             </div> <!-- end .project -->    
             
@@ -70,7 +70,7 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 200px 60px;
+        grid-template-columns: 60px 200px;
         grid-column-gap: 10px;
 
         align-items: center;
@@ -98,7 +98,7 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 200px 60px;
+        grid-template-columns: 60px 200px;
         grid-template-rows: 60px;
         grid-column-gap: 10px;
         align-items: center;

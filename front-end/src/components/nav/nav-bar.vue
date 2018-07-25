@@ -4,6 +4,16 @@
 
         <h1><span>V</span> MAN</h1>
 
+        <div class="main-nav">
+
+            <router-link to="/dashboard/activity" class="main-nav-link" ><img src="/images/assets/icons/dashboard.png" /></router-link>
+
+            <router-link to="/dashboard/projects" class="main-nav-link" ><img src="/images/assets/icons/projects.png" /></router-link>
+
+            <router-link to="/dashboard/chat" class="main-nav-link" ><img src="/images/assets/icons/chat.png" /></router-link>  
+            
+        </div> <!-- end .main-nav -->
+
         <div></div>
 
         <div class="menu-button" @click="menubar = !menubar" :class="{ 'menu-button-expand' : menubar }" >
@@ -46,7 +56,7 @@
         grid-column: 1/3;
 
         display: grid;
-        grid-template-columns: min-content auto 80px;
+        grid-template-columns: min-content 144px auto 80px;
         grid-template-rows: 1fr;
 
         background-color: var(--black);
@@ -67,6 +77,24 @@
 
         font-weight: normal;
         color: var(--red);
+    }
+
+    .main-nav {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        align-items: center;
+    }
+
+    .main-nav-link > img {
+
+        filter: grayscale(1);
+    }
+
+    .router-link-active > img {
+
+        filter: grayscale(0);
     }
 
     .menu-button {
