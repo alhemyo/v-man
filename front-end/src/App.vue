@@ -89,13 +89,13 @@
 
 	.routes-enter {
 
-		transform: translateX( 20px );
+		transform: translateX( 10px );
 		opacity: 0;
 	}
 
     .routes-leave-to {
 
-        transform: translateX( -20px );
+        transform: translateX( -10px );
         opacity: 0;
     }
 

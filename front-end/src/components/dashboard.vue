@@ -8,7 +8,7 @@
 
         <div class="dash-loader">
 
-            <transition name="routes">
+            <transition mode="in-out" name="routes">
 
                 <router-view />
 

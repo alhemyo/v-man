@@ -10,7 +10,7 @@
 
             <router-link to="/dashboard/projects" class="main-nav-link" ><img src="/images/assets/icons/projects.png" /></router-link>
 
-            <router-link to="/dashboard/chat" class="main-nav-link" ><img src="/images/assets/icons/chat.png" /></router-link>  
+            <router-link to="/dashboard/users" class="main-nav-link" ><img src="/images/assets/icons/chat.png" /></router-link>  
             
         </div> <!-- end .main-nav -->
 
