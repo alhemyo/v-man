@@ -180,7 +180,7 @@
                                     
                                     setTimeout(() => {
 
-                                        this.$router.push({ name: 'dashboard' })
+                                        this.$router.push({ name: 'timeline' })
 
                                     },500)
 

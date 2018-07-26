@@ -4,19 +4,53 @@
 
         <div class="project-nav">
 
-            <p class="project-text">Client</p> 
+            <div class="project-main-nav">
 
-            <p class="project-text">Project name</p> 
+                <p class="project-text main-nav-title">PROJECTS</p>
+
+            </div>
+
+            <p class="project-text project-client">Client</p>
+
+            <p class="project-text project-state">State ⯆</p>
+
+            <p class="project-text"></p>
+
+            <p class="project-text project-deadline">Deadline ⯆</p>
+
+            <p class="project-text">Add Task</p>
 
         </div>
 
         <div class="projects-scroll-wrap">
             
-            <div :key="index" v-for="(project, index) in projects" class="project">
+            <div v-if="project.project.name" :key="index" v-for="(project, index) in projects" class="project">
 
-                <p class="project-text project-name">{{ project.project.client }}</p>
+                <div v-if="project.project.priority === 'low'" class="project-priority"></div> <!-- end .project-priority -->
+
+                <div v-if="project.project.priority === 'mid'" class="project-priority mid-priority"></div> <!-- end .project-priority -->
+
+                <div v-if="project.project.priority === 'high'" class="project-priority high-priority"></div> <!-- end .project-priority -->
 
                 <p class="project-text project-name">{{ project.project.name }}</p>
+
+                <p class="project-text project-client">{{ project.project.client }}</p>
+
+                <p class="project-text project-state">production</p>
+
+                <p class="project-text"></p>
+
+                <p class="project-text project-deadline">{{ project.project.deadline }}</p>
+
+                <div class="project-settings">
+
+                    <img src="/images/assets/icons/add_task.png" title="Add task" />
+
+                    <router-link class="project-settings-link" to="edit-project"><img src="/images/assets/icons/edit_project.png" title="Edit Project" /></router-link>
+
+                    <router-link class="project-settings-link" to="delete-project"><img src="/images/assets/icons/delete_project.png" title="Delete Project" /></router-link>
+
+                </div>
                 
             </div> <!-- end .project -->    
             
@@ -70,8 +104,7 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 60px 200px;
-        grid-column-gap: 10px;
+        grid-template-columns: 260px 60px 100px auto 100px 100px;
 
         align-items: center;
 
@@ -98,29 +131,73 @@
         height: 60px;
 
         display: grid;
-        grid-template-columns: 60px 200px;
+        grid-template-columns: 10px 250px 60px 100px auto 100px 100px;
         grid-template-rows: 60px;
-        grid-column-gap: 10px;
         align-items: center;
         
         background-color: white;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        box-shadow: 0px 0px 5px rgba(0,0,0,0.05);;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
     }
 
     .project-text {
 
         font-size: 12px;
         color: var(--dark);
+        text-align: center;
 
         padding: 8px 5px;
 
         border-right: 1px solid rgba(0,0,0,0.1);
     }
 
-    .project-nav .project-text {
+    .main-nav-title {
 
-        color: var(--darkGray);
+        font-weight: bold;
+        color: var(--black);
+        text-align: left;
+    }
+
+    .project-priority {
+
+        width: 3px;
+        height: 16px;
+
+        background-color: var(--gray);
+        border-radius: 4px;
+    }
+
+    .mid-priority {
+
+        background-color: var(--yellow);
+    }
+
+    .high-priority {
+
+        background-color: var(--red);
+    }
+
+    .project-name {
+
+        text-align: left;
+    }
+
+    .project-settings {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 19px;
+    }
+
+    .project-settings img {
+
+        opacity: 0.5;
+
+        cursor: pointer;
+    }
+
+    .project-settings img:hover {
+
+        opacity: 1;
     }
 
 </style>

@@ -216,14 +216,12 @@
         align-items: center;
 
         background-color: var(--white);
-        border-top: 1px solid rgba(0,0,0,0.05);
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .pop-header > p {
 
         font-size: 12px;
-        color: var(--dark);
+        color: var(--darkGray);
 
         padding: 0px 40px;
     }

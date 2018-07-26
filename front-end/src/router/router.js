@@ -9,6 +9,7 @@ import login from '../components/auth/login'
 
 // Import dashboard
 import dashboard from '../components/dashboard'
+import timeline from '../components/timeline'
 
 // import user routes
 import users from '../components/users/users'
@@ -64,6 +65,12 @@ export default new Router({
 
       }),
       children: [
+
+        {
+          path: 'timeline',
+          name: 'timeline',
+          component: timeline
+        },
 
         {
           path: 'users',

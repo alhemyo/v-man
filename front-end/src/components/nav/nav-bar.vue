@@ -6,7 +6,7 @@
 
         <div class="main-nav">
 
-            <router-link to="/dashboard/activity" class="main-nav-link" ><img src="/images/assets/icons/dashboard.png" /></router-link>
+            <router-link to="/dashboard/timeline" class="main-nav-link" ><img src="/images/assets/icons/dashboard.png" /></router-link>
 
             <router-link to="/dashboard/projects" class="main-nav-link" ><img src="/images/assets/icons/projects.png" /></router-link>
 
