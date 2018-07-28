@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, m
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import jwt
+import json
 import datetime
 from functools import wraps
 from flask_cors import CORS
@@ -62,9 +63,12 @@ def get_all_users(current_user):
     #users = session.query(User).all()
     #return jsonify(Users=[u.serialize for u in users])
 
-    print(current_user['name'])
+    # print(current_user['name'])
     users = graph.run("MATCH (user:Person) RETURN user").data()
-    return jsonify(Users=users)
+    users_list = []
+    for user in users:
+        users_list.append(user['user'])
+    return jsonify(Users=users_list)
 
 
 @app.route('/thisuser', methods=['GET'])
@@ -207,7 +211,11 @@ def get_all_projects(current_user):
         #return jsonify({'message': 'User not authorized!'})
 
     projects = graph.run("MATCH (project:Project) RETURN project").data()
-    return jsonify(Projects=projects)
+    projects_list = []
+    for project in projects:
+        projects_list.append(project['project'])
+
+    return jsonify(Projects=projects_list)
 
 
 @app.route('/project', methods=['POST'])
