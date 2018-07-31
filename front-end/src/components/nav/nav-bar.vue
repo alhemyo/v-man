@@ -89,6 +89,8 @@
 
     .main-nav-link > img {
 
+        max-height: 24px;
+
         filter: grayscale(1);
     }
 

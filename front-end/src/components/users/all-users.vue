@@ -22,9 +22,9 @@
                         
                     </div> <!-- end .user-avatar -->
 
-                    <p class="user-text user-name">{{ user.user.name + ' ' + user.user.surname }}</p>
+                    <p class="user-text user-name">{{ user.name + ' ' + user.surname }}</p>
 
-                    <p class="user-text user-position">{{ user.user.position }}</p> 
+                    <p class="user-text user-position">{{ user.position }}</p> 
                     
                 </div> <!-- end .user -->     
                 

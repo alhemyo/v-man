@@ -23,7 +23,7 @@ export default {
                 headers: { 'x-access-token' : localStorage.getItem('token') }
             })
             .then(response => {
-
+                
                 commit( 'updateUsers', response.data.Users )
             })
             .catch(error => {

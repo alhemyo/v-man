@@ -24,23 +24,23 @@
 
         <div class="projects-scroll-wrap">
             
-            <div v-if="project.project.name" :key="index" v-for="(project, index) in projects" class="project">
+            <div v-if="project.name" :key="index" v-for="(project, index) in projects" class="project">
 
-                <div v-if="project.project.priority === 'low'" class="project-priority"></div> <!-- end .project-priority -->
+                <div v-if="project.priority === 'low'" class="project-priority"></div> <!-- end .project-priority -->
 
-                <div v-if="project.project.priority === 'mid'" class="project-priority mid-priority"></div> <!-- end .project-priority -->
+                <div v-if="project.priority === 'mid'" class="project-priority mid-priority"></div> <!-- end .project-priority -->
 
-                <div v-if="project.project.priority === 'high'" class="project-priority high-priority"></div> <!-- end .project-priority -->
+                <div v-if="project.priority === 'high'" class="project-priority high-priority"></div> <!-- end .project-priority -->
 
-                <p class="project-text project-name">{{ project.project.name }}</p>
+                <p class="project-text project-name">{{ project.name }}</p>
 
-                <p class="project-text project-client">{{ project.project.client }}</p>
+                <p class="project-text project-client">{{ project.client }}</p>
 
                 <p class="project-text project-state">production</p>
 
                 <p class="project-text"></p>
 
-                <p class="project-text project-deadline">{{ project.project.deadline }}</p>
+                <p class="project-text project-deadline">{{ project.deadline }}</p>
 
                 <div class="project-settings">
 

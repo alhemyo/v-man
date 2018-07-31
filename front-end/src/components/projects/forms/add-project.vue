@@ -199,7 +199,7 @@
 
             this.$store.dispatch( 'GET_USERS' )
 
-            this.$store.commit( 'updateAddProjectAdminOptions', this.$store.state.users.users.filter((item, is_admin) => { return item.user.is_admin === 'true' }) )
+            this.$store.commit( 'updateAddProjectAdminOptions', this.$store.state.users.users.filter((user, is_admin) => { return user.is_admin === 'true' }) )
             this.$store.commit( 'updateAddProjectUsersOptions', this.$store.state.users.users )
         },
 
