@@ -20,6 +20,7 @@ import deleteUser from '../components/users/forms/delete-user'
 
 // import project routes
 import projects from '../components/projects/projects'
+import project from '../components/projects/project'
 import allProjects from '../components/projects/all-projects'
 import addProject from '../components/projects/forms/add-project'
 import editProject from '../components/projects/forms/edit-project'
@@ -106,6 +107,12 @@ export default new Router({
         },
 
         {
+          path: 'project/:name',
+          name: 'project',
+          component: project
+        },
+
+        {
           path: 'projects',
           name: 'projects',
           component: projects,
@@ -133,7 +140,8 @@ export default new Router({
               path: 'delete-project',
               name: 'deleteProject',
               component: deleteProject
-            }
+            },
+
           ]
         }
 

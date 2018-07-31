@@ -24,7 +24,7 @@
 
         <div class="projects-scroll-wrap">
             
-            <div v-if="project.name" :key="index" v-for="(project, index) in projects" class="project">
+            <div v-if="project.name" :key="index" v-for="(project, index) in projects" class="project" >
 
                 <div v-if="project.priority === 'low'" class="project-priority"></div> <!-- end .project-priority -->
 
@@ -32,7 +32,7 @@
 
                 <div v-if="project.priority === 'high'" class="project-priority high-priority"></div> <!-- end .project-priority -->
 
-                <p class="project-text project-name">{{ project.name }}</p>
+                <p class="project-text project-name" @click="openProject" >{{ project.name }}</p>
 
                 <p class="project-text project-client">{{ project.client }}</p>
 
@@ -69,6 +69,15 @@
         computed: {
 
             projects: { get() { return this.$store.state.projects.projects } }
+        },
+
+        methods: {
+
+            openProject(event) {
+
+                let name = $(event.target).html()
+                this.$router.push({ name: 'project', params: { name: name } })
+            }
         },
 
         created() { 

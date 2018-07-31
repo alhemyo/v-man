@@ -128,10 +128,16 @@
 
         font-size: 12px;
         color: var(--dark);
+        text-align: center;
 
         padding: 8px 5px;
 
         border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .user-name {
+
+        text-align: left;
     }
 
     .user-nav .user-text {

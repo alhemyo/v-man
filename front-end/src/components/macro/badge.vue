@@ -4,7 +4,7 @@
 
         <div v-if="multiselect" class="badge-deselected" :class="{ 'badge-selected' : selected }" ></div>
 
-        <div @click="addBadgeValue" class="badge">
+        <div @click="addBadgeValue" class="badge" :class="{ selected : selected }">
             
             <div class="badge-avatar">
 
@@ -20,7 +20,9 @@
                 
             </div> <!-- end .badge-settings -->
             
-        </div> <!-- end .badge -->    
+        </div> <!-- end .badge -->
+
+        <div v-if="multiselect" class="badge-status"></div>
         
     </div> <!-- end .badge-wrap -->
 
@@ -139,7 +141,7 @@
 
         display: grid;
         grid-template-columns: 40px 80px 40px;
-        grid-template-rows: 40px;
+        grid-template-rows: 38px;
 
         background-color: white;
         border: 1px solid var(--gray);
@@ -148,26 +150,34 @@
         cursor: pointer;
     }
 
+    .selected {
+
+        background-color: var(--white);
+        border: 1px solid var(--dark);
+    }
+
     .badge-deselected {
 
-        width: 6px;
-        height: 6px;
+        width: 4px;
+        height: 10px;
 
         position: absolute;
-        top: 17px;
+        top: 15px;
 
         transition: 0.2s ease;
 
-        background-color: var(--darkGray);
+        background-color: var(--white);
         border-radius: 6px;
     }
 
     .badge-selected {
 
-        background-color: var(--darkRed);
+        background-color: var(--dark);
     }
 
     .badge-avatar {
+
+        user-select: none;
 
         padding: 5px;
     }
@@ -175,6 +185,7 @@
     .badge-name {
 
         font-size: 12px;
+        font-weight: 500;
         text-align: center;
         color: var(--dark);
         white-space: nowrap;
@@ -192,6 +203,21 @@
         padding: 12px;
 
         cursor: pointer;
+    }
+
+    .badge-status {
+
+        width: 6px;
+        height: 6px;
+
+        position: absolute;
+        top: 17px;
+        right: 0px;
+
+        transition: 0.2s ease;
+
+        background-color: var(--yellow);
+        border-radius: 6px;
     }
 
 </style>
