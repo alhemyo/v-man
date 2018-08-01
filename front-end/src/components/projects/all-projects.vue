@@ -76,6 +76,9 @@
             openProject(event) {
 
                 let name = $(event.target).html()
+                let project = this.$store.state.projects.projects.find((project) => { return project.name === name })
+
+                this.$store.commit('updateProject', project)
                 this.$router.push({ name: 'project', params: { name: name } })
             }
         },
@@ -188,6 +191,10 @@
     .project-name {
 
         text-align: left;
+
+        padding: 20px 0px;
+
+        cursor: pointer;
     }
 
     .project-settings {

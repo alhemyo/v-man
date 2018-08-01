@@ -22,7 +22,7 @@
                         
                     </div> <!-- end .user-avatar -->
 
-                    <p class="user-text user-name">{{ user.name + ' ' + user.surname }}</p>
+                    <p class="user-text user-name" :id="user.umcn" @click="openUser" >{{ user.name + ' ' + user.surname }}</p>
 
                     <p class="user-text user-position">{{ user.position }}</p> 
                     
@@ -43,6 +43,22 @@
         computed: {
 
             users: { get() { return this.$store.state.users.users } }
+        },
+
+        methods: {
+
+            openUser(event) {
+
+                let id = event.target.id
+
+                let user = this.users.find((user) => { return user.umcn === id })
+
+                this.$store.commit('updateUserProfile', user)
+
+                this.$router.push({ name: 'user', params: { name: user.name + user.surname } })
+
+                console.log(JSON.stringify(user, null, 4))
+            }
         },
 
         created() { 

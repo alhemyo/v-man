@@ -13,6 +13,7 @@ import timeline from '../components/timeline'
 
 // import user routes
 import users from '../components/users/users'
+import user from '../components/users/user'
 import allUsers from '../components/users/all-users'
 import addUser from '../components/users/forms/add-user'
 import editUser from '../components/users/forms/edit-user'
@@ -71,6 +72,12 @@ export default new Router({
           path: 'timeline',
           name: 'timeline',
           component: timeline
+        },
+
+        {
+          path: 'user/:name',
+          name: 'user',
+          component: user
         },
 
         {
