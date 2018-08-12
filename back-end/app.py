@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 from models import Base, User, Project
 
-from py2neo import authenticate, Graph, Node, Relationship, remote
+from py2neo import authenticate, Graph, Node, Relationship, remote, NodeSelector
 from werkzeug.security import generate_password_hash, check_password_hash
 
 authenticate("hobby-llcolmhlfknpgbkekogpbhbl.dbs.graphenedb.com:24780",
@@ -29,7 +29,7 @@ Base.metadata.bind = engine
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
-
+ 
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -152,23 +152,26 @@ def create_user():
 
 @app.route('/user/<user_id>', methods=['PUT'])
 def edit_user(user_id):
-    user = session.query(User).filter_by(id=user_id).first()
+
+    data = request.get_json()
+
+    user = Node('Person', umcn=user_id)
+    graph.merge(user)
+    for key in data:
+        user[key] = data[key]
+    user.push()
 
     if not user:
         return jsonify({'message': 'No user found!'})
 
-    return ''
+    return jsonify({'message': 'User updated'})
 
 @app.route('/user/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
-    #user = session.query(User).filter_by(id=user_id).first()
-    delete_user = graph.run("MATCH (user:Person) WHERE ID(user)={id} DETACH DELETE user".format(id=user_id)).data()
-    print(delete_user)
-    # if not user:
-    #     return jsonify({'message': 'No user found!'})
+    deleted_user = graph.run("MATCH (user:Person) WHERE user.umcn = '{user_id}' DETACH DELETE user".format(user_id=user_id)).data()
 
-    # session.delete(user)
-    # session.commit()
+    if not deleted_user:
+        return jsonify({'message': 'User not found!'})
 
     return jsonify({'message': 'The user has been deleted'})
 
@@ -210,9 +213,18 @@ def get_all_projects(current_user):
     #if not current_user.is_admin:
         #return jsonify({'message': 'User not authorized!'})
 
+    # users = graph.run("MATCH (person:Person)-[:IS_ADMIN]->(project:Project) RETURN person")
+    # print(users)
+
     projects = graph.run("MATCH (project:Project) RETURN project").data()
     projects_list = []
     for project in projects:
+        project_name = project['project']['name']
+        users = graph.run("MATCH (n:Person)-[:IS_USER]->(m:Project) WHERE m.name='{project_name}' RETURN n.umcn".format(project_name=project_name))
+        users_list = []
+        for user in users:
+            users_list.append(user['n.umcn'])
+        project['project']['users'] = users_list
         projects_list.append(project['project'])
 
     return jsonify(Projects=projects_list)
@@ -228,8 +240,6 @@ def create_project(current_user):
     deadline_month = data['deadline']['month']
     deadline_year = data['deadline']['year']
     deadline = f"{deadline_day}.{deadline_month}.{deadline_year}"
-
-
 
     new_project = Node("Project",
                     name=data['name'],
@@ -254,12 +264,34 @@ def create_project(current_user):
         user_project = Relationship(user, 'IS_USER', new_project)
         graph.create(user_project)
 
-
     return jsonify({'message': 'new project created'})
 
-
+# @app.route('/project/<project_id>', methods=['PUT'])
+# def edit_user(project_id):
+#
+#     data = request.get_json()
+#
+#     project = Node('Project', umcn=user_id)
+#     graph.merge(user)
+#     for key in data:
+#         user[key] = data[key]
+#     user.push()
+#
+#     if not user:
+#         return jsonify({'message': 'No user found!'})
+#
+#     return jsonify({'message': 'User updated'})
+#
+# @app.route('/project/<project_id>', methods=['DELETE'])
+# def delete_user(project_id):
+#     deleted_user = graph.run("MATCH (user:Person) WHERE user.umcn = '{user_id}' DETACH DELETE user".format(user_id=user_id)).data()
+#
+#     if not deleted_user:
+#         return jsonify({'message': 'User not found!'})
+#
+#     return jsonify({'message': 'The user has been deleted'})
 
 
 
 if __name__ == '__main__':
-    app.run( debug=True )
+    app.run(debug=True)
