@@ -1,26 +1,8 @@
 <template>
     
-    <div  class="nav-bar">
+    <div class="nav-bar">
 
-        <h1><span>V</span> MAN</h1>
-
-        <div class="main-nav">
-
-            <router-link to="/dashboard/timeline" class="main-nav-link" ><img src="/images/assets/icons/dashboard.png" /></router-link>
-
-            <router-link to="/dashboard/projects" class="main-nav-link" ><img src="/images/assets/icons/projects.png" /></router-link>
-
-            <router-link to="/dashboard/users" class="main-nav-link" ><img src="/images/assets/icons/chat.png" /></router-link>  
-            
-        </div> <!-- end .main-nav -->
-
-        <div></div>
-
-        <div class="menu-button" @click="menubar = !menubar" :class="{ 'menu-button-expand' : menubar }" >
-
-            <img src="/images/assets/icons/settings.png" />
-
-        </div> <!-- end .menu-button -->
+        <img @click="logout" class="logout" src="/images/assets/icons/off.png" />
 
     </div>
 
@@ -29,14 +11,33 @@
 <script>
 
     export default {
-
+    
         name: 'nav-bar',
 
-        computed: {
+        methods: {
 
-            menubar: {
-                get() { return this.$store.state.menubar },
-                set(menubar) { this.$store.commit( 'updateMenubar', menubar ) }
+            logout() {
+
+                let clearStorage = new Promise((resolve) => {
+
+                    resolve( 
+
+                        localStorage.clear(),
+                        this.$store.commit('updateAuthToken', null),
+                        this.$store.commit('resetAuthState'),
+                        this.$store.commit('resetAuthUserState'),
+                        this.$store.commit('resetUserProjectsState')
+                        
+                    )
+
+                })
+
+                clearStorage.then(() => {
+
+                    this.$router.push('/login')
+
+                })
+
             }
         }
 
@@ -44,87 +45,42 @@
 
 </script>
 
+
 <style scoped>
 
     .nav-bar {
 
-        width: 100vw;
+        width: 100%;
         height: 80px;
 
         position: relative;
 
-        grid-column: 1/3;
-
-        display: grid;
-        grid-template-columns: min-content 144px auto 80px;
-        grid-template-rows: 1fr;
-
-        background-color: var(--black);
+        background-color: var(--dark);
+        border-radius: 5px;
     }
 
-    h1 {
-
-        font-size: 24px;
-        font-weight: 300;
-        color: var(--white);
-        white-space: nowrap;
-        user-select: none;
-
-        padding: 28px 40px;
-    }
-
-    h1 span {
-
-        font-weight: normal;
-        color: var(--red);
-    }
-
-    .main-nav {
-
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-
-        align-items: center;
-    }
-
-    .main-nav-link > img {
-
-        max-height: 24px;
-
-        filter: grayscale(1);
-    }
-
-    .router-link-active > img {
-
-        filter: grayscale(0);
-    }
-
-    .menu-button {
+    .logout {
 
         width: 80px;
         height: 80px;
 
         position: relative;
-        z-index: 15;
+        float: right;
 
-        display: grid;
-        align-items: center;
+        padding: 28px;
 
-        transition: 0.25s ease-out;
+        opacity: 0.3;
 
         cursor: pointer;
+        
+
+        transition: 0.2s ease;
     }
 
-    .menu-button-expand {
+    .logout:hover {
 
-        transform: translateX( -120px ) rotate( 90deg );
-    }
-
-    .menu-button img {
-
-        pointer-events: none;
+        opacity: 1;
     }
 
 </style>
-
 

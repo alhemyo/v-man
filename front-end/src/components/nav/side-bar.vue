@@ -1,43 +1,76 @@
 <template>
     
-    <div class="side-bar" @click="sidebar = !sidebar" :class="{ 'side-bar-expand' : sidebar }" >
-        
+    <div class="side-bar">
+
+        <div class="header">
+
+            <h1>V <span>MAN</span></h1>
+
+        </div> <!-- end .header -->
+
         <div class="user-card">
 
-            <div class="user-avatar" >
+            <div class="avatar">
 
-                <div class="user-avatar-frame">
+                <div class="avatar-wrap">
 
-                    <img class="avatar" src="/images/janeDoe.png" />    
-                    
-                </div> <!-- end .user-avatar-frame -->    
+                    <img src="/images/johnDoe.png" />
+
+                </div> <!-- end .avatar-wrap -->
+
+            </div> <!-- end .avatar -->
+
+            <div class="info">
+
+                <p class="user-info name">{{ name }}</p>
+
+                <p class="user-info position">{{ position }}</p>    
                 
-            </div> <!-- end .user-avatar -->
+            </div> <!-- end .info -->
 
-            <ul v-show="sidebar" class="user-info" :class="{ 'user-info-expand' : sidebar }" >
-
-                <li class="user-info-item username">{{ username }}</li>
-
-                <li class="user-info-item position">{{ position }}</li>
-
-                <li class="user-info-item status">online</li>
-
-                <li class="user-info-item duration">06:04:23</li>
-                
-            </ul> <!-- end .user-info -->
+            <div class="status" title="online"></div>
             
         </div> <!-- end .user-card -->
 
-        <div class="user-projects"></div> <!-- end .user-projects -->
+        <div class="user-nav"></div>
 
-        <div class="side-bar-footer">
+        <div class="projects">
 
-            <p>new project</p>
+            <p class="projects-header">My projects</p>
 
-            <img src="/images/assets/icons/add_dark.png" title="new project" />  
+            <div class="projects-list">
+
+                <transition-group name="list" tag="div">
+                
+                    <div class="project" v-if="project.name" :key="index" v-for="(project,index) in projects">
+
+                        <div class="priority" 
+                            :class="{
+                                high: ( project.priority === 'high' ),
+                                mid: ( project.priority === 'mid' ),
+                                low: ( project.priority === 'low' )
+                            }"></div>
+
+                        <router-link :to="{ name: 'project', params: { name: project.name } }" class="project-name" >{{ project.name }}</router-link>
+
+                        <img class="project-arrow" src="/images/assets/icons/r_arrow_dark.png" />
+
+                    </div>
+
+                </transition-group>
+                
+            </div> <!-- end .projects-list -->
+
+            <div v-if="loading" class="projects-loader">
+
+                <div class="loader"></div>
+
+            </div>
             
-        </div> <!-- end .side-bar-footer -->    
-    
+        </div> <!-- end .projects -->
+
+        <div class="footer"></div>
+
     </div> <!-- end .side-bar -->
 
 </template>
@@ -45,188 +78,284 @@
 <script>
 
     export default {
-
+    
         name: 'side-bar',
 
         computed: {
 
-            username: { get() { return this.$store.state.user.name + " " + this.$store.state.user.surname } },
-            position: { get() { return this.$store.state.user.position } },
+            name: { get() { return this.$store.state.authUser.name + ' ' + this.$store.state.authUser.surname } },
+            position: { get() { return this.$store.state.authUser.position } },
+            projects: { get() { return this.$store.state.userProjects.userProjects } },
+            loading() {
 
-            sidebar: {
-                get() { return this.$store.state.sidebar },
-                set(sidebar) { this.$store.commit( 'updateSidebar', sidebar ) }
+                if ( this.projects.length === 0 ) {
+                    return true
+                }
+                else {
+                    return false
+                }
+                
             }
+
         },
 
-        mounted() {
-
-            this.$store.dispatch('GET_USER')
+        created() {
+            this.$store.dispatch('GET_USER_PROJECTS')
         }
 
     }
 
 </script>
 
+
 <style scoped>
+
+    .list-enter-active, .list-leave-active {
+
+        transition: all 1s ease;
+    }
+
+    .list-enter, .list-leave-to {
+
+        opacity: 0;
+        transform: translateY(30px);
+    }
 
     .side-bar {
 
-        width: 80px;
-        height: 100%;
+        width: 280px;
 
         position: relative;
+        grid-row: 1/3;
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 140px auto 80px;
-
-        background-color: white;
-        border-right: 1px solid rgba(0,0,0,0.1);
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-
-        transition: 0.3s ease;
+        grid-template-rows: 80px 100px 60px auto 80px;
+        grid-gap: 4px;
 
         overflow: hidden;
     }
 
-    .side-bar-expand {
+    h1 {
 
-        width: 300px;
+        font-family: var(--decorative);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--red);
+        user-select: none;
+
+        padding: 28px 20px;
     }
 
-    /* --------------- USER CARD CSS --------------- */
+    h1 span {
+
+        color: var(--white);
+        font-weight: 500;
+    }
 
     .user-card {
 
-        width: 100%;
-
-        display: grid;
-        grid-template-columns: minmax(80px, 1fr) minmax(0px, 1.8fr);
-        grid-template-rows: 140px;
-
-        justify-items: center;
-        align-items: center;
-
-        overflow: hidden;
-    }
-
-    .user-avatar {
-
-        width: 100%;
-        height: 100%;
-
         position: relative;
 
-        transition: 0.3s ease;
-
-        background-color: white;
+        display: grid;
+        grid-template-columns: 100px auto;
+        grid-template-rows: 100px;
     }
 
-    .user-avatar-frame {
+    .avatar {
 
-        max-width: 80px;
-        max-height: 80px;
+        padding: 20px;
+    }
+
+    .status {
+
+        width: 10px;
+        height: 10px;
+
+        position: absolute;
+        bottom: 15px;
+        left: 45px;
+
+        background-color: var(--green);
+        border-radius: 20px;
+    }
+
+    .info {
+
+        font-family: var(--decorative);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--white);
+
+        padding: 20px 0px;
+
+        display: grid;
+        align-items: center;
+    }
+
+    .position {
+
+        font-family: var(--default);
+        font-weight: 300;
+        color: gray;
+    }
+
+    .projects {
+
+        min-height: 0;
+
+        display: grid;
+        grid-template-rows: 60px auto;
+    }
+
+    .projects-header {
+
+        font-family: var(--decorative);
+        font-size: 14px;
+        font-weight: 500;
+        color: gray;
+
+        padding: 24px 20px;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .projects-list {
+
+        width: calc(100% + 20px);
+
+        padding: 10px;
+
+        overflow-y: scroll;
+    }
+
+    @keyframes load {
+        
+        0% {
+            left: 0px;
+            opacity: 1;
+        }
+
+        50% {
+
+            opacity: 0.5;
+            transform: scale(0.8);
+        }
+
+        100% {
+            left: 50px;
+            opacity: 1;
+        }
+
+    }
+
+    .projects-loader {
+
+        width: 60px;
+        height: 10px;
 
         position: absolute;
         top: 50%;
         left: 50%;
 
-        transform: translate( -50%, -50% );
+        transform: translate( -50%,-50% );
     }
 
-    .user-info {
+    .loader {
 
-        width: 0px;
-        height: 70px;
+        width: 10px;
+        height: 10px;
 
-        display: grid;
-        grid-template-columns: min-content min-content min-content;
-        grid-template-rows: 20px 18px;
-        grid-gap: 10px;
+        position: absolute;
+        left: 0px;
 
-        justify-content: space-between;
-        justify-items: center;
-        align-content: space-around;
-        align-items: center;
+        background-color: var(--white);
 
-        padding: 20px 0px;
-        padding-right: 40px;
+        border-radius: 10px;
 
-        transition: 0.3s ease;
-        overflow: hidden;
+        animation: load 0.5s ease-in-out alternate infinite;
     }
 
-    .user-info-expand {
-
-        width: auto;
-    }
-
-    .user-info-item {
-
-        font-size: 12px;
-        color: var(--dark);
-        white-space: nowrap;
-    }
-
-    .username {
-
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--black);
+    .project {
 
         width: 100%;
+        height: 40px;
 
-        grid-column: 1/4;
-    }
-
-    .position {
-
-        justify-self: flex-start;
-    }
-
-    .status {
-
-        color: var(--green);
-    }
-
-    .duration {
-
-        color: rgba(0,0,0,0.4);
-
-        justify-self: flex-end;
-    }
-
-    .side-bar-footer {
-
-        padding: 0px 20px;
+        padding: 0px 10px;
 
         display: grid;
-        grid-template-columns: minmax(0px, 100%) 40px;
+        grid-template-columns: 4px auto 20px;
         grid-template-rows: 40px;
-
+        grid-column-gap: 4px;
         align-items: center;
-        align-content: center;
+
+        border-radius: 6px;
 
         cursor: pointer;
     }
 
-    .side-bar-footer p {
+    .priority {
 
-        font-size: 12px;
-        color: var(--dark);
-        white-space: nowrap;
+        width: 2px;
+        height: 8px;
 
-        padding-right: 20px;
-
-        justify-self: flex-end;
+        background-color: gray;
     }
 
-    .side-bar-footer img {
+    .high {
 
-        padding: 5px;
+        background-color: var(--red);
+    }
+
+    .mid {
+
+        background-color: var(--yellow);
+    }
+
+    .low {
+
+        background-color: gray;
+    }
+
+    .project-name {
+
+        font-size: 12px;
+        color: rgba(255,255,255,0.2);
+
+        padding: 14px 0px;
+    }
+
+    .project-arrow {
+
+        padding: 7px;
+
+        opacity: 0.3;
+    }
+
+    .router-link-active {
+
+        color: var(--white);
+    }
+
+    .project:hover {
+        
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .project:hover .project-name {
+
+        color: rgba(255,255,255,0.5);
+    }
+
+    .project:hover .project-arrow {
+
+        opacity: 1;
+    }
+
+    .footer {
+
+        border-top: 1px solid rgba(0,0,0,0.1);
     }
 
 </style>
-
 

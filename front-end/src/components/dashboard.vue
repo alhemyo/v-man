@@ -3,20 +3,17 @@
     <div class="dashboard">
 
         <nav-bar />
-
         <side-bar />
 
-        <div class="dash-loader">
+        <div class="loader">
 
-            <transition mode="out-in" name="routes">
+            <transition mode="out-in" name="swipe">
 
                 <router-view />
 
             </transition>
 
-        </div> <!-- end .dash-loader -->
-
-        <menu-bar />
+        </div>
 
     </div>
 
@@ -26,48 +23,47 @@
 
     import navBar from './nav/nav-bar'
     import sideBar from './nav/side-bar'
-    import menuBar from './nav/menu-bar'
 
     export default {
-    
         name: 'dashboard',
-
         components: {
-
             navBar,
-            sideBar,
-            menuBar
+            sideBar
         }
-    
     }
 
 </script>
 
-<style scoped>
+<style>
+
+    .swipe-enter-active, .swipe-leave-active {
+
+        transition: all 0.5s ease;
+    }
+
+    .swipe-enter, .swipe-leave-to {
+
+        transform: translateX(30px);
+        opacity: 0;
+    }
 
     .dashboard {
 
         width: 100%;
-        height: 100vh;
+        height: 100%;
 
         position: relative;
 
         display: grid;
-        grid-template-columns: min-content 1fr;
+        grid-template-columns: 280px auto;
         grid-template-rows: 80px auto;
-
-        background-color: white;
-
-        overflow: hidden;
+        grid-gap: 4px;
     }
 
-    .dash-loader {
+    .loader {
 
-        position: relative;
-
-        padding: 40px;
-
-        overflow: hidden;
+        background-color: var(--dark);
+        border-radius: 5px;
     }
 
 </style>
