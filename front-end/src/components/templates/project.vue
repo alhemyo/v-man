@@ -47,7 +47,15 @@
 
             <div class="tasks-wrap"></div>
 
-            <div class="users-wrap"></div>
+            <div class="users-wrap">
+
+                <div class="users-list">
+
+                    <p :key="index" v-for="(user, index) in assignedUsers">{{ user.name + ' ' + user.surname }}</p>
+
+                </div> <!-- end .users-list -->
+
+            </div> <!-- end .users-wrap -->
 
         </div> <!-- end .tasks -->
 
@@ -71,16 +79,26 @@
 
         computed: {
             projects: { get() { return this.$store.state.userProjects.userProjects } },
-            project() { return this.projects.find( (project) => { return project.name === this.$route.params.name }) || 'Project' }
+            project() { return this.projects.find( (project) => { return project.name === this.$route.params.name }) || 'Project' },
+            assignedUsers: { get() { 
+                return this.$store.state.users.users.filter((user, index) => {
+                    return user.id = this.project.users[index]
+                    }) 
+                } 
+            }
         },
 
         methods: {
 
             test() {
 
-                console.log(this.project)
+                console.log(this.users)
             }
-        }
+        },
+
+        created() {
+            this.$store.dispatch('GET_USERS')
+        },
 
     }
 
