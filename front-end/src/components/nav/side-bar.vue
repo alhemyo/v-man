@@ -289,7 +289,7 @@
         grid-column-gap: 4px;
         align-items: center;
 
-        border-radius: 6px;
+        border-radius: 5px;
 
         cursor: pointer;
     }

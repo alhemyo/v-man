@@ -45,13 +45,30 @@
 
             </div> <!-- end .tasks-header-->
 
-            <div class="tasks-wrap"></div>
+            <div class="tasks-wrap">
+
+                <div class="tasks-list">
+
+                    <div class="task" :key="index" v-for="(task, index) in Math.floor(Math.random() * Math.floor(30))">
+
+                        <p>Task {{ index + 1 }}</p>
+
+                    </div>
+
+                </div>
+
+            </div>
 
             <div class="users-wrap">
 
                 <div class="users-list">
 
-                    <p :key="index" v-for="(user, index) in assignedUsers">{{ user.name + ' ' + user.surname }}</p>
+                    <user-badge
+                        :key="index" 
+                        v-for="(user, index) in assignedUsers" 
+                        :name="user.name"
+                        :surname="user.surname"
+                        :avatar="'/images/janeDoe.png'" />
 
                 </div> <!-- end .users-list -->
 
@@ -67,13 +84,20 @@
 
 <script>
 
+    import userBadge from '../templates/macro/userBadge'
+
     export default {
     
         name: 'project',
 
+        components: {
+            userBadge
+        },
+
         data() {
             return {
-                state: 'in-production'
+                state: 'in-production',
+                random: ""
             }
         },
 
@@ -88,17 +112,9 @@
             }
         },
 
-        methods: {
-
-            test() {
-
-                console.log(this.users)
-            }
-        },
-
         created() {
             this.$store.dispatch('GET_USERS')
-        },
+        }
 
     }
 
@@ -110,7 +126,8 @@
     .project {
 
         width: 100%;
-        height: 100%;
+        height: calc(100vh - 92px);
+        min-height: 0;
 
         position: relative;
 
@@ -221,12 +238,18 @@
 
     .tasks {
 
+        min-height: 0;
+
         padding: 0px 20px;
+
+        position: relative;
 
         display: grid;
         grid-template-columns: auto 200px;
         grid-template-rows: 60px auto;
         grid-gap: 4px;
+
+        overflow: hidden;
     }
 
     .tasks-header {
@@ -254,10 +277,82 @@
 
     .tasks-wrap {
 
+        min-height: 0;
+
+        position: relative;
+
         border-right: 1px solid rgba(0,0,0,0.1);
+
+        overflow: hidden;
+    }
+
+    .tasks-list {
+
+        width: calc( 100% + 17px );
+        min-height: 0;
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: min-content;
+        grid-row-gap: 4px;
+
+        padding: 10px;
+
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    .task {
+
+        font-size: 12px;
+        color: rgba(255,255,255,0.3);
+
+        height: 40px;
+
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 40px;
+        align-items: center;
+
+        background-color: var(--black);
+        border-radius: 5px;
+    }
+
+    .task p {
+
+        padding: 10px;
+    }
+
+    .users-wrap {
+
+        position: relative;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+    .users-list {
+
+        width: calc(100% + 17px);
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 190px;
+        grid-auto-rows: min-content;
+        grid-row-gap: 4px;
+        justify-content: center;
+
+        padding: 10px 0px;
+
+        overflow-y: scroll;
     }
 
     .project-footer {
+
+        height: 80px;
+
+        position: relative;
 
         border-top: 1px solid rgba(0,0,0,0.1);
     }

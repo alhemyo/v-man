@@ -49,7 +49,7 @@
 		--yellow: #FFC107;
 
     /* APP CSS */
-    font-family: var(--default);
+    font-family: var(--decorative);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
