@@ -216,10 +216,25 @@ def get_all_projects(current_user):
     # users = graph.run("MATCH (person:Person)-[:IS_ADMIN]->(project:Project) RETURN person")
     # print(users)
 
+    # {id: id(n), labels: labels(n), data: n}
+
     projects = graph.run("MATCH (project:Project) RETURN project").data()
+    projects_ids = graph.run("MATCH (project:Project) RETURN {id: ID(project), data: project}").data()
+    # print(projects)
+    # print(projects_ids)
+    # projects_with_ids = []
+    # for project_id in projects_ids:
+    #     project_with_id = project_id['{id: ID(project), data: project}']
+    #     projects_with_ids.append(project_with_id)
+    #
+    # print(projects_with_ids)
+
     projects_list = []
     for project in projects:
         project_name = project['project']['name']
+        # project_id = graph.run("MATCH (project:Project) WHERE project.name='{project_name}' RETURN ID(project)".format(project_name=project_name)).data()
+        # print(project_id)
+        #project['project']['id'] = project_id
         users = graph.run("MATCH (n:Person)-[:IS_USER]->(m:Project) WHERE m.name='{project_name}' RETURN n.umcn".format(project_name=project_name))
         users_list = []
         for user in users:
@@ -228,6 +243,7 @@ def get_all_projects(current_user):
         projects_list.append(project['project'])
 
     return jsonify(Projects=projects_list)
+
 
 
 @app.route('/project', methods=['POST'])
@@ -265,6 +281,34 @@ def create_project(current_user):
         graph.create(user_project)
 
     return jsonify({'message': 'new project created'})
+
+
+@app.route('/task', methods=['POST'])
+@token_required
+def create_task(current_user):
+    data = request.get_json()
+    print(data)
+
+    print(data['users'])
+    print(data['notes'])
+
+    new_task = Node("Task",
+                    name=data['name'],
+                    priority=data['priority'],
+                    state=data['state'],
+                    thumbnail=data['thumbnail'],
+                    deadline=data['deadline'],
+                    download=data['download'],
+                    created=data['created'],
+                    finished=data['finished'],
+                    upload=data['upload']
+                    )
+
+    graph.create(new_task)
+
+    return jsonify({'message': 'new task created'})
+
+
 
 # @app.route('/project/<project_id>', methods=['PUT'])
 # def edit_user(project_id):
