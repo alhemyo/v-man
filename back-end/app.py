@@ -141,14 +141,7 @@ def create_user():
 
     graph.create(new_user)
 
-    #new_user.set_password(data['password'])
-    #new_user.set_password('123')
-    #session.add(new_user)
-    #session.commit()
-
-    # data.headers.add('Access-Control-Allow-Origin', '*')
-
-    return jsonify({'message': 'new user created'})
+    return jsonify(new_user)
 
 @app.route('/user/<user_id>', methods=['PUT'])
 def edit_user(user_id):
@@ -175,35 +168,7 @@ def delete_user(user_id):
 
     return jsonify({'message': 'The user has been deleted'})
 
-@app.route('/login', methods = ['POST'])
-def login():
-    auth = request.authorization
 
-    if not auth or not auth.username or not auth.password:
-        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
-
-    #user = session.query(User).filter_by(email=auth.username).first()
-    user = graph.run("MATCH (user:Person) WHERE user.email = '{authuser}' RETURN user".format(authuser=auth.username))
-    user_id = remote(user.evaluate())._id
-    print(user_id)
-    user = graph.run("MATCH (user:Person) WHERE user.email = '{authuser}' RETURN user".format(authuser=auth.username))
-    user_data = list(user)[0][0]
-    print(user_data)
-    print(user_data["password"])
-
-    if not user:
-        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
-
-    if check_password_hash(user_data["password"], auth.password):
-        token = jwt.encode({'user_id': user_id},
-                           app.config['SECRET_KEY'])
-
-        # if user.check_password(auth.password):
-    #     token = jwt.encode({'user_id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-
-        return jsonify({'token': token.decode('UTF-8')})
-
-    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
 
 
 @app.route('/project', methods=['GET'])
@@ -280,8 +245,21 @@ def create_project(current_user):
         user_project = Relationship(user, 'IS_USER', new_project)
         graph.create(user_project)
 
-    return jsonify({'message': 'new project created'})
+    return jsonify(new_project)
 
+
+@app.route('/task', methods=['GET'])
+@token_required
+def get_all_tasks(current_user):
+
+
+    tasks = graph.run("MATCH (task:Task) RETURN task").data()
+
+    tasks_list = []
+    for task in tasks:
+        tasks_list.append(task['task'])
+
+    return jsonify(Tasks=tasks_list)
 
 @app.route('/task', methods=['POST'])
 @token_required
@@ -306,7 +284,7 @@ def create_task(current_user):
 
     graph.create(new_task)
 
-    return jsonify({'message': 'new task created'})
+    return jsonify(new_task)
 
 
 
@@ -334,6 +312,37 @@ def create_task(current_user):
 #         return jsonify({'message': 'User not found!'})
 #
 #     return jsonify({'message': 'The user has been deleted'})
+
+
+@app.route('/login', methods = ['POST'])
+def login():
+    auth = request.authorization
+
+    if not auth or not auth.username or not auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+    #user = session.query(User).filter_by(email=auth.username).first()
+    user = graph.run("MATCH (user:Person) WHERE user.email = '{authuser}' RETURN user".format(authuser=auth.username))
+    user_id = remote(user.evaluate())._id
+    print(user_id)
+    user = graph.run("MATCH (user:Person) WHERE user.email = '{authuser}' RETURN user".format(authuser=auth.username))
+    user_data = list(user)[0][0]
+    print(user_data)
+    print(user_data["password"])
+
+    if not user:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+    if check_password_hash(user_data["password"], auth.password):
+        token = jwt.encode({'user_id': user_id},
+                           app.config['SECRET_KEY'])
+
+        # if user.check_password(auth.password):
+    #     token = jwt.encode({'user_id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+
+        return jsonify({'token': token.decode('UTF-8')})
+
+    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
 
 
 

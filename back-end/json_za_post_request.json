@@ -1,24 +1,4 @@
-{
-	"username": "Ignat Petrov",
-	"email": "ignat14@gmail.com",
-	"position": "3D",
-	"is_admin": "True",
-	"admin_type": "uber admin",
-	"status": "online",
-	"avatar": "none",
-	"password": "123",
-	"gender": "Male",
-	"education": "high",
-	"address": "bul.Partizanski odredi",
-	"city": "Skopje",
-	"phone_number": "070111111",
-    "day": "05",
-	"month": "04",
-	"year": "1988",
-	"umcn": "192894785792"
-}
-
-
+USER:
 {
 "IdExpireDate": {"day": "", "month": "", "year": ""},
 "IdNumber":"",
@@ -29,14 +9,33 @@
 "birthday":{"day": "", "month": "", "year": ""},
 "city":"",
 "education":"",
-"email":"",
+"email":"ignat14@gmail.com",
 "employmentDate":{"day": "", "month": "", "year": ""},
 "gender":"",
 "is_admin":true,
-"name":"xxxxxx",
+"name":"Ignat",
 "payment":"",
 "phone":"",
 "position":"",
-"surname":"xx",
-"umcn":""
+"surname":"Petrov",
+"umcn":"192894785792"
 }
+
+TASK:
+{
+    "name": "mdd055_mp_v001",
+	"priority": "high",
+	"state": "rotomation",
+	"thumbnail": "some/path",
+	"deadline": "234143124",
+	"download": "132412412",
+	"created": "123412431",
+	"finished": "12341234",
+	"upload": "12341234",
+	"users": ["user1", "user2"],
+	"notes": [{"message": "hello", "date": "1212344"}, {"message": "hi again", "date": "3412341243"}]
+}
+
+
+PROJECT:
+
