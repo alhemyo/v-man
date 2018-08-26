@@ -248,7 +248,7 @@ def create_project(current_user):
     return jsonify(new_project)
 
 
-@app.route('/task', methods=['GET'])
+@app.route('/tasks', methods=['GET'])
 @token_required
 def get_all_tasks(current_user):
 
