@@ -49,9 +49,11 @@
 
                 <div class="tasks-list">
 
-                    <div class="task" :key="index" v-for="(task, index) in Math.floor(Math.random() * Math.floor(30))">
+                    <div class="task" :key="index" v-for="(task, index) in tasks">
 
-                        <p>Task {{ index + 1 }}</p>
+                        <p>Task {{ task.name }}</p>
+
+                        <p @click="newTask">New Task</p>
 
                     </div>
 
@@ -109,11 +111,20 @@
                     return user.id = this.project.users[index]
                     }) 
                 } 
+            },
+            tasks: { get() { return this.$store.state.tasks.tasks } }
+        },
+
+        methods: {
+
+            newTask() {
+                this.$store.dispatch('NEW_TASK')
             }
         },
 
         created() {
             this.$store.dispatch('GET_USERS')
+            this.$store.dispatch('GET_TASKS')
         }
 
     }
@@ -311,7 +322,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: auto;
+        grid-template-columns: max-content max-content;
         grid-template-rows: 40px;
         align-items: center;
 

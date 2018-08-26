@@ -29,6 +29,15 @@
         components: {
             navBar,
             sideBar
+        },
+        data() {
+            return {
+                date: new Date()
+            }
+        },
+        mounted() {
+            console.log(this.date)
+            console.log(this.date.getTime())
         }
     }
 
