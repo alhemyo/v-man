@@ -23,7 +23,8 @@ USER:
 
 TASK:
 {
-    "name": "mdd055_mp_v001",
+	"project": "45",
+    	"name": "mdd055_mp_v001",
 	"priority": "high",
 	"state": "rotomation",
 	"thumbnail": "some/path",

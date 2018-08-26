@@ -53,24 +53,6 @@ def token_required(f):
     return decorated
 
 
-@app.route('/user', methods=['GET'])
-@token_required
-def get_all_users(current_user):
-
-    #if not current_user.is_admin:
-        #return jsonify({'message': 'User not authorized!'})
-
-    #users = session.query(User).all()
-    #return jsonify(Users=[u.serialize for u in users])
-
-    # print(current_user['name'])
-    users = graph.run("MATCH (user:Person) RETURN user").data()
-    users_list = []
-    for user in users:
-        users_list.append(user['user'])
-    return jsonify(Users=users_list)
-
-
 @app.route('/thisuser', methods=['GET'])
 @token_required
 def get_this_users(current_user):
@@ -80,14 +62,28 @@ def get_this_users(current_user):
 
     return jsonify(current_user)
 
+
+@app.route('/user', methods=['GET'])
+@token_required
+def get_all_users(current_user):
+
+    #if not current_user.is_admin:
+        #return jsonify({'message': 'User not authorized!'})
+
+    users = graph.run("MATCH (user:Person) RETURN user").data()
+    users_list = []
+    for user in users:
+        users_list.append(user['user'])
+    return jsonify(Users=users_list)
+
+
+
 @app.route('/user/<user_id>', methods=['GET'])
 #@token_required
 def get_one_user(user_id):
 
     #if not current_user.is_admin:
         #return jsonify({'message': 'User not authorized!'})
-
-    #user = session.query(User).filter_by(id=user_id).first()
 
     user = graph.run("MATCH (user:Person) WHERE ID(user)={id} RETURN user".format(id=user_id)).data()
     print(user)
@@ -167,6 +163,38 @@ def delete_user(user_id):
         return jsonify({'message': 'User not found!'})
 
     return jsonify({'message': 'The user has been deleted'})
+
+
+
+@app.route('/user/<umcn>/projects', methods=['GET'])
+@token_required
+def get_projects_of_user(current_user, umcn):
+
+    projects = graph.run(f"MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE person.umcn='{umcn}' RETURN project").data()
+
+    projects_list = []
+    for project in projects:
+        projects_list.append(project['project'])
+
+    return jsonify(Projects=projects_list)
+
+
+@app.route('/myprojects', methods=['GET'])
+@token_required
+def my_projects(user_id):
+
+    umcn = user_id['umcn']
+
+    projects = graph.run("MATCH (n:Person)-[:IS_USER]->(m:Project) WHERE n.umcn='{umcn}' RETURN m".format(umcn=umcn)).data()
+    print(projects)
+
+    projects_list = []
+    for project in projects:
+        print(project['m'])
+        projects_list.append(project['m'])
+
+    return jsonify(Projects=projects_list)
+
 
 
 
@@ -261,13 +289,32 @@ def get_all_tasks(current_user):
 
     return jsonify(Tasks=tasks_list)
 
+
+
+@app.route('/task/<task_id>/notes', methods=['GET'])
+@token_required
+def get_notes_of_task(current_user, task_id):
+
+    print(current_user, task_id)
+
+    notes = graph.run(f"MATCH (note:Note)-[:IS_NOTE_OF]->(task:Task) WHERE ID(task)={task_id} RETURN note").data()
+    print(notes)
+
+    notes_list = []
+    for note in notes:
+        notes_list.append(note['note'])
+
+    return jsonify(Notes=notes_list)
+
+
+
+
 @app.route('/task', methods=['POST'])
 @token_required
 def create_task(current_user):
     data = request.get_json()
     print(data)
 
-    print(data['users'])
     print(data['notes'])
 
     new_task = Node("Task",
@@ -283,6 +330,33 @@ def create_task(current_user):
                     )
 
     graph.create(new_task)
+
+    project_id = data["project"]
+    project = graph.run("MATCH (project:Project) WHERE ID(project)={project_id} RETURN project".format(project_id=project_id)).data()[0]["project"]
+    print(project)
+    task_project = Relationship(new_task, 'IS_TASK_OF', project)
+    graph.create(task_project)
+
+    user_ids = data['users']
+    print(user_ids)
+    for user_id in user_ids:
+        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
+        user_task = Relationship(user, 'IS_USER', new_task)
+        graph.create(user_task)
+
+
+    notes = data['notes']
+    print(notes)
+    for note in notes:
+        new_note = Node("Note",
+                        client=note['client'],
+                        date=note['date'],
+                        message=note['message'])
+
+        graph.create(new_note)
+
+        note_task = Relationship(new_note, 'IS_NOTE_OF', new_task)
+        graph.create(note_task)
 
     return jsonify(new_task)
 
