@@ -7,6 +7,7 @@ import auth from './modules/auth'
 import authUser from './modules/users/authUser'
 import users from './modules/users/users'
 import userProjects from './modules/projects/userProjects'
+import tasks from './modules/projects/tasks'
 
 export default new Vuex.Store({
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     auth,
     authUser,
     users,
-    userProjects
+    userProjects,
+    tasks
   },
 
   state: {
