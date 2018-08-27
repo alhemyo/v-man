@@ -185,16 +185,20 @@ def my_projects(user_id):
 
     umcn = user_id['umcn']
 
-    projects = graph.run("MATCH (n:Person)-[:IS_USER]->(m:Project) WHERE n.umcn='{umcn}' RETURN m".format(umcn=umcn)).data()
+    projects = graph.run("MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE person.umcn='{umcn}' RETURN project".format(umcn=umcn)).data()
     print(projects)
 
     projects_list = []
     for project in projects:
-        print(project['m'])
-        projects_list.append(project['m'])
+        project_name = project['project']['name']
+        users = graph.run(f"MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE project.name='{project_name}' RETURN person.umcn")
+        users_list = []
+        for user in users:
+            users_list.append(user['person.umcn'])
+        project['project']['users'] = users_list
+        projects_list.append(project['project'])
 
     return jsonify(Projects=projects_list)
-
 
 
 
@@ -218,6 +222,9 @@ def get_all_projects(current_user):
     # projects_with_ids = []
     # for project_id in projects_ids:
     #     project_with_id = project_id['{id: ID(project), data: project}']
+    #     test_list = []
+    #     for key in project_with_id:
+    #         print(project_with_id[key])
     #     projects_with_ids.append(project_with_id)
     #
     # print(projects_with_ids)
@@ -274,6 +281,23 @@ def create_project(current_user):
         graph.create(user_project)
 
     return jsonify(new_project)
+
+
+
+@app.route('/project/<project_id>/tasks', methods=['GET'])
+@token_required
+def get_tasks_of_project(current_user, project_id):
+
+    tasks = graph.run(f"MATCH (task:Task)-[:IS_TASK_OF]->(project:Project) WHERE ID(project)={project_id} RETURN task").data()
+    print(tasks)
+
+    tasks_list = []
+    for task in tasks:
+        tasks_list.append(task['task'])
+
+    return jsonify(Tasks=tasks_list)
+
+
 
 
 @app.route('/tasks', methods=['GET'])
