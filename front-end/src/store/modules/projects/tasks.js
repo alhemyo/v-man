@@ -39,6 +39,7 @@ export default {
                 .then(response => {
 
                         commit('updateTasks', response.data.Tasks )
+                        console.log(response)
                         resolve(response)
 
                 })

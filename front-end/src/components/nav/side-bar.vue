@@ -40,24 +40,20 @@
 
             <div class="projects-list">
 
-                <transition-group name="list" tag="div">
-                
-                    <div class="project" v-if="project.name" :key="index" v-for="(project,index) in projects">
+                <div class="project" v-if="project.name" :key="index" v-for="(project,index) in projects">
 
-                        <div class="priority" 
-                            :class="{
-                                high: ( project.priority === 'high' ),
-                                mid: ( project.priority === 'mid' ),
-                                low: ( project.priority === 'low' )
-                            }"></div>
+                    <div class="priority" 
+                        :class="{
+                            high: ( project.priority === 'high' ),
+                            mid: ( project.priority === 'mid' ),
+                            low: ( project.priority === 'low' )
+                        }"></div>
 
-                        <router-link :to="{ name: 'project', params: { name: project.name } }" class="project-name" >{{ project.name }}</router-link>
+                    <router-link :to="{ name: 'project', params: { name: project.name } }" class="project-name" >{{ project.name }}</router-link>
 
-                        <img class="project-arrow" src="/images/assets/icons/r_arrow_dark.png" />
+                    <img class="project-arrow" src="/images/assets/icons/r_arrow_dark.png" />
 
-                    </div>
-
-                </transition-group>
+                </div>
                 
             </div> <!-- end .projects-list -->
 
@@ -109,17 +105,6 @@
 
 
 <style scoped>
-
-    .list-enter-active, .list-leave-active {
-
-        transition: all 1s ease;
-    }
-
-    .list-enter, .list-leave-to {
-
-        opacity: 0;
-        transform: translateY(30px);
-    }
 
     .side-bar {
 
@@ -223,8 +208,17 @@
     .projects-list {
 
         width: calc(100% + 20px);
+        height: 100%;
+        min-height: 0;
 
-        padding: 10px;
+        position: relative;
+
+        padding: 15px 10px;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: min-content;
+        grid-row-gap: 4px;
 
         overflow-y: scroll;
     }
@@ -280,6 +274,8 @@
 
         width: 100%;
         height: 40px;
+
+        position: relative;
 
         padding: 0px 10px;
 
