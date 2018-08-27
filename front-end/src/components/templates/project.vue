@@ -51,6 +51,8 @@
 
                     <div class="task" :key="index" v-for="(task, index) in tasks">
 
+                        <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
+
                         <p>Task {{ task.name }}</p>
 
                         <p @click="newTask">New Task</p>
@@ -108,11 +110,11 @@
             project() { return this.projects.find( (project) => { return project.name === this.$route.params.name }) || 'Project' },
             assignedUsers: { get() { 
                 return this.$store.state.users.users.filter((user, index) => {
-                    return user.id = this.project.users[index]
+                    return user.id = this.project.users[index] || null
                     }) 
                 } 
             },
-            tasks: { get() { return this.$store.state.tasks.tasks } }
+            tasks: { get() { return this.$store.state.tasks.tasks || [] } }
         },
 
         methods: {
@@ -201,21 +203,6 @@
         border-radius: 10px;
     }
 
-    .high {
-
-        background-color: var(--red);
-    }
-
-    .mid {
-
-        background-color: var(--yellow);
-    }
-
-    .low {
-
-        background-color: gray;
-    }
-
     .in-production {
 
         animation: bounce 0.6s ease-in-out alternate infinite;
@@ -246,6 +233,8 @@
         font-weight: 500;
         color: var(--white);
     }
+
+    /* ---------- TASKS CSS ---------- */
 
     .tasks {
 
@@ -322,18 +311,43 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: max-content max-content;
+        grid-template-columns: 20px 200px max-content;
         grid-template-rows: 40px;
+        grid-column-gap: 10px;
         align-items: center;
 
         background-color: var(--black);
         border-radius: 5px;
     }
 
+    .task-priority {
+
+        width: 4px;
+        height: 14px;
+
+        position: relative;
+        justify-self: flex-end;
+
+        background-color: gray;
+        border-radius: 4px;
+    }
+
+    .task-mid {
+
+        background-color: var(--yellow);
+    }
+
+    .task-high {
+
+        background-color: var(--red);
+    }
+
     .task p {
 
         padding: 10px;
     }
+
+    /* ---------- USERS CSS ---------- */
 
     .users-wrap {
 
@@ -366,6 +380,21 @@
         position: relative;
 
         border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .high {
+
+        background-color: var(--red);
+    }
+
+    .mid {
+
+        background-color: var(--yellow);
+    }
+
+    .low {
+
+        background-color: gray;
     }
 
 </style>

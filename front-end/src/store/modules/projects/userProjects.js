@@ -39,6 +39,7 @@ export default {
                 .then(response => {
                 
                     commit('updateUserProjects', response.data.Projects)
+                    console.log(response)
                     resolve(response)
                 })
 
