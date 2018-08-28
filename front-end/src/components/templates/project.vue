@@ -37,11 +37,15 @@
 
                 </div>
 
+                <img class="add" src="/images/assets/icons/add.png" />
+
                 <div class="users-nav">
 
                     <p class="header-title">Asigned users</p>
 
                 </div>
+
+                <img class="add" src="/images/assets/icons/add.png" />
 
             </div> <!-- end .tasks-header-->
 
@@ -257,7 +261,7 @@
         grid-column: 1/3;
 
         display: grid;
-        grid-template-columns: auto 200px;
+        grid-template-columns: auto 60px 140px 60px;
         grid-template-rows: 60px;
         grid-gap: 4px;
         align-items: center;
@@ -273,6 +277,22 @@
         color: gray;
 
         padding: 22px 20px;
+    }
+
+    .add {
+
+        padding: 16px;
+
+        opacity: 0.3;
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    .add:hover {
+
+        opacity: 0.6;
     }
 
     .tasks-wrap {
