@@ -21,6 +21,8 @@
 
 [POST] /project
 
+[GET] /project/&lt;project_id>/tasks
+
 [GET] /tasks
 
 [GET] /task/&lt;id>/notes

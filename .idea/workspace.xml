@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb4e6f48-ba28-4ddc-a17f-cca68e955ced" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/v-man.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/v-man.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,29 +16,35 @@
     <session id="1268767369">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="375" />
+          <entry key="md" value="12" />
+          <entry key="py" value="1707" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="375" />
+          <entry key="Markdown" value="12" />
+          <entry key="Python" value="1707" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.4" value="7" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="md" value="1" />
+          <entry key="md" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="1" />
+          <entry key="Markdown" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -49,11 +54,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/back-end/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="227" column="51" lean-forward="true" selection-start-line="227" selection-start-column="51" selection-end-line="227" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#92#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="275">
+              <caret line="11" column="80" lean-forward="true" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/back-end/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="351">
+                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -70,13 +84,15 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back-end/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-299" />
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back-end/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="25">
               <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="73" />
             </state>
           </provider>
@@ -85,7 +101,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back-end/json_za_post_request.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="475">
               <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
@@ -97,6 +113,7 @@
     <findStrings>
       <find>generate_password_hash</find>
       <find>delete_user</find>
+      <find>project/</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,6 +124,7 @@
       <list>
         <option value="$PROJECT_DIR$/../../vezbi/odoo/api.py" />
         <option value="$PROJECT_DIR$/back-end/json_za_post_request.json" />
+        <option value="$PROJECT_DIR$/back-end/readme.md" />
         <option value="$PROJECT_DIR$/back-end/app.py" />
       </list>
     </option>
@@ -116,11 +134,26 @@
     <option name="width" value="1920" />
     <option name="height" value="1053" />
   </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Buildout</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,12 +170,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../venv_v-man" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -192,6 +224,15 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
@@ -201,15 +242,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32972974" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997879" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9024776" visible="true" weight="0.26702702" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49973643" weight="0.39891893" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.26193002" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32972974" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32972974" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.26162162" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.0975224" side_tool="true" weight="0.26702702" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32972974" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -220,16 +261,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../../vezbi/odoo/api.py" />
-    <entry file="file://$PROJECT_DIR$/back-end/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -240,18 +271,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/back-end/json_za_post_request.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="475">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back-end/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-299" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back-end/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back-end/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="351">
+            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/back-end/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="227" column="51" lean-forward="true" selection-start-line="227" selection-start-column="51" selection-end-line="227" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#92#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="275">
+          <caret line="11" column="80" lean-forward="true" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
         </state>
       </provider>
     </entry>

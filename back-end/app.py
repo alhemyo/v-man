@@ -170,37 +170,80 @@ def delete_user(user_id):
 @token_required
 def get_projects_of_user(current_user, umcn):
 
-    projects = graph.run(f"MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE person.umcn='{umcn}' RETURN project").data()
+    selector = NodeSelector(graph)
+    users = selector.select("Person", umcn=umcn)
+    user = list(users)[0]
+
+    myprojects = []
+    for rel in graph.match(start_node=user, rel_type="IS_USER"):
+        project = rel.end_node()
+        myprojects.append(project)
 
     projects_list = []
-    for project in projects:
-        projects_list.append(project['project'])
+    for project in myprojects:
+
+        users_list = []
+        for rel in graph.match(end_node=project, rel_type="IS_USER"):
+            user_umcn = rel.start_node()["umcn"]
+            users_list.append(user_umcn)
+
+        admin = ""
+        for rel in graph.match(end_node=project, rel_type="IS_ADMIN"):
+            admin_umcn = rel.start_node()["umcn"]
+            admin = admin_umcn
+
+        project_obj = ({"id": remote(project)._id,
+                        "name": project['name'],
+                        "client": project['client'],
+                        "deadline": project['deadline'],
+                        "priority": project['priority'],
+                        "users": users_list,
+                        "admin": admin
+                        })
+        projects_list.append(project_obj)
 
     return jsonify(Projects=projects_list)
 
 
 @app.route('/myprojects', methods=['GET'])
 @token_required
-def my_projects(user_id):
+def my_projects(current_user):
 
-    umcn = user_id['umcn']
+    umcn = current_user['umcn']
 
-    projects = graph.run("MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE person.umcn='{umcn}' RETURN project".format(umcn=umcn)).data()
-    print(projects)
+    selector = NodeSelector(graph)
+    users = selector.select("Person", umcn=umcn)
+    user = list(users)[0]
+
+    myprojects = []
+    for rel in graph.match(start_node=user, rel_type="IS_USER"):
+        project = rel.end_node()
+        myprojects.append(project)
 
     projects_list = []
-    for project in projects:
-        project_name = project['project']['name']
-        users = graph.run(f"MATCH (person:Person)-[:IS_USER]->(project:Project) WHERE project.name='{project_name}' RETURN person.umcn")
+    for project in myprojects:
+
         users_list = []
-        for user in users:
-            users_list.append(user['person.umcn'])
-        project['project']['users'] = users_list
-        projects_list.append(project['project'])
+        for rel in graph.match(end_node=project, rel_type="IS_USER"):
+            user_umcn = rel.start_node()["umcn"]
+            users_list.append(user_umcn)
+
+        admin = ""
+        for rel in graph.match(end_node=project, rel_type="IS_ADMIN"):
+            admin_umcn = rel.start_node()["umcn"]
+            admin = admin_umcn
+
+        project_obj = ({"id": remote(project)._id,
+                        "name": project['name'],
+                        "client": project['client'],
+                        "deadline": project['deadline'],
+                        "priority": project['priority'],
+                        "users": users_list,
+                        "admin": admin
+                        })
+        projects_list.append(project_obj)
 
     return jsonify(Projects=projects_list)
-
-
 
 
 @app.route('/project', methods=['GET'])
@@ -210,40 +253,33 @@ def get_all_projects(current_user):
     #if not current_user.is_admin:
         #return jsonify({'message': 'User not authorized!'})
 
-    # users = graph.run("MATCH (person:Person)-[:IS_ADMIN]->(project:Project) RETURN person")
-    # print(users)
-
-    # {id: id(n), labels: labels(n), data: n}
-
-    projects = graph.run("MATCH (project:Project) RETURN project").data()
-    projects_ids = graph.run("MATCH (project:Project) RETURN {id: ID(project), data: project}").data()
-    # print(projects)
-    # print(projects_ids)
-    # projects_with_ids = []
-    # for project_id in projects_ids:
-    #     project_with_id = project_id['{id: ID(project), data: project}']
-    #     test_list = []
-    #     for key in project_with_id:
-    #         print(project_with_id[key])
-    #     projects_with_ids.append(project_with_id)
-    #
-    # print(projects_with_ids)
+    selector = NodeSelector(graph)
+    projects = selector.select("Project")
 
     projects_list = []
     for project in projects:
-        project_name = project['project']['name']
-        # project_id = graph.run("MATCH (project:Project) WHERE project.name='{project_name}' RETURN ID(project)".format(project_name=project_name)).data()
-        # print(project_id)
-        #project['project']['id'] = project_id
-        users = graph.run("MATCH (n:Person)-[:IS_USER]->(m:Project) WHERE m.name='{project_name}' RETURN n.umcn".format(project_name=project_name))
+
         users_list = []
-        for user in users:
-            users_list.append(user['n.umcn'])
-        project['project']['users'] = users_list
-        projects_list.append(project['project'])
+        for rel in graph.match(end_node=project, rel_type="IS_USER"):
+            user_umcn = rel.start_node()["umcn"]
+            users_list.append(user_umcn)
+
+        admin = ""
+        for rel in graph.match(end_node=project, rel_type="IS_ADMIN"):
+            admin_umcn = rel.start_node()["umcn"]
+            admin = admin_umcn
+
+        project_obj = ({"id": remote(project)._id,
+                        "name": project['name'],
+                        "client": project['client'],
+                        "deadline": project['deadline'],
+                        "priority": project['priority'],
+                        "users": users_list,
+                        "admin": admin
+                        })
+        projects_list.append(project_obj)
 
     return jsonify(Projects=projects_list)
-
 
 
 @app.route('/project', methods=['POST'])
@@ -337,9 +373,6 @@ def get_notes_of_task(current_user, task_id):
 @token_required
 def create_task(current_user):
     data = request.get_json()
-    print(data)
-
-    print(data['notes'])
 
     new_task = Node("Task",
                     name=data['name'],
@@ -356,13 +389,13 @@ def create_task(current_user):
     graph.create(new_task)
 
     project_id = data["project"]
-    project = graph.run("MATCH (project:Project) WHERE ID(project)={project_id} RETURN project".format(project_id=project_id)).data()[0]["project"]
-    print(project)
+    project = graph.run(f"MATCH (project:Project) WHERE ID(project)={project_id} RETURN project").data()[0]["project"]
+
     task_project = Relationship(new_task, 'IS_TASK_OF', project)
     graph.create(task_project)
 
     user_ids = data['users']
-    print(user_ids)
+
     for user_id in user_ids:
         user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
         user_task = Relationship(user, 'IS_USER', new_task)
