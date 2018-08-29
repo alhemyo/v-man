@@ -39,7 +39,7 @@ export default new Router({
       children: [
 
         {
-          path: '/project/:name',
+          path: '/project/:id',
           name: 'project',
           component: () => import('../components/templates/project.vue')
         }

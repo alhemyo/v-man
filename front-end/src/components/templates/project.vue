@@ -1,6 +1,6 @@
 <template>
     
-    <div class="project" :key="project.name">
+    <div class="project">
 
         <div class="project-card">
 
@@ -8,9 +8,9 @@
 
                 <div class="bouncer" 
                     :class="{ 
-                        high : (project.priority === 'high'), 
-                        mid : (project.priority === 'mid'), 
-                        low : (project.priority ==='low'),
+                        high : ( project.priority === 'high' ), 
+                        mid : ( project.priority === 'mid' ), 
+                        low : ( project.priority ==='low' ),
                         'in-production': ( this.state === 'in-production' ),
                         finished: ( state === 'finished' ),
                         backup: ( state === 'backup' )
@@ -58,8 +58,6 @@
                         <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
 
                         <p>Task {{ task.name }}</p>
-
-                        <p @click="newTask">New Task</p>
 
                     </div>
 
@@ -110,27 +108,32 @@
         },
 
         computed: {
-            projects: { get() { return this.$store.state.userProjects.userProjects } },
-            project() { return this.projects.find( (project) => { return project.name === this.$route.params.name }) || 'Project' },
-            assignedUsers: { get() { 
-                return this.$store.state.users.users.filter((user, index) => {
-                    return user.id = this.project.users[index] || null
-                    }) 
-                } 
+
+            project() {
+                return this.$store.state.userProjects.userProjects.find((project) => {
+
+                    return project.id === Number(this.$route.params.id)
+
+                }) || {}
             },
-            tasks: { get() { return this.$store.state.tasks.tasks || [] } }
-        },
+            assignedUsers() {
 
-        methods: {
+                return this.$store.state.users.users.filter((user,index) => {
 
-            newTask() {
-                this.$store.dispatch('NEW_TASK')
-            }
+                    return user.id === this.project.users[index]
+
+                }) || {}
+
+            },
+            tasks: { get() { return this.$store.state.tasks.tasks } }
+
         },
 
         created() {
+
             this.$store.dispatch('GET_USERS')
             this.$store.dispatch('GET_TASKS')
+            
         }
 
     }
@@ -178,7 +181,7 @@
     @keyframes bounce {
 
         0% {
-            top: 30px;
+            top: 32px;
             transform:scaleY(0.9) scaleX(1.1);
         }
 
@@ -200,28 +203,11 @@
         height: 10px;
 
         position: absolute;
-        top: 30px;
+        top: 32px;
         left: 25px;
 
         background-color: var(--white);
         border-radius: 10px;
-    }
-
-    .in-production {
-
-        animation: bounce 0.6s ease-in-out alternate infinite;
-    }
-
-    .finished {
-
-        background-color: var(--green);
-        animation: none;
-    }
-
-    .backup {
-
-        background-color: var(--black);
-        animation: none;
     }
 
     .project-info {
@@ -331,7 +317,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 20px 200px max-content;
+        grid-template-columns: 20px 200px;
         grid-template-rows: 40px;
         grid-column-gap: 10px;
         align-items: center;
@@ -415,6 +401,23 @@
     .low {
 
         background-color: gray;
+    }
+
+    .in-production {
+
+        animation: bounce 0.6s ease-in-out alternate infinite;
+    }
+
+    .finished {
+
+        background-color: var(--green);
+        animation: none;
+    }
+
+    .backup {
+
+        background-color: var(--black);
+        animation: none;
     }
 
 </style>

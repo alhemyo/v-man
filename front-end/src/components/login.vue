@@ -271,6 +271,7 @@
 
     .login-input {
 
+        font-family: var(--decorative);
         font-size: 14px;
         color: rgba(255,255,255,0.3);
         text-align: center;

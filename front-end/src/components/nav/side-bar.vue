@@ -49,7 +49,7 @@
                             low: ( project.priority === 'low' )
                         }"></div>
 
-                    <router-link :to="{ name: 'project', params: { name: project.name } }" class="project-name" >{{ project.name }}</router-link>
+                    <router-link :to="{ name: 'project', params: { id: project.id } }" class="project-name" >{{ project.name }}</router-link>
 
                     <img class="project-arrow" src="/images/assets/icons/r_arrow_dark.png" />
 
@@ -109,6 +109,7 @@
     .side-bar {
 
         width: 280px;
+        height: calc(100vh - 8px);
 
         position: relative;
         grid-row: 1/3;
@@ -208,8 +209,6 @@
     .projects-list {
 
         width: calc(100% + 20px);
-        height: 100%;
-        min-height: 0;
 
         position: relative;
 
@@ -220,6 +219,7 @@
         grid-auto-rows: min-content;
         grid-row-gap: 4px;
 
+        overflow: hidden;
         overflow-y: scroll;
     }
 

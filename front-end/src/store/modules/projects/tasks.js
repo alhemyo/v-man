@@ -26,11 +26,12 @@ export default {
 
     actions: {
 
-        GET_TASKS({commit}) {
+        GET_TASKS({commit}, id) {
 
             return new Promise((resolve,reject) => {
 
                 axios({
+                    //url: `${this.state.api}project/${id}/tasks`,
                     url: `${this.state.api}tasks`,
                     method: 'GET',
                     headers: { 'x-access-token' : localStorage.getItem('token') }
@@ -39,7 +40,6 @@ export default {
                 .then(response => {
 
                         commit('updateTasks', response.data.Tasks )
-                        console.log(response)
                         resolve(response)
 
                 })
@@ -82,7 +82,10 @@ export default {
 
                 })
 
-                .catch(error => console.log(error))
+                .catch(error => {
+
+                    reject(error)
+                })
 
             })
 

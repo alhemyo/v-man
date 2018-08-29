@@ -9,7 +9,7 @@
 
             <transition mode="out-in" name="swipe">
 
-                <router-view />
+                <router-view :key="this.$route.fullPath" />
 
             </transition>
 
@@ -37,7 +37,6 @@
         },
         mounted() {
             console.log(this.date)
-            console.log(this.date.getTime())
         }
     }
 
