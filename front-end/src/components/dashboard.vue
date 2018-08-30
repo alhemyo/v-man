@@ -26,6 +26,7 @@
 
     export default {
         name: 'dashboard',
+
         components: {
             navBar,
             sideBar
@@ -35,6 +36,11 @@
                 date: new Date()
             }
         },
+
+        beforeUpdate(to,from,next) {
+            this.$store.commit('resetTasks')
+        },
+
         mounted() {
             console.log(this.date)
         }

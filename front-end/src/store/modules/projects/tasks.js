@@ -26,13 +26,12 @@ export default {
 
     actions: {
 
-        GET_TASKS({commit}) {
+        GET_TASKS({commit}, id) {
 
             return new Promise((resolve,reject) => {
 
                 axios({
-                    //url: `${this.state.api}project/${id}/tasks`,
-                    url: `${this.state.api}tasks`,
+                    url: `${this.state.api}project/${id}/tasks`,
                     method: 'GET',
                     headers: { 'x-access-token' : localStorage.getItem('token') }
                 })
@@ -50,18 +49,20 @@ export default {
 
         },
 
-        NEW_TASK({commit}) {
+        NEW_TASK({commit}, id) {
 
             let task = {
+
+                project: id,
                 name: `Task ${state.tasks.length + 1}`,
                 priority: 'high',
-                state: 'rotomation',
+                state: 'rendering',
                 thumbnail: null,
-                deadline: new Date('01','24','2018'),
-                download: new Date('01','24','2018'),
+                deadline: new Date(2018,9,2),
+                download: new Date(2018,9,2),
                 created: new Date(),
-                finished: new Date('01','24','2018'),
-                upload: new Date('01','24','2018'),
+                finished: new Date(2018,9,2),
+                upload: new Date(2018,9,2),
                 users: [],
                 notes: []
             }

@@ -1,24 +1,24 @@
 USER:
 {
-"IdExpireDate": {"day": "", "month": "", "year": ""},
-"IdNumber":"",
-"accNumber":"",
-"address":"",
-"admin_type":"uber admin",
-"bank":"",
-"birthday":{"day": "", "month": "", "year": ""},
-"city":"",
-"education":"",
-"email":"ignat14@gmail.com",
-"employmentDate":{"day": "", "month": "", "year": ""},
-"gender":"",
-"is_admin":true,
-"name":"Ignat",
-"payment":"",
-"phone":"",
-"position":"",
-"surname":"Petrov",
-"umcn":"192894785792"
+	"IdExpireDate": {"day": "", "month": "", "year": ""},
+	"IdNumber":"",
+	"accNumber":"",
+	"address":"",
+	"admin_type":"uber admin",
+	"bank":"",
+	"birthday":{"day": "", "month": "", "year": ""},
+	"city":"",
+	"education":"",
+	"email":"ignat14@gmail.com",
+	"employmentDate":{"day": "", "month": "", "year": ""},
+	"gender":"",
+	"is_admin":true,
+	"name":"Ignat",
+	"payment":"",
+	"phone":"",
+	"position":"",
+	"surname":"Petrov",
+	"umcn":"192894785792"
 }
 
 PROJECT:
@@ -34,7 +34,7 @@ PROJECT:
 TASK:
 {
 	"project": "45",
-    	"name": "mdd055_mp_v001",
+    "name": "mdd055_mp_v001",
 	"priority": "high",
 	"state": "rotomation",
 	"thumbnail": "some/path",

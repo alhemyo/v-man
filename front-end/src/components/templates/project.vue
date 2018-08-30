@@ -37,7 +37,7 @@
 
                 </div>
 
-                <img class="add" src="/images/assets/icons/add.png" />
+                <img @click="newTask" class="add" title="add Task" src="/images/assets/icons/add.png" />
 
                 <div class="users-nav">
 
@@ -53,29 +53,33 @@
 
                 <div class="tasks-list">
 
-                    <div class="task" :key="index" v-for="(task, index) in tasks">
+                    <transition-group name="slide-up" tag="div">
 
-                        <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
+                        <div @click="openTask" class="task" :key="index" v-for="(task, index) in tasks">
 
-                        <p class="task-text task-title" :title="task.name" >{{ task.name }}</p>
+                            <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
 
-                        <p class="task-text task-state" >{{ taskState }}</p>
+                            <p class="task-text task-title" :title="task.name" >{{ task.name }}</p>
 
-                        <div></div>
+                            <p class="task-text task-state" >{{ task.state }}</p>
 
-                        <p class="task-text task-deadline" >{{ task.deadline.split('T')[0] }}</p>
+                            <div></div>
 
-                        <div class="task-nav">
+                            <p class="task-text task-deadline" >{{ task.created.split('T')[0] }}</p>
 
-                            <img src="/images/assets/icons/add_task.png" />
+                            <div class="task-nav">
 
-                            <img src="/images/assets/icons/edit_task.png" />
+                                <img src="/images/assets/icons/add_task.png" />
 
-                            <img src="/images/assets/icons/delete_task.png" />
+                                <img src="/images/assets/icons/edit_task.png" />
+
+                                <img src="/images/assets/icons/delete_task.png" />
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    </transition-group>
 
                 </div>
 
@@ -119,7 +123,6 @@
         data() {
             return {
                 state: 'production',
-                taskState: 'modeling',
                 random: ""
             }
         },
@@ -147,10 +150,25 @@
 
         },
 
+        methods: {
+
+            openTask(event) {
+
+                $('.task').not(event.currentTarget).removeClass('task-open')
+                $(event.currentTarget).toggleClass('task-open')
+    
+            },
+
+            newTask() {
+
+                this.$store.dispatch( 'NEW_TASK', this.$route.params.id )
+            }
+        },
+
         created() {
 
             this.$store.dispatch('GET_USERS')
-            this.$store.dispatch('GET_TASKS')
+            this.$store.dispatch('GET_TASKS', this.$route.params.id )
             
         }
 
@@ -244,6 +262,17 @@
 
     /* ---------- TASKS CSS ---------- */
 
+    .slide-up-enter-active, .slide-up-leave-active {
+
+        transition: 0.3s ease;
+    }
+
+    .slide-up-enter, .slide-up-leave-to {
+
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
     .tasks {
 
         min-height: 0;
@@ -319,9 +348,9 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-auto-rows: min-content;
-        grid-row-gap: 4px;
 
         padding: 10px;
+        padding-top: 6px;
 
         overflow: hidden;
         overflow-y: scroll;
@@ -334,6 +363,9 @@
 
         height: 40px;
 
+        position: relative;
+        margin-top: 4px;
+
         display: grid;
         grid-template-columns: 20px 200px 100px auto 100px 90px;
         grid-template-rows: 40px;
@@ -344,6 +376,15 @@
         border-radius: 5px;
 
         cursor: pointer;
+
+        transition: 0.3s ease;
+    }
+
+    .task-open {
+
+        height: 400px;
+
+        background-color: rgba(0,0,0,0.3);
     }
 
     .task-priority {
