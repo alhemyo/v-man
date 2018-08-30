@@ -55,29 +55,43 @@
 
                     <transition-group name="slide-up" tag="div">
 
-                        <div @click="openTask" class="task" :key="index" v-for="(task, index) in tasks">
+                        <div class="task" :key="index" v-for="(task, index) in tasks">
 
-                            <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
+                            <div class="task-head">
+                                
+                                <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
 
-                            <p class="task-text task-title" :title="task.name" >{{ task.name }}</p>
+                                <p @click="openTask" class="task-text task-title" :title="task.name" >{{ task.name }}</p>
 
-                            <p class="task-text task-state" >{{ task.state }}</p>
+                                <p class="task-text task-state" >{{ task.state }}</p>
 
-                            <div></div>
+                                <div></div>
 
-                            <p class="task-text task-deadline" >{{ task.created.split('T')[0] }}</p>
+                                <p class="task-text task-deadline" >{{ task.created.split('T')[0] }}</p>
 
-                            <div class="task-nav">
+                                <div class="task-nav">
 
-                                <img src="/images/assets/icons/add_task.png" />
+                                    <img src="/images/assets/icons/add_task.png" />
 
-                                <img src="/images/assets/icons/edit_task.png" />
+                                    <img src="/images/assets/icons/edit_task.png" />
 
-                                <img src="/images/assets/icons/delete_task.png" />
+                                    <img src="/images/assets/icons/delete_task.png" />
+
+                                </div> <!-- end .task-nav -->
+                                
+                            </div> <!-- end .task-head -->
+
+                            <div class="task-body"></div>
+
+                            <div class="task-foot">
+
+                                <input type="text" class="note-input" placeholder="Note" />
+
+                                <img src="/images/assets/icons/note.png" />
 
                             </div>
 
-                        </div>
+                        </div> <!-- end .task -->
 
                     </transition-group>
 
@@ -154,8 +168,8 @@
 
             openTask(event) {
 
-                $('.task').not(event.currentTarget).removeClass('task-open')
-                $(event.currentTarget).toggleClass('task-open')
+                $('.task-title').not(event.currentTarget).parent().parent().removeClass('task-open')
+                $(event.currentTarget).parent().parent().toggleClass('task-open')
     
             },
 
@@ -367,17 +381,17 @@
         margin-top: 4px;
 
         display: grid;
-        grid-template-columns: 20px 200px 100px auto 100px 90px;
-        grid-template-rows: 40px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 40px auto 40px;
         grid-column-gap: 10px;
         align-items: center;
 
         background-color: var(--black);
         border-radius: 5px;
 
-        cursor: pointer;
-
         transition: 0.3s ease;
+
+        overflow: hidden;
     }
 
     .task-open {
@@ -385,6 +399,60 @@
         height: 400px;
 
         background-color: rgba(0,0,0,0.3);
+    }
+
+    .task-head {
+
+        display: grid;
+        grid-template-columns: 20px 200px 100px auto 100px 90px;
+        grid-template-rows: 40px;
+        grid-column-gap: 10px;
+        align-items: center;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .task-foot {
+
+        height: 40px;
+
+        display: grid;
+        grid-template-columns: auto 40px;
+        grid-column-gap: 10px;
+        grid-template-rows: 40px;
+        align-items: center;
+
+        padding: 0px 10px;
+
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .task-foot img {
+
+        padding: 10px;
+
+        opacity: 0.3;
+    }
+
+    .note-input {
+
+        font-family: var(--decorative);
+        font-size: 12px;
+        color: rgba(255,255,255,0.5);
+
+        width: 100%;
+        height: 24px;
+
+        padding: 0px 10px;
+
+        background-color: transparent;
+        border: none;
+        border-radius: 30px;
+    }
+
+    .note-input::placeholder {
+
+        color: rgba(255,255,255,0.2);
     }
 
     .task-priority {
@@ -425,6 +493,8 @@
 
         text-align: left;
         color: rgba(255,255,255,0.5);
+
+        cursor: pointer;
     }
 
     .task-state, .task-deadline {
