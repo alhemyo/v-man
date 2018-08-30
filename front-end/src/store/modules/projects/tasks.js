@@ -26,7 +26,7 @@ export default {
 
     actions: {
 
-        GET_TASKS({commit}, id) {
+        GET_TASKS({commit}) {
 
             return new Promise((resolve,reject) => {
 

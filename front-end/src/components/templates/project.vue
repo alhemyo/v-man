@@ -11,7 +11,7 @@
                         high : ( project.priority === 'high' ), 
                         mid : ( project.priority === 'mid' ), 
                         low : ( project.priority ==='low' ),
-                        'in-production': ( this.state === 'in-production' ),
+                        production: ( this.state === 'production' ),
                         finished: ( state === 'finished' ),
                         backup: ( state === 'backup' )
 
@@ -33,7 +33,7 @@
 
                 <div class="tasks-nav">
 
-                    <p class="header-title">Tasks</p>
+                    <p class="header-title"> {{ tasksLength }} Tasks</p>
 
                 </div>
 
@@ -57,7 +57,23 @@
 
                         <div class="task-priority" :class="{ 'high' : (task.priority === 'high'), mid : (task.priority === 'mid') }"></div>
 
-                        <p>Task {{ task.name }}</p>
+                        <p class="task-text task-title" :title="task.name" >{{ task.name }}</p>
+
+                        <p class="task-text task-state" >{{ taskState }}</p>
+
+                        <div></div>
+
+                        <p class="task-text task-deadline" >{{ task.deadline.split('T')[0] }}</p>
+
+                        <div class="task-nav">
+
+                            <img src="/images/assets/icons/add_task.png" />
+
+                            <img src="/images/assets/icons/edit_task.png" />
+
+                            <img src="/images/assets/icons/delete_task.png" />
+
+                        </div>
 
                     </div>
 
@@ -102,7 +118,8 @@
 
         data() {
             return {
-                state: 'in-production',
+                state: 'production',
+                taskState: 'modeling',
                 random: ""
             }
         },
@@ -125,7 +142,8 @@
                 }) || {}
 
             },
-            tasks: { get() { return this.$store.state.tasks.tasks } }
+            tasks: { get() { return this.$store.state.tasks.tasks } },
+            tasksLength() { return this.tasks.length || 0 }
 
         },
 
@@ -317,13 +335,15 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 20px 200px;
+        grid-template-columns: 20px 200px 100px auto 100px 90px;
         grid-template-rows: 40px;
         grid-column-gap: 10px;
         align-items: center;
 
         background-color: var(--black);
         border-radius: 5px;
+
+        cursor: pointer;
     }
 
     .task-priority {
@@ -348,9 +368,59 @@
         background-color: var(--red);
     }
 
-    .task p {
+    .task-text {
 
-        padding: 10px;
+        color: rgba(255,255,255,0.3);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: center;
+
+        padding: 14px;
+
+        overflow: hidden;
+    }
+
+    .task-title {
+
+        text-align: left;
+        color: rgba(255,255,255,0.5);
+    }
+
+    .task-state, .task-deadline {
+
+        background-color: rgba(0,0,0,0.05);
+    }
+
+    .task-state:hover, .task-deadline:hover {
+
+        color: var(--white);
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    .task-nav {
+
+        display: grid;
+        grid-template-columns: 24px 24px 24px;
+        grid-column-gap: 4px;
+        grid-template-rows: 24px;
+
+        justify-self: flex-end;
+
+        padding-right: 10px;
+    }
+
+    .task-nav img {
+
+        padding: 6px;
+
+        opacity: 0.3;
+
+        transition: 0.2s ease;
+    }
+
+    .task-nav img:hover {
+
+        opacity: 0.8;
     }
 
     /* ---------- USERS CSS ---------- */
@@ -403,7 +473,7 @@
         background-color: gray;
     }
 
-    .in-production {
+    .production {
 
         animation: bounce 0.6s ease-in-out alternate infinite;
     }

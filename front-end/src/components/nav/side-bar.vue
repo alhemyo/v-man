@@ -328,11 +328,6 @@
         opacity: 0.3;
     }
 
-    .router-link-active {
-
-        color: var(--white);
-    }
-
     .project:hover {
         
         background-color: rgba(0,0,0,0.1);
@@ -346,6 +341,11 @@
     .project:hover .project-arrow {
 
         opacity: 1;
+    }
+
+    .router-link-active {
+
+        color: var(--white);
     }
 
     .footer {
