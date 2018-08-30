@@ -21,6 +21,16 @@ USER:
 "umcn":"192894785792"
 }
 
+PROJECT:
+{
+	"admin_id": "11234132",
+	"user_ids": ["12421344", "5241452"],
+	"name": "project Y",
+	"deadline": "18-01-2018",
+	"priority": "high",
+	"client": "Mill"
+}
+
 TASK:
 {
 	"project": "45",
@@ -38,5 +48,12 @@ TASK:
 }
 
 
-PROJECT:
+NOTE:
+{
+	"task": "80",
+	"client": "Method",
+	"date": "25-08-2018",
+	"message": "Hello"
+}
+	
 
