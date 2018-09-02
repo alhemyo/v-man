@@ -16,7 +16,7 @@
 
   .fade-enter-active, .fade-leave-active {
 
-    transition: 0.5s ease;
+    transition: 0.3s ease;
   }
 
   .fade-enter, .fade-leave-to {
@@ -24,21 +24,25 @@
     opacity: 0;
   }
 
-  html,body {
+  .list-enter-active, .list-leave-active {
 
-    width: 100%;
+    transition: 0.5s ease;
+  }
 
-    box-sizing: border-box;
+  .list-enter, .list-leave-to {
 
-    margin: 0;
-    padding: 0;
+    transform: translateY(50px);
+
+    opacity: 0;
   }
 
   #app {
 
+    /* Variables */
+
     /* FONTS */
-    --decorative: 'Quicksand', sans-serif;
-    --default: 'Roboto', sans-serif;
+    --main-font: 'Quicksand', sans-serif;
+    --extra-font: 'Roboto', sans-serif;
 
     /* COLORS */
     --black: #333541;
@@ -49,16 +53,14 @@
 		--yellow: #FFC107;
 
     /* APP CSS */
-    font-family: var(--decorative);
+
+    font-family: var(--main-font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    width: 100%;
-    height: 100vh;
-
-    padding: 4px;
-
-    background-color: var(--black);
 
     overflow: hidden;
   }

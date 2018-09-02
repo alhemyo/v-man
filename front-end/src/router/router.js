@@ -6,46 +6,32 @@ Vue.use(Router)
 
 export default new Router({
 
-  mode: "history",
+  mode: 'history',
+  base: process.env.BASE_URL,
 
   routes: [
+
     {
       path: '/login',
       name: 'login',
-      component: () => import('../components/login.vue'),
-      beforeEnter: ((to, from, next) => {
+      component: () => import( '../components/main/login.vue' ),
+      beforeEnter: ((to,from,next) => {
 
-        if ( store.getters.isAuth ) {
-          next('/')
-        }
-
-        next()
+        store.getters.isAuth ? next('/') : next()
 
       })
     },
     {
       path: '/',
       name: 'dashboard',
-      component: () => import('../components/dashboard.vue'),
+      component: () => import( '../components/main/dashboard.vue' ),
       beforeEnter: ((to,from,next) => {
 
-        if ( !store.getters.isAuth ) {
-          next('/login')
-        }
+        !store.getters.isAuth ? next('/login') : next()
 
-        next()
-
-      }),
-      children: [
-
-        {
-          path: '/project/:id',
-          name: 'project',
-          component: () => import('../components/templates/project.vue')
-        }
-        
-      ]
+      })
     }
+
   ]
 
 })

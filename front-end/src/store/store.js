@@ -4,22 +4,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import auth from './modules/auth'
-import authUser from './modules/users/authUser'
-import users from './modules/users/users'
-import userProjects from './modules/projects/userProjects'
-import tasks from './modules/projects/tasks'
+import thisUser from './modules/thisUser'
+import thisUserProjects from './modules/projects/thisUserProjects'
 
 export default new Vuex.Store({
 
   modules: {
     auth,
-    authUser,
-    users,
-    userProjects,
-    tasks
+    thisUser,
+    thisUserProjects
   },
 
   state: {
+
     // API
     api: "http://127.0.0.1:5000/",
     testApi: "http://127.0.0.1:3000/",
@@ -33,7 +30,17 @@ export default new Vuex.Store({
       alphanumeric: /^[\s/0-9a-zA-Z/ -]+$/,
       mail: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
       
-    }
-  }
+    },
 
+    miniSidebar: false
+
+  },
+  mutations: {
+
+    updateMiniSidebar( state, mini ) { state.miniSidebar = mini }
+
+  },
+  actions: {
+
+  }
 })
