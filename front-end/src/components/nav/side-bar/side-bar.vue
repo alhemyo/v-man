@@ -79,6 +79,8 @@
 
         position: relative;
 
+        grid-row: 1/3;
+
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 80px 100px 60px auto 60px;

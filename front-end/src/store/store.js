@@ -6,13 +6,17 @@ Vue.use(Vuex)
 import auth from './modules/auth'
 import thisUser from './modules/thisUser'
 import thisUserProjects from './modules/projects/thisUserProjects'
+import tasks from './modules/projects/tasks'
+import users from './modules/users/users'
 
 export default new Vuex.Store({
 
   modules: {
     auth,
     thisUser,
-    thisUserProjects
+    thisUserProjects,
+    tasks,
+    users
   },
 
   state: {

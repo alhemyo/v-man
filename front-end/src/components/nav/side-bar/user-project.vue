@@ -42,12 +42,16 @@
 
         position: relative;
 
+        margin-top: 4px;
+
         padding: 0px 20px;
 
         display: grid;
         grid-template-columns: 20px auto 20px;
         grid-template-rows: 40px;
         align-items: center;
+
+        border-radius: 0px 30px 30px 0px;
     }
 
     .user-project:hover {
@@ -55,8 +59,6 @@
         color: var(--dark);
 
         background-color: var(--white);
-
-        border-radius: 0px 30px 30px 0px;
     }
 
     .priority {
@@ -78,6 +80,22 @@
     .mid {
 
         background-color: var(--yellow);
+    }
+
+    .router-link-active {
+
+        color: var(--dark);
+        font-weight: 700;
+
+        background-color: white;
+    }
+
+    .router-link-active:hover {
+
+        color: var(--dark);
+        font-weight: 700;
+
+        background-color: white;
     }
 
 </style>

@@ -21,6 +21,7 @@ export default new Router({
 
       })
     },
+
     {
       path: '/',
       name: 'dashboard',
@@ -29,7 +30,18 @@ export default new Router({
 
         !store.getters.isAuth ? next('/login') : next()
 
-      })
+      }),
+
+      children: [
+
+        {
+          path: '/project/:id',
+          name: 'project',
+          component: () => import('../components/templates/project/project.vue')
+        }
+
+      ]
+
     }
 
   ]

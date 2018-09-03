@@ -26,12 +26,19 @@
 
   .list-enter-active, .list-leave-active {
 
-    transition: 0.5s ease;
+    transition: 0.3s ease;
   }
 
-  .list-enter, .list-leave-to {
+  .list-enter {
 
-    transform: translateY(50px);
+    transform: translateY(30px);
+
+    opacity: 0;
+  }
+
+  .list-leave-to {
+
+    transform: translateY(-30px);
 
     opacity: 0;
   }
