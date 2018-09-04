@@ -34,6 +34,71 @@ export default new Router({
 
       children: [
 
+        // Admin routes
+
+        {
+          path: '/admin/projects',
+          name: 'projects',
+          component: () => import( '../components/templates/admin/projects/projects.vue' ),
+          beforeEnter: (( to, from, next ) => {
+
+            if ( store.state.thisUser.is_admin === 'true' ) {
+
+              if ( store.state.thisUser.admin_type === 'uber admin' || store.state.thisUser.admin_type === 'project admin' ) {
+
+                next()
+
+              }
+
+              else {
+
+                next('/')
+
+              }
+
+            }
+
+            else {
+
+              next('/')
+
+            }
+
+          })
+        },
+        {
+          path: '/admin/users',
+          name: 'users',
+          component: () => import( '../components/templates/admin/users/users.vue' ),
+          beforeEnter: (( to, from, next ) => {
+
+            if ( store.state.thisUser.is_admin === 'true' ) {
+
+              if ( store.state.thisUser.admin_type === 'uber admin' || store.state.thisUser.admin_type === 'user admin' ) {
+
+                next()
+
+              }
+
+              else {
+
+                next('/')
+
+              }
+
+            }
+
+            else {
+
+              next('/')
+
+            }
+
+          })
+        },
+
+        // Dynamic project routes
+
         {
           path: '/project/:id',
           name: 'project',

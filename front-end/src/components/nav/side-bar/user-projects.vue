@@ -81,7 +81,7 @@
 
     .projects-header {
 
-        font-size: 14px;
+        font-size: 12px;
         color: var(--dark);
 
         padding: 0px 20px;

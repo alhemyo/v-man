@@ -98,7 +98,7 @@
 
         background-color: white;
         border: 1px solid rgba(0,0,0,0.05);
-        border-radius: 30px;
+        border-radius: 5px;
 
         overflow: hidden;
     }
@@ -169,7 +169,7 @@
 
     .state, .deadline {
 
-        background-color: rgba(0,0,0,0.03);
+        background-color: rgba(0,0,0,0.01);
     }
 
     .task-nav {

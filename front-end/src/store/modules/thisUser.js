@@ -21,8 +21,8 @@ const thisUserDefaultState = () => {
         position: localStorage.getItem('position') || 'design',
         employmentDate: '',
         payment: '',
-        is_admin: '',
-        admin_type: ''
+        is_admin: localStorage.getItem('admin') || false,
+        admin_type: localStorage.getItem('adminType') || null
 
     }
 
@@ -83,6 +83,8 @@ export default {
                     localStorage.setItem('surname', response.data.surname)
                     localStorage.setItem('position', response.data.position)
                     localStorage.setItem('gender', response.data.gender)
+                    localStorage.setItem('admin', response.data.is_admin)
+                    localStorage.setItem('adminType', response.data.admin_type)
 
                     commit( 'UTUName', response.data.name )
                     commit( 'UTUSurname', response.data.surname )

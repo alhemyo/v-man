@@ -66,6 +66,8 @@ export default {
 
             commit('resetThisUserDefaultState')
             commit('resetThisUserProjectsState')
+            commit('resetTasksState')
+            commit('resetUsersState')
             commit('resetAuthState')
 
             router.push('/login')

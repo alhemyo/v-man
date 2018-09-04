@@ -72,4 +72,9 @@
     overflow: hidden;
   }
 
+  .material-icons {
+
+    user-select: none;
+  }
+
 </style>

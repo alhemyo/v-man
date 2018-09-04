@@ -2,7 +2,7 @@
     
     <div class="side-bar" :class="{ 'side-bar-mini' : miniSidebar }">
 
-        <h1 @click="toggleSidebar" :class="{ 'h1-mini' : miniSidebar }" >V <span :class="{ mini : miniSidebar }" >MAN</span></h1>
+        <h1 :class="{ 'h1-mini' : miniSidebar }" >V <span :class="{ mini : miniSidebar }" >MAN</span></h1>
 
         <user-card />
 
@@ -54,16 +54,6 @@
                 get() { return this.$store.state.miniSidebar }
             }
 
-        },
-
-        methods: {
-
-            toggleSidebar() {
-
-                this.mini = !this.mini
-
-                this.$store.commit('updateMiniSidebar', this.mini )
-            }
         }
  
     }
