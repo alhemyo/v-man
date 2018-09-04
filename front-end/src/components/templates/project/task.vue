@@ -35,6 +35,14 @@
 
         <div class="task-body"></div>
 
+        <div class="footer">
+
+            <input class="note-input" type="text" placeholder="Write a note..." />
+
+            <i class="material-icons" >notes</i>
+
+        </div>
+
     </div>
 
 </template>
@@ -84,13 +92,15 @@
 
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 40px auto;
+        grid-template-rows: 40px auto 40px;
 
         transition: 0.3s ease;
 
         background-color: white;
         border: 1px solid rgba(0,0,0,0.05);
         border-radius: 30px;
+
+        overflow: hidden;
     }
 
     .task-open {
@@ -152,6 +162,9 @@
     .name {
 
         text-align: left;
+
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     .state, .deadline {
@@ -178,6 +191,34 @@
     .material-icons:hover {
 
         color: rgba(0,0,0,0.5);
+    }
+
+    .footer {
+
+        display: grid;
+        grid-template-columns: auto 40px ;
+        grid-template-rows: 40px;
+        align-items: center;
+        justify-items: center;
+
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .note-input {
+
+        font-family: var(--default);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--dark);
+
+        width: 100%;
+        height: 30px;
+
+        padding: 0px 20px;
+
+        background-color: rgba(0,0,0,0.05);
+        border: none;
+        border-radius: 3px;
     }
 
 </style>

@@ -4,7 +4,9 @@
 
         <div class="header">
 
-            <p class="header-text">{{ tasksLength }} Tasks</p>
+            <p class="header-text"><span>{{ finishedTasks }}</span> / {{ tasksLength }} Tasks</p>
+
+            <i class="material-icons" title="new task" >add</i>
 
         </div>
 
@@ -49,6 +51,7 @@
 
             tasks: { get() { return this.$store.state.tasks.tasks || [] } },
             tasksLength() { return this.tasks.length || 0 },
+            finishedTasks() { return 0 },
             loading() { return this.tasks.length === 0 ? true : false }
 
         },
@@ -83,6 +86,7 @@
     .header {
 
         display: grid;
+        grid-template-columns: auto 60px;
         align-items: center;
 
         border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -90,7 +94,14 @@
 
     .header-text {
 
+        font-size: 12px;
+
         padding: 23px 20px;
+    }
+
+    .header-text span {
+
+        color: var(--green);
     }
 
     .task-list {
@@ -104,6 +115,21 @@
 
         overflow: hidden;
         overflow-y: scroll;
+    }
+
+    .material-icons {
+
+        color: rgba(0,0,0,0.5);
+
+        justify-self: center;
+
+        cursor: pointer;
+    }
+
+    .material-icons:hover {
+
+        background-color: lightgray;
+        border-radius: 30px;
     }
 
 </style>

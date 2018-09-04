@@ -115,6 +115,8 @@
 
     .header-text {
 
+        font-size: 12px;
+
         padding: 23px 20px;
     }
 

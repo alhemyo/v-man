@@ -51,7 +51,7 @@
         padding: 0px 20px;
 
         display: grid;
-        grid-template-columns: 20px auto;
+        grid-template-columns: 10px auto;
         grid-template-rows: 20px 20px;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
@@ -65,7 +65,7 @@
         height: 44px;
 
         grid-row: 1/3;
-        justify-self: center;
+        justify-self: flex-start;
 
         background-color: gray;
         border-radius: 4px;
