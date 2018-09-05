@@ -2,11 +2,11 @@
     
     <div v-show="condition" class="loader">
 
-        <div class="ball"></div>
+        <div :class="{ light : (shade === 'light') }" class="ball"></div>
 
-        <div class="ball"></div>
+        <div :class="{ light : (shade === 'light') }" class="ball"></div>
 
-        <div class="ball"></div>
+        <div :class="{ light : (shade === 'light') }" class="ball"></div>
 
     </div>
 
@@ -20,7 +20,8 @@
 
         props: {
 
-            condition: ''
+            condition: '',
+            shade: String
         }
 
     }
@@ -78,6 +79,11 @@
     .ball:nth-child(2) {
 
         animation-delay: 0.5s;
+    }
+
+    .light {
+
+        background-color: var(--white);
     }
 
 </style>

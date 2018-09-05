@@ -33,7 +33,7 @@
 <script>
 
     import user from './user'
-    import loader from '../../widgets/loader'
+    import loader from '../../macro/loader'
 
     export default {
     

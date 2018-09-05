@@ -6,7 +6,7 @@
 
         <div class="projects">
 
-            <loader :condition="loading" />
+            <loader :shade="'light'" :condition="loading" />
 
             <transition-group name="list" >
 
@@ -28,7 +28,7 @@
 <script>
 
     import userProject from './user-project'
-    import loader from '../../widgets/loader'
+    import loader from '../../macro/loader'
 
     export default {
     

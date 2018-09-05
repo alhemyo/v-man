@@ -98,6 +98,7 @@
 
         background-color: white;
         border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 
         overflow: hidden;
     }
@@ -105,7 +106,6 @@
     .task-open {
 
         height: 400px;
-;
         border-radius: 5px;
     }
 
@@ -123,7 +123,7 @@
 
     .task-open .header {
 
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.01);
     }
 
     .priority {
@@ -194,7 +194,7 @@
         align-items: center;
         justify-items: center;
 
-        border-top: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(0,0,0,0.01);
     }
 
     .note-input {
@@ -209,7 +209,7 @@
 
         padding: 0px 20px;
 
-        background-color: rgba(0,0,0,0.05);
+        background-color: var(--white);
         border: none;
         border-radius: 3px;
     }

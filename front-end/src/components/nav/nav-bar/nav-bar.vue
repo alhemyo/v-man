@@ -139,7 +139,7 @@
 
     .router-link-active .main-nav-icons {
 
-        color: var(--red);
+        color: var(--dark);
     }
 
     .sub-nav-icons {

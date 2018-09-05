@@ -58,7 +58,7 @@
 
     .material-icons {
 
-        font-size: 24px;
+        font-size: 22px;
         color: var(--white);
 
         padding: 18px;

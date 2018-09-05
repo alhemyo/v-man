@@ -77,4 +77,51 @@
     user-select: none;
   }
 
+  /* FORM CSS */
+
+  .form-input {
+
+      font-family: var(--default);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--dark);
+
+      width: 100%;
+      height: 50px;
+
+      padding: 0px 20px;
+
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 3px;
+
+  }
+
+  .form-text-area {
+
+      font-family: var(--default);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--dark);
+
+      width: 100%;
+      height: 120px;
+
+      resize: none;
+
+      padding: 20px 20px;
+
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 3px;
+  }
+
+  .form-half-1 {
+
+    grid-column: 1/3;
+  }
+
+  .form-full {
+
+    grid-column: 1/5;
+  }
+
 </style>

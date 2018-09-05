@@ -35,7 +35,7 @@
 <script>
 
     import task from './task'
-    import loader from '../../widgets/loader'
+    import loader from '../../macro/loader'
 
     export default {
     

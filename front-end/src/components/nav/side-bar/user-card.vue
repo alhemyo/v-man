@@ -90,7 +90,7 @@
         transform: translateX(-50%);
 
         background-color: var(--green);
-        border: 2px solid var(--white);
+        border: 2px solid var(--dark);
         border-radius: 15px;
     }
 
