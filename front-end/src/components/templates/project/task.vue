@@ -97,7 +97,6 @@
         transition: 0.3s ease;
 
         background-color: white;
-        border: 1px solid rgba(0,0,0,0.05);
         border-radius: 5px;
 
         overflow: hidden;
@@ -106,8 +105,7 @@
     .task-open {
 
         height: 400px;
-
-        background-color: var(--white);
+;
         border-radius: 5px;
     }
 
@@ -165,11 +163,6 @@
 
         padding-left: 0px;
         padding-right: 0px;
-    }
-
-    .state, .deadline {
-
-        background-color: rgba(0,0,0,0.01);
     }
 
     .task-nav {

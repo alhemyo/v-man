@@ -43,7 +43,7 @@
         grid-template-columns: 40px auto 40px;
         align-items: center;
 
-        border: 1px solid rgba(0,0,0,0.1);
+        background-color: white;
         border-radius: 30px;
 
         cursor: pointer;

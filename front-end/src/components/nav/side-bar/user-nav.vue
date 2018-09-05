@@ -54,15 +54,12 @@
         justify-content: space-around;
 
         transition: 0.3s ease;
-
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .material-icons {
 
         font-size: 24px;
-        font-weight: 400;
-        color: var(--dark);
+        color: var(--white);
 
         padding: 18px;
 
@@ -75,7 +72,7 @@
 
     .material-icons:hover {
 
-        opacity: 1;
+        opacity: 0.6;
     }
 
     .mini {

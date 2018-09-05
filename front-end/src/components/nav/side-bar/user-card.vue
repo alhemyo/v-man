@@ -64,8 +64,6 @@
 
         display: grid;
         grid-template-columns: minmax( 80px, 100px ) 180px;
-
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .avatar-wrap {
@@ -114,14 +112,14 @@
 
         font-size: 14px;
         font-weight: 500;
-        color: rgba(0,0,0,0.5);
+        color: rgba(255,255,255,0.3);
     }
 
     .name {
 
         font-size: 14px;
         font-weight: 600;
-        color: var(--dark);
+        color: var(--white);
     }
 
     .mini {

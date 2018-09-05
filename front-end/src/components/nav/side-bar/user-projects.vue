@@ -82,7 +82,7 @@
     .projects-header {
 
         font-size: 12px;
-        color: var(--dark);
+        color: rgba(255,255,255,0.3);
 
         padding: 0px 20px;
 
@@ -103,7 +103,7 @@
         padding: 10px 0px;
         padding-right: 20px;
 
-        background-color: rgba(0,0,0,0.03);
+        background-color: rgba(0, 0, 0, 0.03);
 
         overflow: hidden;
         overflow-y: scroll;

@@ -76,8 +76,6 @@
     }
 
     .project-nav {
-
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .project-content {
@@ -89,7 +87,7 @@
 
     .project-footer {
 
-        border-top: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid var(--white);
     }
 
 </style>

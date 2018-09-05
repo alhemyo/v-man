@@ -77,7 +77,7 @@
 
         transition: width 0.3s ease;
 
-        background-color: var(--white);
+        background-color: var(--dark);
 
         overflow: hidden;
     }
@@ -98,8 +98,6 @@
         padding: 28px 20px;
 
         transition: 0.3s ease;
-
-        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .h1-mini {
@@ -110,7 +108,7 @@
     h1 span {
 
         font-weight: 500;
-        color: var(--dark);
+        color: rgba(255,255,255,0.3);
 
         transition: 0.2s ease;
     }
@@ -134,8 +132,6 @@
         justify-content: flex-end;
 
         transition: width 0.3s ease;
-        
-        border-top: 1px solid rgba(0,0,0,0.05);
     }
 
     .side-bar-footer-mini {
@@ -148,6 +144,7 @@
     .material-icons {
 
         font-size: 28px;
+        color: var(--white);
 
         padding: 16px;
 

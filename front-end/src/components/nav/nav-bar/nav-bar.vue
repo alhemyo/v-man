@@ -92,7 +92,7 @@
         grid-template-columns: minmax( 60px, 180px ) auto minmax( 150px, 300px );
         align-items: center;
 
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.01);
     }
 
     .main-nav {

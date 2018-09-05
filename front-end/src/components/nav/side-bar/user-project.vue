@@ -35,7 +35,7 @@
     .user-project {
 
         font-size: 12px;
-        color: rgba(0,0,0,0.5);
+        color: rgba(255,255,255,0.3);
 
         width: 100%;
         height: 40px;
@@ -56,9 +56,9 @@
 
     .user-project:hover {
 
-        color: var(--dark);
+        color: rgba(255,255,255,0.6);
 
-        background-color: var(--white);
+        background-color: rgba(255,255,255,0.05);
     }
 
     .priority {
@@ -87,7 +87,7 @@
         color: var(--dark);
         font-weight: 700;
 
-        background-color: white;
+        background-color: var(--white);
     }
 
     .router-link-active:hover {
@@ -95,7 +95,7 @@
         color: var(--dark);
         font-weight: 700;
 
-        background-color: white;
+        background-color: var(--white);
     }
 
 </style>
