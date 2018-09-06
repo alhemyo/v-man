@@ -87,7 +87,7 @@
       color: var(--dark);
 
       width: 100%;
-      height: 50px;
+      height: 40px;
 
       padding: 0px 20px;
 
@@ -117,6 +117,11 @@
   .form-half-1 {
 
     grid-column: 1/3;
+  }
+
+  .form-half-2 {
+
+    grid-column: 3/5;
   }
 
   .form-full {

@@ -16,7 +16,17 @@
 
             <textarea class="form-text-area form-full" placeholder="Task Description" v-model="description" />
 
-            <date-input :name="'deadline'" />
+            <date-picker
+                lang="en"
+                class="date-picker form-half-1" 
+                input-class="form-input"
+                placeholder="deadline"
+                format="DD MMM YYYY"
+                v-model="deadline"
+                :not-before="new Date()" 
+            />
+
+            <form-select class="form-half-2" />
             
         </form>
 
@@ -28,18 +38,14 @@
 
 <script>
 
-    import moment from 'moment'
-
-    import dateInput from '../../macro/form/date-input'
+    import DatePicker from 'vue2-datepicker'
+    import formSelect from '../../macro/form/form-select'
 
     export default {
     
         name: 'add-task',
 
-        components: {
-
-            dateInput
-        },
+        components: { DatePicker, formSelect },
 
         computed: {
 
@@ -57,6 +63,17 @@
 
             },
 
+            deadline: {
+
+                get() { return this.$store.state.addTask.deadline },
+                set(value) { this.$store.commit( 'updateAddTaskDeadline', value ) }
+            },
+
+            priority: {
+
+                get() { return this.$store.state.addTask.priority }
+            }
+
         }
 
     }
@@ -68,7 +85,7 @@
     .add-task {
 
         width: 560px;
-        height: 400px;
+        height: auto;
 
         position: absolute;
         bottom: 0px;
@@ -80,8 +97,6 @@
         background-color: white;
         box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
         border-radius: 15px 15px 0px 0px;
-
-        overflow: hidden;
 
     }
 
@@ -95,6 +110,8 @@
     }
 
     h1 {
+
+        user-select: none;
 
         padding: 0px 20px;
     }
@@ -122,6 +139,13 @@
         justify-self: center;
 
         cursor: pointer;
+    }
+
+    .date-picker {
+
+        width: 100%;
+
+        font-family: var(--default);
     }
 
 </style>
