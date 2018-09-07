@@ -4,15 +4,40 @@
 
         <p>priority</p>
 
-        <div class="options">
+        <label class="options">
 
-            <div class="option low" @click="low" ></div>
+            <div class="custom-options">
 
-            <div class="option mid"></div>
+                <div class="custom-option custom-low" ></div>
 
-            <div class="option high"></div>
+                <div class="custom-option custom-mid" ></div>
 
-        </div>
+                <div class="custom-option custom-high" ></div>
+
+            </div>
+
+            <input 
+            type="radio" 
+            name="option" 
+            value="low" 
+            class="option low"
+            id="low"
+            @change="$emit( 'change', $event.target.value )" />
+
+            <input 
+            type="radio" 
+            name="option" 
+            value="mid" 
+            class="option mid"
+            @change="$emit( 'change', $event.target.value )" />
+
+            <input 
+            type="radio" 
+            name="option" 
+            value="high" 
+            @change="$emit( 'change', $event.target.value )" />
+
+        </label>
 
     </div>
 
@@ -24,18 +49,7 @@
     
         name: 'form-select',
 
-        props: [ 'priority' ],
-
-        methods: {
-
-            low() {
-
-                this.priority = 'low'
-
-                this.$emit( 'click', $event.target.priority )
-            }
-
-        }
+        props: [ 'priority' ]
 
     }
 
@@ -65,6 +79,8 @@
 
         height: 40px;
 
+        position: relative;
+
         display: grid;
         grid-template-columns: 14px 14px 14px;
         grid-column-gap: 10px;
@@ -74,33 +90,69 @@
         background-color: white;
         border: 1px solid rgba(0,0,0,0.1);
         border-radius: 30px;
+
+        overflow: hidden;
     }
 
     .option {
 
+        z-index: 1;
+
+        opacity: 0;
+    }
+
+    .custom-options {
+
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+
+        display: grid;
+        grid-template-columns: 14px 14px 14px;
+        grid-column-gap: 10px;
+        justify-content: center;
+        align-items: center;
+
+        background-color: white;
+
+        pointer-events: none;
+    }
+
+    .custom-option {
+
         width: 14px;
         height: 14px;
 
-        background-color: white;
         border: 2px solid gray;
-        border-radius: 20px;
-
-        cursor: pointer;
+        border-radius: 30px;
     }
 
-    .low {
-
-        border-color: gray;
-    }
-
-    .mid {
+    .custom-mid {
 
         border-color: var(--yellow);
     }
 
-    .high {
+    .custom-high {
 
         border-color: var(--red);
+    }
+
+    .low-checked {
+
+        background-color: gray;
+    }
+
+    .mid-checked {
+
+        background-color: var(--yellow);
+    }
+
+    .high-checked {
+
+        background-color: var(--red);
     }
 
 </style>
