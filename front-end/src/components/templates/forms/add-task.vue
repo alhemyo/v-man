@@ -26,11 +26,17 @@
                 :not-before="new Date()" 
             />
 
-            <form-select class="form-half-2" />
+            <priority class="form-half-2" :priority="priority" @setPriority="priority = $event" />
             
         </form>
 
-        <div class="footer"></div>
+        <div class="footer">
+
+            <p class="form-message">{{ message }}</p>
+
+            <div class="form-button">Add</div>
+
+        </div>
         
     </div>
 
@@ -39,13 +45,21 @@
 <script>
 
     import DatePicker from 'vue2-datepicker'
-    import formSelect from '../../macro/form/form-select'
+    import priority from '../../macro/form/priority'
 
     export default {
     
         name: 'add-task',
 
-        components: { DatePicker, formSelect },
+        components: { DatePicker, priority },
+
+        data() {
+            return {
+
+                message: 'Add task errors or warnings'
+
+            }
+        },
 
         computed: {
 
@@ -71,7 +85,8 @@
 
             priority: {
 
-                get() { return this.$store.state.addTask.priority }
+                get() { return this.$store.state.addTask.priority },
+                set(priority) { this.$store.commit( 'updateAddTaskPriority', priority ) }
             }
 
         }
@@ -128,6 +143,13 @@
     }
 
     .footer {
+
+        padding: 0px 20px;
+
+        display: grid;
+        grid-template-columns: auto 60px;
+        grid-template-rows: 60px;
+        align-items: center;
 
         border-top: 1px solid rgba(0,0,0,0.01);
     }

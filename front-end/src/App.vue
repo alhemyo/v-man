@@ -129,4 +129,34 @@
     grid-column: 1/5;
   }
 
+  .form-message {
+
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+  }
+
+  .form-button {
+
+    user-select: none;
+
+    width: 100%;
+    height: 40px;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+
+    cursor: pointer;
+  }
+
+  .form-button:hover {
+
+    background-color: var(--white);
+  }
+
 </style>
