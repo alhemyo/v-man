@@ -19,7 +19,7 @@
 
             <div></div>
 
-            <p class="task-info deadline">{{ deadline.split('T')[0] }}</p>
+            <p class="task-info deadline">{{ formatDeadline }}</p>
 
             <div class="task-nav">
 
@@ -49,6 +49,8 @@
 
 <script>
 
+    import moment from 'moment'
+
     export default {
     
         name: 'task',
@@ -60,6 +62,12 @@
             id: String,
             priority: String,
             deadline: String
+
+        },
+
+        computed: {
+
+            formatDeadline() { return moment(this.deadline).format("DD MMM YYYY") }
 
         },
 

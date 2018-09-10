@@ -19,7 +19,7 @@ export default {
     mutations: {
 
         updateTasks( state, tasks ) { state.tasks = tasks },
-        pushTask( state, task ) { state.tasks.push(task) },
+        unshiftTask( state, task ) { state.tasks.unshift(task) },
         resetTasksState( state ) { Object.assign( state, tasksDefaultState() ) }
 
     },

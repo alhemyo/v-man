@@ -1,12 +1,12 @@
 <template>
     
-    <div class="add-task">
+    <div class="add-task" :class="{ 'open-task' : openTaskForm }" >
 
         <div class="header">
             
             <h1>Add Task</h1>
 
-            <i class="material-icons">close</i>
+            <i class="material-icons" @click="closeAddTask" >close</i>
 
         </div>
 
@@ -34,7 +34,7 @@
 
             <p class="form-message">{{ message }}</p>
 
-            <div class="form-button">Add</div>
+            <div class="form-button" @click="addTask" >Add</div>
 
         </div>
         
@@ -87,6 +87,63 @@
 
                 get() { return this.$store.state.addTask.priority },
                 set(priority) { this.$store.commit( 'updateAddTaskPriority', priority ) }
+            },
+
+            openTaskForm: { get() { return this.$store.state.openTaskForm } }
+
+        },
+
+        methods: {
+
+            closeAddTask() {
+
+                this.$store.commit( 'updateOpenTaskForm', false )
+                this.$store.commit( 'resetAddTaskState' )
+
+            },
+
+            addTask() {
+
+                if( this.name && 
+                    !this.name.match(this.$store.state.regex.letters) &&
+                    this.priority && 
+                    this.deadline )  {
+
+                    this.$store.dispatch( 'NEW_TASK' )
+
+                    .then(response => {
+
+                        this.$store.commit( 'resetAddTaskState' )
+                        this.$store.commit( 'updateOpenTaskForm', false )
+
+                    })
+
+                    .catch(error => console.log(error))
+
+                }
+
+                else {
+
+                    this.message = "Invalid data"
+
+                }
+
+                /*
+
+
+                */
+
+            }
+
+        },
+
+        watch: {
+
+            $route() {
+
+                this.$store.commit( 'updateOpenTaskForm', false )
+                this.$store.commit( 'resetAddTaskState' )
+
             }
 
         }
@@ -103,16 +160,23 @@
         height: auto;
 
         position: absolute;
-        bottom: 0px;
+        bottom: -600px;
         right: 40px;
 
         display: grid;
         grid-template-rows: 40px auto 60px;
 
+        transition: 0.3s ease;
+
         background-color: white;
         box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
         border-radius: 15px 15px 0px 0px;
 
+    }
+
+    .open-task {
+
+        bottom: 0px;
     }
 
     .header {

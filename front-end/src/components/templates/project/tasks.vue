@@ -6,7 +6,7 @@
 
             <p class="header-text"><span>{{ finishedTasks }}</span> / {{ tasksLength }} Tasks</p>
 
-            <i class="material-icons" title="new task" >add</i>
+            <i class="material-icons" title="new task" @click="openTask" >add</i>
 
         </div>
 
@@ -53,6 +53,18 @@
             tasksLength() { return this.tasks.length || 0 },
             finishedTasks() { return 0 },
             loading() { return this.tasks.length === 0 ? true : false }
+
+        },
+
+        methods: {
+
+            openTask() {
+
+                this.$store.commit( 'updateAddTaskCreated', new Date() )
+                this.$store.commit( 'updateAddTaskId', this.$route.params.id )
+                this.$store.commit( 'updateOpenTaskForm', true )
+
+            }
 
         },
 

@@ -20,7 +20,11 @@
 
         </div>
 
-        <div class="project-footer"></div>
+        <div class="project-footer">
+
+            <div class="task-footer"></div>
+
+        </div>
 
     </div>
 
@@ -73,9 +77,6 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 100px 60px auto 60px;
-    }
-
-    .project-nav {
     }
 
     .project-content {

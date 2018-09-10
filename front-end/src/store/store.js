@@ -38,12 +38,16 @@ export default new Vuex.Store({
       
     },
 
-    miniSidebar: false
+    // UI controls
+
+    miniSidebar: false, // Open / Close sidebar
+    openTaskForm: false // Open / Close add task form
 
   },
   mutations: {
 
-    updateMiniSidebar( state, mini ) { state.miniSidebar = mini }
+    updateMiniSidebar( state, mini ) { state.miniSidebar = mini },
+    updateOpenTaskForm( state, openTaskForm ) { state.openTaskForm = openTaskForm }
 
   },
   actions: {
