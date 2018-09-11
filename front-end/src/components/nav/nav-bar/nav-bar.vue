@@ -57,7 +57,7 @@
             miniSidebar: { get() { return this.$store.state.miniSidebar } },
 
             admin: { get() { return this.$store.state.thisUser.is_admin } },
-            adminType: { get() { return this.$store.state.thisUser.admin_type } }
+            adminType: { get() { return this.$store.state.thisUser.admin_type } },
 
         },
 
@@ -92,7 +92,7 @@
         grid-template-columns: minmax( 60px, 180px ) auto minmax( 150px, 300px );
         align-items: center;
 
-        border-bottom: 1px solid rgba(0,0,0,0.01);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .main-nav {
@@ -180,9 +180,8 @@
 
         padding: 0px 20px;
 
-        background-color: var(--white);
+        background-color: rgba(0,0,0,0.05);
         border: none;
-        border-radius: 5px 0px 0px 5px;
     }
 
     .search-button {
@@ -190,8 +189,7 @@
         font-size: 22px;
         color: rgba(0,0,0,0.6);
 
-        background-color: var(--white);
-        border-radius: 0px 5px 5px 0px;
+        background-color: rgba(0,0,0,0.05);
 
         padding: 9px;
 

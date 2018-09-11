@@ -14,6 +14,11 @@
 
 <style>
 
+  html, body {
+
+    overflow: hidden;
+  }
+
   .fade-enter-active, .fade-leave-active {
 
     transition: 0.3s ease;
@@ -50,6 +55,7 @@
     /* FONTS */
     --main-font: 'Quicksand', sans-serif;
     --extra-font: 'Roboto', sans-serif;
+    --mono-font: 'Roboto Mono', monospace;
 
     /* COLORS */
     --black: #333541;
@@ -60,6 +66,9 @@
 		--yellow: #FFC107;
 
     /* APP CSS */
+
+    width: 100%;
+    min-width: 1200px;
 
     font-family: var(--main-font);
     font-size: 14px;
@@ -75,6 +84,13 @@
   .material-icons {
 
     user-select: none;
+  }
+
+  .date {
+
+    font-family: var(--mono-font);
+    font-weight: 400;
+    color: var(--dark);
   }
 
   /* FORM CSS */

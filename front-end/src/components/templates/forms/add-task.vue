@@ -111,7 +111,7 @@
 
                     this.$store.dispatch( 'NEW_TASK' )
 
-                    .then(response => {
+                    .then(() => {
 
                         this.$store.commit( 'resetAddTaskState' )
                         this.$store.commit( 'updateOpenTaskForm', false )

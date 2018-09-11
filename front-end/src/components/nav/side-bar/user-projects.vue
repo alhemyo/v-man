@@ -100,7 +100,7 @@
 
         position: relative;
 
-        padding: 10px 0px;
+        padding: 0px 0px;
         padding-right: 20px;
 
         background-color: rgba(0, 0, 0, 0.03);

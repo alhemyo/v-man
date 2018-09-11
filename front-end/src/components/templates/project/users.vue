@@ -109,6 +109,8 @@
         display: grid;
         grid-template-columns: auto 40px;
         align-items: center;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .header-text {
@@ -122,9 +124,10 @@
 
         width: calc( 100% + 17px );
 
-        padding: 10px 20px;
+        padding: 0px 2px;
+        padding-bottom: 2px;
 
-        background-color: var(--white);
+        background-color: rgba(0,0,0,0.05);
 
         overflow: hidden;
         overflow-y: scroll;

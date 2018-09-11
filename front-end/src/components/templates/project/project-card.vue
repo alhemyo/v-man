@@ -14,13 +14,15 @@
 
         <p v-cloak class="project-info name">{{ name }}</p>
 
-        <p v-show="client" class="project-info">{{ client + ' / ' + deadline }}</p>
+        <p v-show="client" class="project-info date">{{ client + ' / ' + formatDeadline }}</p>
 
     </div>
 
 </template>
 
 <script>
+
+    import moment from 'moment'
 
     export default {
     
@@ -32,6 +34,12 @@
             client: String,
             deadline: String,
             priority: String
+
+        },
+
+        computed: {
+
+            formatDeadline() { return moment(this.deadline).format("DD MMM YYYY") }
 
         }
 

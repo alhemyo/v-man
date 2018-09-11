@@ -19,7 +19,7 @@
 
             <div></div>
 
-            <p class="task-info deadline">{{ formatDeadline }}</p>
+            <p class="task-info deadline date">{{ formatDeadline }}</p>
 
             <div class="task-nav">
 
@@ -94,7 +94,7 @@
         height: 40px;
 
         position: relative;
-        margin-top: 4px;
+        margin-top: 2px;
 
         padding: 0px 10px;
 
@@ -105,8 +105,7 @@
         transition: 0.3s ease;
 
         background-color: white;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        border-radius: 0px;
 
         overflow: hidden;
     }
@@ -114,7 +113,7 @@
     .task-open {
 
         height: 400px;
-        border-radius: 5px;
+        border-radius: 0px;
     }
 
     .header {
@@ -123,7 +122,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 20px 200px 100px auto 100px 100px;
+        grid-template-columns: 20px 200px 100px auto 120px 100px;
         grid-column-gap: 10px;
         grid-template-rows: 40px;
         align-items: center;
@@ -183,8 +182,8 @@
 
     .material-icons {
 
-        font-size: 24px;
-        color: rgba(0,0,0,0.3);
+        font-size: 22px;
+        color: rgba(0,0,0,0.2);
 
         cursor: pointer;
     }
@@ -217,9 +216,8 @@
 
         padding: 0px 20px;
 
-        background-color: var(--white);
+        background-color: rgba(0,0,0,0.05);
         border: none;
-        border-radius: 3px;
     }
 
 </style>

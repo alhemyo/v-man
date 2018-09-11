@@ -37,15 +37,13 @@
         height: 40px;
 
         position: relative;
-        margin-top: 4px;
+        margin-top: 2px;
 
         display: grid;
         grid-template-columns: 40px auto 40px;
         align-items: center;
 
         background-color: white;
-        border-radius: 3px;
-        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 
         cursor: pointer;
     }

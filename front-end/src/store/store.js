@@ -9,6 +9,7 @@ import thisUserProjects from './modules/projects/thisUserProjects'
 import tasks from './modules/projects/tasks'
 import addTask from './modules/projects/addTask'
 import users from './modules/users/users'
+import projects from './modules/projects/projects'
 
 export default new Vuex.Store({
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     thisUserProjects,
     tasks,
     users,
-    addTask
+    addTask,
+    projects
   },
 
   state: {

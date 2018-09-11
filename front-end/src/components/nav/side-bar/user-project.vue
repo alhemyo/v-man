@@ -42,7 +42,7 @@
 
         position: relative;
 
-        margin-top: 4px;
+        margin-top: 2px;
 
         padding: 0px 20px;
 
