@@ -18,6 +18,8 @@
 
         <div class="users-list">
 
+            <loader :condition="loading" />
+
             <transition-group mode="in-out" name="list">
 
                 <user 
@@ -39,6 +41,7 @@
 <script>
 
     import user from './user'
+    import loader from '../../../macro/loader'
 
     export default {
     
@@ -47,13 +50,15 @@
         computed: {
 
             users: { get() { return this.$store.state.users.users } },
-            usersLength() { return this.users.length }
+            usersLength() { return this.users.length },
+            loading() { return this.usersLength > 0 ? false : true }
 
         },
 
         components: {
 
-            user
+            user,
+            loader
 
         },
 

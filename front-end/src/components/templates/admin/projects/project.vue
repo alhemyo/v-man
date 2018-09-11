@@ -54,7 +54,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 20px 200px;
+        grid-template-columns: 40px 200px;
         align-items: center;
     }
 

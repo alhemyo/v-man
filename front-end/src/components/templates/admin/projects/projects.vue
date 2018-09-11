@@ -8,7 +8,17 @@
 
         </div>
 
+        <div class="projects-nav">
+
+            <i class="material-icons">assessment</i>
+
+            <p>project name</p>
+
+        </div>
+
         <div class="projects-list">
+
+            <loader :condition="loading" />
 
             <transition-group mode="out-in" name="list">
 
@@ -31,6 +41,7 @@
 <script>
 
     import project from './project'
+    import loader from '../../../macro/loader'
 
     export default {
     
@@ -39,13 +50,15 @@
         computed: {
 
             projects: { get() { return this.$store.state.projects.projects || [] } },
-            projectsLength() { return this.projects.length }
+            projectsLength() { return this.projects.length },
+            loading() { return this.projectsLength > 0 ? false : true }
 
         },
 
         components: {
 
-            project
+            project,
+            loader
 
         },
 
@@ -69,7 +82,7 @@
         position: relative;
 
         display: grid;
-        grid-template-rows: 100px auto 60px;
+        grid-template-rows: 100px 60px auto 60px;
     }
 
     .header {
@@ -83,8 +96,39 @@
 
         display: grid;
         align-items: center;
+    }
 
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+    .projects-nav {
+
+        color: rgba(0,0,0,0.5);
+
+        width: 100%;
+        height: 60px;
+
+        padding: 0px 4px;
+
+        display: grid;
+        grid-template-columns: 40px 200px;
+        align-items: center;
+    }
+
+    .projects-nav > * {
+
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .projects-nav .material-icons {
+
+        font-size: 22px;
+
+        text-align: center;
+    }
+
+    .projects-nav p {
+
+        font-size: 12px;
+
+        padding: 6px 10px;
     }
 
     .projects-list {
