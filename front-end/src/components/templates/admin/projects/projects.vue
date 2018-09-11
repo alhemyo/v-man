@@ -10,11 +10,15 @@
 
         <div class="projects-list">
 
-            <project 
-            :key="project.id" 
-            v-for="project in projects" 
-            :name="project.name"
-            :priority="project.priority" />
+            <transition-group mode="out-in" name="list">
+
+                <project 
+                :key="project.id" 
+                v-for="project in projects" 
+                :name="project.name"
+                :priority="project.priority" />
+
+            </transition-group>
 
         </div>
 
@@ -87,7 +91,7 @@
 
         width: calc( 100% + 17px );
 
-        padding: 0px 2px;
+        padding: 0px 4px;
 
         background-color: rgba(0,0,0,0.1);
 

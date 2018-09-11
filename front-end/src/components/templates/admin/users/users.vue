@@ -8,13 +8,25 @@
 
         </div>
 
+        <div class="users-nav">
+
+            <i class="material-icons">person</i>
+
+            <p>Name</p>
+
+        </div>
+
         <div class="users-list">
 
-            <user 
-            :key="user.umcn" 
-            v-for="user in users" 
-            :name="user.name + ' ' + user.surname"
-            :gender="user.gender" />
+            <transition-group mode="in-out" name="list">
+
+                <user 
+                :key="user.umcn" 
+                v-for="user in users" 
+                :name="user.name + ' ' + user.surname"
+                :gender="user.gender" />
+
+            </transition-group>
 
         </div>
 
@@ -65,7 +77,7 @@
         position: relative;
 
         display: grid;
-        grid-template-rows: 100px auto 60px;
+        grid-template-rows: 100px 60px auto 60px;
     }
 
     .header {
@@ -79,15 +91,48 @@
 
         display: grid;
         align-items: center;
+    }
 
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+    .users-nav {
+
+        color: rgba(0,0,0,0.5);
+
+        padding: 0px 4px;
+
+        display: grid;
+        grid-template-columns: 40px 200px;
+        align-items: center;
+    }
+
+    .users-nav > * {
+
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .users-nav p {
+
+        font-size: 12px;
+
+        padding: 10px 10px;
+
+    }
+
+    .users-nav .material-icons {
+
+        text-align: center;
+
+        width: 40px;
+
+        padding: 10px px;
+
+        justify-self: center;
     }
 
     .users-list {
 
         width: calc( 100% + 17px );
 
-        padding: 0px 2px;
+        padding: 0px 4px;
 
         background-color: rgba(0,0,0,0.1);
 
