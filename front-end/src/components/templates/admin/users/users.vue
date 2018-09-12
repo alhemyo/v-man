@@ -10,9 +10,13 @@
 
         <div class="users-nav">
 
-            <i class="material-icons">person</i>
+            <i class="material-icons">mood</i>
 
             <p>Name</p>
+
+            <p>position</p>
+
+            <p>admin type</p>
 
         </div>
 
@@ -26,13 +30,27 @@
                 :key="user.umcn" 
                 v-for="user in users" 
                 :name="user.name + ' ' + user.surname"
-                :gender="user.gender" />
+                :gender="user.gender"
+                :birthday="user.birthday"
+                :position="user.position"
+                :admin="user.is_admin"
+                :adminType="user.admin_type" />
 
             </transition-group>
 
         </div>
 
-        <div class="footer"></div>
+        <div class="footer">
+
+            <div class="add-user">
+
+                <p>New user</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -105,7 +123,7 @@
         padding: 0px 4px;
 
         display: grid;
-        grid-template-columns: 40px 200px;
+        grid-template-columns: 40px 200px 80px 110px;
         align-items: center;
     }
 
@@ -117,9 +135,15 @@
     .users-nav p {
 
         font-size: 12px;
+        text-align: center;
 
         padding: 10px 10px;
 
+    }
+
+    .users-nav p:nth-child(2) {
+
+        text-align: left;
     }
 
     .users-nav .material-icons {
@@ -146,7 +170,46 @@
 
     .footer {
 
+        padding: 0px 20px;
+
+        display: grid;
+        grid-template-columns: min-content;
+        justify-content: flex-end;
+        align-items: center;
+
         border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .add-user {
+
+        color: var(--dark);
+
+        width: auto;
+        height: 40px;
+
+        display: grid;
+        grid-template-columns: min-content 40px;
+        align-items: center;
+
+        background-color: white;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 30px;
+
+        cursor: pointer;
+    }
+
+    .add-user p {
+
+        font-size: 12px;
+        white-space: nowrap;
+
+        padding-left: 20px;
+    }
+
+    .add-user i {
+
+        font-size: 20px;
+        text-align: center;
     }
 
 </style>

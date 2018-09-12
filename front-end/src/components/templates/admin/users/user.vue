@@ -6,7 +6,11 @@
 
             <img class="avatar" :src="userAvatar" />
 
-            <p class="name">{{ name }}</p>
+            <p class="name">{{ name ? name : '/' }}</p>
+
+            <p class="position">{{ position ? position : '/' }}</p>
+
+            <p class="admin">{{ admin === "true" ? adminType : 'regular user' }}</p>
 
         </div>
 
@@ -16,6 +20,8 @@
 
 <script>
 
+    import moment from 'moment'
+
     export default {
     
         name: 'user',
@@ -24,13 +30,18 @@
 
             name: String,
             avatar: String,
-            gender: String
+            gender: String,
+            birthday: String,
+            position: String,
+            admin: String,
+            adminType: String
 
         },
 
         computed: {
 
-            userAvatar() { return this.gender === 'male' ? '/images/johnDoe.png' : '/images/janeDoe.png' }
+            userAvatar() { return this.gender === 'male' ? '/images/johnDoe.png' : '/images/janeDoe.png' },
+            formatBirthday() { return moment(this.birthday).format("DD MM YYYY") }
 
         }
 
@@ -61,7 +72,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 40px 200px;
+        grid-template-columns: 40px 200px 80px 110px;
         align-items: center;
     }
 
@@ -70,16 +81,25 @@
         border-right: 1px solid rgba(0,0,0,0.1);
     }
 
+    .header > p {
+
+        font-size: 12px;
+        text-align: center;
+        color: rgba(0,0,0,0.5);
+
+        padding: 4px 10px;
+    }
+
     .avatar {
 
         padding: 8px;
     }
 
-    .name {
+    .header .name {
 
-        font-size: 12px;
-
-        padding: 2px 10px;
+        color: var(--dark);
+        font-weight: 500;
+        text-align: left;
     }
 
 </style>
