@@ -52,6 +52,8 @@
 
         </div>
 
+        <new-user />
+
     </div>
 
 </template>
@@ -60,6 +62,7 @@
 
     import user from './user'
     import loader from '../../../macro/loader'
+    import newUser from '../../forms/new-user'
 
     export default {
     
@@ -76,7 +79,8 @@
         components: {
 
             user,
-            loader
+            loader,
+            newUser
 
         },
 

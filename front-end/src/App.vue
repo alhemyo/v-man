@@ -130,6 +130,26 @@
       border-radius: 3px;
   }
 
+  .form-1 {
+
+    grid-column: 1/2;
+  }
+
+  .form-2 {
+
+    grid-column: 2/3;
+  }
+
+  .form-3 {
+
+    grid-column: 3/4;
+  }
+
+  .form-4 {
+
+    grid-column: 4/5;
+  }
+
   .form-half-1 {
 
     grid-column: 1/3;

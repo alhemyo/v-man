@@ -53,7 +53,7 @@
         components: {
 
             user,
-            loader
+            loader,
         },
 
         computed: {
