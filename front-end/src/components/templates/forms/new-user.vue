@@ -64,7 +64,9 @@
 
             <input type="text" class="form-input form-2" placeholder="Payment" />
 
-            <input type="text" class="form-input form-3" placeholder="Position" />
+            <form-select name='Position' :options="positionOptions" />
+
+            <input type="text" class="form-input form-4" placeholder="admin" />
 
         </form>
 
@@ -77,6 +79,7 @@
 <script>
 
     import DatePicker from 'vue2-datepicker'
+    import formSelect from '../../macro/form/form-select'
 
     export default {
 
@@ -84,7 +87,16 @@
 
         components: {
 
-            DatePicker
+            DatePicker,
+            formSelect
+        },
+
+        data() {
+            return {
+
+                positionOptions: [ '3D', 'MGFX', 'OFFICE', 'DESIGN', 'COMP' ]
+
+            }
         }
 
     }

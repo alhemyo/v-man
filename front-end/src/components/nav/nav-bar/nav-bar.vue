@@ -24,7 +24,7 @@
 
         <div class="search-bar">
 
-            <input class="search" type="text" placeholder="Search.." v-model="date" />
+            <input class="search" type="text" placeholder="Search.." />
 
             <i class="material-icons search-button" >search</i>
 
@@ -41,16 +41,6 @@
     export default {
     
         name: 'nav-bar',
-
-        data() {
-
-            return {
-
-                date: moment().format('DD MMM YYYY - HH:mm:ss')
-
-            }
-
-        },
 
         computed: {
 

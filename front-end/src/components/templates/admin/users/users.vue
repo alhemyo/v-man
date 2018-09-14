@@ -124,11 +124,11 @@
 
         color: rgba(0,0,0,0.5);
 
-        padding: 0px 4px;
-
         display: grid;
         grid-template-columns: 40px 200px 80px 110px;
         align-items: center;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .users-nav > * {
@@ -165,8 +165,6 @@
 
         width: calc( 100% + 17px );
 
-        padding: 0px 4px;
-
         background-color: rgba(0,0,0,0.1);
 
         overflow-y: scroll;
@@ -182,38 +180,6 @@
         align-items: center;
 
         border-top: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .add-user {
-
-        color: var(--dark);
-
-        width: auto;
-        height: 40px;
-
-        display: grid;
-        grid-template-columns: min-content 40px;
-        align-items: center;
-
-        background-color: white;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 30px;
-
-        cursor: pointer;
-    }
-
-    .add-user p {
-
-        font-size: 12px;
-        white-space: nowrap;
-
-        padding-left: 20px;
-    }
-
-    .add-user i {
-
-        font-size: 20px;
-        text-align: center;
     }
 
 </style>

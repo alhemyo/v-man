@@ -36,22 +36,22 @@
     .project {
 
         width: 100%;
-        height: 40px;
+        height: 60px;
 
         position: relative;
-        margin-top: 2px;
 
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 40px;
 
         background-color: white;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .header {
 
         width: 100%;
-        height: 40px;
+        height: 60px;
 
         display: grid;
         grid-template-columns: 40px 200px;

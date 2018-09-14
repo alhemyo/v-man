@@ -94,9 +94,6 @@
         height: 40px;
 
         position: relative;
-        margin-top: 2px;
-
-        padding: 0px 10px;
 
         display: grid;
         grid-template-columns: 100%;
@@ -105,6 +102,7 @@
         transition: 0.3s ease;
 
         background-color: white;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
         border-radius: 0px;
 
         overflow: hidden;
@@ -113,6 +111,7 @@
     .task-open {
 
         height: 400px;
+
         border-radius: 0px;
     }
 
@@ -122,8 +121,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 20px 200px 100px auto 120px 100px;
-        grid-column-gap: 10px;
+        grid-template-columns: 30px 200px 100px auto 120px 100px;
         grid-template-rows: 40px;
         align-items: center;
     }
@@ -194,6 +192,8 @@
     }
 
     .footer {
+
+        padding: 0px 10px;
 
         display: grid;
         grid-template-columns: auto 40px ;

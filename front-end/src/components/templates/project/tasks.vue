@@ -4,9 +4,17 @@
 
         <div class="header">
 
+            <i class="material-icons header-icons">assessment</i>
+
             <p class="header-text"><span>{{ finishedTasks }}</span> / {{ tasksLength }} Tasks</p>
 
-            <i class="material-icons" title="new task" @click="openTask" >add</i>
+            <p class="header-text">state</p>
+
+            <div></div>
+
+            <p class="header-text">deadline</p>
+
+            <p class="header-text">tools</p>
 
         </div>
 
@@ -25,6 +33,18 @@
                 :deadline="task.deadline" />
 
             </transition-group>
+
+        </div>
+
+        <div class="tasks-footer">
+
+            <div class="button" @click="openTask" >
+
+                <p>New task</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
 
         </div>
 
@@ -83,12 +103,12 @@
 
     .tasks {
 
-        height: calc( 100vh - 300px );
+        height: calc( 100vh - 240px );
         min-height: 0;
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 60px auto;
+        grid-template-rows: 60px auto 60px;
 
         overflow: hidden;
     }
@@ -96,22 +116,38 @@
     .header {
 
         display: grid;
-        grid-template-columns: auto 60px;
+        grid-template-columns: 30px 200px 100px auto 120px 100px;
         align-items: center;
 
         border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
+    .header > * {
+
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .header-icons {
+
+        font-size: 18px;
+    }
+
     .header-text {
 
         font-size: 12px;
+        text-align: center;
 
-        padding: 23px 20px;
+        padding: 6px 0px;
     }
 
     .header-text span {
 
         color: var(--green);
+    }
+
+    .header-text:nth-child(2) {
+
+        text-align: left;
     }
 
     .task-list {
@@ -121,11 +157,8 @@
 
         position: relative;
 
-        padding: 0px 2px;
-        padding-right: 0px;
-        padding-bottom: 2px;
-
         background-color: rgba(0,0,0,0.05);
+        border-right: 1px solid rgba(0,0,0,0.05);
 
         overflow: hidden;
         overflow-y: scroll;
@@ -140,10 +173,16 @@
         cursor: pointer;
     }
 
-    .material-icons:hover {
+    .tasks-footer {
 
-        background-color: lightgray;
-        border-radius: 30px;
+        padding: 0px 20px;
+
+        display: grid;
+        grid-template-columns: min-content;
+        justify-content: flex-end;
+        align-items: center;
+
+        border-top: 1px solid rgba(0,0,0,0.1);
     }
 
 </style>

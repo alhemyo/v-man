@@ -20,11 +20,7 @@
 
         </div>
 
-        <div class="project-footer">
-
-            <div class="task-footer"></div>
-
-        </div>
+        <add-task />
 
     </div>
 
@@ -32,6 +28,7 @@
 
 <script>
 
+    import addTask from '../forms/add-task'
     import projectCard from './project-card'
     import tasks from './tasks'
     import users from './users'
@@ -44,7 +41,8 @@
 
             projectCard,
             tasks,
-            users
+            users,
+            addTask
         },
 
         computed: {
@@ -76,7 +74,7 @@
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 100px 60px auto 60px;
+        grid-template-rows: 100px 60px auto;
     }
 
     .project-content {
@@ -84,11 +82,6 @@
         display: grid;
         grid-template-columns: auto 200px;
         grid-template-rows: 1fr;
-    }
-
-    .project-footer {
-
-        border-top: 1px solid var(--white);
     }
 
 </style>

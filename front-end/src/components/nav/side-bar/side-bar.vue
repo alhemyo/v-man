@@ -10,9 +10,15 @@
 
         <user-projects />
 
-        <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }">
+        <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
 
-            <i class="material-icons">add</i>
+            <div class="button side-bar-button" :class="{ 'mini-side-bar-button' : miniSidebar }" >
+
+                <p>New project</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
 
         </div>
 
@@ -125,7 +131,7 @@
 
         position: relative;
 
-        padding: 0px 5px;
+        padding: 0px 20px;
 
         display: grid;
         align-items: center;
@@ -141,23 +147,22 @@
         justify-content: center;
     }
 
-    .material-icons {
+    .side-bar-button {
 
-        font-size: 28px;
-        color: var(--white);
+        color: rgba(255,255,255,0.5);
 
-        padding: 16px;
+        transition: 0.3s ease;
 
-        transition: 0.2s ease;
-
-        opacity: 0.3;
-
-        cursor: pointer;
+        background-color: var(--black);
     }
 
-    .material-icons:hover {
+    .mini-side-bar-button {
 
-        opacity: 1;
+        width: 40px;
+
+        justify-content: flex-end;
+
+        overflow: hidden;
     }
 
 </style>

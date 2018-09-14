@@ -16,8 +16,6 @@
 
         </div>
 
-        <add-task />
-
     </div>
     
 </template>
@@ -26,7 +24,7 @@
 
     import sideBar from '../nav/side-bar/side-bar'
     import navBar from '../nav/nav-bar/nav-bar'
-    import addTask from '../templates/forms/add-task'
+    
 
     export default {
 
@@ -34,8 +32,7 @@
 
         components: {
             sideBar,
-            navBar,
-            addTask
+            navBar
         }
         
     }

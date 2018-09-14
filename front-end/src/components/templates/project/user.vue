@@ -37,20 +37,21 @@
         height: 40px;
 
         position: relative;
-        margin-top: 2px;
 
         display: grid;
         grid-template-columns: 40px auto 40px;
+        grid-column-gap: 10px;
         align-items: center;
 
         background-color: white;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
 
         cursor: pointer;
     }
 
     .avatar {
 
-        padding: 5px;
+        padding: 8px;
 
         opacity: 0.8;
     }

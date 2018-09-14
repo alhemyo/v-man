@@ -6,8 +6,6 @@
 
             <p class="header-text">{{ usersLength }} Assigned Users</p>
 
-            <i class="material-icons" title="assign user to project" >add</i>
-
         </div>
 
         <div class="user-list">
@@ -23,6 +21,18 @@
             </transition-group>
 
             <loader :condition="loading" />
+
+        </div>
+
+        <div class="users-footer">
+
+            <div class="button" >
+
+                <p>Add user</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
 
         </div>
 
@@ -95,19 +105,18 @@
 
     .users {
 
-        height: calc( 100vh - 300px );
+        height: calc( 100vh - 240px );
 
         position: relative;
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 60px auto;
+        grid-template-rows: 60px auto 60px;
     }
 
     .header {
 
         display: grid;
-        grid-template-columns: auto 40px;
         align-items: center;
 
         border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -115,17 +124,13 @@
 
     .header-text {
 
+        text-align: center;
         font-size: 12px;
-
-        padding: 23px 20px;
     }
 
     .user-list {
 
         width: calc( 100% + 17px );
-
-        padding: 0px 2px;
-        padding-bottom: 2px;
 
         background-color: rgba(0,0,0,0.05);
 
@@ -142,10 +147,16 @@
         cursor: pointer;
     }
 
-    .material-icons:hover {
+    .users-footer {
 
-        background-color: lightgray;
-        border-radius: 30px;
+        padding: 0px 20px;
+
+        display: grid;
+        grid-template-columns: min-content;
+        justify-content: flex-end;
+        align-items: center;
+
+        border-top: 1px solid rgba(0,0,0,0.1);
     }
 
 </style>

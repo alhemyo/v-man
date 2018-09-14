@@ -42,8 +42,6 @@
 
         position: relative;
 
-        margin-top: 2px;
-
         padding: 0px 20px;
 
         display: grid;

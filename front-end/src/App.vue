@@ -195,4 +195,39 @@
     background-color: var(--white);
   }
 
+  /* BUTTON CSS */
+
+  .button {
+
+      color: var(--dark);
+
+      width: auto;
+      height: 40px;
+
+      display: grid;
+      grid-template-columns: min-content 40px;
+      grid-column-gap: 10px;
+      align-items: center;
+
+      background-color: white;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 30px;
+
+      cursor: pointer;
+  }
+
+  .button p {
+
+      font-size: 12px;
+      white-space: nowrap;
+
+      padding-left: 20px;
+  }
+
+  .button i {
+
+      font-size: 20px;
+      text-align: center;
+  }
+
 </style>
