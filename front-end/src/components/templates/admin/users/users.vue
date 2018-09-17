@@ -42,7 +42,7 @@
 
         <div class="footer">
 
-            <div class="add-user">
+            <div class="button" @click="openUserForm" >
 
                 <p>New user</p>
 
@@ -82,6 +82,16 @@
             loader,
             newUser
 
+        },
+
+        methods: {
+
+            openUserForm() {
+
+                this.$store.commit( 'updateAddUserCreated', new Date() )
+                this.$store.commit( 'updateOpenUserForm', true )
+
+            }
         },
 
         created() {

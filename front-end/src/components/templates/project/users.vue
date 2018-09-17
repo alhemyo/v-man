@@ -28,7 +28,7 @@
 
             <div class="button" >
 
-                <p>Add user</p>
+                <p>Assign user</p>
 
                 <i class="material-icons">add</i>
 

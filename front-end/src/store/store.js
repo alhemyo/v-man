@@ -10,6 +10,7 @@ import tasks from './modules/projects/tasks'
 import addTask from './modules/projects/addTask'
 import users from './modules/users/users'
 import projects from './modules/projects/projects'
+import addUser from './modules/users/add-user'
 
 export default new Vuex.Store({
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     tasks,
     users,
     addTask,
-    projects
+    projects,
+    addUser
   },
 
   state: {
@@ -43,16 +45,16 @@ export default new Vuex.Store({
     // UI controls
 
     miniSidebar: false, // Open / Close sidebar
-    openTaskForm: false // Open / Close add task form
+    openTaskForm: false, // Open / Close add task form
+    openUserForm: false // Open / Close add user form
 
   },
   mutations: {
 
     updateMiniSidebar( state, mini ) { state.miniSidebar = mini },
-    updateOpenTaskForm( state, openTaskForm ) { state.openTaskForm = openTaskForm }
-
-  },
-  actions: {
+    updateOpenTaskForm( state, openTaskForm ) { state.openTaskForm = openTaskForm },
+    updateOpenUserForm( state, openUserForm ) { state.openUserForm = openUserForm }
 
   }
+  
 })

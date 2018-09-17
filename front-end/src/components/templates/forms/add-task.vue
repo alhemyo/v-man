@@ -34,7 +34,7 @@
 
             <p class="form-message">{{ message }}</p>
 
-            <div class="form-button" @click="addTask" >Add</div>
+            <div class="form-button" @click="addTask" ><i class="material-icons">done</i></div>
 
         </div>
         
@@ -127,22 +127,6 @@
                     this.message = "Invalid data"
 
                 }
-
-                /*
-
-
-                */
-
-            }
-
-        },
-
-        watch: {
-
-            $route() {
-
-                this.$store.commit( 'updateOpenTaskForm', false )
-                this.$store.commit( 'resetAddTaskState' )
 
             }
 

@@ -33,6 +33,24 @@
         components: {
             sideBar,
             navBar
+        },
+
+        watch: {
+
+            $route: {
+
+                deep: true,
+                handler: function() {
+
+                    this.$store.commit( 'updateOpenTaskForm', false )
+                    this.$store.commit( 'updateOpenUserForm', false )
+                    this.$store.commit( 'resetAddTaskState' )
+                    this.$store.commit( 'resetAddUserState' )
+
+                }
+
+            }
+
         }
         
     }
