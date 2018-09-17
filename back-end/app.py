@@ -97,20 +97,7 @@ def create_user():
     data = request.get_json()
     print(data)
 
-    birthday_day = data['birthday']['day']
-    birthday_month = data['birthday']['month']
-    birthday_year = data['birthday']['year']
-    birthday = f"{birthday_day}.{birthday_month}.{birthday_year}"
-
-    IdExpireDate_day = data['IdExpireDate']['day']
-    IdExpireDate_month = data['IdExpireDate']['month']
-    IdExpireDate_year = data['IdExpireDate']['year']
-    IdExpireDate = f"{IdExpireDate_day}.{IdExpireDate_month}.{IdExpireDate_year}"
-
-    employmentDate_day = data['employmentDate']['day']
-    employmentDate_month = data['employmentDate']['month']
-    employmentDate_year = data['employmentDate']['year']
-    employmentDate = f"{employmentDate_day}.{employmentDate_month}.{employmentDate_year}"
+    date_created = str(datetime.datetime.now()).replace(' ', 'T') + "Z"
 
     new_user = Node("Person",
                     name=data['name'],
@@ -120,7 +107,7 @@ def create_user():
                     position=data['position'],
                     gender=data['gender'],
                     education=data['education'],
-                    birthday=birthday,
+                    birthday=data['birthday'],
                     address=data['address'],
                     city=data['city'],
                     phone=data['phone'],
@@ -128,11 +115,12 @@ def create_user():
                     is_admin=str(data['is_admin']).lower(),
                     admin_type=data['admin_type'],
                     IdNumber=data['IdNumber'],
-                    IdExpireDate=IdExpireDate,
+                    IdExpireDate=data['IdExpireDate'],
                     bank=data['bank'],
                     accNumber=data['accNumber'],
-                    employmentDate=employmentDate,
-                    payment=data['payment']
+                    employmentDate=data['employmentDate'],
+                    payment=data['payment'],
+                    date_created=date_created
                     )
 
     graph.create(new_user)
@@ -288,14 +276,9 @@ def create_project(current_user):
     data = request.get_json()
     print(data)
 
-    deadline_day = data['deadline']['day']
-    deadline_month = data['deadline']['month']
-    deadline_year = data['deadline']['year']
-    deadline = f"{deadline_day}.{deadline_month}.{deadline_year}"
-
     new_project = Node("Project",
                     name=data['name'],
-                    deadline=deadline,
+                    deadline=data['deadline'],
                     priority=data['priority'],
                     client=data['client']
                     )
@@ -316,7 +299,16 @@ def create_project(current_user):
         user_project = Relationship(user, 'IS_USER', new_project)
         graph.create(user_project)
 
-    return jsonify(new_project)
+    project_obj = ({"id": remote(new_project)._id,
+                    "name": data['name'],
+                    "client": data['client'],
+                    "deadline": data['deadline'],
+                    "priority": data['priority'],
+                    "users": data['user_ids'],
+                    "admin": data['admin_id']
+                    })
+
+    return jsonify(project_obj)
 
 
 
@@ -451,7 +443,7 @@ def create_note(current_user):
 #     return jsonify({'message': 'The user has been deleted'})
 
 
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     auth = request.authorization
 
