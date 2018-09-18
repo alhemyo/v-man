@@ -34,6 +34,8 @@
 
         <div class="footer"></div>
 
+        <new-project />
+
     </div>
 
 </template>
@@ -42,6 +44,7 @@
 
     import project from './project'
     import loader from '../../../macro/loader'
+    import newProject from '../../forms/new-project'
 
     export default {
     
@@ -58,7 +61,8 @@
         components: {
 
             project,
-            loader
+            loader,
+            newProject
 
         },
 

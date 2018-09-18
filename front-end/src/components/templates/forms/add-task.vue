@@ -56,7 +56,7 @@
         data() {
             return {
 
-                message: 'Add task errors or warnings'
+                message: ''
 
             }
         },
@@ -104,32 +104,62 @@
 
             addTask() {
 
-                if( this.name && 
-                    !this.name.match(this.$store.state.regex.letters) &&
-                    this.priority && 
-                    this.deadline )  {
+                if( this.name && !this.name.match(this.$store.state.regex.letters) ) {
 
-                    this.$store.dispatch( 'NEW_TASK' )
+                    if ( this.deadline ) {
 
-                    .then(() => {
+                        if ( this.priority ) {
 
-                        this.$store.commit( 'resetAddTaskState' )
-                        this.$store.commit( 'updateOpenTaskForm', false )
+                            this.$store.dispatch( 'NEW_TASK' )
 
-                    })
+                            .then(() => {
 
-                    .catch(error => console.log(error))
+                                this.$store.commit( 'resetAddTaskState' )
+                                this.$store.commit( 'updateOpenTaskForm', false )
+
+                            })
+
+                            .catch(error => console.log(error))
+
+                        }
+
+                        else {
+                            this.message = "Please select priority."
+                        }
+
+                    }
+
+                    else {
+                        this.message = "Please select deadline."
+                    }
 
                 }
 
                 else {
-
-                    this.message = "Invalid data"
-
+                    this.message = "Valid Task name is required."
                 }
+
+                /*
+
+                
+
+                */
 
             }
 
+        },
+
+        watch: {
+
+            message() {
+
+                setTimeout(() => {
+
+                    this.message = ""
+
+                },3000)
+
+            }
         }
 
     }

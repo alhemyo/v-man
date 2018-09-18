@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const addUserDefaultState = () => {
 
     return {
@@ -61,9 +63,9 @@ export default {
 
     actions: {
 
-        NEW_USER() {
+        NEW_USER({commit}) {
 
-            return new Promise(( resolve ) => {
+            return new Promise(( resolve, reject ) => {
 
                 let data = {
 
@@ -85,14 +87,32 @@ export default {
                     payment: this.state.addUser.payment,
                     position: this.state.addUser.position,
                     is_admin: this.state.addUser.admin,
-                    admin_type: this.state.addUser.adminType,
+                    admin_type: this.state.addUser.admin ? this.state.addUser.adminType : '',
                     created: this.state.addUser.created
 
                 }
 
-                console.log(JSON.stringify(data, null, 4))
+                axios({
 
-                resolve(data)
+                    url: `${this.state.api}user`,
+                    method: 'POST',
+                    headers: { 'x-access-token' : localStorage.getItem('token') },
+                    data: data
+
+                })
+
+                .then(response => {
+
+                    commit( 'unshiftUser', response.data )
+
+                    resolve(response)
+
+                })
+
+                .catch(error => {
+
+                    reject(error)
+                })
 
             })
 

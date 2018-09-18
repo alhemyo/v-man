@@ -2,7 +2,9 @@
     
     <div class="form-select form-input" @click="pop = !pop">
 
-        <p class="name" :class="{ value : value }" >{{ value ? value : name }}</p>
+        <p v-if="!userSelect" class="name" :class="{ value : value }" >{{ value ? value : name }}</p>
+
+        <p v-if="userSelect" class="name" :class="{ value : value }" :title="value.name + ' ' + value.surname" >{{ value ? value.name + ' ' + value.surname : name }}</p>
 
         <i class="material-icons">more_vert</i>
 
@@ -10,7 +12,19 @@
 
             <div class="pop-up-list">
 
-                <p class="option" @click="$emit('setValue', option)" :key="index" v-for="(option, index) in options" >{{ option }}</p>
+                <!-- SINGLE VALUE IN ARRAY -->
+
+                <p v-if="!userSelect" class="option" @click="$emit( 'setValue', option )" :key="index" v-for="(option, index) in options" >{{ option }}</p>
+
+                <!-- OBJECT IN ARRAY -->
+
+                <div v-if="userSelect" class="option-badge" @click="$emit( 'setValue', option )" :key="index" v-for="( option, index ) in options" >
+
+                    <img :src="(option.gender === 'male') ? '/images/JohnDoe.png' : '/images/JaneDoe.png'" />
+
+                    <p>{{ option.name + ' ' + option.surname }}</p>
+
+                </div>
 
             </div>
 
@@ -22,6 +36,8 @@
 
 <script>
 
+    import {isObject} from 'lodash'
+
     export default {
     
         name: 'form-select',
@@ -29,7 +45,7 @@
         props: {
 
             name: String,
-            value: String,
+            value: '',
             options: Array
 
         },
@@ -40,6 +56,11 @@
                 pop: false
 
             }
+        },
+
+        computed: {
+
+            userSelect() { return _.isObject(this.options[0]) }
         }
 
     }
@@ -49,6 +70,8 @@
 <style scoped>
 
     .form-select {
+
+        width: 100%;
 
         color: rgba(0,0,0,0.5);
         user-select: none;
@@ -63,6 +86,8 @@
         grid-template-columns: auto 40px;
         align-items: center;
 
+        transition: 0.3s ease;
+
         cursor: pointer;
     }
 
@@ -73,7 +98,12 @@
 
     .name {
 
-        justify-self: flex-start;
+        text-align: left;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        overflow: hidden;
     }
 
     .value {
@@ -127,21 +157,56 @@
     .option {
 
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
 
         padding: 14px;
         margin-top: 1px;
 
         transition: 0.2s ease;
 
-        background-color: var(--white);
-        border: 1px solid rgba(0,0,0,0.05);
         border-radius: 3px;
     }
 
     .option:hover {
 
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0,0,0,0.05);
+    }
+
+    .option-badge {
+
+        font-size: 12px;
+        font-weight: 600;
+
+        position: relative;
+        margin-top: 1px;
+
+        display: grid;
+        grid-template-columns: 40px auto;
+        grid-template-rows: 40px;
+        align-items: center;
+
+        transition: 0.2s ease;
+
+        border: 1px solid rgba(0,0,0,0.05);
+        border-radius: 3px;
+
+        overflow: hidden;
+    }
+
+    .option-badge img {
+
+        padding: 6px;
+    }
+
+    .option-badge p {
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: left;
+
+        padding: 0px 10px;
+
+        overflow: hidden;
     }
 
 </style>

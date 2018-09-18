@@ -160,6 +160,11 @@
     grid-column: 3/5;
   }
 
+  .form-third-1 {
+
+    grid-column: 1/4;
+  }
+
   .form-full {
 
     grid-column: 1/5;
@@ -168,7 +173,7 @@
   .form-message {
 
     font-size: 12px;
-    color: rgba(0,0,0,0.5);
+    color: var(--red);
   }
 
   .form-button {

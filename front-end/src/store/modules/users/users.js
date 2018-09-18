@@ -19,7 +19,7 @@ export default {
     mutations: {
 
         updateUsers( state, users ) { state.users = users },
-        pushUser( state, user ) { state.users.push( user ) },
+        unshiftUser( state, user ) { state.users.unshift( user ) },
         resetUsersState( state ) { Object.assign( state, usersDefaultState() ) }
 
     },

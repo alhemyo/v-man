@@ -54,6 +54,8 @@
 
             <input type="text" class="form-input form-half-1" placeholder="UMCN" v-model="umcn" />
 
+            <form-checkbox class="form-4" :value="admin" name="Admin" @checked="admin = $event" />
+
             <hr class="form-full" />
 
             <date-picker
@@ -69,7 +71,7 @@
 
             <form-select name='Position' :value="position" :options="positionOptions" @setValue="position = $event" />
 
-            <form-select name='Admin type' :value="adminType" :options="adminOptions" @setValue="adminType = $event" />
+            <form-select name='Admin type' :value="adminType" :options="adminOptions" @setValue="adminType = $event" :class="{ 'admin-show' : !admin }" />
 
         </form>
 
@@ -89,6 +91,7 @@
 
     import DatePicker from 'vue2-datepicker'
     import formSelect from '../../macro/form/form-select'
+    import formCheckbox from '../../macro/form/form-checkbox'
 
     export default {
 
@@ -97,7 +100,8 @@
         components: {
 
             DatePicker,
-            formSelect
+            formSelect,
+            formCheckbox
         },
 
         data() {
@@ -108,7 +112,7 @@
                 positionOptions: [ '3D', 'MGFX', 'OFFICE', 'DESIGN', 'COMP', 'AUDIO', 'SYS ADMIN', 'EDIT', 'GRADE', 'TRACK', 'ROTOMATION', 'ACCOUNT' ],
                 adminOptions: [ 'project admin', 'user admin', 'uber admin' ],
 
-                message: 'Alert message for errors and warnings'
+                message: ''
 
             }
         },
@@ -204,6 +208,11 @@
                 set(position) { this.$store.commit( 'updateAddUserPosition', position ) }
             },
 
+            admin: {
+                get() { return this.$store.state.addUser.admin },
+                set(value) { this.$store.commit( 'updateAddUserAdmin', value ) }
+            },
+
             adminType: {
                 get() { return this.$store.state.addUser.adminType },
                 set(adminType) { this.$store.commit( 'updateAddUserAdminType', adminType ) }
@@ -222,7 +231,181 @@
 
             addUser() {
 
-                this.$store.dispatch( 'NEW_USER' )
+                if ( this.name && this.name.match(this.$store.state.regex.letters) ) {
+
+                    if ( this.surname && this.surname.match(this.$store.state.regex.letters) ) {
+
+                        if ( this.gender ) {
+
+                            if ( this.birthday ) {
+
+                                if ( this.city && this.city.match(this.$store.state.regex.letters) ) {
+
+                                    if ( this.phone && this.phone.match(this.$store.state.regex.numbers) ) {
+
+                                        if ( this.address && this.address.match(this.$store.state.regex.alphanumeric) ) {
+
+                                            if ( this.email && this.email.match(this.$store.state.regex.mail) ) {
+
+                                                if ( this.idNumber && this.idNumber.match(this.$store.state.regex.alphanumeric) ) {
+
+                                                    if ( this.idExpireDate ) {
+
+                                                        if ( this.education ) {
+
+                                                            if ( this.accNumber && this.accNumber.match(this.$store.state.regex.numbers) ) {
+
+                                                                if ( this.bank && this.bank.match(this.$store.state.regex.alphanumeric) ) {
+
+                                                                    if ( this.umcn && this.umcn.match(this.$store.state.regex.numbers) ) {
+
+                                                                        if ( this.employmentDate ) {
+
+                                                                            if ( this.payment && this.payment.match(this.$store.state.regex.alphanumeric) ) {
+
+                                                                                if ( this.position ) {
+
+                                                                                    if ( this.admin && !this.adminType ) {
+
+                                                                                        this.message = "Please select admin type"
+
+                                                                                    }
+
+                                                                                    else {
+
+                                                                                        this.message = ""
+
+                                                                                        this.$store.dispatch( 'NEW_USER' )
+
+                                                                                        .then(() => {
+
+                                                                                            this.$store.commit( 'updateOpenUserForm', false )
+                                                                                            this.$store.commit( 'resetAddUserState' )
+
+                                                                                        })
+
+                                                                                    }
+
+                                                                                }
+
+                                                                                else {
+                                                                                    this.message = "Please select position."
+                                                                                }
+
+                                                                            }
+
+                                                                            else {
+                                                                                this.message = "Valid payment is required."
+                                                                            }
+
+                                                                        }
+
+                                                                        else {
+                                                                            this.message = "Please select employment date."
+                                                                        }
+
+                                                                    }
+
+                                                                    else {
+                                                                        this.message = "Valid unique master citizen number is required."
+                                                                    }
+
+                                                                }
+
+                                                                else {
+                                                                    this.message = "Valid bank name is required."
+                                                                }
+
+                                                            }
+
+                                                            else {
+                                                                this.message = "Valid account number is required."
+                                                            }
+
+                                                        }
+
+                                                        else {
+                                                            this.message = "Please select education."
+                                                        }
+
+                                                    }
+
+                                                    else {
+                                                        this.message = "ID expire date is required."
+                                                    }
+
+                                                }
+
+                                                else {
+                                                    this.message = "Valid ID number is required."
+                                                }
+
+                                            }
+
+                                            else {
+                                                this.message = "Valid e mail is required."
+                                            }
+
+                                        }
+
+                                        else {
+                                            this.message = "Valid address is required."
+                                        }
+
+                                    }
+
+                                    else {
+                                        this.message = "Valid phone number is required."
+                                    }
+
+                                }
+
+                                else {
+                                    this.message = "Valid city is required."
+                                }
+
+                            }
+
+                            else {
+                                this.message = "Please select birthday."
+                            }
+
+                        }
+
+                        else {
+                            this.message = "Please select gender."
+                        }
+
+                    }
+
+                    else {
+                        this.message = "Valid surname is required."
+                    }
+
+                }
+
+                else {
+                    this.message = "Valid name is required."
+                }
+
+                /*
+
+                
+
+                */
+
+            }
+        },
+
+        watch: {
+
+            message() {
+
+                setTimeout(() => {
+
+                    this.message = ""
+
+                },3000)
 
             }
         }
@@ -316,6 +499,13 @@
         width: 100%;
 
         font-family: var(--default);
+    }
+
+    .admin-show {
+
+        transform: translateY( -5px );
+
+        opacity: 0;
     }
 
 </style>
