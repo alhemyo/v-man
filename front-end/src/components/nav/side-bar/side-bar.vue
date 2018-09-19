@@ -12,7 +12,7 @@
 
         <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
 
-            <div class="button side-bar-button" :class="{ 'mini-side-bar-button' : miniSidebar }" >
+            <div class="button side-bar-button" :class="{ 'mini-side-bar-button' : miniSidebar }" @click="openProjectForm" >
 
                 <p>New project</p>
 
@@ -60,6 +60,15 @@
                 get() { return this.$store.state.miniSidebar }
             }
 
+        },
+
+        methods: {
+
+            openProjectForm() {
+
+                this.$store.commit( 'updateOpenProjectForm', true )
+
+            }
         }
  
     }

@@ -1,34 +1,59 @@
 <template>
     
-    <div class="form-select form-input" @click="pop = !pop">
+    <div class="form-select form-input">
 
-        <p v-if="!userSelect" class="name" :class="{ value : value }" >{{ value ? value : name }}</p>
+        <div class="form-select-button" @click="pop = !pop">
 
-        <p v-if="userSelect" class="name" :class="{ value : value }" :title="value.name + ' ' + value.surname" >{{ value ? value.name + ' ' + value.surname : name }}</p>
+            <p v-if="!userSelect" class="name" :class="{ value : value }" >{{ value ? value : name }}</p>
 
-        <i class="material-icons">more_vert</i>
+            <p v-if="userSelect" class="name" :class="{ value : value }" >{{ value ? value.length + ' ' + name + (value.length > 1 ? 's' : '') : name }}</p>
 
-        <div v-if="pop" class="pop-up">
+            <i class="material-icons">more_vert</i>
+
+        </div>
+
+        <div v-if="pop" class="pop-up" @click="closePop">
 
             <div class="pop-up-list">
 
                 <!-- SINGLE VALUE IN ARRAY -->
 
-                <p v-if="!userSelect" class="option" @click="$emit( 'setValue', option )" :key="index" v-for="(option, index) in options" >{{ option }}</p>
+                <select-option
+
+                v-if="!userSelect" 
+                :key="index" 
+                v-for="( option, index ) in options" 
+                :userSelect="userSelect"
+                :multy="multy"
+                :name="option"
+                @selectOption="$emit( 'setValue', option )"
+                :checkSelected="false"
+                @select="$event ? selectedList.push(option) : selectedList = selectedList.filter( item => item.umcn != option.umcn )"
+                
+                />
 
                 <!-- OBJECT IN ARRAY -->
+                
+                <select-option 
 
-                <div v-if="userSelect" class="option-badge" @click="$emit( 'setValue', option )" :key="index" v-for="( option, index ) in options" >
-
-                    <img :src="(option.gender === 'male') ? '/images/JohnDoe.png' : '/images/JaneDoe.png'" />
-
-                    <p>{{ option.name + ' ' + option.surname }}</p>
-
-                </div>
+                v-if="userSelect" 
+                :key="index" 
+                v-for="( option, index ) in options" 
+                :userSelect="userSelect"
+                :multy="multy"
+                :name="option.name" 
+                :surname="option.surname"
+                :umcn="option.umcn"
+                :checkSelected="Boolean(selectedList.find( (item) => { return item.umcn === option.umcn } ))"
+                @select="$event ? selectedList.push(option) : selectedList = selectedList.filter( item => item.umcn != option.umcn )"
+                
+                />
 
             </div>
 
         </div>
+
+        <div v-if="multy && pop" class="pop-footer" :class="{ empty : !listLength }" @click="addList" ><i class="material-icons">{{ listLength ? 'done' : 'close' }}</i></div>
 
     </div>
 
@@ -38,29 +63,62 @@
 
     import {isObject} from 'lodash'
 
+    import selectOption from './option'
+
     export default {
     
         name: 'form-select',
+
+        components: {
+
+            selectOption
+        },
 
         props: {
 
             name: String,
             value: '',
-            options: Array
+            options: Array,
+            multy: false
 
         },
 
         data() {
             return {
 
-                pop: false
+                pop: false,
+
+                selectedList: []
 
             }
         },
 
         computed: {
 
-            userSelect() { return _.isObject(this.options[0]) }
+            userSelect() { return _.isObject(this.options[0]) },
+            listLength() { return this.selectedList.length > 0 ? true : false }
+
+        },
+
+        methods: {
+
+            closePop() {
+
+                if ( !this.multy ) {
+
+                    this.pop = false
+
+                }
+
+            },
+
+            addList() {
+
+                this.pop = false
+
+                this.$emit( 'setValue', this.selectedList )
+
+            }
         }
 
     }
@@ -72,6 +130,7 @@
     .form-select {
 
         width: 100%;
+        height: 40px;
 
         color: rgba(0,0,0,0.5);
         user-select: none;
@@ -82,10 +141,6 @@
         padding: 0;
         padding-left: 20px;
 
-        display: grid;
-        grid-template-columns: auto 40px;
-        align-items: center;
-
         transition: 0.3s ease;
 
         cursor: pointer;
@@ -94,6 +149,15 @@
     .form-select .material-icons {
 
         font-size: 18px;
+    }
+
+    .form-select-button {
+
+        height: 40px;
+
+        display: grid;
+        grid-template-columns: auto 40px;
+        align-items: center;
     }
 
     .name {
@@ -154,22 +218,34 @@
 
     }
 
-    .option {
+    .pop-footer {
 
-        font-size: 12px;
-        font-weight: 600;
+        color: white;
 
-        padding: 14px;
-        margin-top: 1px;
+        width: 40px;
+        height: 40px;
 
-        transition: 0.2s ease;
+        position: absolute;
+        bottom: 30px;
+        right: -20px;
 
-        border-radius: 3px;
+        display: grid;
+        align-items: center;
+
+        transition: 0.3s ease;
+
+        background-color: var(--green);
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
     }
 
-    .option:hover {
+    .empty {
 
-        background-color: rgba(0,0,0,0.05);
+        color: white;
+
+        bottom: 260px;
+
+        background-color: var(--red);
     }
 
     .option-badge {

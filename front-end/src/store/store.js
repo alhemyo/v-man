@@ -48,14 +48,16 @@ export default new Vuex.Store({
 
     miniSidebar: false, // Open / Close sidebar
     openTaskForm: false, // Open / Close add task form
-    openUserForm: false // Open / Close add user form
+    openUserForm: false, // Open / Close add user form
+    openProjectForm: false, // Open / Close add project form
 
   },
   mutations: {
 
     updateMiniSidebar( state, mini ) { state.miniSidebar = mini },
     updateOpenTaskForm( state, openTaskForm ) { state.openTaskForm = openTaskForm },
-    updateOpenUserForm( state, openUserForm ) { state.openUserForm = openUserForm }
+    updateOpenUserForm( state, openUserForm ) { state.openUserForm = openUserForm },
+    updateOpenProjectForm( state, openProjectForm ) { state.openProjectForm = openProjectForm }
 
   }
   

@@ -1,12 +1,12 @@
 <template>
 
-    <div class="new-project">
+    <div class="new-project" :class="{ 'open-project' : openProjectForm }" >
 
         <div class="header">
 
             <h1>Add Project</h1>
 
-            <i class="material-icons" >close</i>
+            <i class="material-icons" @click="closeProjectForm" >close</i>
 
         </div>
 
@@ -25,7 +25,9 @@
 
             <form-select class="form-1" name="Client" :options="clientOptions" :value="client" @setValue="client = $event" />
 
-            <form-select class="form-2" name="Admin" :options="adminOptions" :value="admin" @setValue="admin = $event" />
+            <form-select class="form-2" name="Admin" :multy="true" :options="adminOptions" :value="admin" @setValue="admin = $event.map(item => item.umcn)" />
+
+            <form-select class="form-3" name="User" :multy="true" :options="userOptions" :value="users" @setValue="users = $event.map(item => item.umcn)" />
 
             <priority class="form-4" :priority="priority" @setPriority="priority = $event" />
 
@@ -35,7 +37,7 @@
 
             <p class="form-message">{{ message }}</p>
 
-            <p class="form-button">Add</p>
+            <p class="form-button" @click="newProject" >Add</p>
 
         </div>
 
@@ -65,7 +67,7 @@
 
                 clientOptions: [ 'VT', 'FT', 'CT', 'CS', 'ZZ', 'MK' ],
 
-                message: 'Add project errors and warnings'
+                message: ''
 
             }
         },
@@ -92,12 +94,37 @@
                 set(admin) { this.$store.commit( 'updateAddProjectAdmin', admin ) }
             },
 
+            users: {
+                get() { return this.$store.state.addProject.users },
+                set(users) { this.$store.commit( 'updateAddProjectUsers', users ) }
+            },
+
             priority: {
                 get() { return this.$store.state.addProject.priority },
                 set(priority) { this.$store.commit( 'updateAddProjectPriority', priority ) }
             },
 
-            adminOptions: { get() { return this.$store.state.users.users.filter(user => { return user.is_admin === "true" }) } }
+            adminOptions: { get() { return this.$store.state.users.users.filter(user => { return user.is_admin === "true" }) } },
+
+            userOptions: { get() { return this.$store.state.users.users } },
+
+            openProjectForm: { get() { return this.$store.state.openProjectForm } }
+        },
+
+        methods: {
+
+            closeProjectForm() {
+
+                this.$store.commit( 'updateOpenProjectForm', false )
+                this.$store.commit( 'resetAddProjectState' )
+
+            },
+
+            newProject() {
+
+                this.$store.dispatch('NEW_PROJECT')
+            }
+
         },
 
         mounted() {
@@ -118,14 +145,21 @@
 
         position: absolute;
         right: 40px;
-        bottom: 0px;
+        bottom: -400px;
 
         display: grid;
         grid-template-rows: 40px auto 60px;
 
+        transition: 0.3s ease;
+
         background-color: white;
         border-radius: 15px 15px 0px 0px;
         box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
+    }
+
+    .open-project {
+
+        bottom: 0px;
     }
 
     .header {

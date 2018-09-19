@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const addProjectDefaultState = () => {
 
     return {
@@ -6,6 +8,7 @@ const addProjectDefaultState = () => {
         deadline: '',
         client: '',
         admin: '',
+        users: '',
         priority: ''
 
     }
@@ -24,9 +27,54 @@ export default {
         updateAddProjectDeadline( state, deadline ) { state.deadline = deadline },
         updateAddProjectClient( state, client ) { state.client = client },
         updateAddProjectAdmin( state, admin ) { state.admin = admin },
+        updateAddProjectUsers( state, users ) { state.users = users },
         updateAddProjectPriority( state, priority ) { state.priority = priority },
 
         resetAddProjectState( state ) { Object.assign( state, addProjectDefaultState() ) }
+
+    },
+
+    actions: {
+
+        NEW_PROJECT({commit}) {
+
+            return new Promise(( resolve, reject ) => {
+
+                let data = {
+
+                    name: this.state.addProject.name,
+                    client: this.state.addProject.client,
+                    deadline: this.state.addProject.deadline,
+                    priority: this.state.addProject.priority,
+                    admin_id: this.state.addProject.admin,
+                    user_ids: this.state.addProject.users
+
+                }
+
+                console.log(JSON.stringify(data, null, 4))
+
+                axios({
+
+                    url: `${this.state.api}project`,
+                    method: 'POST',
+                    headers: { 'x-access-token' : localStorage.getItem('token') },
+                    data: data
+
+                })
+
+                .then(response => {
+
+                    console.log(response)
+
+                    resolve(response)
+
+                })
+
+                .catch(error => reject(error))
+
+            })
+
+        }
 
     }
 
