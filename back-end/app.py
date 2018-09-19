@@ -285,11 +285,11 @@ def create_project(current_user):
 
     graph.create(new_project)
 
-    admin_id = data['admin_id']
-    admin = graph.run("MATCH (user:Person) WHERE user.umcn = '{user_id}' RETURN user".format(user_id=admin_id)).data()[0]["user"]
-
-    user_admin_project = Relationship(admin, 'IS_ADMIN', new_project)
-    graph.create(user_admin_project)
+    admin_ids = data['admin_id']
+    for admin_id in admin_ids:
+        admin = graph.run("MATCH (user:Person) WHERE user.umcn = '{user_id}' RETURN user".format(user_id=admin_id)).data()[0]["user"]
+        user_admin_project = Relationship(admin, 'IS_ADMIN', new_project)
+        graph.create(user_admin_project)
 
 
     user_ids = data['user_ids']
