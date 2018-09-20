@@ -61,7 +61,7 @@
 
 <script>
 
-    import {isObject} from 'lodash'
+    import {isObject} from 'lodash' // eslint-disable-line
 
     import selectOption from './option'
 
@@ -220,7 +220,7 @@
 
     .pop-footer {
 
-        color: white;
+        color: var(--green);
 
         width: 40px;
         height: 40px;
@@ -228,24 +228,25 @@
         position: absolute;
         bottom: 30px;
         right: -20px;
+        z-index: 1;
 
         display: grid;
         align-items: center;
 
         transition: 0.3s ease;
 
-        background-color: var(--green);
+        background-color: white;
         border-radius: 40px;
         box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
     }
 
     .empty {
 
-        color: white;
+        color: var(--red);
 
         bottom: 260px;
 
-        background-color: var(--red);
+        background-color: white;
     }
 
     .option-badge {

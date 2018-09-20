@@ -228,7 +228,7 @@
         grid-template-columns: auto 60px;
         grid-template-rows: 60px;
         align-items: center;
-
+        
         border-top: 1px solid rgba(0,0,0,0.01);
     }
 

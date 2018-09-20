@@ -44,8 +44,10 @@
 
                     this.$store.commit( 'updateOpenTaskForm', false )
                     this.$store.commit( 'updateOpenUserForm', false )
+                    this.$store.commit( 'updateOpenProjectForm', false )
                     this.$store.commit( 'resetAddTaskState' )
                     this.$store.commit( 'resetAddUserState' )
+                    this.$store.commit( 'resetAddProjectState' )
 
                 }
 

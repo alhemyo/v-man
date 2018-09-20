@@ -189,6 +189,7 @@
 
     transition: 0.2s ease;
 
+    background-color: white;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 3px;
 

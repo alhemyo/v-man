@@ -51,8 +51,6 @@ export default {
 
                 }
 
-                console.log(JSON.stringify(data, null, 4))
-
                 axios({
 
                     url: `${this.state.api}project`,
@@ -64,7 +62,7 @@ export default {
 
                 .then(response => {
 
-                    console.log(response)
+                    commit( 'unshiftProject', response.data )
 
                     resolve(response)
 

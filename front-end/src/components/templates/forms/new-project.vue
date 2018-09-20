@@ -37,7 +37,7 @@
 
             <p class="form-message">{{ message }}</p>
 
-            <p class="form-button" @click="newProject" >Add</p>
+            <p class="form-button" @click="newProject" ><i class="material-icons">done</i></p>
 
         </div>
 
@@ -122,7 +122,52 @@
 
             newProject() {
 
-                this.$store.dispatch('NEW_PROJECT')
+                if ( this.name && !this.name.match(this.$store.state.regex.login) ) {
+
+                    if ( this.deadline ) {
+
+                        if ( this.client ) {
+
+                            if ( this.admin ) {
+
+                                if ( this.users ) {
+
+                                    if ( this.priority ) {
+
+                                        this.$store.dispatch('NEW_PROJECT')
+
+                                        .then(() => {
+
+                                            this.$store.commit( 'updateOpenProjectForm', false )
+                                            this.$store.commit( 'resetAddProjectState' )
+
+                                        })
+
+                                    }
+
+                                    else { this.message = 'Please select priority.' }
+
+                                }
+
+                                else { this.message = 'Please select project users.' }
+
+                            }
+
+                            else { this.message = 'Please select project admin.' }
+
+                        }
+
+                        else { this.message = 'Please select Client.' }
+
+                    }
+
+                    else { this.message = 'Please select deadline date.' }
+
+                }
+
+                else { this.message = 'Valid name is required.' }
+
+                
             }
 
         },
@@ -130,6 +175,19 @@
         mounted() {
 
             this.$store.dispatch( 'GET_USERS' )
+        },
+
+        watch: {
+
+            message() {
+
+                setTimeout(() => {
+
+                    this.message = ''
+
+                },3000)
+
+            }
         }
 
     }

@@ -18,7 +18,8 @@ export default {
 
     mutations: {
 
-        updateProjects( state, projects ) { state.projects = projects }
+        updateProjects( state, projects ) { state.projects = projects },
+        unshiftProject( state, project ) { state.projects.unshift(project) }
 
     },
 
