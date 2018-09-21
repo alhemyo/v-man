@@ -133,7 +133,7 @@
     h1 span {
 
         font-weight: 500;
-        color: rgba(255,255,255,0.3);
+        color: white;
 
         transition: 0.2s ease;
     }

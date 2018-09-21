@@ -21,8 +21,8 @@
             <bars
             class="bars"
             :data="tasks"
-            :height="50"
-            :padding="10"
+            :height="90"
+            :padding="20"
             :gradient="['#FFC107','#FF312E']"
             :barWidth="5"
             :growDuration="0.1"
@@ -92,9 +92,9 @@
 
         display: grid;
         grid-template-columns: 10px 200px auto ;
-        grid-template-rows: 20px 20px;
+        grid-template-rows: 40px 40px;
         grid-column-gap: 10px;
-        grid-row-gap: 10px;
+        grid-row-gap: 20px;
         align-items: center;
         align-content: center;
     }
@@ -126,6 +126,8 @@
         font-size: 12px;
         color: var(--dark);
         white-space: nowrap;
+
+        align-self: flex-start;
     }
 
     .name {
@@ -138,7 +140,7 @@
         padding: 0px;
 
         grid-column: 2/3;
-        align-self: center;
+        align-self: flex-end;
 
         background-color: white;
     }

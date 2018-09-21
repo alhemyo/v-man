@@ -10,8 +10,6 @@
 
         <!-- replace with component when content -->
 
-        <div class="project-nav"></div>
-
         <div class="project-content">
 
             <tasks />
@@ -74,7 +72,7 @@
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 100px 60px auto;
+        grid-template-rows: 160px auto;
     }
 
     .project-content {

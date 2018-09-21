@@ -35,7 +35,8 @@
     .user-project {
 
         font-size: 12px;
-        color: rgba(255,255,255,0.3);
+        font-weight: 400;
+        color: rgba(255,255,255,0.2);
 
         width: 100%;
         height: 40px;
