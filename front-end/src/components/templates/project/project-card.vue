@@ -16,15 +16,20 @@
 
         <p v-show="client" class="project-info date">{{ client + ' / ' + formatDeadline }}</p>
 
-        <bars
-        class="bars"
-        :data="tasks"
-        :padding="20"
-        :gradient="['#FFC107','#FF312E']"
-        :barWidth="5"
-        :growDuration="0.1"
+        <div class="visual">
 
-         />
+            <bars
+            class="bars"
+            :data="tasks"
+            :height="50"
+            :padding="10"
+            :gradient="['#FFC107','#FF312E']"
+            :barWidth="5"
+            :growDuration="0.1"
+
+            />
+
+        </div>
 
     </div>
 
@@ -65,13 +70,12 @@
 
 <style scoped>
 
-    .bars {
+    .visual {
 
+        width: 100%;
         height: 100%;
 
         position: relative;
-
-        padding: 20px 0px;
 
         grid-column: 3/4;
         grid-row: 1/3;
