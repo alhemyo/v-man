@@ -100,23 +100,19 @@
 
     .calendar {
 
-        color: white;
-
         width: 100%;
-        max-width: 280px;
+        max-width: 600px;
         height: auto;
-        min-height: 200px;
+        min-height: 100%;
 
-        position: absolute;
-        top: 50%;
-        left: 50%;
+        position: relative;
+        margin: auto;
 
         padding: 20px;
 
-        transform: translate( -50%, -50% );
-
-        background-color: var(--dark);
-        border-radius: 10px;
+        display: grid;
+        align-items: center;
+        align-content: center;
     }
 
     .nav {
@@ -141,7 +137,7 @@
 
         font-family: (--default);
         font-size: 14px;
-        color: white;
+        text-align: right;
 
         width: 100%;
 
@@ -159,7 +155,7 @@
     .days {
 
         font-size: 12px;
-        font-weight: 300;
+        font-weight: 400;
         text-align: center;
 
         width: 100%;
@@ -177,7 +173,7 @@
         text-align: center;
 
         display: grid;
-        grid-template-columns: repeat( 7, minmax( 20px, 40px ) );
+        grid-template-columns: repeat( 7, minmax( 20px, 1fr ) );
         grid-template-rows: repeat( 6, minmax( 20px, 40px ) );
         grid-row-gap: 10px;
         align-items: center;
@@ -185,8 +181,7 @@
 
     .date {
 
-        font-weight: 300;
-        color: rgba(255,255,255,0.5);
+        font-weight: 400;
 
         width: 100%;
         height: 100%;

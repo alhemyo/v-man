@@ -57,11 +57,6 @@
             formatDeadline() { return moment(this.deadline).format("DD MMM YYYY") },
             tasks: { get() { return this.$store.state.tasks.tasks.map(task => { return moment(task.created).minutes() }) } }
             
-        },
-
-        mounted() {
-
-            console.log(this.tasks)
         }
 
     }

@@ -66,17 +66,8 @@
 
             openProjectForm() {
 
-                return new Promise( resolve => {
-
-                    resolve(this.$router.push({ name: 'projects' }))
-
-                })
-
-                .then(() => {
-
-                    this.$store.commit( 'updateOpenProjectForm', true )
-
-                })
+                this.$router.push({ name: 'projects' })
+                this.$store.commit( 'updateOpenProjectForm', true )
 
             }
         }
