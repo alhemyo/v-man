@@ -430,27 +430,6 @@ def create_task(current_user):
     task_project = Relationship(new_task, 'IS_TASK_OF', project)
     graph.create(task_project)
 
-    user_ids = data['users']
-
-    for user_id in user_ids:
-        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
-        user_task = Relationship(user, 'IS_USER', new_task)
-        graph.create(user_task)
-
-
-    notes = data['notes']
-    print(notes)
-    for note in notes:
-        new_note = Node("Note",
-                        client=note['client'],
-                        date=note['date'],
-                        message=note['message'])
-
-        graph.create(new_note)
-
-        note_task = Relationship(new_note, 'IS_NOTE_OF', new_task)
-        graph.create(note_task)
-
     new_task['project'] = project_id
     new_task['id'] = remote(new_task)._id
 

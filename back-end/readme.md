@@ -73,9 +73,7 @@
 	"download": "132412412",
 	"created": "123412431",
 	"finished": "12341234",
-	"upload": "12341234",
-	"users": ["user1", "user2"],
-	"notes": [{"message": "hello", "date": "1212344"}, {"message": "hi again", "date": "3412341243"}]
+	"upload": "12341234"
 }
 
 [POST] /task/&lt;id>/users
