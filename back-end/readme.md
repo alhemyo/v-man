@@ -73,7 +73,8 @@
 	"download": "132412412",
 	"created": "123412431",
 	"finished": "12341234",
-	"upload": "12341234"
+	"upload": "12341234",
+	"description": "asfdadsf"
 }
 
 [POST] /task/&lt;id>/users

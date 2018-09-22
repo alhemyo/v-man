@@ -394,8 +394,8 @@ def create_note(current_user, task_id):
 
     task = graph.run(f"MATCH (task:Task) WHERE ID(task)={task_id} RETURN task").data()[0]["task"]
 
-    print(task)
     new_note = Node("Note",
+                    user=current_user['umcn'],
                     client=data['client'],
                     date=data['date'],
                     message=data['message'])
@@ -419,7 +419,8 @@ def create_task(current_user):
                     download=data['download'],
                     created=data['created'],
                     finished=data['finished'],
-                    upload=data['upload']
+                    upload=data['upload'],
+                    description=data['description']
                     )
 
     graph.create(new_task)
