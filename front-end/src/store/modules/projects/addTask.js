@@ -44,8 +44,9 @@ export default {
 
                 let data = {
 
-                    name: this.state.addTask.name || 'Task',
-                    priority: this.state.addTask.priority || 'low',
+                    name: this.state.addTask.name,
+                    priority: this.state.addTask.priority,
+                    description: this.state.addTask.description,
                     project: this.state.addTask.id,
                     created: this.state.addTask.created,
                     deadline: this.state.addTask.deadline,

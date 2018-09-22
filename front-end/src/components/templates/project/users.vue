@@ -4,7 +4,7 @@
 
         <div class="header">
 
-            <p class="header-text">{{ usersLength }} Assigned Users</p>
+            <p class="header-text">{{ assignedUsersLength }} Assigned Users</p>
 
         </div>
 
@@ -18,9 +18,10 @@
                 :name="user.name + ' ' + user.surname"
                 :avatar="user.gender === 'male' ? male : female" />
 
+
             </transition-group>
 
-            <loader :condition="loading" />
+            <loader :loading="loading" />
 
         </div>
 
@@ -68,25 +69,23 @@
 
         computed: {
 
-            assignedUsers() {
+            project() {
 
-                let project = this.$store.state.thisUserProjects.projects.find(( project ) => {
+                return this.$store.state.thisUserProjects.projects.find((project) => {
 
                     return project.id === Number( this.$route.params.id )
 
-                })
-
-                return this.$store.state.users.users.filter(( user, index ) => {
-
-                    return user.id === project.users[index]
-
-                }) || []
+                }) || {}
 
             },
 
-            usersLength() { return this.assignedUsers.length || 0 },
+            users: { get() { return this.$store.state.users.users } },
 
-            loading() { return this.assignedUsers.length === 0 ? true : false || false }
+            assignedUsers() { return this.users.filter(user => this.project.users.includes(user.umcn)) || [] },
+
+            assignedUsersLength() { return this.assignedUsers.length || 0 },
+
+            loading() { return this.assignedUsersLength > 0 ? false : true }
 
         },
 
