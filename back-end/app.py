@@ -311,6 +311,31 @@ def create_project(current_user):
     return jsonify(project_obj)
 
 
+@app.route('/project/<project_id>/users', methods=['POST'])
+@token_required
+def assign_users_to_project(current_user, project_id):
+
+    data = request.get_json()
+    users = data['users']
+    admins = data['admins']
+
+    project = graph.run("MATCH (project:Project) WHERE ID(project)={id} RETURN project".format(id=project_id)).data()[0]["project"]
+    print(project)
+
+    for user_id in users:
+        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
+        print(user)
+        user_project = Relationship(user, 'IS_USER', project)
+        graph.create(user_project)
+
+    for user_id in admins:
+        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
+        print(user)
+        user_project = Relationship(user, 'IS_ADMIN', project)
+        graph.create(user_project)
+
+    return jsonify(data)
+
 
 @app.route('/project/<project_id>/tasks', methods=['GET'])
 @token_required
@@ -325,7 +350,6 @@ def get_tasks_of_project(current_user, project_id):
         tasks_list.append(task['task'])
 
     return jsonify(Tasks=tasks_list)
-
 
 
 @app.route('/task/<task_id>/notes', methods=['GET'])
@@ -344,7 +368,42 @@ def get_notes_of_task(current_user, task_id):
     return jsonify(Notes=notes_list)
 
 
+@app.route('/task/<task_id>/users', methods=['POST'])
+@token_required
+def assign_users_to_task(current_user, task_id):
 
+    data = request.get_json()
+    users = data['users']
+
+    task = graph.run("MATCH (task:Task) WHERE ID(task)={id} RETURN task".format(id=task_id)).data()[0]["task"]
+    print(task)
+
+    for user_id in users:
+        user = graph.run("MATCH (user:Person) WHERE user.umcn='{id}' RETURN user".format(id=user_id)).data()[0]["user"]
+        print(user)
+        user_task = Relationship(user, 'IS_USER', task)
+        graph.create(user_task)
+
+    return jsonify(Users=users)
+
+
+@app.route('/task/<task_id>/note', methods=['POST'])
+@token_required
+def create_note(current_user, task_id):
+    data = request.get_json()
+
+    task = graph.run(f"MATCH (task:Task) WHERE ID(task)={task_id} RETURN task").data()[0]["task"]
+
+    print(task)
+    new_note = Node("Note",
+                    client=data['client'],
+                    date=data['date'],
+                    message=data['message'])
+
+    note_task = Relationship(new_note, 'IS_NOTE_OF', task)
+    graph.create(note_task)
+
+    return jsonify(new_note)
 
 @app.route('/task', methods=['POST'])
 @token_required
@@ -397,24 +456,6 @@ def create_task(current_user):
 
     return jsonify(new_task)
 
-
-@app.route('/note', methods=['POST'])
-@token_required
-def create_note(current_user):
-    data = request.get_json()
-
-    task_id = data["task"]
-    task = graph.run(f"MATCH (task:Task) WHERE ID(task)={task_id} RETURN task").data()[0]["task"]
-
-    new_note = Node("Note",
-                    client=data['client'],
-                    date=data['date'],
-                    message=data['message'])
-
-    note_task = Relationship(new_note, 'IS_NOTE_OF', task)
-    graph.create(note_task)
-
-    return jsonify(new_note)
 
 
 # @app.route('/project/<project_id>', methods=['PUT'])

@@ -50,7 +50,6 @@ TASK:
 
 NOTE:
 {
-	"task": "80",
 	"client": "Method",
 	"date": "25-08-2018",
 	"message": "Hello"
