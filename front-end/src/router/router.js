@@ -103,6 +103,12 @@ export default new Router({
           path: '/project/:id',
           name: 'project',
           component: () => import('../components/templates/project/project.vue')
+        },
+
+        {
+          path: '/calendar',
+          name: 'calendar',
+          component: () => import('../components/templates/events/calendar.vue')
         }
 
       ]
