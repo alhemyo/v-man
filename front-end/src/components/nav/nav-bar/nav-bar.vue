@@ -18,12 +18,6 @@
 
             </router-link>
 
-            <router-link :to="{ name: 'calendar' }" >
-
-                <i class="material-icons main-nav-icons">access_time</i>    
-                
-            </router-link> 
-
         </div>
 
         <div></div>
@@ -95,7 +89,7 @@
         height: 80px;
 
         display: grid;
-        grid-template-columns: 60px 60px 60px 60px;
+        grid-template-columns: 60px 60px 60px;
         grid-template-rows: 80px;
         align-items: center;
         justify-items: center;

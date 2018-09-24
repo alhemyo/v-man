@@ -4,17 +4,17 @@
 
         <div class="nav">
 
-            <i class="material-icons" @click="prevYear" >keyboard_arrow_left</i>
+            <i class="material-icons next-year" title="previous year" @click="prevYear" >keyboard_arrow_left</i>
 
-            <i class="material-icons" @click="prev" >keyboard_arrow_left</i>
+            <i class="material-icons next" title="previous month" @click="prev" >keyboard_arrow_left</i>
 
             <p class="month" >{{ formatMonth }}</p>
 
             <p class="year">{{ year }}</p>
 
-            <i class="material-icons" @click="next" >keyboard_arrow_right</i>
+            <i class="material-icons next" title="next month" @click="next" >keyboard_arrow_right</i>
 
-            <i class="material-icons" @click="nextYear" >keyboard_arrow_right</i>
+            <i class="material-icons next-year" title="next year" @click="nextYear" >keyboard_arrow_right</i>
 
         </div>
 
@@ -26,7 +26,29 @@
 
         <div class="table">
 
-            <p class="date" :key="day" v-for="(day, index) in (daysInMonth + firstDay)" >{{ (index + 1) > firstDay ? day - firstDay : '' }}</p>
+            <div class="date-wrap" 
+
+            :key="day" 
+            v-for="day in (daysInMonth + firstDay)"
+            @click="test"
+
+            >
+            
+                <p
+                 class="date"
+                 :class="{ 
+
+                    today : month === new Date().getMonth() ? day - firstDay === today.getDate() ? true : false : false,
+                    'date-hover' : day > firstDay ? true : false
+                    
+                    }"
+                 >
+                 
+                    {{ day > firstDay ? day - firstDay : '' }}
+                 
+                 </p>
+            
+            </div>
 
         </div>
 
@@ -46,7 +68,6 @@
             return {
 
                 days: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
-                months: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
 
                 today: new Date(),
                 month: new Date().getMonth(),
@@ -63,6 +84,14 @@
         },
 
         methods: {
+
+            test(event) {
+
+                let clickedDate = new Date( this.year, this.month, event.target.firstChild.data, ) 
+
+                console.log(clickedDate)
+
+            },
 
             next() { 
                 
@@ -101,21 +130,23 @@
     .calendar {
 
         width: 100%;
-        max-width: 600px;
         height: auto;
-        min-height: 100%;
 
         position: relative;
 
         display: grid;
         align-items: center;
         align-content: center;
+
+        opacity: 0.8;
     }
 
     .nav {
 
         font-size: 14px;
+        font-weight: 400;
         text-align: center;
+        color: var(--white);
 
         width: 100%;
         height: auto;
@@ -133,7 +164,6 @@
     .month {
 
         font-family: (--default);
-        font-size: 14px;
         text-align: right;
 
         width: 100%;
@@ -154,6 +184,7 @@
         font-size: 12px;
         font-weight: 400;
         text-align: center;
+        color: rgba(255,255,255,0.5);
 
         width: 100%;
         height: 40px;
@@ -166,31 +197,73 @@
 
     .table {
 
-        font-size: 12px;
-        text-align: center;
-
         display: grid;
         grid-template-columns: repeat( 7, minmax( 20px, 1fr ) );
-        grid-template-rows: repeat( 6, minmax( 20px, 40px ) );
+        grid-template-rows: repeat( 6, minmax( 20px, 30px ) );
         grid-row-gap: 10px;
         align-items: center;
     }
 
-    .date {
-
-        font-weight: 400;
-        color: white;
+    .date-wrap {
 
         width: 100%;
         height: 100%;
 
+        position: relative;
+
         display: grid;
         align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .date {
+
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba( 255,255,255,0.3 );
+        text-align: center;
+
+        width: 20px;
+        height: 20px;
+
+        display: grid;
+        align-items: center;
+
+        border-radius: 3px;
+
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .date-wrap:hover .date-hover {
+
+        width: 28px;
+        height: 28px;
+
+        background-color: rgba( 255,255,255,0.1 );
+
+        cursor: pointer;
+        pointer-events: all;
+    }
+    
+    .today {
+
+        color: white;
+
+        width: 28px;
+        height: 28px;
     }
 
     .material-icons {
 
         text-align: center;
+    }
+
+    .next-year {
+
+        font-size: 18px;
+        color: rgba(255,255,255,0.5);
     }
 
 </style>

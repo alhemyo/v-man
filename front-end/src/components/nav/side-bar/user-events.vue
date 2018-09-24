@@ -32,6 +32,8 @@
         width: 100%;
         height: auto;
 
+        padding-top: 40px;
+
         color: white;
     }
 

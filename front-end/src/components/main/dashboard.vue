@@ -94,6 +94,8 @@
 
     .view {
 
+        position: relative;
+
         overflow: hidden;
     }
 

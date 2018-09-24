@@ -12,12 +12,12 @@
 
         <user-nav />
 
-        <user-projects />
+        <user-events />
 
         <!--
 
-        <user-events />
-
+        <user-projects />
+        
         -->
 
         <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
