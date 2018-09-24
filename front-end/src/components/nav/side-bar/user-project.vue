@@ -1,6 +1,6 @@
 <template>
     
-    <router-link :to="{ name: 'project', params: { id: id } }" class="user-project">
+    <router-link :to="{ name: 'myproject' , params: { id: id } }" class="user-project">
         
         <div class="priority" :class="{ high : ( priority === 'high' ), mid : ( priority === 'mid' ) }"></div> 
         

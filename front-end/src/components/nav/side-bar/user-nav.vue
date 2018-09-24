@@ -2,11 +2,11 @@
     
     <div class="user-nav" :class="{ mini : miniSidebar }">
 
-        <i class="material-icons">person</i>
+        <router-link class="link" :to="{ name: 'myprofile' }" ><i class="material-icons">person</i></router-link>
 
-        <i class="material-icons">list</i>
+        <router-link class="link" :to="{ name: 'myprojects' }" ><i class="material-icons">list</i></router-link>
 
-        <i class="material-icons">access_time</i>
+        <router-link class="link" :to="{ name: 'myevents' }" ><i class="material-icons">access_time</i></router-link>
 
     </div>
 
@@ -32,9 +32,6 @@
 
     .user-nav {
 
-        color: rgba(255,255,255,0.2);
-        text-align: center;
-
         width: 100%;
         height: 60px;
 
@@ -47,19 +44,25 @@
         border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    .user-nav > i {
+    .user-nav > .link i {
 
         font-size: 26px;
     }
 
-    .user-nav > i:nth-child(2) {
+    .user-nav > .link:nth-child(2) i {
 
         font-size: 32px;
     }
 
-    .user-nav > i:nth-child(3) {
+    .user-nav > .link:nth-child(3) i {
 
         font-size: 24px;
+    }
+
+    .link {
+
+        color: rgba(255,255,255,0.2);
+        text-align: center;
     }
 
     .mini {

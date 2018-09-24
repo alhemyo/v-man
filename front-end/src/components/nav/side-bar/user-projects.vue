@@ -53,6 +53,12 @@
 
         this.$store.dispatch( 'GET_THIS_USER_PROJECTS' )
 
+        .then(() => {
+
+            this.$router.push({ name: 'myproject', params: { id : this.projects[0].id } })
+
+        })
+
         }
 
     }
@@ -83,8 +89,6 @@
         min-height: 0;
 
         position: relative;
-
-        padding-top: 40px;
 
         overflow: hidden;
         overflow-y: scroll;

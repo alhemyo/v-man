@@ -12,10 +12,19 @@
 
         <user-nav />
 
-        <user-events />
+        <div class="side-view" >
+
+            <transition name="route" mode="out-in">
+
+                <router-view name="sideview"></router-view>
+
+            </transition>
+
+        </div>
 
         <!--
 
+        <user-events />
         <user-projects />
         
         -->
@@ -167,6 +176,15 @@
     .mini {
 
         opacity: 0;
+    }
+
+    .side-view {
+
+        height: 100%;
+
+        position: relative;
+
+        padding-top: 40px;
     }
 
     .side-bar-footer {

@@ -97,12 +97,42 @@ export default new Router({
           })
         },
 
-        // Dynamic project routes
+        // Regular routes
 
         {
-          path: '/project/:id',
-          name: 'project',
-          component: () => import('../components/templates/project/project.vue')
+          path: '/myprofile',
+          name: 'myprofile',
+          alias: '/',
+          components: {
+            default: () => import('../components/templates/user/timeline.vue'),
+            sideview: () => import('../components/nav/side-bar/user-profile.vue')
+          }
+        },
+        {
+          path: '/myprojects',
+          name: 'myprojects',
+          components: {
+            default: () => import('../components/templates/mainview.vue'),
+            sideview: () => import('../components/nav/side-bar/user-projects.vue')
+          },
+          children: [
+
+            {
+              path: ':id',
+              name: 'myproject',
+              components: {
+                mainview: () => import('../components/templates/project/project.vue')
+              }
+            }
+
+          ]
+        },
+        {
+          path: '/myevents',
+          name: 'myevents',
+          components: {
+            sideview: () => import('../components/nav/side-bar/user-events.vue')
+          }
         }
 
       ]
