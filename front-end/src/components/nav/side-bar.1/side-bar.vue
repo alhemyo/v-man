@@ -2,23 +2,13 @@
     
     <div class="side-bar" :class="{ 'side-bar-mini' : miniSidebar }">
 
-        <div class="header" :class="{ 'header-mini' : miniSidebar }" >
-
-            <img src="/images/assets/logo/vertigo_logo.png" alt="logo" />
-
-        </div>
+        <h1 :class="{ 'h1-mini' : miniSidebar }" >V <span :class="{ mini : miniSidebar }" >MAN</span></h1>
 
         <user-card />
 
         <user-nav />
 
         <user-projects />
-
-        <!--
-
-        <user-events />
-
-        -->
 
         <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
 
@@ -41,7 +31,6 @@
     import userCard from './user-card'
     import userNav from './user-nav'
     import userProjects from './user-projects'
-    import userEvents from './user-events'
 
     export default {
 
@@ -51,8 +40,7 @@
 
             userCard,
             userNav,
-            userProjects,
-            userEvents
+            userProjects
 
         },
 
@@ -97,40 +85,17 @@
 
         position: relative;
 
-        padding: 0px 20px;
-
         grid-row: 1/3;
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 80px 160px 60px auto 60px;
+        grid-template-rows: 80px 100px 60px auto 60px;
 
         transition: width 0.3s ease;
 
         background-color: var(--dark);
 
         overflow: hidden;
-    }
-
-    .header {
-
-        width: 100%;
-
-        padding: 20px 0px;
-
-        transition: width 0.3s ease;
-    }
-
-    .header-mini {
-
-        width: 40px;
-
-        padding: 25px 0px;
-    }
-
-    .header-img {
-
-        transition: 0.3s ease;
     }
 
     .side-bar-mini {

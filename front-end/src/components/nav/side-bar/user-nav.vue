@@ -2,13 +2,11 @@
     
     <div class="user-nav" :class="{ mini : miniSidebar }">
 
-        <i class="material-icons" title="profile" >account_circle</i>
+        <i class="material-icons">person</i>
 
-        <i class="material-icons" >timeline</i>
+        <i class="material-icons">list</i>
 
-        <i class="material-icons" >access_time</i>
-
-        <i class="material-icons" @click="logout" title="Logout" >power_settings_new</i>
+        <i class="material-icons">access_time</i>
 
     </div>
 
@@ -24,15 +22,6 @@
 
             miniSidebar: { get() { return this.$store.state.miniSidebar } }
 
-        },
-
-        methods: {
-
-            logout() {
-
-                this.$store.dispatch('LOGOUT')
-
-            }
         }
 
     }
@@ -43,36 +32,34 @@
 
     .user-nav {
 
+        color: rgba(255,255,255,0.2);
+        text-align: center;
+
         width: 100%;
         height: 60px;
 
-        position: relative;
-
         display: grid;
-        grid-template-columns: 60px 60px 60px 60px;
-        grid-template-rows: 60px;
-        justify-content: space-around;
+        grid-template-columns: repeat(3, 50px);
+        justify-content: center;
+        align-items: center;
 
-        transition: 0.3s ease;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    .material-icons {
+    .user-nav > i {
 
-        font-size: 22px;
-        color: var(--white);
-
-        padding: 18px;
-
-        transition: 0.2s ease;
-
-        opacity: 0.3;
-
-        cursor: pointer;
+        font-size: 26px;
     }
 
-    .material-icons:hover {
+    .user-nav > i:nth-child(2) {
 
-        opacity: 0.6;
+        font-size: 32px;
+    }
+
+    .user-nav > i:nth-child(3) {
+
+        font-size: 24px;
     }
 
     .mini {

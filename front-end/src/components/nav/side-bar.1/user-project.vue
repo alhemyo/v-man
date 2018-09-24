@@ -36,19 +36,21 @@
 
         font-size: 12px;
         font-weight: 400;
-        color: rgba(255,255,255,0.4);
+        color: rgba(255,255,255,0.2);
 
         width: 100%;
         height: 40px;
 
         position: relative;
 
+        padding: 0px 20px;
+
         display: grid;
-        grid-template-columns: 20px auto 30px;
+        grid-template-columns: 20px auto 20px;
         grid-template-rows: 40px;
         align-items: center;
 
-        border-radius: 3px;
+        border-radius: 0px 30px 30px 0px;
     }
 
     .user-project:hover {
@@ -56,25 +58,6 @@
         color: rgba(255,255,255,0.6);
 
         background-color: rgba(255,255,255,0.05);
-    }
-
-    .user-project > i {
-
-        text-align: center;
-        color: rgba(255,255,255,0.3);
-
-        transition: 0.2s ease;
-
-        transform: translateX( -20px );
-
-        opacity: 0;
-    }
-
-    .user-project:hover > i {
-
-        transform: translateX( 0px );
-
-        opacity: 1;
     }
 
     .priority {
@@ -100,25 +83,18 @@
 
     .router-link-active {
 
-        color: white;
-        font-weight: 500;
+        color: var(--dark);
+        font-weight: 700;
 
-        background-color: rgba(0,0,0,0.1);
+        background-color: var(--white);
     }
 
     .router-link-active:hover {
 
-        color: white;
-        font-weight: 500;
+        color: var(--dark);
+        font-weight: 700;
 
-        background-color: rgba(0,0,0,0.1);
-    }
-
-    .router-link-active > i {
-
-        transform: translateX( 0px );
-
-        opacity: 1;
+        background-color: var(--white);
     }
 
 </style>

@@ -87,9 +87,9 @@
 
         display: grid;
         grid-template-columns: 10px 200px auto ;
-        grid-template-rows: 40px 40px;
+        grid-template-rows: 35px 30px;
         grid-column-gap: 10px;
-        grid-row-gap: 20px;
+        grid-row-gap: 10px;
         align-items: center;
         align-content: center;
     }
@@ -127,7 +127,7 @@
 
     .name {
 
-        font-size: 14px;
+        font-size: 24px;
         text-align: left;
         white-space: nowrap;
         color: var(--dark);

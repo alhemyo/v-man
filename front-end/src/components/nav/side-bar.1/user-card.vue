@@ -6,6 +6,8 @@
 
             <img class="avatar" :src="(gender === 'female') ? female : male" />
 
+            <div class="status"></div>
+
         </div>
 
         <div class="info" :class="{ mini : miniSidebar }">
@@ -56,19 +58,19 @@
     .user-card {
 
         width: 100%;
-        height: 160px;
+        height: 100px;
 
         position: relative;
 
         display: grid;
-        grid-template-columns: minmax( 40px, 100px ) 180px;
+        grid-template-columns: minmax( 80px, 100px ) 180px;
     }
 
     .avatar-wrap {
 
         position: relative;
 
-        padding: 0px;
+        padding: 20px;
 
         display: grid;
         align-items: center;
@@ -76,9 +78,25 @@
         transition: 0.3s ease;
     }
 
+    .status {
+
+        width: 15px;
+        height: 15px;
+
+        position: absolute;
+        left: 50%;
+        bottom: 12px;
+
+        transform: translateX(-50%);
+
+        background-color: var(--green);
+        border: 2px solid var(--dark);
+        border-radius: 15px;
+    }
+
     .info {
 
-        padding: 20px 20px;
+        padding: 20px 0px;
 
         display: grid;
         grid-template-columns: 1fr;
@@ -93,15 +111,15 @@
     .user-info {
 
         font-size: 14px;
-        font-weight: 300;
-        color: rgba(255,255,255,0.5);
+        font-weight: 500;
+        color: rgba(255,255,255,0.3);
     }
 
     .name {
 
         font-size: 14px;
-        font-weight: 500;
-        color: white;
+        font-weight: 600;
+        color: var(--white);
     }
 
     .mini {
