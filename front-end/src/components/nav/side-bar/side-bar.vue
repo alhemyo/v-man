@@ -31,13 +31,7 @@
 
         <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
 
-            <div class="button side-bar-button" :class="{ 'mini-side-bar-button' : miniSidebar }" @click="openProjectForm" >
-
-                <p>New project</p>
-
-                <i class="material-icons">add</i>
-
-            </div>
+            <i class="material-icons" @click="logout" >power_settings_new</i>
 
         </div>
 
@@ -89,6 +83,16 @@
 
                 this.$router.push({ name: 'projects' })
                 this.$store.commit( 'updateOpenProjectForm', true )
+
+            },
+
+            logout() {
+
+                if ( confirm( 'Are you sure you want to Logout?' ) ) {
+
+                    this.$store.dispatch( 'LOGOUT' )
+
+                }
 
             }
         }
@@ -189,44 +193,39 @@
 
     .side-bar-footer {
 
+        color: rgba( 255, 255, 255, 0.3 );
+
         width: 100%;
         height: 60px;
 
         position: relative;
 
-        padding: 0px 20px;
-
         display: grid;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
 
-        transition: width 0.3s ease;
+        transition: 0.3s ease;
+    }
+
+    .side-bar-footer:hover {
+
+        color: rgba( 255, 255, 255, 0.8 );
     }
 
     .side-bar-footer-mini {
 
-        width: 80px;
-
-        justify-content: center;
-    }
-
-    .side-bar-button {
-
-        color: rgba(255,255,255,0.5);
-
-        transition: 0.3s ease;
-
-        background-color: var(--black);
-    }
-
-    .mini-side-bar-button {
-
         width: 40px;
 
-        justify-content: flex-end;
-
-        overflow: hidden;
+        padding: 0px;
     }
+
+    .side-bar-footer > i {
+
+        padding: 18px;
+
+        cursor: pointer;
+    }
+
 
 </style>
 

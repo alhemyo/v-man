@@ -70,7 +70,7 @@
     .user-projects {
 
         width: 100%;
-        height: calc( 100vh - 360px );
+        height: calc( 100vh - 400px );
 
         position: relative;
 

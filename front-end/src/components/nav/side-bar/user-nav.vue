@@ -65,6 +65,11 @@
         text-align: center;
     }
 
+    .router-link-active {
+
+        color: white;
+    }
+
     .mini {
 
         opacity: 0;

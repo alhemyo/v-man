@@ -46,6 +46,7 @@ export default new Router({
 
               if ( store.state.thisUser.admin_type === 'uber admin' || store.state.thisUser.admin_type === 'project admin' ) {
 
+                store.commit( 'updateMiniSidebar', true )
                 next()
 
               }
@@ -76,6 +77,7 @@ export default new Router({
 
               if ( store.state.thisUser.admin_type === 'uber admin' || store.state.thisUser.admin_type === 'user admin' ) {
 
+                store.commit( 'updateMiniSidebar', true )
                 next()
 
               }
