@@ -28,7 +28,7 @@
 
     import addTask from '../forms/add-task'
     import projectCard from './project-card'
-    import tasks from './tasks'
+    import tasks from './tasks/tasks'
     import users from './users'
 
     export default {
