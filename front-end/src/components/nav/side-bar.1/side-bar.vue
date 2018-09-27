@@ -2,36 +2,23 @@
     
     <div class="side-bar" :class="{ 'side-bar-mini' : miniSidebar }">
 
-        <div class="header" :class="{ 'header-mini' : miniSidebar }" >
-
-            <img src="/images/assets/logo/vertigo_logo.png" alt="logo" />
-
-        </div>
+        <h1 :class="{ 'h1-mini' : miniSidebar }" >V <span :class="{ mini : miniSidebar }" >MAN</span></h1>
 
         <user-card />
 
         <user-nav />
 
-        <div class="side-view" >
-
-            <transition name="route" mode="out-in">
-
-                <router-view name="sideview"></router-view>
-
-            </transition>
-
-        </div>
-
-        <!--
-
-        <user-events />
         <user-projects />
-        
-        -->
 
         <div class="side-bar-footer" :class="{ 'side-bar-footer-mini' : miniSidebar }" >
 
-            <i class="material-icons" @click="logout" >power_settings_new</i>
+            <div class="button side-bar-button" :class="{ 'mini-side-bar-button' : miniSidebar }" @click="openProjectForm" >
+
+                <p>New project</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
 
         </div>
 
@@ -44,7 +31,6 @@
     import userCard from './user-card'
     import userNav from './user-nav'
     import userProjects from './user-projects'
-    import userEvents from './user-events'
 
     export default {
 
@@ -54,8 +40,7 @@
 
             userCard,
             userNav,
-            userProjects,
-            userEvents
+            userProjects
 
         },
 
@@ -84,16 +69,6 @@
                 this.$router.push({ name: 'projects' })
                 this.$store.commit( 'updateOpenProjectForm', true )
 
-            },
-
-            logout() {
-
-                if ( confirm( 'Are you sure you want to Logout?' ) ) {
-
-                    this.$store.dispatch( 'LOGOUT' )
-
-                }
-
             }
         }
  
@@ -110,40 +85,17 @@
 
         position: relative;
 
-        padding: 0px 20px;
-
         grid-row: 1/3;
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 80px 160px 60px auto 60px;
+        grid-template-rows: 80px 100px 60px auto 60px;
 
         transition: width 0.3s ease;
 
         background-color: var(--dark);
 
         overflow: hidden;
-    }
-
-    .header {
-
-        width: 100%;
-
-        padding: 20px 0px;
-
-        transition: width 0.3s ease;
-    }
-
-    .header-mini {
-
-        width: 40px;
-
-        padding: 25px 0px;
-    }
-
-    .header-img {
-
-        transition: 0.3s ease;
     }
 
     .side-bar-mini {
@@ -182,50 +134,46 @@
         opacity: 0;
     }
 
-    .side-view {
-
-        height: 100%;
-
-        position: relative;
-
-        padding-top: 40px;
-    }
-
     .side-bar-footer {
-
-        color: rgba( 255, 255, 255, 0.3 );
 
         width: 100%;
         height: 60px;
 
         position: relative;
 
+        padding: 0px 20px;
+
         display: grid;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
 
-        transition: 0.3s ease;
-    }
-
-    .side-bar-footer:hover {
-
-        color: rgba( 255, 255, 255, 0.8 );
+        transition: width 0.3s ease;
     }
 
     .side-bar-footer-mini {
 
+        width: 80px;
+
+        justify-content: center;
+    }
+
+    .side-bar-button {
+
+        color: rgba(255,255,255,0.5);
+
+        transition: 0.3s ease;
+
+        background-color: var(--black);
+    }
+
+    .mini-side-bar-button {
+
         width: 40px;
 
-        padding: 0px;
+        justify-content: flex-end;
+
+        overflow: hidden;
     }
-
-    .side-bar-footer > i {
-
-        padding: 18px;
-
-        cursor: pointer;
-    }
-
 
 </style>
 

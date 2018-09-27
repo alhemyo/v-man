@@ -138,6 +138,8 @@
     .projects-list {
 
         width: calc( 100% + 17px );
+        
+        position: relative;
 
         background-color: rgba(0,0,0,0.1);
 

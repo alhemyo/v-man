@@ -4,7 +4,7 @@
 
         <div class="main-nav">
 
-            <i class="material-icons close-bar" @click="toggleSidebar" >{{ miniSidebar ? 'keyboard_arrow_right' : 'keyboard_arrow_left' }}</i>
+            <i class="material-icons close-bar" @click="miniSidebar = !miniSidebar" >{{ miniSidebar ? 'keyboard_arrow_right' : 'keyboard_arrow_left' }}</i>
 
             <router-link v-if="( admin === 'true' && adminType === 'uber admin' || adminType === 'project admin' )" :to="{ name: 'projects' }" >
 
@@ -17,12 +17,6 @@
                 <i class="material-icons main-nav-icons">group</i>
 
             </router-link>
-
-            <router-link :to="{ name: 'calendar' }" >
-
-                <i class="material-icons main-nav-icons">access_time</i>    
-                
-            </router-link> 
 
         </div>
 
@@ -48,21 +42,15 @@
 
         computed: {
 
-            miniSidebar: { get() { return this.$store.state.miniSidebar } },
+            miniSidebar: { 
+                
+                get() { return this.$store.state.miniSidebar }, 
+                set(miniSidebar) { this.$store.commit('updateMiniSidebar', miniSidebar ) }
+            },
 
             admin: { get() { return this.$store.state.thisUser.is_admin } },
             adminType: { get() { return this.$store.state.thisUser.admin_type } },
 
-        },
-
-        methods: {
-
-            toggleSidebar() {
-
-                this.mini = !this.mini
-
-                this.$store.commit('updateMiniSidebar', this.mini )
-            }
         }
 
     }
@@ -95,7 +83,7 @@
         height: 80px;
 
         display: grid;
-        grid-template-columns: 60px 60px 60px 60px;
+        grid-template-columns: 60px 60px 60px;
         grid-template-rows: 80px;
         align-items: center;
         justify-items: center;

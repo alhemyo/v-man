@@ -21,7 +21,7 @@
 
             </transition-group>
 
-            <loader :loading="loading" />
+            <loader :condition="loading" />
 
         </div>
 
@@ -75,7 +75,7 @@
 
                     return project.id === Number( this.$route.params.id )
 
-                }) || {}
+                })
 
             },
 

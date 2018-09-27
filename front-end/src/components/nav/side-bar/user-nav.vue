@@ -2,13 +2,11 @@
     
     <div class="user-nav" :class="{ mini : miniSidebar }">
 
-        <i class="material-icons" title="profile" >account_circle</i>
+        <router-link class="link" :to="{ name: 'myprofile' }" ><i class="material-icons">person</i></router-link>
 
-        <i class="material-icons" >timeline</i>
+        <router-link class="link" :to="{ name: 'myprojects' }" ><i class="material-icons">list</i></router-link>
 
-        <i class="material-icons" >access_time</i>
-
-        <i class="material-icons" @click="logout" title="Logout" >power_settings_new</i>
+        <router-link class="link" :to="{ name: 'myevents' }" ><i class="material-icons">access_time</i></router-link>
 
     </div>
 
@@ -24,15 +22,6 @@
 
             miniSidebar: { get() { return this.$store.state.miniSidebar } }
 
-        },
-
-        methods: {
-
-            logout() {
-
-                this.$store.dispatch('LOGOUT')
-
-            }
         }
 
     }
@@ -46,33 +35,39 @@
         width: 100%;
         height: 60px;
 
-        position: relative;
-
         display: grid;
-        grid-template-columns: 60px 60px 60px 60px;
-        grid-template-rows: 60px;
-        justify-content: space-around;
+        grid-template-columns: repeat(3, 50px);
+        justify-content: center;
+        align-items: center;
 
-        transition: 0.3s ease;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    .material-icons {
+    .user-nav > .link i {
 
-        font-size: 22px;
-        color: var(--white);
-
-        padding: 18px;
-
-        transition: 0.2s ease;
-
-        opacity: 0.3;
-
-        cursor: pointer;
+        font-size: 26px;
     }
 
-    .material-icons:hover {
+    .user-nav > .link:nth-child(2) i {
 
-        opacity: 0.6;
+        font-size: 32px;
+    }
+
+    .user-nav > .link:nth-child(3) i {
+
+        font-size: 24px;
+    }
+
+    .link {
+
+        color: rgba(255,255,255,0.2);
+        text-align: center;
+    }
+
+    .router-link-active {
+
+        color: white;
     }
 
     .mini {

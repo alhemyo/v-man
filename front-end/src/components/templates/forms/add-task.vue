@@ -176,6 +176,7 @@
         position: absolute;
         bottom: -600px;
         right: 40px;
+        z-index: 2;
 
         display: grid;
         grid-template-rows: 40px auto 60px;

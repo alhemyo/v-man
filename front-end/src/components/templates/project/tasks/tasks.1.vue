@@ -110,6 +110,8 @@
         grid-template-columns: 1fr;
         grid-template-rows: 60px auto 60px;
 
+        background-color: white;
+
         overflow: hidden;
     }
 
