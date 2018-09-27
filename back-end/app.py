@@ -437,6 +437,28 @@ def create_task(current_user):
     return jsonify(new_task)
 
 
+@app.route('/task/<task_id>', methods=['PATCH'])
+def edit_task(task_id):
+
+    data = request.get_json()
+
+    print(task_id)
+
+    task = Node('Task', _id=task_id)
+    graph.merge(task)
+    for key in data:
+        task[key] = data[key]
+    task.push()
+
+    print(remote(task)._id)
+
+    if not task:
+        return jsonify({'message': 'Task not found!'})
+
+    return jsonify(task)
+
+
+
 
 # @app.route('/project/<project_id>', methods=['PUT'])
 # def edit_user(project_id):
