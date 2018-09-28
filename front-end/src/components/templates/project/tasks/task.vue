@@ -60,17 +60,21 @@
 
                 <div class="notes-list">
 
-                    <note 
+                    <transition-group name="list">
 
-                    :key="index" 
-                    v-for="(note, index) in notes"
-                    :user="note.user"
-                    :client="note.client"
-                    :date="note.date"
-                    :message="note.message"
-                    :visible="active"
-                    
-                    />
+                        <note 
+
+                        v-for="(note, index) in notes"
+                        :key="index" 
+                        :user="note.user"
+                        :client="note.client"
+                        :date="note.date"
+                        :message="note.message"
+                        :visible="active"
+                        
+                        />
+
+                    </transition-group>
 
                 </div>
                 
@@ -158,7 +162,7 @@
 
             // NOTE
 
-            notes: { get() { return this.$store.state.notes.notes.Notes } }
+            notes: { get() { return this.$store.state.notes.notes } }
 
         },
 
@@ -192,7 +196,7 @@
 
                 this.$store.commit( 'resetAddNoteState' )
 
-                this.active ? this.$store.dispatch( 'GET_NOTES', { id: this.id } ) : null
+                this.active ? this.$store.dispatch( 'GET_NOTES', { id: this.id } ) : this.$store.commit( 'resetNotesState' )
 
             }
 

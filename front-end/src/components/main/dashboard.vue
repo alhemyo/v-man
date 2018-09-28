@@ -48,6 +48,8 @@
                     this.$store.commit( 'resetAddTaskState' )
                     this.$store.commit( 'resetAddUserState' )
                     this.$store.commit( 'resetAddProjectState' )
+                    this.$store.commit( 'resetAddNoteState' )
+                    this.$store.commit( 'resetNotesState' )
 
                 }
 
