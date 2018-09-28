@@ -32,7 +32,17 @@
 
         </div>
 
-        <div class="footer"></div>
+        <div class="footer">
+
+            <div class="button" @click="openProjectForm">
+
+                <p>New Project</p>
+
+                <i class="material-icons">add</i>
+
+            </div>
+
+        </div>
 
         <new-project />
 
@@ -63,6 +73,16 @@
             project,
             loader,
             newProject
+
+        },
+
+        methods: {
+
+            openProjectForm() {
+
+                this.$store.commit( 'updateOpenProjectForm', true )
+
+            }
 
         },
 
@@ -147,6 +167,13 @@
     }
 
     .footer {
+
+        padding: 0px 40px;
+
+        display: grid;
+        grid-template-columns: min-content;
+        justify-content: flex-end;
+        align-items: center;
 
         border-top: 1px solid rgba(0,0,0,0.1);
     }

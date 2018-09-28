@@ -10,13 +10,13 @@
 
             </div>
 
-            <p class="task-name" @click="openTask" >{{ name }}</p>
+            <p class="task-name" @click="openTask" >{{ name }} <i class="material-icons">{{ active ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</i></p>
 
             <p>{{ state }}</p>
 
             <div></div>
 
-            <p>{{ formatDeadline }}</p>
+            <p class="task-deadline"><span>●</span> {{ formatDeadline }}</p>
 
             <p>{{ '5 Users' }}</p>
 
@@ -38,7 +38,7 @@
 
                 <div class="task-description">
 
-                    <p class="task-date">{{ createdDate + ' | ' + downloadedDate + ' | ' + finishedDate + ' | ' + uploadedDate }}</p>
+                    <p class="task-date"><span>⯈ </span>{{ createdDate }} | <span>⯆ </span>{{ downloadedDate }} | <span>⯇ </span>{{ finishedDate }} | <span>⯅ </span>{{ uploadedDate }}</p>
 
                     <div class="description">
 
@@ -48,13 +48,45 @@
 
                 </div>
 
-                <div class="task-thumbnail"></div>    
+                <div class="task-thumbnail">
+
+                    <img :src="`/images/uploads/task/thumb_0${random}.jpg`" />    
+                    
+                </div>    
                 
-            </div>    
+            </div>
+
+            <div class="task-notes">
+
+                <div class="notes-list">
+
+                    <note 
+
+                    :key="index" 
+                    v-for="(note, index) in notes"
+                    :user="note.user"
+                    :client="note.client"
+                    :date="note.date"
+                    :message="note.message"
+                    :visible="active"
+                    
+                    />
+
+                </div>
+                
+            </div> 
             
         </div> <!-- end .task-body -->
 
-        <div class="task-footer"></div>
+        <div class="task-footer">
+
+            <input type="text" @focus="setNote" placeholder="Add note..." v-model="note" />
+
+            <p class="client" @click="client = !client" :class="{ 'client-on' : client }" >{{ project.client }}</p>
+
+            <i class="material-icons" @click="addNote" >notes</i>
+
+        </div>
 
     </div>
 
@@ -63,10 +95,13 @@
 <script>
 
     import moment from 'moment'
+    import note from './note'
 
     export default {
     
         name: 'task',
+
+        components: { note },
 
         props: {
 
@@ -86,22 +121,78 @@
 
         computed: {
 
+            random() { return Math.floor(Math.random() * (6 - 1)) + 1 },
+
+            // TASK
             formatDeadline() { return moment(this.deadline).format("DD MMM YYYY") },
             createdDate() { return moment(this.created).format('DD MMM YYYY') },
             downloadedDate() { return this.downloaded ?  moment(this.downloaded).format('DD MMM YYYY') : 'pending' },
             finishedDate() { return this.finished ?  moment(this.finished).format('DD MMM YYYY') : 'pending' },
             uploadedDate() { return this.uploaded ?  moment(this.uploaded).format('DD MMM YYYY') : 'pending' },
 
+            //ADD NOTE
+
+            project() {
+
+                return this.$store.state.thisUserProjects.projects.find((project) => {
+
+                    return project.id === Number( this.$route.params.id )
+
+                }) || {}
+
+            },
+
+            note: {
+
+                get() { return this.$store.state.addNote.note },
+                set(value) { this.$store.commit('updateAddNoteNote', value) }
+
+            },
+
+            client: {
+
+                get() { return this.$store.state.addNote.client },
+                set(client) { this.$store.commit( 'updateAddNoteClient', client ) }
+
+            },
+
+            // NOTE
+
+            notes: { get() { return this.$store.state.notes.notes.Notes } }
+
         },
 
         methods: {
 
-            openTask(event) {
+            openTask() {
 
-                //$('.task').not( $(event.currentTarget).parent().parent() ).removeClass('task-open')
-                //$(event.currentTarget).parent().parent().toggleClass('task-open')
+                this.$emit('active', this.active ? false : this.id )
 
-                this.$emit('active', this.active ? false : this.id)
+            },
+
+            setNote() {
+
+                this.$store.commit( 'updateAddNoteTaskId', this.id )
+
+            },
+
+            addNote() {
+
+                this.$store.dispatch( 'ADD_NOTE' )
+
+                .then(() => { this.$store.commit( 'resetAddNoteState' ) })
+
+            }
+
+        },
+
+        watch: {
+
+            active() {
+
+                this.$store.commit( 'resetAddNoteState' )
+
+                this.active ? this.$store.dispatch( 'GET_NOTES', { id: this.id } ) : null
 
             }
 
@@ -141,7 +232,7 @@
 
         border-radius: 0px;
 
-        box-shadow: 0px 0px 10px rgba( 0, 0, 0, 0.3 );
+        box-shadow: 0px 0px 50px rgba( 0, 0, 0, 0.2 );
     }
 
     /* TASK HEADER CSS */
@@ -193,7 +284,37 @@
 
         padding: 14px 0px;
 
+        display: grid;
+        grid-template-columns: auto 20px;
+        align-items: center;
+
         cursor: pointer;
+    }
+
+    .task-name i {
+
+        font-size: 16px;
+        text-align: center;
+        color: rgba( 0, 0, 0, 0.5 );
+
+        transition: 0.2s ease;
+
+        opacity: 0;
+    }
+
+    .task-name:hover i {
+
+        opacity: 1;
+    }
+
+    .task-open i {
+
+        opacity: 1;
+    }
+
+    .task-deadline span {
+
+        color: var(--red);
     }
 
     .task-tools {
@@ -243,7 +364,7 @@
 
         position: relative;
         
-        padding-bottom: 10px;
+        padding-bottom: 20px;
 
         display: grid;
         grid-template-columns: auto 220px;
@@ -267,7 +388,7 @@
     .description {
 
         width: calc( 100% + 17px );
-        height: 110px;
+        height: 100px;
 
         overflow: hidden;
         overflow-y: scroll;
@@ -279,11 +400,124 @@
         font-size: 10px;
     }
 
+    .task-date span:nth-child(1) {
+
+        color: darkcyan;
+    }
+
+    .task-date span:nth-child(2) {
+
+        color: var(--yellow);
+    }
+
+    .task-date span:nth-child(3) {
+
+        color: var(--green);
+    }
+
+    .task-thumbnail {
+
+        position: relative;
+
+        background-color: black;
+        border-radius: 3px;
+
+        overflow: hidden;
+    }
+
+    .task-thumbnail img {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate( -50%, -50% );
+    }
+
+    /* TASK NOTES */
+
+    .task-notes {
+
+        width: 100%;
+        height: 150px;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+    .notes-list {
+
+        width: calc( 100% + 17px );
+        height: 150px;
+
+        display: grid;
+        grid-template-columns: auto;
+        grid-auto-rows: auto;
+
+        overflow-y: scroll;
+    }
+
     /* TASK FOOTER CSS */
 
     .task-footer {
 
+        text-align: center;
+
+        display: grid;
+        grid-template-columns: auto min-content 40px;
+        align-items: center;
+
         border-top: 1px solid rgba( 0, 0, 0, 0.05 );
+    }
+
+    .client {
+
+        font-size: 10px;
+
+        padding: 7px 7px;
+
+        border-radius: 3px;
+
+        cursor: pointer;
+    }
+
+    .client:hover {
+
+        background-color: rgba( 0, 0, 0, 0.05 );
+    }
+
+    .client-on {
+
+        color: white;
+
+        background-color: var(--red);
+    }
+
+    .client-on:hover {
+
+        color: white;
+
+        background-color: var(--red);
+    }
+
+    .task-footer input {
+
+        font-size: 12px;
+
+        padding: 10px 20px;
+
+        border: none;
+
+
+    }
+
+    .task-footer i {
+
+        font-size: 18px;
+        color: rgba( 0, 0, 0, 0.5 );
+
+        cursor: pointer;
     }
     
 

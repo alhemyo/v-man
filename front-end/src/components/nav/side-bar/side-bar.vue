@@ -79,13 +79,6 @@
 
         methods: {
 
-            openProjectForm() {
-
-                this.$router.push({ name: 'projects' })
-                this.$store.commit( 'updateOpenProjectForm', true )
-
-            },
-
             logout() {
 
                 if ( confirm( 'Are you sure you want to Logout?' ) ) {
