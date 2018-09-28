@@ -7,7 +7,7 @@ api = Api(app)
 from resources import users
 
 api.add_resource(users.AllUsers, '/api/users')
-api.add_resource(users.User, '/api/users/<int:user_id>')
+api.add_resource(users.OneUser, '/api/users/<int:user_id>')
 
 
 if __name__ == '__main__':

@@ -3,6 +3,8 @@ from Token import token_required
 from py2neo import authenticate, Graph, Node, Relationship, remote, NodeSelector
 from datetime import datetime
 
+from werkzeug.security import generate_password_hash, check_password_hash
+
 users_api = Blueprint('users_api', __name__)
 
 
