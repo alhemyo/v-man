@@ -126,8 +126,18 @@ def get_tasks_of_project(current_user, project_id):
 
     tasks_list = []
     for task in tasks:
+        task_id = remote(task['task'])._id
+
+        users = graph.run(f'MATCH (user:Person)-[:IS_USER]->(task:Task) WHERE ID(task)={task_id} RETURN user').data()
+
+        users_list = []
+        for user in users:
+            umcn = user['user']['umcn']
+            users_list.append(umcn)
+
         task['task']['project'] = project_id
-        task['task']['id'] = remote(task['task'])._id
+        task['task']['id'] = task_id
+        task['task']['users'] = users_list
         tasks_list.append(task['task'])
 
     return jsonify(Tasks=tasks_list)
