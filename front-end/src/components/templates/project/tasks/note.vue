@@ -1,20 +1,14 @@
 <template>
     
-    <div v-show="visible" class="note">
+    <div class="note" :key="user" >
 
         <div class="note-header">
 
             <img src="/images/janeDoe.png" />
 
-            <p>{{ noteUser[0].name + ' ' + noteUser[0].surname }}</p>
+            <p class="note-user">{{ noteUser.surname }}</p>
 
-            <p>{{ formatDate }}</p>
-
-        </div>
-
-        <div class="note-message">
-
-            <p class="message" >{{ message }}</p>
+            <p class="note-date">{{ date }}</p>
 
         </div>
 
@@ -42,9 +36,7 @@
 
         computed: {
 
-            users: { get() { return this.$store.state.users.users } },
-            noteUser() { return this.users.filter( user => { return user.umcn === this.user } ) },
-            formatDate() { return moment(this.date).format("DD MMM YYYY - HH:mm:ss") }
+            noteUser() { return this.user ? this.$store.state.users.users.find(user => { return user.umcn === this.user }) : false }
 
         }
 
@@ -62,7 +54,7 @@
         padding: 20px 0px;
 
         display: grid;
-        grid-template-rows: 20px auto;
+        grid-template-rows: 40px auto;
         grid-row-gap: 10px;
         align-items: center;
 
@@ -71,27 +63,14 @@
 
     .note-header {
 
-        display: grid;
-        grid-template-columns: 20px auto min-content;
-        grid-template-rows: 20px;
-        grid-column-gap: 10px;
-        align-items: center;
-    }
-
-    .note-header p {
-
-        font-size: 11px;
+        font-size: 14px;
+        color: var(--dark);
         white-space: nowrap;
-    }
 
-    .message {
-
-        font-size: 12px;
-
-        padding: 14px 20px;
-
-        background-color: rgba( 0, 0, 0, 0.05 );
-        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 40px auto min-content;
+        grid-template-rows: 30px;
+        align-items: center;
     }
 
 </style>

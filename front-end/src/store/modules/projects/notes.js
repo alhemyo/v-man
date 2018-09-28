@@ -19,7 +19,7 @@ export default {
     mutations: {
 
         updateNotes(state, notes) { state.notes = notes },
-        unshiftNote(state, note) { state.notes.unshift(note) },
+        unshiftNote(state, note) { state.notes.Notes.unshift(note) },
         resetNotesState(state) { Object.assign( state, notesDefaultState() ) }
 
     },
@@ -40,7 +40,7 @@ export default {
 
                 .then(response => {
 
-                    commit( 'updateNotes', response.data )
+                    commit( 'updateNotes', response.data.Notes )
 
                     resolve(response)
 
