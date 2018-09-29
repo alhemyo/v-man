@@ -25,7 +25,6 @@ def token_required(f):
 
         # try:
         data = jwt.decode(token, "supersecretkey")
-        #current_user = session.query(User).filter_by(id=data['user_id']).first()
         current_user = graph.run("MATCH (user:Person) WHERE ID(user) = {user_id} RETURN user".format(user_id=data['user_id'])).data()[0]["user"]
         # except:
         #     return jsonify({'message': 'Token is invalid!'}), 401
