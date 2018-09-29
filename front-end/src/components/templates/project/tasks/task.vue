@@ -68,6 +68,7 @@
                         :key="index" 
                         :user="note.user"
                         :client="note.client"
+                        :clientName="project.client"
                         :date="note.date"
                         :message="note.message"
                         :visible="active"
@@ -374,9 +375,7 @@
         grid-template-columns: auto 220px;
         grid-column-gap: 20px;
 
-        border-bottom: 1px solid rgba( 0, 0, 0, 0.05 );
-
-        overflow: hidden;
+        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
     }
 
     .task-description {
@@ -472,7 +471,9 @@
         grid-template-columns: auto min-content 40px;
         align-items: center;
 
-        border-top: 1px solid rgba( 0, 0, 0, 0.05 );
+        z-index: 1;
+
+        border-top: 1px solid rgba( 0, 0, 0, 0.1 );
     }
 
     .client {

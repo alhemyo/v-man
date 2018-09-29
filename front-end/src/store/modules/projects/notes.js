@@ -19,7 +19,7 @@ export default {
     mutations: {
 
         updateNotes(state, notes) { state.notes = notes },
-        unshiftNote(state, note) { state.notes.Notes.unshift(note) },
+        unshiftNote(state, note) { state.notes.unshift(note) },
         resetNotesState(state) { Object.assign( state, notesDefaultState() ) }
 
     },
