@@ -1,6 +1,6 @@
 from py2neo import authenticate, Graph
 
-test = False
+test = True
 
 if test:
     authenticate("localhost:7474", "neo4j", "admin123")

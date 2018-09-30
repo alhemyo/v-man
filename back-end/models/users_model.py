@@ -16,7 +16,7 @@ class User:
             user['id'] = user_id
             return user
         else:
-            return {"message: ": "User not found!"}
+            return {"message": "User not found!"}
 
     @staticmethod
     def find_all():
@@ -62,6 +62,9 @@ class User:
     @staticmethod
     def update(user_id):
         user = graph.run(f"MATCH (user:Person) WHERE ID(user)={user_id} RETURN user").evaluate()
+
+        if not user:
+            return {"message": "User not found!"}
 
         data = request.get_json()
 
