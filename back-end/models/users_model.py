@@ -1,13 +1,9 @@
 from flask import request
 import datetime
-from py2neo import authenticate, Graph, Node, Relationship, remote, NodeSelector
+from py2neo import Node, Relationship, remote, NodeSelector
 from werkzeug.security import generate_password_hash, check_password_hash
 
-authenticate("hobby-llcolmhlfknpgbkekogpbhbl.dbs.graphenedb.com:24780",
-             "admin", "b.gXG8lmaG9deu.Dy50O3vtQ3BGbTZk")
-graph = Graph("bolt://hobby-llcolmhlfknpgbkekogpbhbl.dbs.graphenedb.com:24786",
-              user="admin", password="b.gXG8lmaG9deu.Dy50O3vtQ3BGbTZk",
-              bolt=True, secure=True, http_port=24786, https_port=24780)
+from config import graph
 
 
 class User:
@@ -37,34 +33,25 @@ class User:
         return users_list
 
     @staticmethod
-    def add():
-            data = request.get_json()
+    def add(data):
 
+            password = generate_password_hash("123")
             date_created = str(datetime.datetime.now()).replace(' ', 'T') + "Z"
 
-            new_user = Node("Person",
-                            name=data['name'],
-                            surname=data['surname'],
-                            email=data['email'],
-                            password=generate_password_hash("123"),
-                            position=data['position'],
-                            gender=data['gender'],
-                            education=data['education'],
-                            birthday=data['birthday'],
-                            address=data['address'],
-                            city=data['city'],
-                            phone=data['phone'],
-                            umcn=data['umcn'],
-                            is_admin=str(data['is_admin']).lower(),
-                            admin_type=data['admin_type'],
-                            IdNumber=data['IdNumber'],
-                            IdExpireDate=data['IdExpireDate'],
-                            bank=data['bank'],
-                            accNumber=data['accNumber'],
-                            employmentDate=data['employmentDate'],
-                            payment=data['payment'],
-                            date_created=date_created
-                            )
+            try:
+                new_user = Node("Person",
+                                name=data['name'],
+                                surname=data['surname'],
+                                email=data['email']
+                                )
+            except KeyError as e:
+                return {"message": f"You are missing a key element: {e}"}
+
+            new_user['password'] = password
+            new_user['date_created'] = date_created
+
+            for attribute in data:
+                new_user[attribute] = data[attribute]
 
             graph.create(new_user)
 
@@ -79,7 +66,7 @@ class User:
         data = request.get_json()
 
         for attribute in data:
-            if user[attribute]:
+            if user[attribute] is not None:
                 user[attribute] = data[attribute]
             else:
                 return {"message": f"The attribute {attribute} is not found!"}

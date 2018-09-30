@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from flask_restful import Resource
 
 from resources.token import token_required
@@ -14,7 +14,8 @@ class AllUsers(Resource):
 
     @staticmethod
     def post():
-        user = User.add()
+        data = request.get_json()
+        user = User.add(data)
         return jsonify(user)
 
 

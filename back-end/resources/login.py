@@ -5,6 +5,7 @@ import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from py2neo import remote
 
+import config
 
 class Login(Resource):
 
@@ -16,13 +17,14 @@ class Login(Resource):
             return jsonify({"message": "Could not verify"})
 
         user = graph.run(f"MATCH (user:Person) WHERE user.email = '{auth.username}' RETURN user").evaluate()
-        user_id = remote(user)._id
 
         if not user:
             return jsonify({"message": "Could not verify"})
 
+        user_id = remote(user)._id
+
         if check_password_hash(user["password"], auth.password):
-            token = jwt.encode({'user_id': user_id}, "supersecretkey")
+            token = jwt.encode({'user_id': user_id}, config.secret_key)
 
             return jsonify({'token': token.decode('UTF-8')})
 

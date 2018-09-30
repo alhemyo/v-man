@@ -1,10 +1,15 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
+import sys
+
+from resources import login, users
+
 
 app = Flask(__name__)
 api = Api(app)
 
-from resources import login, users
+CORS(app)
 
 api.add_resource(login.Login, '/api/login')
 api.add_resource(users.AllUsers, '/api/users')
