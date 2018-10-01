@@ -40,45 +40,43 @@ export default {
 
         NEW_TASK({commit}) { 
 
-            return new Promise(( resolve, reject ) => {
 
-                let data = {
+            let data = {
 
-                    name: this.state.addTask.name,
-                    priority: this.state.addTask.priority,
-                    description: this.state.addTask.description,
-                    project: this.state.addTask.id,
-                    created: this.state.addTask.created,
-                    deadline: this.state.addTask.deadline,
-                    download: this.state.addTask.downloaded,
-                    finished: this.state.addTask.finished,
-                    upload: this.state.addTask.uploaded,
-                    state: 'pending',
-                    thumbnail: null,
-                    users: [],
-                    notes: []
+                name: this.state.addTask.name,
+                priority: this.state.addTask.priority,
+                description: this.state.addTask.description,
+                project: this.state.addTask.id,
+                created: this.state.addTask.created,
+                deadline: this.state.addTask.deadline,
+                download: this.state.addTask.downloaded,
+                finished: this.state.addTask.finished,
+                upload: this.state.addTask.uploaded,
+                state: 'pending',
+                thumbnail: null,
+                users: [],
+                notes: []
 
-                }
+            }
 
-                axios({
+            axios({
 
-                    url: `${this.state.api}task`,
-                    method: 'POST',
-                    headers: { 'x-access-token' : localStorage.getItem('token') },
-                    data: data
-
-                })
-
-                .then(response => {
-
-                    commit( 'unshiftTask', response.data )
-                    resolve(response)
-
-                })
-
-                .catch(error => reject(error))
+                url: `${this.state.api}task`,
+                method: 'POST',
+                headers: { 'x-access-token' : localStorage.getItem('token') },
+                data: data
 
             })
+
+            .then(response => {
+
+                commit( 'unshiftTask', response.data )
+                
+                return response
+
+            })
+
+            .catch(error => { return error })
 
          }
 

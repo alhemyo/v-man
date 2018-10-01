@@ -27,6 +27,16 @@
 
         <div class="users-footer">
 
+            <assign-button
+            
+            name="Assign Users"
+            :button="true"
+            :options="users"
+            
+             />
+
+            <!--
+
             <div class="button" >
 
                 <p>Assign user</p>
@@ -34,6 +44,8 @@
                 <i class="material-icons">add</i>
 
             </div>
+
+            -->
 
         </div>
 
@@ -45,6 +57,7 @@
 
     import user from './user'
     import loader from '../../macro/loader'
+    import assignButton from '../../macro/form/assign-button'
 
     export default {
     
@@ -65,6 +78,7 @@
 
             user,
             loader,
+            assignButton
         },
 
         computed: {
@@ -85,7 +99,7 @@
 
             assignedUsersLength() { return this.assignedUsers.length || 0 },
 
-            loading() { return this.assignedUsersLength > 0 ? false : true }
+            loading() { return this.assignedUsersLength > 0 ? false : true },
 
         },
 

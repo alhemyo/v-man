@@ -44,27 +44,24 @@ export default {
 
             }
 
-            return new Promise((resolve, reject) => {
+            axios({
 
-                axios({
-
-                    url: `${this.state.api}task/${this.state.addNote.taskId}/note`,
-                    method: 'POST',
-                    headers: { 'x-access-token' : localStorage.getItem('token') },
-                    data: data
-
-                })
-
-                .then(response => {
-
-                    commit( 'unshiftNote', response.data )
-                    resolve(response)
-
-                })
-
-                .catch(error => reject(error))
+                url: `${this.state.api}task/${this.state.addNote.taskId}/note`,
+                method: 'POST',
+                headers: { 'x-access-token' : localStorage.getItem('token') },
+                data: data
 
             })
+
+            .then(response => {
+
+                commit( 'unshiftNote', response.data )
+
+                return response
+
+            })
+
+            .catch(error => { return error })
 
         }
 
