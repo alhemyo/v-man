@@ -71,14 +71,14 @@
         position: relative;
         z-index: 1;
 
-        padding: 20px 0px;
+        padding: 20px 20px;
 
         display: grid;
         grid-template-rows: 30px auto;
         grid-row-gap: 10px;
         align-items: center;
 
-        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+        border-bottom: 1px solid rgba( 0, 0, 0, 0.05 );
     }
 
     .note:nth-last-child(1) {
@@ -146,7 +146,7 @@
         position: relative;
         float: left;
 
-        padding: 10px 0px;
+        padding: 6px 0px;
 
         align-self: flex-start;
     }
@@ -160,7 +160,7 @@
         position: relative;
         float: left;
 
-        padding: 14px;
+        padding: 8px;
 
         background-color: rgba( 0, 0, 0, 0.1 );
         border-radius: 5px;
