@@ -87,7 +87,6 @@ class LoginTestCase(unittest.TestCase):
                                 headers={'Content-Type': 'application/json'},
                                 data=json.dumps(body))
         data = json.loads(response.data.decode())
-        print(data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['name'], 'ChangedName')
 
