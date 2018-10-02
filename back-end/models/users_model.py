@@ -35,6 +35,10 @@ class User:
     @staticmethod
     def add(data):
 
+            all_attributes = ["name", "surname", "email", "IdExpireDate", "IdNumber", "accNumber", "address",
+                                "is_admin", "admin_type", "bank", "birthday", "city", "education",
+                                "employmentDate", "gender", "payment", "phone", "position", "umcn"]
+
             password = generate_password_hash("123")
             date_created = str(datetime.datetime.now()).replace(' ', 'T') + "Z"
 
@@ -50,8 +54,12 @@ class User:
             new_user['password'] = password
             new_user['date_created'] = date_created
 
-            for attribute in data:
-                new_user[attribute] = data[attribute]
+            for attribute in all_attributes:
+                if attribute in data:
+                    new_user[attribute] = data[attribute]
+                else:
+                    new_user[attribute] = ""
+                    #return {"message": f"The element {attribute} is not allowed"}
 
             graph.create(new_user)
 
@@ -61,10 +69,10 @@ class User:
 
     @staticmethod
     def update(user_id):
-        user = graph.run(f"MATCH (user:Person) WHERE ID(user)={user_id} RETURN user").evaluate()
+        user = User.find_one(user_id)
 
-        if not user:
-            return {"message": "User not found!"}
+        if user.get("message") == "User not found!":
+            return {"message": f"User {user_id} not found!"}
 
         data = request.get_json()
 

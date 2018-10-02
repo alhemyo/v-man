@@ -20,6 +20,24 @@ class AllProjects(Resource):
         return jsonify(project)
 
 
+class MyProjects(Resource):
+
+    @staticmethod
+    @token_required
+    def get(current_user_id):
+        myprojects = Project.find_all_projects_of_user(current_user_id)
+
+        return jsonify(myprojects)
+
+class UserProjects(Resource):
+
+    @staticmethod
+    def get(user_id):
+        user_projects = Project.find_all_projects_of_user(user_id)
+
+        return jsonify(user_projects)
+
+
 class OneProject(Resource):
 
     @staticmethod
