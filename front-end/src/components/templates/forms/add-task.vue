@@ -104,7 +104,7 @@
 
             addTask() {
 
-                if( this.name && !this.name.match(this.$store.state.regex.letters) ) {
+                if( this.name && !this.name.match(this.$store.state.regex.login) ) {
 
                     if ( this.deadline ) {
 

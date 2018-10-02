@@ -32,31 +32,21 @@
 
         </div> <!-- end .task-header -->
 
-        <div class="task-body">
+        <div class="task-body" >
             
-            <div class="task-info">
+            <div class="description">
 
-                <div class="task-description">
+                <p>{{ description }}</p>
 
-                    <p class="task-date"><span>⯈ </span>{{ createdDate }} | <span>⯆ </span>{{ downloadedDate }} | <span>⯇ </span>{{ finishedDate }} | <span>⯅ </span>{{ uploadedDate }}</p>
-
-                    <div class="description">
-
-                        <p>{{ description }}</p>
-
-                    </div>
-
-                </div>
-
-                <div class="task-thumbnail">
-
-                    <img :src="`/images/uploads/task/thumb_0${random}.jpg`" />    
-                    
-                </div>    
-                
             </div>
 
-            <div class="task-notes">
+            <div class="task-thumbnail">
+
+                <img :src="`/images/uploads/task/thumb_0${random}.jpg`" />
+
+            </div>
+
+            <div class="notes">
 
                 <div class="notes-list">
 
@@ -78,8 +68,8 @@
                     </transition-group>
 
                 </div>
-                
-            </div> 
+
+            </div>
             
         </div> <!-- end .task-body -->
 
@@ -255,7 +245,7 @@
         grid-template-rows: 40px;
         align-items: center;
 
-        border-bottom: 1px solid rgba( 0, 0, 0, 0.05 );
+        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
     }
 
     .task-priority {
@@ -353,69 +343,40 @@
 
         position: relative;
 
-        padding: 20px;
-
         display: grid;
-        grid-template-rows: 150px 150px;
+        grid-template-columns: 350px auto;
+        grid-template-rows: max-content auto;
 
-        overflow: hidden;
+        background-color: white;
     }
 
-    .task-info { 
-
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 1.3;
-
-        position: relative;
-        
-        padding-bottom: 20px;
-
-        display: grid;
-        grid-template-columns: auto 220px;
-        grid-column-gap: 20px;
-
-        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
-    }
-
-    .task-description {
-
-        display: grid;
-        grid-template-rows: 20px 110px;
-        grid-row-gap: 10px;
-        align-items: center;
-
-        overflow: hidden;
-    }
+    /* TASK DESCRIPTION */
 
     .description {
 
-        width: calc( 100% + 17px );
-        height: 100px;
+        height: auto;
+        max-height: 160px;
+
+        padding: 20px 0px;
 
         overflow: hidden;
+    }
+
+    .description p {
+
+        font-size: 12px;
+        line-height: 1.5;
+        color: rgba( 0, 0, 0, 0.5 );
+
+        width: calc( 100% + 17px );
+        height: auto;
+        max-height: 120px;
+
+        padding: 0px 20px;
+
         overflow-y: scroll;
-    }
 
-    .task-date {
-
-        font-family: var(--mono-font);
-        font-size: 10px;
-    }
-
-    .task-date span:nth-child(1) {
-
-        color: darkcyan;
-    }
-
-    .task-date span:nth-child(2) {
-
-        color: var(--yellow);
-    }
-
-    .task-date span:nth-child(3) {
-
-        color: var(--green);
+        
     }
 
     .task-thumbnail {
@@ -423,9 +384,6 @@
         position: relative;
 
         background-color: black;
-        border-radius: 3px;
-
-        overflow: hidden;
     }
 
     .task-thumbnail img {
@@ -437,14 +395,36 @@
         transform: translate( -50%, -50% );
     }
 
+    @media screen and ( min-width: 1700px ) {
+        
+        .task-body {
+
+            grid-template-columns: 350px auto minmax( auto, 400px );
+            grid-template-rows: 1fr;
+        }
+
+        .description {
+
+            max-height: 320px;
+        }
+
+        .description p {
+
+            max-height: 320px;
+        }
+        
+    }
+
     /* TASK NOTES */
 
-    .task-notes {
+    .notes {
 
-        width: 100%;
-        height: 150px;
+        height: 320px;
 
-        position: relative;
+        grid-column: 2/3;
+        grid-row: 1/3;
+
+        background-color: var(--white);
 
         overflow: hidden;
     }
@@ -452,11 +432,7 @@
     .notes-list {
 
         width: calc( 100% + 17px );
-        height: 150px;
-
-        display: grid;
-        grid-template-columns: auto;
-        grid-auto-rows: auto;
+        height: 320px;
 
         overflow-y: scroll;
     }

@@ -10,7 +10,7 @@
 
         <div v-if="userSelect" class="object-option" :class="{ selected : selected }" @click="select" >
 
-            <i class="material-icons">person</i>
+            <img src="/images/janeDoe.png" />
 
             <p>{{ name + ' ' + surname }}</p>
 
@@ -93,6 +93,7 @@
 
         font-size: 12px;
         font-weight: 600;
+        color: rgba( 0, 0, 0, 0.5 );
 
         position: relative;
         margin-top: 1px;
@@ -102,17 +103,20 @@
         grid-template-rows: 40px;
         align-items: center;
 
-        transition: 0.2s ease;
-
         border: 1px solid rgba(0,0,0,0.05);
         border-radius: 3px;
 
         overflow: hidden;
     }
 
+    .object-option:hover {
+
+        background-color: rgba( 0, 0, 0, 0.05 );
+    }
+
     .object-option img {
 
-        padding: 6px;
+        padding: 8px;
     }
 
     .object-option p {
@@ -127,6 +131,13 @@
     }
 
     .selected {
+
+        color: white;
+
+        background-color: var(--yellow);
+    }
+
+    .selected:hover {
 
         color: white;
 

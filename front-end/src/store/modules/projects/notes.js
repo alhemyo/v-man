@@ -28,8 +28,6 @@ export default {
 
         GET_NOTES( {commit}, {id} ) {
 
-            return new Promise((resolve, reject) => {
-
                 axios({
 
                     url: `${this.state.api}task/${id}/notes`,
@@ -42,13 +40,11 @@ export default {
 
                     commit( 'updateNotes', response.data.Notes )
 
-                    resolve(response)
+                    return response
 
                 })
 
-                .catch(error => reject(error))
-
-            })
+                .catch(error => { return error })   
 
         }
         
