@@ -107,6 +107,8 @@
         border-radius: 3px;
 
         overflow: hidden;
+
+        cursor: pointer;
     }
 
     .object-option:hover {
@@ -124,6 +126,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         text-align: left;
+        user-select: none;
 
         padding: 0px 10px;
 

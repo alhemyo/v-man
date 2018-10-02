@@ -12,7 +12,7 @@
 
         <div class="pop" v-if="pop" >
 
-            <div class="pop-header">
+            <div v-if="optionsLength" class="pop-header">
 
                 <p>{{ name }}</p>
 
@@ -24,7 +24,8 @@
 
                 <select-option 
  
-                :key="index" 
+                :key="index"
+                v-if="optionsLength"
                 v-for="( option, index ) in options" 
                 :userSelect="true"
                 :multy="true"
@@ -36,9 +37,11 @@
                 
                 />
 
+                <p v-if="!optionsLength" class="assign-message">All users are assigned.</p>
+
             </div>
 
-            <div class="pop-footer">
+            <div v-if="optionsLength" @click="selectedList.length > 0 ? $emit( 'usersList', selectedList ) : false" class="pop-footer">
 
                 <p>Assign</p>
 
@@ -67,6 +70,12 @@
                 pop: false,
                 selectedList: [] 
             } 
+        },
+
+        computed: {
+
+            optionsLength() { return this.options.length > 0 ? true : false }
+
         }
 
     }
@@ -124,6 +133,8 @@
         width: calc( 100% + 17px );
         height: 200px;
 
+        position: relative;
+
         padding: 10px;
 
         display: grid;
@@ -139,6 +150,7 @@
     .pop-footer {
 
         text-align: center;
+        user-select: none;
 
         width: 100%;
         height: 40px;
@@ -147,6 +159,17 @@
         align-items: center;
 
         border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+
+        cursor: pointer;
+    }
+
+    .assign-message {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate( -50%, -50% );
     }
 
 </style>
