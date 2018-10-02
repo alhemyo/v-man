@@ -29,7 +29,7 @@ class MyProjects(Resource):
 
         return jsonify(myprojects)
 
-class UserProjects(Resource):
+class ProjectsOfUser(Resource):
 
     @staticmethod
     def get(user_id):

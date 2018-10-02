@@ -117,4 +117,4 @@ class Project:
             return {"message": f"Project {project_id} not found!"}
 
         graph.run(f"MATCH (project:Project) WHERE ID(project)={project_id} DETACH DELETE project").evaluate()
-        return {"message": f"The Project with id = {project_id} has been deleted"}
+        return {"message": f"The Project with id {project_id} has been deleted"}
