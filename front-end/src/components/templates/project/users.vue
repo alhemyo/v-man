@@ -31,7 +31,7 @@
             
             name="Assign Users"
             :button="true"
-            :options="users"
+            :options="unassignedUsers"
             
              />
 
@@ -96,6 +96,8 @@
             users: { get() { return this.$store.state.users.users } },
 
             assignedUsers() { return this.users.filter(user => this.project.users.includes(user.umcn)) || [] },
+
+            unassignedUsers() { return this.users.filter(user => !this.project.users.includes(user.umcn)) || [] },
 
             assignedUsersLength() { return this.assignedUsers.length || 0 },
 
