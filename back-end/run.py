@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
-import sys
 
-from resources import login, users, projects, tasks
+from resources import login, users, projects, tasks, notes
 
 
 app = Flask(__name__)
@@ -18,12 +17,14 @@ api.add_resource(users.OneUser, '/api/users/<int:user_id>')
 
 api.add_resource(projects.MyProjects, '/api/users/self/projects')
 api.add_resource(projects.ProjectsOfUser, '/api/users/<int:user_id>/projects')
-
 api.add_resource(projects.AllProjects, '/api/projects')
 api.add_resource(projects.OneProject, '/api/projects/<int:project_id>')
 
 api.add_resource(tasks.AllTasksOfProject, '/api/projects/<int:project_id>/tasks')
 api.add_resource(tasks.OneTask, '/api/tasks/<int:task_id>')
+
+api.add_resource(notes.AllNotesOfTask, '/api/tasks/<int:task_id>/notes')
+api.add_resource(notes.OneNote, '/api/notes/<int:note_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)

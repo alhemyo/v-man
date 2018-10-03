@@ -10,18 +10,47 @@ from config import graph
 class Task:
 
     @staticmethod
+    def make_connections(users, task, connection_type):
+        if users:
+            if type(users) == list:
+
+                for user_id in users:
+                    user = User.find_one(user_id)
+                    if user.get("message") == "User not found!":
+                        return {"message": f"User {user_id} not found"}
+                    user_task_rel = Relationship(user, connection_type, task)
+                    graph.create(user_task_rel)
+                return {}
+            else:
+                return {"message": "The users attributes must be lists!"}
+        else:
+            return {}
+
+    @staticmethod
+    def find_users(task, connection_type):
+        users_list = []
+        for rel in graph.match(end_node=task, rel_type=connection_type):
+            user_id = remote(rel.start_node())._id
+            users_list.append(user_id)
+
+        return users_list
+
+    @staticmethod
     def find_one(task_id):
         task = graph.run(f"MATCH (task:Task) WHERE ID(task)={task_id} RETURN task").evaluate()
 
         if task:
             task['id'] = task_id
+            users = Task.find_users(task, "IS_USER")
+            task['users'] = users
             return task
         else:
             return {"message": "Task not found!"}
 
     @staticmethod
     def find_all(project_id):
-        tasks = graph.run("MATCH (task:Task) RETURN task").data()
+        tasks = graph.run(
+            f"MATCH (task:Task)-[:IS_TASK]->(project:Project) WHERE ID(project)={project_id} RETURN task").data()
 
         tasks_list = []
         for t in tasks:
@@ -68,6 +97,7 @@ class Task:
 
             new_task['project'] = project_id
             new_task['id'] = remote(new_task)._id
+            new_task['users'] = []
 
             return new_task
 
@@ -77,7 +107,7 @@ class Task:
         task = Task.find_one(task_id)
 
         if task.get("message") == "Task not found!":
-            return {"message": f"Project {task_id} not found!"}
+            return {"message": f"Task {task_id} not found!"}
 
         data = request.get_json()
 
@@ -87,6 +117,12 @@ class Task:
             else:
                 return {"message": f"The attribute {attribute} is not found!"}
         task.push()
+
+        users = data.get('users')
+        users_msg = Task.make_connections(users, task, "IS_USER")
+
+        if users_msg.get('message'):
+            return users_msg
 
         return task
 

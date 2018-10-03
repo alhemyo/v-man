@@ -10,11 +10,41 @@ from config import graph
 class Project:
 
     @staticmethod
+    def make_connections(users, project, connection_type):
+        if users:
+            if type(users) == list:
+
+                for user_id in users:
+                    user = User.find_one(user_id)
+                    if user.get("message") == "User not found!":
+                        return {"message": f"User {user_id} not found"}
+                    user_project_rel = Relationship(user, connection_type, project)
+                    graph.create(user_project_rel)
+                return {}
+            else:
+                return {"message": "The users and admins attributes must be lists!"}
+        else:
+            return {}
+
+    @staticmethod
+    def find_users(project, connection_type):
+        users_list = []
+        for rel in graph.match(end_node=project, rel_type=connection_type):
+            user_id = remote(rel.start_node())._id
+            users_list.append(user_id)
+
+        return users_list
+
+    @staticmethod
     def find_one(project_id):
         project = graph.run(f"MATCH (project:Project) WHERE ID(project)={project_id} RETURN project").evaluate()
 
         if project:
             project['id'] = project_id
+            users = Project.find_users(project, "IS_USER")
+            admins = Project.find_users(project, "IS_ADMIN")
+            project['users'] = users
+            project['admins'] = admins
             return project
         else:
             return {"message": "Project not found!"}
@@ -28,6 +58,10 @@ class Project:
             project = u['project']
             project_id = remote(project)._id
             project['id'] = project_id
+            users = Project.find_users(project, "IS_USER")
+            admins = Project.find_users(project, "IS_ADMIN")
+            project['users'] = users
+            project['admins'] = admins
 
             projects_list.append(project)
 
@@ -43,6 +77,9 @@ class Project:
 
         projects = []
         for rel in graph.match(start_node=user, rel_type="IS_USER"):
+            project = rel.end_node()
+            projects.append(project)
+        for rel in graph.match(start_node=user, rel_type="IS_ADMIN"):
             project = rel.end_node()
             projects.append(project)
 
@@ -69,23 +106,16 @@ class Project:
 
             graph.create(new_project)
 
-            if type(admins) == list and type(users) == list:
+            admins = data.get('admins')
+            users = data.get('users')
 
-                for admin_id in admins:
-                    admin = User.find_one(admin_id)
-                    if admin.get("message") == "User not found!":
-                        return {"message": f"User {admin_id} not found"}
-                    admin_project_rel = Relationship(admin, 'IS_ADMIN', new_project)
-                    graph.create(admin_project_rel)
+            users_msg = Project.make_connections(users, new_project, "IS_USER")
+            admins_msg = Project.make_connections(admins, new_project, "IS_ADMIN")
 
-                for user_id in users:
-                    user = User.find_one(user_id)
-                    if user.get("message") == "User not found!":
-                        return {"message": f"User {user_id} not found"}
-                    user_project_rel = Relationship(user, 'IS_USER', new_project)
-                    graph.create(user_project_rel)
-            else:
-                return {"message": "The users and admins attributes must be lists!"}
+            if users_msg.get('message'):
+                return users_msg
+            if admins_msg.get('message'):
+                return admins_msg
 
             new_project['id'] = remote(new_project)._id
             return new_project
@@ -105,6 +135,17 @@ class Project:
             else:
                 return {"message": f"The attribute {attribute} is not found!"}
         project.push()
+
+        admins = data.get('admins')
+        users = data.get('users')
+
+        users_msg = Project.make_connections(users, project, "IS_USER")
+        admins_msg = Project.make_connections(admins, project, "IS_ADMIN")
+
+        if users_msg.get('message'):
+            return users_msg
+        if admins_msg.get('message'):
+            return admins_msg
 
         return project
 
