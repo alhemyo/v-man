@@ -1,8 +1,14 @@
 <template>
 
-    <div class="loader">
+    <div v-if="condition" class="loader">
 
-        <div class="dot" :key="index" v-for="(dot, index) in 6"></div>
+        <div class="tiles">
+
+            <div class="tile" :key="index" v-for="(tile, index) in 5"></div>
+
+        </div>
+
+        <p class="loader-message">{{ message }}</p>
 
     </div>
     
@@ -14,7 +20,7 @@
 
         name: 'loader',
 
-        props: { condition: Boolean }
+        props: { condition: Boolean, message: String }
 
     }
 
@@ -24,83 +30,124 @@
 
     .loader {
 
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
 
         position: absolute;
         top: 50%;
         left: 50%;
 
-        transform: translate( -50%, -50% ) scale(0.8);
+        transform: translate( -50%, -50% );
     }
 
-    @keyframes loader {
+    .tiles {
+
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+    }
+
+    @keyframes pulse {
 
         0% {
 
-            background-color: var(--midgray);
-            transform: rotate(0deg);
+            height: 30%;
+
+            background-color: var(--darkgray);
+
             opacity: 0.3;
+        }
+
+        25% {
+
+            height: 60%;
+
+            background-color: var(--red);
+
+            opacity: 1;
         }
 
         50% {
 
-            background-color: var(--black);
-            opacity: 1;
+            height: 30%;
+
+            background-color: var(--darkgray);
+
+            opacity: 0.3;
         }
 
         100% {
 
-            background-color: var(--midgray);
-            transform: rotate(360deg);
+            height: 30%;
+
             opacity: 0.3;
         }
         
     }
 
-    .dot {
+    .tile {
 
-        width: 10px;
-        height: 10px;
+        width: 10%;
+        height: 30%;
 
         position: absolute;
+        top: 50%;
 
-        border-radius: 20px;
+        left: 5%;
 
-        background-color: var(--lightgray);
+        transform: translateY( -50% );
 
-        transform-origin: 20px 20px;
+        animation: pulse 1s ease-out infinite;
 
-        transform: rotate(0deg);
-
-        animation: loader 3s linear infinite;
+        background-color: var(--darkgray);
 
         opacity: 0;
     }
 
-    .dot:nth-child(2) {
+    .tile:nth-child(2) {
 
-        animation-delay: 0.5s;
+        left: 25%;
+
+        animation-delay: 0.2s;
     }
 
-    .dot:nth-child(3) {
+    .tile:nth-child(3) {
 
-        animation-delay: 1s;
+        left: 45%;
+
+        animation-delay: 0.4s;
     }
 
-    .dot:nth-child(4) {
+    .tile:nth-child(4) {
 
-        animation-delay: 1.5s;
+        left: 65%;
+
+        animation-delay: 0.6s;
     }
 
-    .dot:nth-child(5) {
+    .tile:nth-child(5) {
 
-        animation-delay: 2s;
+        left: 85%;
+
+        animation-delay: 0.8s;
     }
 
-    .dot:nth-child(6) {
+    .loader-message {
 
-        animation-delay: 2.5s;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--darkgray);
+        text-align: center;
+        white-space: nowrap;
+
+        position: absolute;
+        top: 50px;
+        left: 50%;
+
+        transform: translateX( -50% );
     }
+
+
 
 </style>

@@ -30,9 +30,14 @@
             
             />
 
-            <div class="loader">
+            <div class="loader-wrap">
 
-                <loader v-if="loading" />
+                <loader 
+
+                    :condition="loading"
+                    message="Geting you ready..."
+
+                />
 
             </div>
 
@@ -203,10 +208,10 @@
         color: var(--red);
     }
 
-    .loader {
+    .loader-wrap {
 
-        width: 40px;
-        height: 40px;
+        width: 100%;
+        height: 100%;
 
         justify-self: center;
 

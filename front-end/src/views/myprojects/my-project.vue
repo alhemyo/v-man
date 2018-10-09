@@ -62,12 +62,10 @@
 
                 </div>
 
-                <scaling-squares-spinner
+                <loader 
 
-                    v-if="taskLoading"
-                    :animation-duration="1250"
-                    :size="30"
-                    color="#9A9A9A"
+                    :condition="taskLoading"
+                    message="Fetching tasks..."
 
                 />
 
@@ -107,12 +105,10 @@
 
                 </div>
 
-                <scaling-squares-spinner
+                <loader 
 
-                    v-if="usersLoading"
-                    :animation-duration="1250"
-                    :size="30"
-                    color="#9A9A9A"
+                    :condition="usersLoading"
+                    message="Loading Users..."
 
                 />
 
@@ -145,13 +141,12 @@
     import task from './task'
     import userBadge from '../../components/widgets/user-badge'
     import loader from '../../components/widgets/loader'
-    import { ScalingSquaresSpinner  } from 'epic-spinners' 
 
     export default {
 
         name: 'project',
 
-        components: { task, userBadge, loader, ScalingSquaresSpinner },
+        components: { task, userBadge, loader },
 
         data() {
             return {
@@ -305,6 +300,7 @@
 
         display: grid;
         grid-template-columns: 60px 60px;
+        grid-column-gap: 10px;
         align-items: center;
         justify-content: center;
         justify-items: center;

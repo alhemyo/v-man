@@ -2,14 +2,12 @@
     
     <div class="my-projects" :class="{ 'collapse-my-projects' : !sidebar }" >
 
-        <scaling-squares-spinner
+        <loader 
 
-                v-if="loading"
-                :animation-duration="1250"
-                :size="30"
-                color="#9A9A9A"
+            :condition="loading"
+            message="Loading projects..."
 
-                />
+        />
 
         <div class="projects-list">
 

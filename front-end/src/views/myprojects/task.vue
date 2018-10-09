@@ -40,12 +40,10 @@
 
             <div class="notes">
 
-                <scaling-squares-spinner
+                <loader 
 
-                v-if="notesLoading"
-                :animation-duration="1250"
-                :size="30"
-                color="#9A9A9A"
+                    :condition="notesLoading"
+                    message="Fetching notes..."
 
                 />
 
