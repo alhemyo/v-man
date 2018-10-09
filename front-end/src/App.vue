@@ -2,9 +2,9 @@
 
   <div id="app">
 
-    <transition mode="out-in" name="fade">
+    <transition name="route" mode="out-in" appear >
 
-      <router-view />
+      <router-view/>
 
     </transition>
 
@@ -14,226 +14,102 @@
 
 <style>
 
-  html, body {
+  /* GLOBAL VARIABLES */
 
-    overflow: hidden;
-  }
+  * {
 
-  .fade-enter-active, .fade-leave-active {
+    /* font variables */
 
-    transition: 0.3s ease;
-  }
+    --main: 'Quicksand', sans-serif;
 
-  .fade-enter, .fade-leave-to {
+    /* color variables */
 
-    opacity: 0;
-  }
-
-  .list-enter-active, .list-leave-active {
-
-    transition: 0.3s ease;
-  }
-
-  .list-enter {
-
-    transform: translateY(30px);
-
-    opacity: 0;
-  }
-
-  .list-leave-to {
-
-    transform: translateY(-30px);
-
-    opacity: 0;
-  }
-
-  #app {
-
-    /* Variables */
-
-    /* FONTS */
-    --main-font: 'Quicksand', sans-serif;
-    --extra-font: 'Roboto', sans-serif;
-    --mono-font: 'Roboto Mono', monospace;
-
-    /* COLORS */
-    --black: #333541;
-    --dark: #383A47;
-    --white: #F9F8F8;
-    --red: #FF312E;
-		--green: #8BC34A;
-		--yellow: #FFC107;
-
-    /* APP CSS */
-
-    width: 100%;
-    min-width: 1200px;
-
-    font-family: var(--main-font);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--dark);
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    overflow: hidden;
-  }
-
-  .material-icons {
-
-    user-select: none;
-  }
-
-  .date {
-
-    font-family: var(--mono-font);
-    font-weight: 400;
-    color: var(--dark);
-  }
-
-  /* FORM CSS */
-
-  .form-input {
-
-      font-family: var(--default);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--dark);
-
-      width: 100%;
-      height: 40px;
-
-      padding: 0px 20px;
-
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 3px;
+    --lightgray: #F6F6F6;
+    --midgray: #DEDEDE;
+    --darkgray: #9A9A9A;
+    --black: #383A47;
+    --red: #EC2E2E;
+    --yellow: #FFC107;
+    --green: #8BC34A;
 
   }
 
-  .form-text-area {
+  /* BUTTONS */
 
-      font-family: var(--default);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--dark);
+  .button-v {
 
-      width: 100%;
-      height: 120px;
-
-      resize: none;
-
-      padding: 20px 20px;
-
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 3px;
-  }
-
-  .form-1 {
-
-    grid-column: 1/2;
-  }
-
-  .form-2 {
-
-    grid-column: 2/3;
-  }
-
-  .form-3 {
-
-    grid-column: 3/4;
-  }
-
-  .form-4 {
-
-    grid-column: 4/5;
-  }
-
-  .form-half-1 {
-
-    grid-column: 1/3;
-  }
-
-  .form-half-2 {
-
-    grid-column: 3/5;
-  }
-
-  .form-third-1 {
-
-    grid-column: 1/4;
-  }
-
-  .form-full {
-
-    grid-column: 1/5;
-  }
-
-  .form-message {
-
-    font-size: 12px;
-    color: var(--red);
-  }
-
-  .form-button {
-
-    user-select: none;
-
-    width: 100%;
-    height: 40px;
+    width: 60px;
+    height: 60px;
 
     display: grid;
+    grid-template-rows: 40px 20px;
     align-items: center;
-    justify-content: center;
+
+    cursor: pointer;
+
+  }
+
+  .button-v i {
+
+    font-size: 24px;
+
+    transition: 0.2s ease;
+  }
+
+  .button-v p {
+
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--darkgray);
 
     transition: 0.2s ease;
 
-    background-color: white;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
+    transform: translateY(10px);
+
+    opacity: 0;
+  }
+
+  .button-v:hover i {
+
+    color: var(--darkgray);
+  }
+
+  .button-v:hover p {
+
+    transform: translateY(0px);
+
+    opacity: 1;
+  }
+
+  /* VIEW TRANSITION CLASSES */
+
+  .route-enter-active, .route-leave-active {
+
+    transition: 0.3s ease;
+  }
+
+  .route-enter, .route-leave-to {
+
+    opacity: 0;
+  }
+
+  /* APP CSS */
+
+  #app {
+    
+    font-family: var(--main);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  i {
+
+    text-align: center;
+    color: var(--midgray);
 
     cursor: pointer;
-  }
-
-  .form-button:hover {
-
-    background-color: var(--white);
-  }
-
-  /* BUTTON CSS */
-
-  .button {
-
-      color: var(--dark);
-
-      width: auto;
-      height: 40px;
-
-      display: grid;
-      grid-template-columns: min-content 40px;
-      grid-column-gap: 10px;
-      align-items: center;
-
-      background-color: white;
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 30px;
-
-      cursor: pointer;
-  }
-
-  .button p {
-
-      font-size: 12px;
-      white-space: nowrap;
-
-      padding-left: 20px;
-  }
-
-  .button i {
-
-      font-size: 20px;
-      text-align: center;
   }
 
 </style>

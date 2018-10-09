@@ -1,41 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
+// IMPORT STORE MODULES
 
-import auth from './modules/auth'
-import thisUser from './modules/thisUser'
-import thisUserProjects from './modules/projects/thisUserProjects'
-import tasks from './modules/projects/tasks'
-import addTask from './modules/projects/addTask'
+import auth from './modules/auth/auth'
+import thisUser from './modules/auth/thisUser'
+import myProjects from './modules/myprojects/myProjects'
 import users from './modules/users/users'
-import projects from './modules/projects/projects'
-import addUser from './modules/users/add-user'
-import addProject from './modules/projects/addProject'
-import addNote from './modules/projects/addNote'
-import notes from './modules/projects/notes'
+import tasks from './modules/myprojects/tasks'
+import notes from './modules/myprojects/notes'
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
 
-  modules: {
-    auth,
-    thisUser,
-    thisUserProjects,
-    tasks,
-    users,
-    addTask,
-    projects,
-    addUser,
-    addProject,
-    addNote,
-    notes
-  },
+  modules: { auth, thisUser, myProjects, users, tasks, notes },
 
   state: {
 
     // API
     api: "http://127.0.0.1:5000/",
-    testApi: "http://127.0.0.1:3000/",
 
     // Regex
 		regex: {
@@ -48,21 +32,13 @@ export default new Vuex.Store({
       
     },
 
-    // UI controls
-
-    miniSidebar: false, // Open / Close sidebar
-    openTaskForm: false, // Open / Close add task form
-    openUserForm: false, // Open / Close add user form
-    openProjectForm: false, // Open / Close add project form
-
+    // SIDEBAR
+    sidebar: true
+    
   },
+
   mutations: {
-
-    updateMiniSidebar( state, mini ) { state.miniSidebar = mini },
-    updateOpenTaskForm( state, openTaskForm ) { state.openTaskForm = openTaskForm },
-    updateOpenUserForm( state, openUserForm ) { state.openUserForm = openUserForm },
-    updateOpenProjectForm( state, openProjectForm ) { state.openProjectForm = openProjectForm }
-
+    updateSidebar(state, sidebar) { state.sidebar = sidebar }
   }
-  
+
 })

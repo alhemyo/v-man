@@ -26,7 +26,7 @@ export default {
 
     actions: {
 
-        GET_USERS({commit}) {
+        getUsers({commit}) {
 
             return new Promise(( resolve, reject ) => {
 
