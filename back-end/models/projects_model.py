@@ -78,10 +78,16 @@ class Project:
         projects = []
         for rel in graph.match(start_node=user, rel_type="IS_USER"):
             project = rel.end_node()
+            project['id'] = remote(project)._id
+            project['users'] = Project.find_users(project, "IS_USER")
+            project['admins'] = Project.find_users(project, "IS_ADMIN")
             projects.append(project)
-        for rel in graph.match(start_node=user, rel_type="IS_ADMIN"):
-            project = rel.end_node()
-            projects.append(project)
+
+        # for rel in graph.match(start_node=user, rel_type="IS_ADMIN"):
+        #     project = rel.end_node()
+        #     project['id'] = remote(project)._id
+        #     if project not in projects:
+        #         projects.append(project)
 
         return projects
 

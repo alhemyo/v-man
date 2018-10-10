@@ -22,7 +22,7 @@ class Note:
     @staticmethod
     def find_all(task_id):
         notes = graph.run(
-            f"MATCH (note:Note)-[:IS_NOTE]->(task:Task) WHERE ID(task)={task_id} RETURN note").data()
+            f"MATCH (note:Note)-[:IS_NOTE_OF]->(task:Task) WHERE ID(task)={task_id} RETURN note").data()
 
         notes_list = []
         for n in notes:
@@ -56,7 +56,7 @@ class Note:
 
             task = graph.run(f"MATCH (task:Task) WHERE ID(task)={task_id} RETURN task").evaluate()
 
-            note_task_rel = Relationship(new_note, 'IS_NOTE', task)
+            note_task_rel = Relationship(new_note, 'IS_NOTE_OF', task)
             graph.create(note_task_rel)
 
             new_note['user'] = current_user_id

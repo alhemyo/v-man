@@ -50,7 +50,7 @@ class Task:
     @staticmethod
     def find_all(project_id):
         tasks = graph.run(
-            f"MATCH (task:Task)-[:IS_TASK]->(project:Project) WHERE ID(project)={project_id} RETURN task").data()
+            f"MATCH (task:Task)-[:IS_TASK_OF]->(project:Project) WHERE ID(project)={project_id} RETURN task").data()
 
         tasks_list = []
         for t in tasks:
@@ -92,7 +92,7 @@ class Task:
 
             project = graph.run(f"MATCH (project:Project) WHERE ID(project)={project_id} RETURN project").evaluate()
 
-            task_project_rel = Relationship(new_task, 'IS_TASK', project)
+            task_project_rel = Relationship(new_task, 'IS_TASK_OF', project)
             graph.create(task_project_rel)
 
             new_task['project'] = project_id
