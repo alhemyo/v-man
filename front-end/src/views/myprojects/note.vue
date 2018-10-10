@@ -137,7 +137,7 @@
 
         float: left;
 
-        padding: 14px;
+        padding: 8px 14px;
 
         background-color: var(--lightgray);
         border-radius: 3px;

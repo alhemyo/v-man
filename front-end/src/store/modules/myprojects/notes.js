@@ -32,7 +32,7 @@ export default {
 
                 axios({
 
-                    url: `${this.state.api}task/${id}/notes`,
+                    url: `${this.state.api}tasks/${id}/notes`,
                     method: 'GET',
                     headers: { 'x-access-token' : localStorage.getItem('token') }
 

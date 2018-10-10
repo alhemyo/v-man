@@ -33,7 +33,7 @@ export default {
                 axios({
 
                     method: 'GET',
-                    url: `${this.state.api}user`,
+                    url: `${this.state.api}users`,
                     headers: { 'x-access-token' : localStorage.getItem( 'token' ) }
 
                 })

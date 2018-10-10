@@ -34,15 +34,14 @@
 
 <script>
 
-    import projectLink from './project-link'
-    import loader from '../../components/widgets/loader'
-    import { ScalingSquaresSpinner  } from 'epic-spinners'
-
     export default {
 
         name: 'my-projects',
 
-        components: { projectLink, loader, ScalingSquaresSpinner },
+        components: {
+            projectLink: () => import('./project-link'), 
+            loader: () => import('../../components/widgets/loader')
+        },
 
         data() {
             return {
@@ -63,7 +62,13 @@
 
                 this.loading = false 
 
-                this.$router.push({ name: 'project', params: { id : this.myProjects[0].id } })
+                if ( this.$route.params.id ) {
+                    this.$router.push({ name: 'project', params: { id : this.$route.params.id } })
+                }
+
+                else {
+                    this.$router.push({ name: 'project', params: { id : this.myProjects[0].id } })
+                }
 
             })
         }

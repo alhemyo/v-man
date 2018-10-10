@@ -91,10 +91,6 @@
 
     import moment from 'moment'
 
-    import note from './note'
-    import loader from '../../components/widgets/loader'
-    import { ScalingSquaresSpinner  } from 'epic-spinners'
-
     export default {
 
         name: 'task',
@@ -114,7 +110,10 @@
         
         },
 
-        components: { note, loader, ScalingSquaresSpinner },
+        components: { 
+            note: () => import('./note'), 
+            loader: () => import('../../components/widgets/loader')
+        },
 
         data() {
             return {

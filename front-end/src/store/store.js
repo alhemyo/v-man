@@ -19,7 +19,7 @@ export default new Vuex.Store({
   state: {
 
     // API
-    api: "http://127.0.0.1:5000/",
+    api: "http://127.0.0.1:5000/api/",
 
     // Regex
 		regex: {
