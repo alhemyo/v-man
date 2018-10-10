@@ -57,6 +57,8 @@ class Task:
             task = t['task']
             task_id = remote(task)._id
             task['id'] = task_id
+            users = Task.find_users(task, "IS_USER")
+            task['users'] = users
 
             tasks_list.append(task)
 
