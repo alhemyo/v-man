@@ -82,6 +82,7 @@
                         :state="task.state"
                         :deadline="task.deadline"
                         :description="task.description"
+                        :users="task.users"
 
                         @active="id = $event"
                         :active="task.id === id ? true : false"
@@ -162,6 +163,19 @@
             }
         },
 
+        asyncComputed: {
+
+            async combined() {
+
+                let project = await this.project
+                let users = await this.users
+
+                return project && users
+
+            }
+
+        },
+
         computed: {
 
             // PROJECT
@@ -174,19 +188,6 @@
             // USERS
             users: { get() { return this.$store.state.users.users } }
             
-        },
-
-        asyncComputed: {
-
-            async combined() {
-
-                let project = await this.project
-                let users = await this.users
-
-                return project && users
-
-            }
-
         },
 
         created() {
@@ -211,13 +212,22 @@
 
         watch: {
 
-            combined() {
+            project: {
 
-                this.usersLoading = false
+                deep: true,
+                immediate: true,
 
-                this.assignedUsers = this.users.filter(user => { return this.project.users.includes(user.id) })
+                handler: function() {
 
-                this.assignedUsers.length > 0 ? this.usersEmpty = false : this.usersEmpty = true
+                    setTimeout(() => {
+
+                        this.usersLoading = false
+                        this.assignedUsers = this.users.filter(user => { return this.project.users.includes(user.id) })
+                        this.assignedUsers.length > 0 ? this.usersEmpty = false : this.usersEmpty = true
+
+                    },1000)
+
+                }
 
             }
 

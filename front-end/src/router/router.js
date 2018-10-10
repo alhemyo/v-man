@@ -31,6 +31,7 @@ export default new Router({
         {
           path: '/myprojects',
           name: 'myprojects',
+          alias: '/', // **************************Remove when profile route is added.
           components: {
             default: () => import('../views/main-view.vue'),
             sideview: () => import('../views/myprojects/my-projects.vue')

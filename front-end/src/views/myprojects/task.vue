@@ -14,7 +14,7 @@
 
             <p class="task-info">{{ formatDeadline }}</p>
 
-            <p class="task-info">{{users}} {{ users === 1 ? 'user' : 'users' }}</p>
+            <p class="task-info">{{ users.length }} {{ users.length === 1 ? 'user' : 'users' }}</p>
 
             <i class="fas fa-angle-down open" :class="{ 'fa-angle-up' : active }" @click="openTask" />
 
@@ -103,7 +103,7 @@
             state: String,
             deadline: String,
             created: String,
-            users: Number,
+            users: Array,
             description: String,
 
             active: Boolean
