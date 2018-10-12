@@ -33,12 +33,18 @@ export default new Vuex.Store({
     },
 
     // SIDEBAR
-    sidebar: true
+    sidebar: true,
+
+    // FORMS
+    forms: {
+      user: true
+    }
     
   },
 
   mutations: {
-    updateSidebar(state, sidebar) { state.sidebar = sidebar }
+    updateSidebar(state, sidebar) { state.sidebar = sidebar },
+    updateUserForm(state, userForm) { state.forms.user = userForm }
   }
 
 })

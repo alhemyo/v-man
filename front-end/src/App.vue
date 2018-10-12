@@ -112,4 +112,57 @@
     cursor: pointer;
   }
 
+  /* FORM INPUT */
+
+  .form-input {
+
+      width: 100%;
+      height: 40px;
+
+      display: grid;
+      grid-template-columns: auto 40px;
+      align-items: center;
+
+      background-color: var(--lightgray);
+      border-radius: 3px;
+  }
+
+  .form-1-1 {
+
+    grid-column: 1/2;
+  }
+
+  .form-1-2 {
+
+    grid-column: 2/3;
+  }
+
+  .form-full {
+
+    grid-column: 1/3;
+  }
+
+  .form-input input {
+
+      font-family: var(--main);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--darkgray);
+
+      width: 100%;
+      height: 40px;
+
+      padding: 0px 10px;
+      padding-right: 0px;
+
+      background-color: transparent;
+      border: none;
+  }
+
+  .form-input i {
+
+      font-size: 12px;
+      color: rgba(0,0,0,0.2);
+  }
+
 </style>
