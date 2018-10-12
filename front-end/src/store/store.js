@@ -37,14 +37,18 @@ export default new Vuex.Store({
 
     // FORMS
     forms: {
-      user: true
+      user: false,
+      project: true,
+      task: false
     }
     
   },
 
   mutations: {
     updateSidebar(state, sidebar) { state.sidebar = sidebar },
-    updateUserForm(state, userForm) { state.forms.user = userForm }
+    updateUserForm(state, userForm) { state.forms.user = userForm },
+    updateProjectForm(state, projectForm) { state.forms.project = projectForm },
+    updateTaskForm(state, taskForm) { state.forms.task = taskForm }
   }
 
 })

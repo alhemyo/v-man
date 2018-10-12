@@ -51,7 +51,7 @@
 
   .button-v i {
 
-    font-size: 24px;
+    font-size: 20px;
 
     transition: 0.2s ease;
   }
@@ -110,6 +110,139 @@
     color: var(--midgray);
 
     cursor: pointer;
+  }
+
+  /* FORM */
+
+  .form {
+
+      width: 350px;
+      height: 100vh;
+
+      position: absolute;
+      top: 0px;
+      right: -350px;
+      z-index: 5;
+
+      display: grid;
+      grid-template-rows: 60px auto 60px;
+
+      transition: right 0.3s ease;
+
+      background-color: white;
+      
+      overflow: hidden;
+  }
+
+  .open {
+
+      right: 0px;
+
+      box-shadow: 0px 0px 20px var(--darkgray);
+  }
+
+  .form-header {
+
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--black);
+      user-select: none;
+
+      width: 100%;
+      height: 60px;
+
+      padding: 20px;
+
+      display: grid;
+      grid-template-columns: 40px auto;
+      align-items: center;
+  }
+
+  .form-body {
+
+      width: calc( 100% + 17px );
+      height: auto;
+      max-height: calc( 100vh - 120px );
+
+      padding: 20px;
+
+      align-self: center;
+
+      display: grid;
+      grid-template-columns: 150px 150px;
+      grid-auto-rows: 40px;
+      grid-gap: 10px;
+
+      overflow-y: auto;
+  }
+
+  .form-footer {
+
+      position: relative;
+  }
+
+  /* FORM BUTTON */
+
+  .form-button {
+
+      width: 40px;
+      height: 40px;
+
+      position: absolute;
+      right: 290px;
+      top: 10px;
+
+      transition: 0.3s ease;
+
+      display: grid;
+      align-items: center;
+
+      border-radius: 60px;
+
+      cursor: pointer;
+  }
+
+  .form-button:hover {
+
+      background-color: var(--lightgray);
+
+  }
+
+  .valid {
+
+      right: 20px;
+  }
+
+  .form-button i {
+
+      font-size: 20px;
+  }
+
+  .not-valid-icon {
+
+      color: var(--red);
+  }
+
+  .valid-icon {
+
+      color: var(--green);
+  }
+
+  /* FORM MESSAGE */
+
+  .form-message {
+
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--darkgray);
+      text-align: center;
+
+      width: 230px;
+
+      position: relative;
+      margin: auto;
+
+      padding: 24px 0px;
   }
 
   /* FORM INPUT */

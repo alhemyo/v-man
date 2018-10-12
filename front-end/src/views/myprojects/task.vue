@@ -16,7 +16,7 @@
 
             <p class="task-info">{{ users.length }} {{ users.length === 1 ? 'user' : 'users' }}</p>
 
-            <i class="fas fa-angle-down open" :class="{ 'fa-angle-up' : active }" @click="openTask" />
+            <i class="fas fa-angle-down open-task-button" :class="{ 'fa-angle-up' : active }" @click="openTask" />
 
         </div>
 
@@ -303,14 +303,14 @@
         text-align: left;
     }
 
-    .open {
+    .open-task-button {
 
         padding: 12px;
 
         transition: 0.2s ease;
     }
 
-    .open:hover {
+    .open-task-button:hover {
 
         color: var(--darkgray);
 

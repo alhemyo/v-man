@@ -8,11 +8,11 @@
 
             <i class="fas fa-sliders-h"></i>
 
-            <i class="fas fa-users-cog"></i>
+            <router-link :to="{ name: 'users' }" ><i class="fas fa-users-cog"></i></router-link>
 
             <i></i>
 
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search" @click="userForm = !userForm" ></i>
 
             <i class="fas fa-power-off" @click="logout" ></i>
 
@@ -33,6 +33,10 @@
             sidebar: {
                 get() { return this.$store.state.sidebar },
                 set(sidebar) { this.$store.commit('updateSidebar', sidebar) }
+            },
+            userForm: {
+                get() { return this.$store.state.forms.user },
+                set(userForm) { this.$store.commit('updateUserForm', userForm) }
             }
 
         },

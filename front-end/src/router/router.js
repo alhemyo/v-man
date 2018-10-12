@@ -8,6 +8,7 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+
     {
       path: '/login',
       name: 'login',
@@ -18,6 +19,7 @@ export default new Router({
 
       })
     },
+
     {
       path: '/',
       name: 'home',
@@ -28,6 +30,7 @@ export default new Router({
 
       }),
       children: [
+
         {
           path: '/myprojects',
           name: 'myprojects',
@@ -37,14 +40,24 @@ export default new Router({
             sideview: () => import('../views/myprojects/my-projects.vue')
           },
           children: [
+
             {
               path: '/myprojects/project/:id',
               name: 'project',
               component: () => import('../views/myprojects/my-project.vue')
             }
+
           ]
+        },
+
+        {
+          path: '/admin/users',
+          name: 'users',
+          component: () => import('../views/admin/users.vue')
         }
+
       ]
     }
+
   ]
 })

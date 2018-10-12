@@ -82,7 +82,7 @@
     .my-projects {
 
         width: 280px;
-        height: calc( 100vh - 420px );
+        height: auto;
 
         position: relative;
 
@@ -101,6 +101,7 @@
     .projects-list {
 
         width: calc( 100% + 17px );
+        height: calc( 100vh - 420px );
         min-height: 0;
 
         position: relative;

@@ -39,7 +39,7 @@
                     class="date"
                     :class="{ 
 
-                        today : month === new Date().getMonth() ? day - firstDay === today.getDate() ? true : false : false,
+                        today : month === new Date().getMonth() && year === new Date().getFullYear() ? day - firstDay === today.getDate() ? true : false : false,
                         'date-hover' : day > firstDay ? true : false
                         
                         }"
@@ -160,6 +160,11 @@
         align-items: center;
 
         cursor: pointer;
+    }
+
+    .nav i {
+
+        color: var(--darkgray);
     }
 
     .month {

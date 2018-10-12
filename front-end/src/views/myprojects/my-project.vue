@@ -46,7 +46,7 @@
 
             <p class="nav-info">users</p>
 
-            <i class="fas fa-star-of-life open" />
+            <i class="fas fa-star-of-life" />
 
             <p class="nav-info">{{ assignedUsers.length === 1 ? assignedUsers.length + ' assigned user' : assignedUsers.length + ' assigned users' }}</p>
 
@@ -378,13 +378,6 @@
     .task-name span {
 
         color: var(--green);
-    }
-
-    .open {
-
-        font-size: 12px;
-
-        padding: 0;
     }
 
     /* PROJECT TASKS CSS */

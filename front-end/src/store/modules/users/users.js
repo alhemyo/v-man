@@ -50,6 +50,33 @@ export default {
 
             })
 
+        },
+
+        newUser({commit}, data) {
+
+            return new Promise(( resolve, reject ) => {
+
+                axios({
+
+                    method: 'POST',
+                    url: `${this.state.api}users`,
+                    headers: { 'x-access-token' : localStorage.getItem('token') },
+                    data: data
+
+                })
+
+                .then(response => {
+
+                    commit( 'unshiftUser', response.data )
+
+                    resolve(response)
+
+                })
+
+                .catch(error => reject(error))
+
+            })
+
         }
 
     }

@@ -6,9 +6,15 @@
 
         <sidebar />
 
-        <router-view class="main-view" />
+        <transition name="views" mode="out-in" >
+
+            <router-view class="main-view" />
+
+        </transition>
 
         <user />
+
+        <project />
 
     </div>
 
@@ -23,7 +29,8 @@
         components: { 
             navbar: () => import ('../components/nav/navbar'), 
             sidebar: () => import('../components/nav/sidebar'),
-            user: () => import('../components/forms/user')
+            user: () => import('../components/forms/form-user'),
+            project: () => import('../components/forms/form-project')
         }
 
     }
