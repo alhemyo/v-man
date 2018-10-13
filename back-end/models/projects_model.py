@@ -41,13 +41,25 @@ class Project:
 
         if project:
             project['id'] = project_id
-            users = Project.find_users(project, "IS_USER")
-            admins = Project.find_users(project, "IS_ADMIN")
-            project['users'] = users
-            project['admins'] = admins
             return project
         else:
             return {"message": "Project not found!"}
+
+
+    @staticmethod
+    def find_one_with_users(project_id):
+        project = Project.find_one(project_id)
+
+        if project.get("message") == "Project not found!":
+            return {"message": f"Project {project_id} not found!"}
+
+        users = Project.find_users(project, "IS_USER")
+        admins = Project.find_users(project, "IS_ADMIN")
+        project['users'] = users
+        project['admins'] = admins
+
+        return project
+
 
     @staticmethod
     def find_all():
@@ -127,13 +139,11 @@ class Project:
             return new_project
 
     @staticmethod
-    def update(project_id):
+    def update(project_id, data):
         project = Project.find_one(project_id)
 
         if project.get("message") == "Project not found!":
             return {"message": f"Project {project_id} not found!"}
-
-        data = request.get_json()
 
         for attribute in data:
             if project[attribute] is not None:
