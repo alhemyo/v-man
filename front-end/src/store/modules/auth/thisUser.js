@@ -67,7 +67,7 @@ export default {
 
                 axios({
 
-                    url: `${this.state.api}thisuser`,
+                    url: `${this.state.api}users/self`,
                     method: 'GET',
                     headers: { 'x-access-token' : this.state.auth.token }
 

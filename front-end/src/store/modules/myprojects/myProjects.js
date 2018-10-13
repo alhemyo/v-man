@@ -27,7 +27,7 @@ export default {
 
                 axios({
 
-                    url: `${this.state.api}myprojects`,
+                    url: `${this.state.api}users/self/projects`,
                     method: 'GET',
                     headers: { 'x-access-token' : localStorage.getItem('token') }
     
@@ -35,7 +35,7 @@ export default {
     
                 .then(response => {
 
-                    commit('updateMyProjects', response.data.Projects)
+                    commit( 'updateMyProjects', response.data )
 
                     resolve(response)
     

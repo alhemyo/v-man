@@ -27,14 +27,14 @@ export default {
             return new Promise((resolve, reject) => {
 
                 axios({
-                    url: `${this.state.api}project/${id}/tasks`,
+                    url: `${this.state.api}projects/${id}/tasks`,
                     method: 'GET',
                     headers: { 'x-access-token' : localStorage.getItem('token') }
                 })
 
                 .then(response => {
 
-                    commit('updateTasks', response.data.Tasks)
+                    commit( 'updateTasks', response.data.Tasks )
 
                     resolve(response)
 

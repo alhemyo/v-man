@@ -14,9 +14,9 @@
 
             <p class="task-info">{{ formatDeadline }}</p>
 
-            <p class="task-info">{{users}} {{ users === 1 ? 'user' : 'users' }}</p>
+            <p class="task-info">{{ users.length }} {{ users.length === 1 ? 'user' : 'users' }}</p>
 
-            <i class="fas fa-angle-down open" :class="{ 'fa-angle-up' : active }" @click="openTask" />
+            <i class="fas fa-angle-down open-task-button" :class="{ 'fa-angle-up' : active }" @click="openTask" />
 
         </div>
 
@@ -91,10 +91,6 @@
 
     import moment from 'moment'
 
-    import note from './note'
-    import loader from '../../components/widgets/loader'
-    import { ScalingSquaresSpinner  } from 'epic-spinners'
-
     export default {
 
         name: 'task',
@@ -107,14 +103,17 @@
             state: String,
             deadline: String,
             created: String,
-            users: Number,
+            users: Array,
             description: String,
 
             active: Boolean
         
         },
 
-        components: { note, loader, ScalingSquaresSpinner },
+        components: { 
+            note: () => import('./note'), 
+            loader: () => import('../../components/widgets/loader')
+        },
 
         data() {
             return {
@@ -304,14 +303,14 @@
         text-align: left;
     }
 
-    .open {
+    .open-task-button {
 
         padding: 12px;
 
         transition: 0.2s ease;
     }
 
-    .open:hover {
+    .open-task-button:hover {
 
         color: var(--darkgray);
 

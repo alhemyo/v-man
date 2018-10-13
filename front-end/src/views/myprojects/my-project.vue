@@ -46,9 +46,9 @@
 
             <p class="nav-info">users</p>
 
-            <i class="fas fa-star-of-life open" />
+            <i class="fas fa-star-of-life" />
 
-            <p class="nav-info">{{ usersLength === 1 ? usersLength + ' assigned user' : usersLength + ' assigned users' }}</p>
+            <p class="nav-info">{{ assignedUsers.length === 1 ? assignedUsers.length + ' assigned user' : assignedUsers.length + ' assigned users' }}</p>
 
         </div>
 
@@ -81,8 +81,8 @@
                         :name="task.name"
                         :state="task.state"
                         :deadline="task.deadline"
-                        :users="task.users.length"
                         :description="task.description"
+                        :users="task.users"
 
                         @active="id = $event"
                         :active="task.id === id ? true : false"
@@ -117,9 +117,9 @@
                     <user-badge
                 
                         v-if="!usersLoading"
-                        :key="user.umcn"
+                        :key="user.id"
                         v-for="user in assignedUsers"
-                        :id="user.umcn"
+                        :id="user.id"
                         :name="user.name + ' ' + user.surname"
                     
                     />
@@ -138,15 +138,15 @@
 
     import moment from 'moment'
 
-    import task from './task'
-    import userBadge from '../../components/widgets/user-badge'
-    import loader from '../../components/widgets/loader'
-
     export default {
 
         name: 'project',
 
-        components: { task, userBadge, loader },
+        components: {
+            task: () => import('./task'), 
+            userBadge: () => import('../../components/widgets/user-badge'), 
+            loader: () => import('../../components/widgets/loader') 
+        },
 
         data() {
             return {
@@ -157,9 +157,23 @@
                 id: '',
 
                 // Users data
+                assignedUsers: [],
                 usersLoading: true,
                 usersEmpty: false
             }
+        },
+
+        asyncComputed: {
+
+            async combined() {
+
+                let project = await this.project
+                let users = await this.users
+
+                return project && users
+
+            }
+
         },
 
         computed: {
@@ -172,14 +186,12 @@
             tasks: { get() { return this.$store.state.tasks.tasks } },
 
             // USERS
-            users: { get() { return this.$store.state.users.users } },
-            assignedUsers() { return this.users.filter(user => { return this.project.users.includes(user.umcn) }) },
-            usersLength() { return this.assignedUsers.length }
-
+            users: { get() { return this.$store.state.users.users } }
+            
         },
 
         created() {
-        
+
             this.$store.dispatch('getTasks', this.$route.params.id ).then(() => {
 
                 this.taskLoading = false
@@ -188,11 +200,7 @@
 
             })
 
-            this.$store.dispatch('getUsers').then(() => {
-
-                this.usersLoading = false
-
-            })
+            this.$store.dispatch('getUsers')
 
         },
 
@@ -204,9 +212,22 @@
 
         watch: {
 
-            assignedUsers() {
+            project: {
 
-                this.assignedUsers.length > 0 ? this.usersEmpty = false : this.usersEmpty = true
+                deep: true,
+                immediate: true,
+
+                handler: function() {
+
+                    setTimeout(() => {
+
+                        this.usersLoading = false
+                        this.assignedUsers = this.users.filter(user => { return this.project.users.includes(user.id) })
+                        this.assignedUsers.length > 0 ? this.usersEmpty = false : this.usersEmpty = true
+
+                    },1000)
+
+                }
 
             }
 
@@ -359,13 +380,6 @@
         color: var(--green);
     }
 
-    .open {
-
-        font-size: 12px;
-
-        padding: 0;
-    }
-
     /* PROJECT TASKS CSS */
 
     .project-tasks {
@@ -417,6 +431,19 @@
 
         overflow: hidden;
         overflow-y: scroll;
+    }
+
+    .users-empty {
+
+        font-size: 14px;
+        color: var(--darkgray);
+        white-space: nowrap;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate( -50%, -50% );
     }
 
 </style>

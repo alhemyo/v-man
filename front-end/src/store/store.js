@@ -19,7 +19,7 @@ export default new Vuex.Store({
   state: {
 
     // API
-    api: "http://127.0.0.1:5000/",
+    api: "http://127.0.0.1:5000/api/",
 
     // Regex
 		regex: {
@@ -33,12 +33,22 @@ export default new Vuex.Store({
     },
 
     // SIDEBAR
-    sidebar: true
+    sidebar: true,
+
+    // FORMS
+    forms: {
+      user: false,
+      project: true,
+      task: false
+    }
     
   },
 
   mutations: {
-    updateSidebar(state, sidebar) { state.sidebar = sidebar }
+    updateSidebar(state, sidebar) { state.sidebar = sidebar },
+    updateUserForm(state, userForm) { state.forms.user = userForm },
+    updateProjectForm(state, projectForm) { state.forms.project = projectForm },
+    updateTaskForm(state, taskForm) { state.forms.task = taskForm }
   }
 
 })
