@@ -4,6 +4,8 @@ from flask_restful import Resource
 from resources.token import token_required
 from models.users_model import User
 
+from flask_socketio import SocketIO, emit, join_room, send
+import json
 
 class AllUsers(Resource):
 
@@ -39,7 +41,12 @@ class OneUser(Resource):
 
     @staticmethod
     def patch(user_id):
-        user = User.update(user_id)
+        data = request.get_json()
+        user = User.update(user_id, data)
+        user_string = json.dumps(user)
+        user_json = json.loads(user_string)
+
+        emit('user_changed', user_json, namespace='/', broadcast=True)
         return jsonify(user)
 
     @staticmethod

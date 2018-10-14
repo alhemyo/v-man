@@ -68,20 +68,18 @@ class User:
             return new_user
 
     @staticmethod
-    def update(user_id):
+    def update(user_id, data):
         user = User.find_one(user_id)
 
         if user.get("message") == "User not found!":
             return {"message": f"User {user_id} not found!"}
-
-        data = request.get_json()
 
         for attribute in data:
             if user[attribute] is not None:
                 user[attribute] = data[attribute]
             else:
                 return {"message": f"The attribute {attribute} is not found!"}
-        user.push()
+        graph.push(user)
 
         return user
 

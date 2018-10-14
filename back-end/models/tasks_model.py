@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 import datetime
 from py2neo import Node, Relationship, remote, NodeSelector
 
@@ -41,11 +41,21 @@ class Task:
 
         if task:
             task['id'] = task_id
-            users = Task.find_users(task, "IS_USER")
-            task['users'] = users
             return task
         else:
             return {"message": "Task not found!"}
+
+    @staticmethod
+    def find_one_with_users(task_id):
+        task = Task.find_one(task_id)
+
+        if task.get("message") == "Task not found!":
+            return {"message": f"Task {task_id} not found!"}
+
+        users = Task.find_users(task, "IS_USER")
+        task['users'] = users
+        return task
+
 
     @staticmethod
     def find_all(project_id):
@@ -105,20 +115,18 @@ class Task:
 
 
     @staticmethod
-    def update(task_id):
+    def update(task_id, data):
         task = Task.find_one(task_id)
 
         if task.get("message") == "Task not found!":
             return {"message": f"Task {task_id} not found!"}
-
-        data = request.get_json()
 
         for attribute in data:
             if task[attribute] is not None:
                 task[attribute] = data[attribute]
             else:
                 return {"message": f"The attribute {attribute} is not found!"}
-        task.push()
+        graph.push(task)
 
         users = data.get('users')
         users_msg = Task.make_connections(users, task, "IS_USER")
@@ -126,6 +134,7 @@ class Task:
         if users_msg.get('message'):
             return users_msg
 
+        print(task)
         return task
 
 
