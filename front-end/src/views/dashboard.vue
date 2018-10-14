@@ -16,6 +16,8 @@
 
         <project />
 
+        <task />
+
     </div>
 
 </template>
@@ -30,7 +32,8 @@
             navbar: () => import ('../components/nav/navbar'), 
             sidebar: () => import('../components/nav/sidebar'),
             user: () => import('../components/forms/form-user'),
-            project: () => import('../components/forms/form-project')
+            project: () => import('../components/forms/form-project'),
+            task: () => import('../components/forms/form-task')
         },
 
         created() {

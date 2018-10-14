@@ -25,7 +25,7 @@
                     :value="project.deadline"
                     @setDate="project.deadline = $event"
                 
-                 />
+                />
 
                 <!-- NAME -->
 

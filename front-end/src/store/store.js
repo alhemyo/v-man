@@ -39,7 +39,7 @@ export default new Vuex.Store({
     // FORMS
     forms: {
       user: false,
-      project: true,
+      project: false,
       task: false
     }
     

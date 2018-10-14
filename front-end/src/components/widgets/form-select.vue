@@ -270,12 +270,12 @@
       border-radius: 60px;
 
       cursor: pointer;
-  }
+    }
 
-  .form-select-button i {
+    .form-select-button i {
 
-      font-size: 20px;
-  }
+        font-size: 20px;
+    }
 
 
 </style>

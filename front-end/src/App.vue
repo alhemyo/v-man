@@ -170,7 +170,7 @@
 
       display: grid;
       grid-template-columns: 150px 150px;
-      grid-auto-rows: 40px;
+      grid-auto-rows: max-content;
       grid-gap: 10px;
 
       overflow-y: auto;
@@ -250,7 +250,8 @@
   .form-input {
 
       width: 100%;
-      height: 40px;
+      min-height: 40px;
+      height: auto;
 
       display: grid;
       grid-template-columns: auto 40px;
@@ -277,19 +278,39 @@
 
   .form-input input {
 
-      font-family: var(--main);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--darkgray);
+    font-family: var(--main);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--darkgray);
 
-      width: 100%;
-      height: 40px;
+    width: 100%;
+    height: 40px;
 
-      padding: 0px 10px;
-      padding-right: 0px;
+    padding: 0px 10px;
+    padding-right: 0px;
 
-      background-color: transparent;
-      border: none;
+    background-color: transparent;
+    border: none;
+  }
+
+  .form-input textarea {
+
+    font-family: var(--main);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--darkgray);
+    resize: none;
+
+    width: 100%;
+    min-height: 150px;
+    max-height: 150px;
+
+    padding: 10px;
+
+    grid-column: 1/3;
+
+    background-color: transparent;
+    border: none;
   }
 
   .form-input i {

@@ -12,7 +12,7 @@
 
             <div class="project-menu">
 
-                <div class="button-v">
+                <div class="button-v" @click="taskForm = !taskForm" >
 
                     <i class="fas fa-file-alt" />
 
@@ -173,6 +173,10 @@
 
             // TASKS
             tasks: { get() { return this.$store.state.tasks.tasks } },
+            taskForm: {
+                get() { return this.$store.state.forms.task },
+                set(taskForm) { this.$store.commit( 'updateTaskForm', taskForm ) }
+            },
 
             // USERS
             users: { get() { return this.$store.state.users.users } }
