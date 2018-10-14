@@ -121,6 +121,8 @@
                         v-for="user in assignedUsers"
                         :id="user.id"
                         :name="user.name + ' ' + user.surname"
+                        :settings="true"
+                        :display="true"
                     
                     />
 
@@ -161,19 +163,6 @@
                 usersLoading: true,
                 usersEmpty: false
             }
-        },
-
-        asyncComputed: {
-
-            async combined() {
-
-                let project = await this.project
-                let users = await this.users
-
-                return project && users
-
-            }
-
         },
 
         computed: {

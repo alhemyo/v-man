@@ -18,6 +18,10 @@
 
             users: { get() { return this.$store.state.users.users } }
 
+        },
+
+        created() {
+            this.$store.dispatch('getUsers')
         }
 
     }

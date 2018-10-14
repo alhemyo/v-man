@@ -31,6 +31,11 @@
             sidebar: () => import('../components/nav/sidebar'),
             user: () => import('../components/forms/form-user'),
             project: () => import('../components/forms/form-project')
+        },
+
+        created() {
+            this.$store.dispatch('getProjects')
+            this.$store.dispatch('getUsers')
         }
 
     }

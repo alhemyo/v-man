@@ -1,18 +1,18 @@
 <template>
     
-    <div class="user-badge">
+    <div class="user-badge" @click="selectUser" :class="{ selected : selected }" >
 
         <div class="header">
 
             <div class="avatar">
 
-                <img src="/images/janeDoe.png" />
+                <img :src="avatar" />
 
             </div>
 
             <p class="name" >{{ name }}</p>
 
-            <div class="settings">
+            <div v-show="settings" class="settings">
 
                 <i class="fas fa-bars" />
 
@@ -31,10 +31,27 @@
         name: 'user-badge',
 
         props: {
-
             id: Number,
-            name: String
+            name: String,
+            gender: String, // Remove when avatar is added
+            display: Boolean,
+            settings: Boolean
+        },
 
+        data() {
+            return {
+                selected: false,
+                avatar: this.gender === 'Male' || this.gender === 'male' ? '/images/johnDoe.png' : '/images/janeDoe.png' // Remove when avatar is added
+            }
+        },
+
+        methods: {
+            selectUser() {
+                if ( !this.display ) {
+                    this.selected = !this.selected
+                    this.$emit( 'selectUser', this.id )
+                }
+            }
         }
 
     }
@@ -61,7 +78,7 @@
         height: 40px;
 
         display: grid;
-        grid-template-columns: 40px auto 40px;
+        grid-template-columns: 40px auto min-content;
         align-items: center;
     }
 
@@ -94,5 +111,16 @@
         display: grid;
         align-items: center;
     }
+
+    .selected {
+
+        background-color: var(--midgray);
+    }
+
+    .selected .name {
+
+        color: var(--black);
+    }
+
 
 </style>
