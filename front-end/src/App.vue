@@ -26,7 +26,7 @@
 
     --lightgray: #F6F6F6;
     --midgray: #DEDEDE;
-    --darkgray: #9A9A9A;
+    --darkgray:gray;
     --black: #383A47;
     --red: #EC2E2E;
     --yellow: #FFC107;

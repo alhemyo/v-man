@@ -83,6 +83,7 @@
                         :deadline="task.deadline"
                         :description="task.description"
                         :users="task.users"
+                        :client="project.client"
 
                         @active="id = $event"
                         :active="task.id === id ? true : false"

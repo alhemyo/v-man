@@ -76,6 +76,7 @@ export default {
                 .then(response => {
 
                     localStorage.setItem('umcn', response.data.umcn)
+                    localStorage.setItem('id', response.data.id)
                     localStorage.setItem('name', response.data.name)
                     localStorage.setItem('surname', response.data.surname)
                     localStorage.setItem('position', response.data.position)

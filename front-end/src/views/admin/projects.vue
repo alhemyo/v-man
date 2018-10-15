@@ -2,7 +2,14 @@
     
     <div class="projects">
         
-        <p :key="project.id" v-for="project in projects">{{ project.name }}</p>
+        <project
+        
+            :key="project.id" 
+            v-for="project in projects"
+            :priority="project.priority"
+            :name="project.name"
+        
+        />
 
     </div>
 
@@ -13,6 +20,10 @@
     export default {
 
         name: 'projects',
+
+        components: {
+            project: () => import('./project')
+        },
 
         data() {
             return {
@@ -39,6 +50,9 @@
 
         width: 100%;
         height: 100%;
+
+        padding: 4px;
+        padding-top: 0px;
     }
 
 </style>
