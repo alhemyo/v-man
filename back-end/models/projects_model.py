@@ -114,7 +114,8 @@ class Project:
                                    name=data['name'],
                                    deadline=data['deadline'],
                                    priority=data['priority'],
-                                   client=data['client']
+                                   client=data['client'],
+                                   state=data['state']
                                    )
                 new_project['date_created'] = date_created
                 admins = data['admins']

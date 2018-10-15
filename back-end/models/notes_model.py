@@ -51,6 +51,7 @@ class Note:
                 return {"message": f"You are missing a key element: {e}"}
 
             new_note['date_created'] = date_created
+            new_note['user'] = current_user_id
 
             graph.create(new_note)
 
@@ -59,14 +60,13 @@ class Note:
             note_task_rel = Relationship(new_note, 'IS_NOTE_OF', task)
             graph.create(note_task_rel)
 
-            new_note['user'] = current_user_id
             new_note['id'] = remote(new_note)._id
 
             return new_note
 
     @staticmethod
     def update(note_id):
-        note =  Note.find_one(note_id)
+        note = Note.find_one(note_id)
 
         if note.get("message") == "Note not found!":
             return {"message": f"Note {note_id} not found!"}

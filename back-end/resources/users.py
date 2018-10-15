@@ -43,10 +43,11 @@ class OneUser(Resource):
     def patch(user_id):
         data = request.get_json()
         user = User.update(user_id, data)
+
         user_string = json.dumps(user)
         user_json = json.loads(user_string)
-
         emit('user_changed', user_json, namespace='/', broadcast=True)
+
         return jsonify(user)
 
     @staticmethod
