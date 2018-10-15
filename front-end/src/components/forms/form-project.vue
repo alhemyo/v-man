@@ -16,6 +16,17 @@
 
             <form v-show="projectForm" v-if="!loading" class="form-body">
 
+                <!-- DEADLINE -->
+
+                <form-date
+                    
+                    class="form-1-2"
+                    name="Deadline"
+                    :value="project.deadline"
+                    @setDate="project.deadline = $event"
+                
+                />
+
                 <!-- NAME -->
 
                 <div class="form-input form-full">
@@ -36,24 +47,29 @@
                     :value="project.client"
                     @option="project.client = $event"
                 
-                 />
+                />
 
-                <!-- DEADLINE -->
+                <!-- PRIORITY -->
 
-                <form-date
+                <form-select
                 
-                    name="Deadline"
-                    :value="project.deadline"
-                    @setDate="project.deadline = $event"
+                    name="Priority"
+                    :options="priorityOptions"
+                    :single="true"
+                    :value="project.priority"
+                    @option="project.priority = $event"
                 
-                 />
+                />
 
                 <!-- ADMIN -->
 
                 <form-select
             
-                name="Admin"
-                :single="true"
+                name="Admins"
+                :single="false"
+                :options="admins"
+                :value="project.admins"
+                @formList="project.admins = $event"
             
                 />
 
@@ -62,7 +78,10 @@
                 <form-select
             
                 name="Users"
-                :single="true"
+                :single="false"
+                :options="users"
+                :value="project.users"
+                @formList="project.users = $event"
             
                 />
 
@@ -92,7 +111,10 @@
         return {
             name: '',
             client: '',
-            deadline: ''
+            deadline: '',
+            priority: '',
+            users: [],
+            admins: []
         }
     }
 
@@ -115,6 +137,7 @@
 
                 // Options
                 clientOptions: [ 'VT', 'CT', 'CS', 'FT', 'GR', 'ZZ' ],
+                priorityOptions: [ 'low', 'mid', 'high' ],
 
                 // project data
                 project,
@@ -131,7 +154,11 @@
             projectForm: {
                 get() { return this.$store.state.forms.project },
                 set(projectForm) { this.$store.commit( 'updateProjectForm', projectForm ) }
-            }
+            },
+            users: {
+                get() { return this.$store.state.users.users }
+            },
+            admins() { return this.users.filter(user => user.admin_type === 'project admin' || user.admin_type === 'uber admin' ) }
         },
 
         methods: {
@@ -149,7 +176,12 @@
                 this.loading = true
 
                 let project = {
-                    name: this.project.name
+                    name: this.project.name,
+                    client: this.project.client,
+                    deadline: this.project.deadline,
+                    priority: this.project.priority,
+                    users: this.project.users,
+                    admins: this.project.admins
                 }
 
                 this.$store.dispatch( 'newProject', project )

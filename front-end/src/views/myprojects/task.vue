@@ -12,7 +12,7 @@
 
             <div></div>
 
-            <p class="task-info">{{ formatDeadline }}</p>
+            <p class="task-info"><span>●</span> {{ formatDeadline }}</p>
 
             <p class="task-info">{{ users.length }} {{ users.length === 1 ? 'user' : 'users' }}</p>
 
@@ -81,7 +81,23 @@
 
         </div>
 
-        <div class="footer"></div>
+        <div class="footer">
+
+            <div class="note-controls">
+
+                <i class="far fa-image" />
+
+                <i class="fas fa-file-upload" />
+
+                <p class="client" :class="{ 'client-on' : note.client }" @click="note.client = !note.client" >{{ client }}</p>
+
+            </div>
+
+            <input class="note-input" type="text" placeholder="Add note..." />
+
+            <i class="far fa-comment-alt" />
+
+        </div>
 
     </div>
 
@@ -90,6 +106,16 @@
 <script>
 
     import moment from 'moment'
+
+    const defaultNote = () => {
+        return {
+            client: false,
+            message: '',
+            user: localStorage.getItem('id')
+        }
+    }
+
+    const note = defaultNote()
 
     export default {
 
@@ -105,6 +131,7 @@
             created: String,
             users: Array,
             description: String,
+            client: String,
 
             active: Boolean
         
@@ -119,7 +146,9 @@
             return {
                 // notes
                 notesLoading: true,
-                notesEmpty: false
+                notesEmpty: false,
+
+                note
             }
         },
 
@@ -298,6 +327,11 @@
         padding: 0px 10px;
     }
 
+    .task-info span {
+
+        color: var(--red);
+    }
+
     .task-name {
 
         text-align: left;
@@ -401,7 +435,62 @@
 
     .footer {
 
+        display: grid;
+        grid-template-columns: 290px auto 60px;
+        grid-template-rows: 40px;
+        align-items: center;
+
         border-top: 1px solid var(--lightgray);
+    }
+
+    .note-controls {
+
+        height: 40px;
+
+        display: grid;
+        grid-template-columns: 40px 40px 40px;
+        grid-column-gap: 10px;
+        align-items: center;
+        justify-content: center;
+
+        border-right: 1px solid var(--lightgray);
+    }
+
+    .client {
+
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--darkgray);
+        text-align: center;
+
+        width: 24px;
+        height: 24px;
+
+        justify-self: center;
+
+        padding: 6px 0px;
+
+        border-radius: 3px;
+
+        cursor: pointer;
+    }
+
+    .client-on {
+
+        color: white;
+        
+        background-color: var(--red);
+    }
+
+    .note-input {
+
+        font-family: var(--main);
+        font-size: 12px;
+        color: gray;
+
+        padding: 10px 10px;
+
+        border: none;
     }
 
 </style>

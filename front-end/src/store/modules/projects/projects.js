@@ -1,62 +1,53 @@
-import axios from "axios";
+import axios from 'axios'
 
-const usersDefaultState = () => {
-
+const defaultProjectsState = () => {
     return {
-
-        users: []
-
+        projects: []
     }
-
 }
 
-const state = usersDefaultState()
+const state = defaultProjectsState()
 
 export default {
 
     state,
 
     mutations: {
-
-        updateUsers( state, users ) { state.users = users },
-        unshiftUser( state, user ) { state.users.unshift( user ) },
-        resetUsersState( state ) { Object.assign( state, usersDefaultState() ) }
-
+        updateProjects(state, projects) { state.projects = projects },
+        unshiftProject(state, project) { state.projects.unshift(project) },
+        resetProjects(state) { Object.assign( state, defaultProjectsState() ) }
     },
 
     actions: {
-        getUsers({commit}) {
-
+        getProjects({commit}) {
             return new Promise(( resolve, reject ) => {
                 axios({
+                    url: `${this.state.api}projects`,
                     method: 'GET',
-                    url: `${this.state.api}users`,
-                    headers: { 'x-access-token' : localStorage.getItem( 'token' ) }
+                    headers: { 'x-access-token' : localStorage.getItem('token') }
                 })
                 .then(response => {
-                    commit( 'updateUsers', response.data.Users )
+                    commit( 'updateProjects', response.data.Projects )
                     resolve(response)
                 })
                 .catch(error => reject(error))
             })
         },
-        newUser({commit}, data) {
+        newProject({commit}, project) {
             return new Promise(( resolve, reject ) => {
                 axios({
+                    url: `${this.state.api}projects`,
                     method: 'POST',
-                    url: `${this.state.api}users`,
                     headers: { 'x-access-token' : localStorage.getItem('token') },
-                    data: data
+                    data: project
                 })
                 .then(response => {
-                    commit( 'unshiftUser', response.data )
+                    commit( 'unshiftProject', response.data )
                     resolve(response)
                 })
                 .catch(error => reject(error))
             })
-
         }
-
     }
 
 }

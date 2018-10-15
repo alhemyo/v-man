@@ -55,21 +55,15 @@
         },
 
         created() {
-
             this.$store.dispatch('getMyProjects')
-            
             .then(() => { 
-
                 this.loading = false 
-
                 if ( this.$route.params.id ) {
                     this.$router.push({ name: 'project', params: { id : this.$route.params.id } })
                 }
-
                 else {
                     this.$router.push({ name: 'project', params: { id : this.myProjects[0].id } })
                 }
-
             })
         }
 

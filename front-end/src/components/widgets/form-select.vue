@@ -4,7 +4,7 @@
 
         <div class="form-input" @click="pop  = !pop">
 
-            <p>{{ single ? value ? value : name : value ? value.length : name }}</p>
+            <p>{{ single ? value ? value : name : value ? value.length + ' ' + name : name }}</p>
 
             <i class="fas fa-ellipsis-h" />
 
@@ -34,17 +34,37 @@
                             v-for="(option, index) in options"
                             class="option" 
                             :key="index"
-                            @click="single ? $emit( 'option', option ) : selectedList.push(option)"  >
+                            @click="$emit( 'option', option )"  >
                             
                             {{ option }}
                         
                         </p>
 
+                        <user-badge 
+                        
+                            v-if="isObject"
+                            v-for="option in options"
+                            :key="option.id"
+                            :id="option.id"
+                            :name="option.name + ' ' + option.surname"
+                            :gender="option.gender"
+                            @selectUser="!selectedList.includes($event) ? selectedList.push($event) : selectedList = selectedList.filter(item => item != $event)"
+                        
+                        />
+
                     </div>
 
                 </div>
 
-                <div v-if="!single" class="pop-footer"></div>
+                <div v-if="!single" class="pop-footer">
+
+                    <div class="form-button" :class="{ valid : checkList }" @click="formList" >
+
+                        <i class="fas" :class="{ 'fa-times not-valid-icon' : !checkList, 'fa-check valid-icon' : checkList }" />
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -68,7 +88,7 @@
             name: String,
             options: Array,
             single: Boolean,
-            value: String || Object
+            value: ''
 
         },
 
@@ -87,16 +107,23 @@
 
         computed: {
           
-            // Check if options are objects or strings
-            isObject() { return _.isObject(this.options[0]) }
+            isObject() { return _.isObject(this.options[0]) }, // Check if options are objects or strings
+            checkList() { return this.selectedList.length > 0 ? true : false }
 
         },
 
         methods: {
 
-            close() { this.pop = false },
+            close() { 
+                this.pop = false
+            },
 
-            closeSelect() { this.single ? this.pop = false : false }
+            closeSelect() { this.single ? this.pop = false : false },
+
+            formList() {
+                this.pop = false
+                this.single ? false : this.$emit( 'formList', this.selectedList )
+            }
 
         },
 
@@ -219,6 +246,35 @@
     .option:hover {
 
         background-color: rgba(0,0,0,0.05);
+    }
+
+    .pop-footer {
+
+        position: relative;
+    }
+
+    .form-select-button {
+
+      width: 40px;
+      height: 40px;
+
+      position: absolute;
+      right: 290px;
+      top: 10px;
+
+      transition: 0.3s ease;
+
+      display: grid;
+      align-items: center;
+
+      border-radius: 60px;
+
+      cursor: pointer;
+    }
+
+    .form-select-button i {
+
+        font-size: 20px;
     }
 
 

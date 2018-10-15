@@ -124,7 +124,7 @@
 
     .header img {
 
-        padding: 20px;
+        padding: 26px;
 
         transition: 0.3s ease;
     }

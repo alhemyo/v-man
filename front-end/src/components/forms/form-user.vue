@@ -162,11 +162,13 @@
 
                 <!-- ADMIN -->
 
-                <form-select
+                <form-switch
                 
+                    class="form-1-2 admin"
+                    :class="{ 'admin-on' : user.admin }"
                     name="Admin"
-                    class="form-1-2"
-                    :single="true"
+                    :value="user.admin"
+                    @switch="user.admin = $event"
                 
                 />
 
@@ -186,6 +188,8 @@
 
                 <form-select
                 
+                    class="admin-type"
+                    :class="{ 'admin-type-on' : user.admin }"
                     name="Admin type"
                     :options="adminOptions"
                     :single="true"
@@ -254,7 +258,7 @@
             umcn: '',
             position: '',
             admin: false,
-            adminType: '',
+            adminType: 'regular user',
             employmentDate: '',
             payment: ''
         }
@@ -270,6 +274,7 @@
 
             formSelect: () => import('../widgets/form-select'),
             formDate: () => import('../widgets/form-date'),
+            formSwitch: () => import('../widgets/form-switch'),
             loader: () => import('../widgets/loader')
 
         },
@@ -280,10 +285,10 @@
                 loading: false,
 
                 // Options
-                genderOptions: [ 'Female', 'Male' ],
+                genderOptions: [ 'female', 'male' ],
                 educationOptions: [ 'low', 'mid', 'high' ],
                 positionOptions: [ '3D', 'MGFX', 'COMP', 'DESIGN', 'AUDIO', 'TRACK', 'SYS-ADMIN', 'OFFICE', 'ACCOUNT' ],
-                adminOptions: [ 'User admin', 'Project admin', 'Uber admin' ],
+                adminOptions: [ 'user admin', 'project admin', 'uber admin' ],
 
                 // User Data
                 user,
@@ -402,5 +407,30 @@
 
 <style scoped>
 
+    .admin {
+
+        transition: 0.2s ease;
+
+        transform: translateY( 50px );
+
+        z-index: 1;
+    }
+
+    .admin-on {
+
+        transform: translateY( 0px );
+    }
+
+    .admin-type {
+
+        transition: 0.2s ease;
+
+        opacity: 0;
+    }
+
+    .admin-type-on {
+
+        opacity: 1;
+    }
 
 </style>

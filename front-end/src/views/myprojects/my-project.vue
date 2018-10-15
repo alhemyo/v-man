@@ -12,7 +12,7 @@
 
             <div class="project-menu">
 
-                <div class="button-v">
+                <div class="button-v" @click="taskForm = !taskForm" >
 
                     <i class="fas fa-file-alt" />
 
@@ -83,6 +83,7 @@
                         :deadline="task.deadline"
                         :description="task.description"
                         :users="task.users"
+                        :client="project.client"
 
                         @active="id = $event"
                         :active="task.id === id ? true : false"
@@ -121,6 +122,8 @@
                         v-for="user in assignedUsers"
                         :id="user.id"
                         :name="user.name + ' ' + user.surname"
+                        :settings="true"
+                        :display="true"
                     
                     />
 
@@ -163,19 +166,6 @@
             }
         },
 
-        asyncComputed: {
-
-            async combined() {
-
-                let project = await this.project
-                let users = await this.users
-
-                return project && users
-
-            }
-
-        },
-
         computed: {
 
             // PROJECT
@@ -184,6 +174,10 @@
 
             // TASKS
             tasks: { get() { return this.$store.state.tasks.tasks } },
+            taskForm: {
+                get() { return this.$store.state.forms.task },
+                set(taskForm) { this.$store.commit( 'updateTaskForm', taskForm ) }
+            },
 
             // USERS
             users: { get() { return this.$store.state.users.users } }

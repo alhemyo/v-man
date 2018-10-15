@@ -6,9 +6,9 @@
 
             <i class="fas fa-angle-left" :class="{ 'fa-angle-right' : !sidebar }" @click="sidebar = !sidebar" ></i>
 
-            <i class="fas fa-sliders-h"></i>
+            <router-link class="link" :to="{ name: 'projects' }" ><i class="fas fa-sliders-h"></i></router-link>
 
-            <router-link :to="{ name: 'users' }" ><i class="fas fa-users-cog"></i></router-link>
+            <router-link class="link" :to="{ name: 'users' }" ><i class="fas fa-users-cog"></i></router-link>
 
             <i></i>
 
@@ -52,7 +52,7 @@
 
 </script>
 
-<style>
+<style scoped>
 
     .navbar-wrap {
 
@@ -74,6 +74,16 @@
         align-items: center;
 
         background-color: white;
+    }
+
+    .link {
+
+        text-align: center;
+    }
+
+    .router-link-active i {
+
+        color: var(--darkgray);
     }
 
 </style>

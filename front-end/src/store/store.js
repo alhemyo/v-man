@@ -9,12 +9,13 @@ import myProjects from './modules/myprojects/myProjects'
 import users from './modules/users/users'
 import tasks from './modules/myprojects/tasks'
 import notes from './modules/myprojects/notes'
+import projects from './modules/projects/projects'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
-  modules: { auth, thisUser, myProjects, users, tasks, notes },
+  modules: { auth, thisUser, myProjects, users, tasks, notes, projects },
 
   state: {
 
@@ -38,7 +39,7 @@ export default new Vuex.Store({
     // FORMS
     forms: {
       user: false,
-      project: true,
+      project: false,
       task: false
     }
     
