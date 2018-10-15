@@ -77,8 +77,8 @@ class Task:
     @staticmethod
     def add(project_id, data):
 
-            all_attributes = ["name", "priority", "state", "thumbnail", "deadline", "download", "created",
-                              "finished", "upload"]
+            all_attributes = ["name", "priority", "state", "thumbnail", "description", "deadline",
+                              "download", "created", "finished", "upload"]
 
             date_created = str(datetime.datetime.now()).replace(' ', 'T') + "Z"
 
