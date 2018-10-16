@@ -64,8 +64,8 @@
                         <note 
 
                         v-if="!notesLoading"
-                        :key="index" 
-                        v-for="(note, index) in notes" 
+                        :key="note.id" 
+                        v-for="note in notes" 
                         :user="note.user"
                         :message="note.message"
                         :client="note.client"
@@ -93,9 +93,9 @@
 
             </div>
 
-            <input class="note-input" type="text" placeholder="Add note..." />
+            <input class="note-input" type="text" placeholder="Add note..." v-model="note.message" />
 
-            <i class="far fa-comment-alt" />
+            <i class="far fa-comment-alt" @click="addNote" />
 
         </div>
 
@@ -169,6 +169,22 @@
 
                 this.$emit( 'active', this.active ? false : this.id )
 
+            },
+
+            addNote() {
+
+                let note = {
+                    client: this.note.client,
+                    message: this.note.message,
+                    user: this.note.user,
+                    date: new Date()
+                }
+
+                this.$store.dispatch( 'addNote', { note: note, id: this.id } )
+                .then(() => {
+                    Object.assign(this.note, defaultNote())
+                    this.notesEmpty = false
+                })
             }
 
         },
@@ -176,28 +192,18 @@
         watch: {
 
             active() {
-
-                this.$store.commit( 'resetAddNoteState' )
-
+                this.$store.commit( 'resetNotesState' )
+                Object.assign( this.note, defaultNote() )
                 if ( this.active ) {
-
                     this.$store.dispatch( 'getNotes', { id: this.id } )
-                    
                     .then( () => {
-
                         this.notesLoading = false
                         this.notes.length > 0 ? this.notesEmpty = false : this.notesEmpty = true
-
                     })
-
                 }
-
                 else {
-
-                    this.$store.commit( 'resetNotesState' )
-
+                    Object.assign( this.note, defaultNote() )
                 }
-
             }
 
         }

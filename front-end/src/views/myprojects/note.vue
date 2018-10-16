@@ -48,7 +48,7 @@
 
         props: {
 
-            user: String,
+            user: Number,
             message: String,
             client: Boolean,
             date: String
@@ -58,7 +58,7 @@
         computed: {
 
             formatDate() { return moment(this.date).format("DD MMM YYYY - HH:mm") },
-            getUser() { return this.$store.state.users.users.filter(user => { return user.umcn === this.user }) },
+            getUser() { return this.$store.state.users.users.filter(user => { return user.id === this.user }) },
             project() { return this.$store.state.myProjects.myProjects.find((project) => { return project.id === Number( this.$route.params.id ) }) || {} }
 
         }
@@ -133,7 +133,7 @@
         font-size: 12px;
         font-weight: 500;
         color: var(--darkgray);
-        line-height: 1.3;
+        line-height: 1.4;
 
         float: left;
 
