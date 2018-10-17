@@ -189,6 +189,11 @@
         align-items: center;
     }
 
+    .nav-link i {
+
+        font-size: 16px;
+    }
+
     .router-link-active i {
 
         color: var(--blue);

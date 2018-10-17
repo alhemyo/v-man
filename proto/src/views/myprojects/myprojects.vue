@@ -36,6 +36,7 @@
 
     .myprojects {
 
+        width: 100%;
         height: auto;
 
         display: grid;
