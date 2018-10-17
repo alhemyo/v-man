@@ -6,6 +6,8 @@
 
             <i class="fas fa-angle-left" :class="{ 'fa-angle-right' : !sidebar }" @click="sidebar = !sidebar" ></i>
 
+            <router-link class="link" to="#" ><i class="fas fa-cog"></i></router-link>
+
             <router-link class="link" :to="{ name: 'projects' }" ><i class="fas fa-sliders-h"></i></router-link>
 
             <router-link class="link" :to="{ name: 'users' }" ><i class="fas fa-users-cog"></i></router-link>
@@ -70,7 +72,7 @@
         height: 100%;
 
         display: grid;
-        grid-template-columns: 80px 80px 80px auto 80px 80px;
+        grid-template-columns: 80px 80px 80px 80px auto 80px 80px;
         align-items: center;
 
         background-color: white;

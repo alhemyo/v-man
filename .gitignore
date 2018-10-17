@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
 
+node_modules/
 .idea/
 back-end/__pycache__/models.cpython-36.pyc
