@@ -59,6 +59,7 @@ def on_login(data):
     CONNECTED_USERS[socket_id] = user_id
     print(CONNECTED_USERS)
     print("Online users: ", set(CONNECTED_USERS.values()))
+    emit('online_users', list(set(CONNECTED_USERS.values())), namespace='/', broadcast=True)
 
 
 @socketio.on('disconnect')
@@ -68,6 +69,13 @@ def on_disconnect():
     CONNECTED_USERS.pop(socket_id)
     print(CONNECTED_USERS)
     print("Online users: ", set(CONNECTED_USERS.values()))
+
+@socketio.on('logout')
+def on_logout(socket_id):
+    CONNECTED_USERS.pop(socket_id)
+    print(CONNECTED_USERS)
+    print("Online users: ", set(CONNECTED_USERS.values()))
+    emit('online_users', list(set(CONNECTED_USERS.values())), namespace='/', broadcast=True)
 
 
 if __name__ == '__main__':
