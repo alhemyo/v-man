@@ -19,6 +19,8 @@ export default new Vuex.Store({
 
   state: {
 
+    connect: false,
+
     // API
     api: "http://127.0.0.1:5000/api/",
 
@@ -49,7 +51,11 @@ export default new Vuex.Store({
     updateSidebar(state, sidebar) { state.sidebar = sidebar },
     updateUserForm(state, userForm) { state.forms.user = userForm },
     updateProjectForm(state, projectForm) { state.forms.project = projectForm },
-    updateTaskForm(state, taskForm) { state.forms.task = taskForm }
+    updateTaskForm(state, taskForm) { state.forms.task = taskForm },
+
+    // Socket
+    SOCKET_CONNECT: ( state ) => { state.connect = true }
   }
+
 
 })

@@ -36,6 +36,7 @@
 
                 this.$store.dispatch( 'logout' )
                 .then(() => {
+                    this.$socket.emit('logout', this.$socket.id )
                     this.$router.push('/login')
                 })
             }
