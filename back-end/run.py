@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_restful import Api
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit, join_room, send
+from flask_socketio import SocketIO, emit, join_room, send, disconnect
 
 from resources import login, users, projects, tasks, notes
 
@@ -76,6 +76,7 @@ def on_logout(socket_id):
     print(CONNECTED_USERS)
     print("Online users: ", set(CONNECTED_USERS.values()))
     emit('online_users', list(set(CONNECTED_USERS.values())), namespace='/', broadcast=True)
+    disconnect(socket_id)
 
 
 if __name__ == '__main__':
