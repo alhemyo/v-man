@@ -32,7 +32,7 @@ export default new Router({
           path: '/myprojects',
           name: 'myprojects',
           components: {
-            default: () => import('../views/myprojects/project.vue'),
+            default: () => import('../views/myprojects/myprojectsView.vue'),
             sideview: () => import('../views/myprojects/myprojects.vue')
           },
 

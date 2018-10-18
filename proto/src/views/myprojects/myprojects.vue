@@ -2,7 +2,7 @@
     
     <div class="myprojects">
 
-        <transition-group name="list">
+        <transition-group name="list" >
 
             <project-badge 
         
@@ -38,10 +38,11 @@
 
         width: 100%;
         height: auto;
+    }
 
-        display: grid;
-        grid-auto-rows: 40px;
-        grid-row-gap: 4px;
+    .project-badge:nth-child(1) {
+
+        margin-top: 0px;
     }
 
 </style>

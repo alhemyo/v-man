@@ -18,7 +18,11 @@ export default {
 
     name: 'project-badge',
 
-    props: { name: String }
+    props: { 
+        id: Number,
+        name: String,
+        priority: String
+    }
 
 }
 
@@ -31,9 +35,14 @@ export default {
         width: 100%;
         height: 40px;
 
+        position: relative;
+        margin-top: 4px;
+
         display: grid;
         grid-template-columns: 40px auto 40px;
         align-items: center;
+        
+        border-radius: 3px;
     }
 
     .priority {
@@ -51,7 +60,7 @@ export default {
 
         font-size: 14px;
 
-        opacity: 0;
+        opacity: 1;
     }
 
 </style>
