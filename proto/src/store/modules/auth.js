@@ -14,10 +14,15 @@ export default {
 
     state,
 
+    getters: { 
+        isAuth: state => !!state.token
+    },
+
     mutations: {
         updateUsername( state, username ) { state.username = username },
         updatePassword( state, password ) { state.password = password },
-        updateToken( state, token ) { state.token = token }
+        updateToken( state, token ) { state.token = token },
+        resetAuth( state ) { Object.assign( state, authDefault() ) }
     },
 
     actions: {
@@ -67,6 +72,19 @@ export default {
 
                 })
                 .catch(error => reject( error ))
+
+            })
+
+        },
+
+        logout({ commit }) {
+
+            return new Promise(( resolve ) => {
+
+                let logout = localStorage.clear()
+                commit( 'resetAuth' )
+
+                resolve(logout)
 
             })
 

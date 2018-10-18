@@ -2,7 +2,7 @@
     
     <router-link to="#" class="project-badge">
 
-        <div class="priority"></div>
+        <div class="priority" :class="{ mid : priority === 'mid', high : priority === 'high' }" ></div>
 
         <p class="default-text">{{ name }}</p>
 
@@ -28,7 +28,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped >
 
     .project-badge {
 
@@ -56,9 +56,42 @@ export default {
         border-radius: 4px;
     }
 
+    .mid {
+
+        background-color: var(--lightblue);
+    }
+
+    .high {
+
+        background-color: var(--blue);
+    }
+
     .project-badge i {
 
         font-size: 14px;
+
+        transition: 0.2s ease;
+
+        transform: translateX( -10px );
+
+        opacity: 0;
+    }
+
+    .project-badge:hover i {
+
+        transform: translateX( 0px );
+
+        opacity: 1;
+    }
+
+    .router-link-active {
+
+        background-color: var(--content);
+    }
+
+    .router-link-active i {
+
+        transform: translateX( 0px );
 
         opacity: 1;
     }

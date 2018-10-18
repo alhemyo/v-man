@@ -12,14 +12,14 @@
 
             <div class="avatar">
 
-                <img src="/images/janeDoe.png" />
+                <img :src=" gender === 'female' ? '/images/janeDoe.png' : '/images/johnDoe.png'" />
 
             </div>
 
             <div class="user-info" :class="{ 'user-info-mini' : sidebar }" >
 
-                <p class="head-text" >Jane Doe</p>
-                <p class="default-text">DESIGN</p>
+                <p class="head-text" >{{ name + ' ' + surname }}</p>
+                <p class="default-text">{{ position }}</p>
 
             </div>
 
@@ -56,6 +56,15 @@
     export default {
 
         name: 'sidebar',
+
+        data() {
+            return {
+                name: localStorage.getItem( 'name' ) || 'Jane',
+                surname: localStorage.getItem( 'surname' ) || 'Doe',
+                position: localStorage.getItem( 'position' ) || 'DESIGN',
+                gender: localStorage.getItem( 'gender' )
+            }
+        },
 
         computed: {
 

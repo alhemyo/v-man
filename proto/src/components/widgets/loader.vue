@@ -51,7 +51,6 @@
             height: 4px;
 
             background-color: var(--icon);
-            box-shadow: 0px 0px 0px var(--blue);
             opacity: 0.5;
         }
 
@@ -60,7 +59,6 @@
             height: 10px;
 
             background-color: var(--icon);
-            box-shadow: 0px 0px 0px var(--blue);
             opacity: 1;
         }
 
@@ -69,7 +67,6 @@
             height: 15px;
 
             background-color: var(--blue);
-            box-shadow: 0px 0px 30px var(--blue);
             opacity: 1;
         }
 
@@ -78,7 +75,6 @@
             height: 10px;
 
             background-color: var(--icon);
-            box-shadow: 0px 0px 0px var(--blue);
             opacity: 1;
         }
 
@@ -87,7 +83,6 @@
             height: 4px;
 
             background-color: var(--icon);
-            box-shadow: 0px 0px 0px var(--blue);
             opacity: 0.5;
         }
         
@@ -98,7 +93,7 @@
         width: 4px;
         height: 8px;
 
-        animation: pulse 0.6s ease infinite;
+        animation: pulse 1.2s ease infinite;
 
         background-color: var(--icon);
         border-radius: 20px;
@@ -108,12 +103,12 @@
 
     .circle:nth-child(2) {
 
-        animation-delay: 0.2s;
+        animation-delay: 0.4s;
     }
 
     .circle:nth-child(3) {
 
-        animation-delay: 0.4s;
+        animation-delay: 0.8s;
     }
 
     .loader-message {

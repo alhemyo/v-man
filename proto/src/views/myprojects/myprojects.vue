@@ -6,9 +6,10 @@
 
             <project-badge 
         
-                :key="index"
-                v-for="(project, index) in 10"
-                :name="'project ' + index"
+                :key="project.id"
+                v-for="project in myProjects"
+                :name="project.name"
+                :priority="project.priority"
             
             />
 
@@ -20,12 +21,34 @@
 
 <script>
 
+    import { orderBy } from 'lodash'
+
     export default {
 
         name: 'myprojects',
 
+        data() {
+            return {
+                loading: true
+            }
+        },
+
         components: {
             projectBadge: () => import('../../components/widgets/projectBadge.vue')
+        },
+
+        computed: {
+            myProjects: {
+                get() { return orderBy(this.$store.state.myProjects.myProjects, ['priority', 'deadline'] ) }
+            }
+        },
+
+        created() {
+
+            this.$store.dispatch( 'getMyProjects' )
+            .then(() => {
+                this.loading = false
+            })
         }
 
     }

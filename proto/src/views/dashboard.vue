@@ -56,7 +56,14 @@
         text-align: center;
         color: var(--icon);
 
+        transition: 0.1s ease;
+
         cursor: pointer;
+    }
+
+    i:hover {
+
+        color: var(--defaultText);
     }
 
     /* Text */

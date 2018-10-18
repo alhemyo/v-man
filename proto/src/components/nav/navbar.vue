@@ -16,7 +16,7 @@
 
             <i class="fas fa-search" />
 
-            <i class="fas fa-power-off" />
+            <i @click="logout" class="fas fa-power-off" />
 
         </div>
 
@@ -28,7 +28,19 @@
 
     export default {
 
-        name: 'navbar'
+        name: 'navbar',
+
+        methods: {
+
+            logout() {
+
+                this.$store.dispatch( 'logout' )
+                .then(() => {
+                    this.$router.push('/login')
+                })
+            }
+
+        }
 
     }
 

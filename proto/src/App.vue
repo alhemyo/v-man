@@ -2,13 +2,29 @@
 
   <div id="app">
 
-    <router-view />
+    <transition mode="out-in" name="views" >
+    
+      <router-view />
+    
+    </transition>
 
   </div>
 
 </template>
 
 <style>
+
+  /* ********** Vue Transitions CSS ********** */
+
+  .views-enter-active, .views-leave-active {
+
+    transition: 0.3s ease;
+  }
+
+  .views-enter, .views-leave-to {
+
+    opacity: 0;
+  }
 
   /* ********** Global Variables ********** */
 
@@ -24,6 +40,7 @@
     --red: #EC2E2E;
     --yellow: #FFC107;
     --green: #8BC34A;
+    --lightblue: #00F9C6;
     --blue: #008CF8;
 
     --defaultText: #6F738D;

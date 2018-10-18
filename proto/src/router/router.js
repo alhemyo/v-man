@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/store'
 
 Vue.use(Router)
 
@@ -13,13 +14,23 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/login.vue')
+      component: () => import('../views/login.vue'),
+      beforeEnter: ((to,from,next) => {
+
+        store.getters.isAuth ? next('/') : next()
+
+      })
     },
 
     {
       path: '/',
       name: 'dashboard',
       component: () => import('../views/dashboard.vue'),
+      beforeEnter: ((to,from,next) => {
+
+        !store.getters.isAuth ? next('/login') : next()
+
+      }),
 
       children: [
 
@@ -32,7 +43,7 @@ export default new Router({
           path: '/myprojects',
           name: 'myprojects',
           components: {
-            default: () => import('../views/myprojects/myprojectsView.vue'),
+            default: () => import('../views/myprojects/projectViewer.vue'),
             sideview: () => import('../views/myprojects/myprojects.vue')
           },
 

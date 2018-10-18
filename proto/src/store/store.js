@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import auth from './modules/auth'
+import myProjects from './modules/myProjects'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
   modules: {
-    auth
+    auth,
+    myProjects
   },
 
   state: {

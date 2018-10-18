@@ -4,7 +4,7 @@
 
         <form class="login-form">
 
-            <img src="/images/assets/logo/vman_logo.png" />
+            <img src="/images/assets/logo/vman_logo_big.png" />
 
             <input 
                 
@@ -33,7 +33,6 @@
                 <loader 
                 
                     :condition='loading'
-                    message='Getting you ready...'
                 
                 />
 
@@ -76,59 +75,73 @@
         },
 
         methods: {
-            validate: _.debounce( function() {
 
-                this.loading = true
+            validate: _.debounce( function() {
 
                 let regex = this.$store.state.regex.login
 
                 if( 
-                    this.username && 
-                    this.password ) {
+                    this.username &&  
+                    this.password ) { // Check if there is value in login inputs
+
+                    this.loading = true // Start loader and disable inputs
 
                     if ( 
                         !this.username.match( regex ) && 
-                        !this.password.match( regex ) ) {
+                        !this.password.match( regex ) ) { // Validate Login inputs
 
-                            this.$store.dispatch( 'authenticate', {
+                            this.$store.dispatch( 'authenticate', { // Dispatch action for auth
                                 user: this.username,
                                 pass: this.password
                             })
-                            .then(response => {
+                            .then(() => {
 
-                                this.$store.dispatch( 'getSelf', localStorage.getItem('token') )
+                                this.$store.dispatch( 'getSelf', localStorage.getItem('token') ) // Dispatch action for self / user
                                 .then(() => {
 
+                                    this.username = 'Welcome ' + localStorage.getItem('name') // Greet
+
                                     setTimeout(() => {
+
                                         this.loading = false
+                                        this.error = false
                                         this.$router.push('/')
+
                                     }, 2000 )
 
                                 })
                                 .catch(error => {
+
                                     console.log( error )
                                     this.loading = false
                                     this.error = true
                                     this.username = 'Invalid user'
 
                                     setTimeout(() => {
+
                                         this.error = false
                                         this.username = ''
                                         this.password = ''
+
                                     },2000)
-                            })
+
+                                })
                             })
                             .catch(error => {
+
                                 console.log( error )
                                 this.loading = false
                                 this.error = true
-                                this.username = 'Invalid data'
+                                this.username = 'Something went wrong...'
 
                                 setTimeout(() => {
+
                                     this.error = false
                                     this.username = ''
                                     this.password = ''
+
                                 },2000)
+
                             })
 
                         }
@@ -136,6 +149,7 @@
                 }
 
             }, 1500 )
+
         }
 
     }
@@ -155,10 +169,15 @@
         left: 50%;
 
         display: grid;
-        grid-template-rows: 50px 40px 40px 60px;
+        grid-template-rows: 200px 40px 40px 60px;
         align-items: center;
 
         transform: translate( -50%, -50% );
+    }
+    
+    .login-form img {
+
+        max-height: 200px;
     }
 
     .login-form > div {
