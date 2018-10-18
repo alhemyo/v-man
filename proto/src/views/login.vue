@@ -101,6 +101,11 @@
 
                                     this.username = 'Welcome ' + localStorage.getItem('name') // Greet
 
+                                    this.$socket.emit( 'login', {
+                                        token: localStorage.getItem('token'),
+                                        socket_id: this.$socket.id
+                                    })
+ 
                                     setTimeout(() => {
 
                                         this.loading = false

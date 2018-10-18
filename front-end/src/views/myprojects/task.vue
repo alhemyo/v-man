@@ -85,7 +85,7 @@
 
             <div class="note-controls">
 
-                <i class="far fa-image" />
+                <i class="far fa-image" @click="test" />
 
                 <i class="fas fa-file-upload" />
 
@@ -185,6 +185,10 @@
                     Object.assign(this.note, defaultNote())
                     this.notesEmpty = false
                 })
+            },
+
+            test() {
+                this.$socket.emit( 'login', {'token' : localStorage.getItem('token'), 'socket_id' : this.$socket.id  } )
             }
 
         },

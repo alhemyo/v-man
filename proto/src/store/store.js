@@ -15,6 +15,11 @@ export default new Vuex.Store({
 
   state: {
 
+    socket: {
+      connect: false,
+      task: {}
+    },
+
     config: {
       api: 'http://127.0.0.1:5000/api/'
     },
@@ -48,7 +53,11 @@ export default new Vuex.Store({
     // Forms
     updateProjectForm( state, projectForm ) { state.forms.projectForm = projectForm },
     updateUserForm( state, userForm ) { state.forms.userForm = userForm },
-    updateTaskForm( state, taskForm ) { state.forms.taskForm = taskForm }
+    updateTaskForm( state, taskForm ) { state.forms.taskForm = taskForm },
+
+    // Socket
+    SOCKET_CONNECT( state )  { state.connect = true },
+    SOCKET_TASK_CHANGED( state, task ) { state.socket.task = task }
   }
 
 })
