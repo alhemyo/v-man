@@ -8,7 +8,11 @@
 
         <div class="mainview">
 
-            <router-view />
+            <transition mode="out-in" name="routes">
+
+                <router-view />
+
+            </transition>
 
         </div>
 
@@ -26,7 +30,7 @@
             navbar: () => import('../components/nav/navbar'),
             sidebar: () => import('../components/nav/sidebar')
         }
-
+        
     }
 
 </script>
@@ -45,6 +49,25 @@
     .list-enter, .list-leave-to {
 
         transform: translateY(20px);
+        opacity: 0;
+    }
+
+    .routes-enter-active, .routes-leave-active {
+
+        transition: 0.5s ease;
+    }
+
+    .routes-enter {
+
+        transform: translateY( -5px );
+
+        opacity: 0;
+    }
+
+    .routes-leave-to {
+
+        transform: translateY( 5px );
+
         opacity: 0;
     }
 
@@ -82,6 +105,17 @@
         font-size: 12px;
         font-weight: 500;
         color: var(--defaultText);
+    }
+
+    .empty {
+
+        text-align: center;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate( -50%, -50% );
     }
 
     /* Components */
@@ -125,6 +159,8 @@
         height: calc( 100vh - 92px );
 
         position: relative;
+
+        overflow: hidden;
     }
 
 </style>

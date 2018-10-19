@@ -14,7 +14,10 @@ export default {
 
     mutations: {
         updateMyProjects( state, myProjects ) { state.myProjects = myProjects },
-        resetMyProjects( state ) { Object.assign( state, myProjectsDefault() ) }
+        resetMyProjects( state ) { Object.assign( state, myProjectsDefault() ) },
+
+        // Socket
+        SOCKET_MY_PROJECT( state, project ) { state.myProjects.unshift(project) }
     },
 
     actions: {

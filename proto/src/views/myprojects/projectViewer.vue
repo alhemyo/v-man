@@ -2,7 +2,11 @@
     
     <div class="myprojects-view">
 
-        <router-view />
+        <transition mode="out-in" name="routes">
+
+            <router-view :key="$route.fullPath" />
+
+        </transition>
 
     </div>
 

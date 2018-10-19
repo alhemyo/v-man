@@ -52,7 +52,8 @@ export default new Router({
 
             {
               path: '/myprojects/:id',
-              name: 'project'
+              name: 'project',
+              component: () => import('../views/myprojects/project.vue')
             }
 
           ]

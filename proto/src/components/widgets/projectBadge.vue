@@ -1,6 +1,6 @@
 <template>
     
-    <router-link to="#" class="project-badge">
+    <router-link :to="{ name: 'project', params: { id } }" class="project-badge">
 
         <div class="priority" :class="{ mid : priority === 'mid', high : priority === 'high' }" ></div>
 
@@ -55,7 +55,7 @@ export default {
         background-color: var(--icon);
         border-radius: 4px;
     }
-
+    
     .mid {
 
         background-color: var(--lightblue);
@@ -65,7 +65,7 @@ export default {
 
         background-color: var(--blue);
     }
-
+    
     .project-badge i {
 
         font-size: 14px;
