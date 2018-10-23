@@ -16,6 +16,47 @@
 
             </div>
 
+            <div slot="nav" class="nav projects-nav">
+
+                <i class="fas fa-signal" />
+
+                <p class="default-text nav-info">Project name</p>
+
+                <p class="default-text nav-info">state</p>
+
+                <p class="default-text nav-info">users</p>
+
+            </div>
+
+            <div slot="content" class="project-list">
+
+                <loader 
+                
+                    message="Fetching projects"
+                    :condition="loading"
+
+                />
+
+                <p v-if="empty" class="default-text empty">No projects.</p>
+
+                <transition-group mode="out-in" name="list">
+
+                    <project 
+
+                        v-if="project.name"
+                        v-for="project in projects"
+                        :key="project.id"
+                        :id="project.id"
+                        :name="project.name"
+                        :priority="project.priority"
+                        :users="project.users.length"
+                    
+                    />
+                    
+                </transition-group>
+
+            </div>
+
         </view-template>
 
     </div>
@@ -29,7 +70,35 @@
         name: 'projects',
 
         components: {
-            viewTemplate: () => import('../../components/templates/viewTemplate.vue')
+            viewTemplate: () => import('../../components/templates/viewTemplate.vue'),
+            loader: () => import('../../components/widgets/loader.vue'),
+            project: () => import('../../components/templates/project.vue')
+        },
+
+        data() {
+            return {
+                loading: true,
+                empty: false
+            }
+        },
+
+        computed: {
+            projects: {
+                get() { return this.$store.state.projects.projects }
+            }
+        },
+
+        watch: {
+            projects() { // Display message if there are no projects in the list.
+                this.empty = this.projects.length > 0 ? false : true
+            }
+        },
+
+        created() {
+            this.$store.dispatch('getProjects')
+            .then(() => {
+                this.loading = false
+            })
         }
 
     }
@@ -58,6 +127,22 @@
         grid-template-rows: 60px;
         align-items: center;
         justify-content: center;
+    }
+
+    .projects-nav {
+
+        display: grid;
+        grid-template-columns: 40px 290px 100px 100px;
+        grid-template-rows: 60px;
+
+        align-items: center;
+
+        background-color: var(--menu);
+    }
+
+    .nav-info:nth-child(2) {
+
+        text-align: left;
     }
 
 </style>

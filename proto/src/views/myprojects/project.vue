@@ -22,7 +22,23 @@
 
         <div slot="nav" class="nav"></div>
 
-        <div slot="content" class="content"></div>
+        <div slot="content" class="content">
+
+            <transition-group name="list">
+
+                <task
+                
+                    v-for="task in tasks"
+                    :key="task.id"
+                    :id="task.id"
+                    :name="task.name"
+                    :priority="task.priority"
+
+                />
+
+            </transition-group>
+
+        </div>
 
     </template-view>
     
@@ -37,10 +53,13 @@
         name: 'project',
 
         components: {
-            templateView: () => import('../../components/templates/viewTemplate.vue')
+            templateView: () => import('../../components/templates/viewTemplate.vue'),
+            task: () => import('../../components/templates/task.vue')
         },
 
         computed: {
+
+            // Project computed properties
 
             project() {
 
@@ -52,7 +71,20 @@
 
             },
 
-            deadline() { return moment(this.project.deadline).format("DD MMM YYYY") }
+            deadline() { return moment(this.project.deadline).format("DD MMM YYYY") },
+
+            // Tasks computed properties
+
+            tasks: {
+                get() { return this.$store.state.tasks.tasks }
+            }
+        },
+
+        created() {
+            this.$store.dispatch( 'getTasks', this.$route.params.id )
+            .then(() => {
+                this.taskLoading = false
+            })
         }
 
     }
@@ -113,7 +145,7 @@
 
     .nav {
 
-        background-color: var(--content);
+        background-color: var(--menu);
     }
 
 </style>

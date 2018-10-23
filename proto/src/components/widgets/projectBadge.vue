@@ -91,7 +91,7 @@ export default {
 
     .router-link-active i {
 
-        color: white;
+        color: var(--icon);
 
         transform: translateX( 0px );
 

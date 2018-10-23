@@ -150,6 +150,8 @@
 
         width: 60px;
         height: 60px;
+
+        padding: 10px;
     }
 
     .user-info {
@@ -226,6 +228,7 @@
     .sidebar-view {
 
         width: 100%;
+        max-width: 280px;
         height: calc( 100vh - 384px );
         min-height: 0;
 

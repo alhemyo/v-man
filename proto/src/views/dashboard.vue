@@ -158,6 +158,18 @@
         position: relative;
     }
 
+    .nav i {
+
+        font-size: 14px;
+    }
+
+    .nav-info {
+
+        text-align: center;
+
+        padding: 0px 10px;
+    }
+
     /* ********** Dashboard CSS ********** */
 
     .dashboard {
