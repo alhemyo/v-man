@@ -30,8 +30,6 @@
 
 <script>
 
-    import { orderBy } from 'lodash'
-
     export default {
 
         name: 'myprojects',
@@ -50,7 +48,7 @@
 
         computed: {
             myProjects: {
-                get() { return orderBy(this.$store.state.myProjects.myProjects, ['priority', 'deadline'] ) }
+                get() { return this.$store.state.myProjects.myProjects }
             }
         },
 
@@ -87,7 +85,7 @@
 
         width: 100%;
         height: auto;
-        min-height: 100%;
+        min-height: calc( 100vh - 388px );
 
         position: relative;
     }

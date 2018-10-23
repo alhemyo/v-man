@@ -37,7 +37,11 @@
 
         <div vue-scrollbar class="sidebar-view" :class="{ 'sidebar-view-mini' : sidebar }" >
 
-            <router-view name="sideview" />
+            <transition mode="out-in" name="routes" >
+            
+                <router-view name="sideview" />
+
+            </transition>
 
         </div>
 

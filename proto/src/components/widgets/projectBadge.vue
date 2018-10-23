@@ -2,7 +2,7 @@
     
     <router-link :to="{ name: 'project', params: { id } }" class="project-badge">
 
-        <div class="priority" :class="{ mid : priority === 'mid', high : priority === 'high' }" ></div>
+        <div class="priority" :class="{ mid : priority === 2, high : priority === 3 }" ></div>
 
         <p class="default-text">{{ name }}</p>
 
@@ -21,7 +21,7 @@ export default {
     props: { 
         id: Number,
         name: String,
-        priority: String
+        priority: Number
     }
 
 }
@@ -90,6 +90,8 @@ export default {
     }
 
     .router-link-active i {
+
+        color: white;
 
         transform: translateX( 0px );
 

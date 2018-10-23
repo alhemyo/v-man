@@ -4,7 +4,7 @@
 
         <div slot="card" class="card project-card">
 
-            <div class="priority" :class="{ mid: project.priority === 'mid', high: project.priority === 'high' }" ></div>
+            <div class="priority" :class="{ mid: project.priority === 2, high: project.priority === 3 }" ></div>
 
             <p class="head-text">{{ project.name }}</p>
 
@@ -66,7 +66,7 @@
         white-space: nowrap;
 
         display: grid;
-        grid-template-columns: 40px auto 120px;
+        grid-template-columns: 40px auto 200px;
         grid-template-rows: 30px 30px;
         grid-column-gap: 10px;
         align-content: center;
@@ -99,8 +99,16 @@
 
     .card-menu {
 
+        width: 200px;
+
         grid-column: 3/4;
         grid-row: 1/3;
+
+        display: grid;
+        grid-template-columns: 60px 60px;
+        grid-template-rows: 60px;
+        align-items: center;
+        justify-content: center;
     }
 
     .nav {

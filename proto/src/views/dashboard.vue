@@ -29,6 +29,23 @@
         components: {
             navbar: () => import('../components/nav/navbar'),
             sidebar: () => import('../components/nav/sidebar')
+        },
+
+        computed: {
+            sidebar: {
+                get() { return this.$store.state.uiComponents.sidebar },
+                set(sidebar) { this.$store.commit('updateSidebar', sidebar) }
+            }
+        },
+
+        watch: {
+
+            $route: {
+                immediate: true,
+                handler: function() {
+                    this.$route.meta.admin ? this.sidebar = true : this.sidebar = false
+                }
+            }
         }
         
     }
@@ -54,7 +71,7 @@
 
     .routes-enter-active, .routes-leave-active {
 
-        transition: 0.5s ease;
+        transition: 0.3s ease;
     }
 
     .routes-enter {
@@ -95,8 +112,13 @@
 
         font-family: var(--main);
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         color: var(--activeText);
+    }
+
+    .head-text span {
+
+        color: var(--defaultText);
     }
 
     .default-text {
