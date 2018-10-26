@@ -24,6 +24,15 @@
 
         <div slot="content" class="content">
 
+            <loader 
+            
+                :condition="taskLoading"
+                message="Loading Tasks..."
+            
+            />
+
+            <p v-if="tasksEmpty" class="default-text empty">No tasks in this project.</p>
+
             <transition-group name="list">
 
                 <task
@@ -54,7 +63,15 @@
 
         components: {
             templateView: () => import('../../components/templates/viewTemplate.vue'),
-            task: () => import('../../components/templates/task.vue')
+            task: () => import('../../components/templates/task.vue'),
+            loader: () => import('../../components/widgets/loader.vue')
+        },
+
+        data() {
+            return {
+                taskLoading: true,
+                tasksEmpty: false
+            }
         },
 
         computed: {
@@ -78,6 +95,21 @@
             tasks: {
                 get() { return this.$store.state.tasks.tasks }
             }
+        },
+
+        watch: {
+
+            $route: {
+                immediate: true,
+                handler: function() {
+                    this.$store.commit( 'resetTasks' )
+                }
+            },
+
+            tasks() {
+                this.tasksEmpty = this.tasks.length > 0 ? false : true
+            }
+
         },
 
         created() {
@@ -145,7 +177,7 @@
 
     .nav {
 
-        background-color: var(--menu);
+        background-color: rgba( 0, 0, 0, 0.1 );
     }
 
 </style>

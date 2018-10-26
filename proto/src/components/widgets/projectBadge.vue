@@ -45,6 +45,11 @@ export default {
         border-radius: 3px;
     }
 
+    .project-badge:nth-child(1) {
+
+        margin-top: 0px;
+    }
+
     .priority {
 
         width: 4px;

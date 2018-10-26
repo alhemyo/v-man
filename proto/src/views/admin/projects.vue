@@ -137,7 +137,7 @@
 
         align-items: center;
 
-        background-color: var(--menu);
+        background-color: rgba( 0, 0, 0, 0.1 );
     }
 
     .nav-info:nth-child(2) {

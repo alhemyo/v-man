@@ -4,7 +4,7 @@
 
         <div class="header">
 
-            <div class="priority"></div>
+            <div class="priority" :class="{ mid: priority === 2, high: priority === 3 }" ></div>
 
             <p class="default-text">{{ name }}</p>
 
@@ -25,7 +25,8 @@
         name: 'task',
 
         props: {
-            name: String
+            name: String,
+            priority: Number
         }
 
     }
@@ -75,6 +76,16 @@
 
         background-color: var(--icon);
         border-radius: 3px;
+    }
+
+    .mid {
+
+        background-color: var(--lightblue);
+    }
+
+    .high {
+
+        background-color: var(--blue);
     }
 
 </style>

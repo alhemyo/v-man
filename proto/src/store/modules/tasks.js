@@ -30,11 +30,17 @@ export default {
                 })
                 .then( response => {
 
-                    let orderedTasks = orderBy( response.data.Tasks, ['date_created'], ['asc'] )
+                    let sortedTasks = response.data.Tasks.filter(item => {
 
-                    commit( 'updateTasks', orderedTasks )
+                        return item.priority === 'high' ? item.priority = 3 : item.priority === 'mid' ? item.priority = 2 : item.priority = 1
+    
+                    })
 
-                    resolve( orderedTasks )
+                    sortedTasks = orderBy( sortedTasks, ['date_created'], ['asc'] )
+
+                    commit( 'updateTasks', sortedTasks )
+
+                    resolve( sortedTasks )
 
                 })
                 .catch( error => reject( error ) )
