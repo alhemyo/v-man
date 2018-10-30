@@ -65,6 +65,12 @@ export default new Router({
           name: 'myevents'
         },
 
+        {
+          path: '/timeline',
+          name: 'timeline',
+          component: () => import('../views/timeline/timeline.vue')
+        },
+
         // Admin routes
 
         {
