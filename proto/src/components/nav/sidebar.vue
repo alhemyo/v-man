@@ -31,7 +31,7 @@
 
             <router-link class="nav-link" :to="{ name: 'myprojects' }" ><i class="fas fa-bars" /></router-link>
 
-            <router-link class="nav-link" :to="{ name: 'myevents' }" ><i class="fas fa-calendar-alt" /></router-link>
+            <router-link class="nav-link" :to="{ name: 'timeline' }" ><i class="fas fa-calendar-alt" /></router-link>
 
         </div>
 
