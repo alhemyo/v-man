@@ -1,21 +1,24 @@
 <template>
     
-    <div v-dragscroll="true" class="timeline-wrap">
+    <div v-dragscroll="true" class="timeline-wrap" id="timeline" :style="timelineStyle">
 
-        <div class="timeline">
+        <div class="timeline" @dblclick="scrollToToday" >
 
-            <div v-bind:style="monthStyle" :key="index" v-for="( month, index ) in timeline" >
+            <div class="month-wrap" :style="monthStyle" :key="index" v-for="( month, index ) in timeline" >
 
-                <p>{{ month.name }}</p>
+                <p class="month default-text">{{ month.name + ' ' + year }}</p>
 
                 <div 
                 
+                    class="day-wrap"
                     :style="dayStyle" 
-                    :title="new Date( year, month.id - 1, day )" 
                     :key="index" 
-                    v-for="( day, index ) in month.days">
+                    v-for="( day, index ) in month.days"
+                    :id="day === currentDay && month.id === currentMonth + 1 && year === currentYear ? 'today' : false"
+                
+                >
                     
-                    <p>{{ day }}</p>
+                    <p class="day default-text">{{ day }}</p>
 
                 </div>
 
@@ -23,13 +26,13 @@
 
         </div>
 
+        <p class="test">{{ timelineX }}</p>
+
     </div>
 
 </template>
 
 <script>
-
-    //import moment from 'moment'
 
     export default {
 
@@ -38,11 +41,16 @@
         data() {
             return {
 
+                windowWidth: 0,
+                timelineX: 0,
+                todayPosition: 0,
+
                 today: new Date(),
-                day: new Date().getDate(),
+                currentDay: new Date().getDate(),
                 month: 0,
                 currentMonth: new Date().getMonth(),
                 year: new Date().getFullYear(),
+                currentYear: new Date().getFullYear(),
 
                 // Timeline
                 timeline: {
@@ -123,35 +131,41 @@
 
                 // Day Style Config
                 dayWidth: 4,
-                dayGap: 4,
+                dayGap: 2,
             }
         },
 
         computed: {
 
-            daysInMonth() { return 32 - new Date( this.year, this.month, 32 ).getDate() },
+            timelineStyle() {
+                return {
+                    width: this.windowWidth - 288 + 'px',
+                    height: '100%',
+                    overflow: 'hidden',
+                    oveflowX: 'scroll'
+                }
+            },
 
             dayStyle() {
                 return {
                     width: this.dayWidth + 'px',
-                    height: '30px',
-                    backgroundColor: 'var(--menu)',
+                    height: '15px',
                     alignSelf: 'flex-end',
                     justifySelf: 'center',
                     display: 'grid',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    borderRadius: '3px 3px 0px 0px'
                 }
             },
 
             monthStyle() {
                 return {
                     width: 'auto',
-                    height: '40px',
-                    backgroundColor: 'var(--background)',
+                    height: '60px',
                     display: 'grid',
                     gridAutoColumns: this.dayWidth + 16 + 'px',
                     gridAutoFlow: 'column',
-                    gridTemplateRows: '40px',
+                    gridTemplateRows: '60px',
                     gridColumnGap: this.dayGap + 'px'
                 }
             },
@@ -177,6 +191,50 @@
                 month ++
             }
 
+        },
+
+        mounted() {
+
+            this.$nextTick(function() {
+                window.addEventListener( 'resize', this.getWindowWidth ) // Listen for resize event
+                document.getElementById( 'timeline' ).addEventListener( 'scroll', this.getScrollX ) // Listen for scroll on the timeline
+                
+                // Init
+                this.getWindowWidth()
+                this.getScrollX()
+
+            })
+
+            setTimeout(() => {
+                document.getElementById('timeline').scrollLeft = 
+                document.getElementById('today').offsetParent.offsetLeft + 
+                document.getElementById('today').offsetLeft
+            },10)
+        },
+
+        methods: {
+
+            getWindowWidth() {
+                this.windowWidth = document.documentElement.clientWidth
+            },
+
+            getScrollX() {
+                this.timelineX = document.getElementById( 'timeline' ).scrollLeft
+            },
+
+            scrollToToday() {
+                document.getElementById('timeline').scrollLeft = 
+                document.getElementById('today').offsetParent.offsetLeft + 
+                document.getElementById('today').offsetLeft
+            }
+
+        },
+
+        beforeDestroy() {
+
+            window.removeEventListener( 'resize', this.getWindowWidth ) // Remove the resize event
+            document.getElementById( 'timeline' ).removeEventListener( 'scroll', this.getScrollX ) // Remove the Scroll event
+
         }
 
     }
@@ -184,13 +242,6 @@
 </script>
 
 <style>
-
-    .timeline-wrap {
-
-        width: 600px;
-
-        overflow: hidden;
-    }
 
     .timeline {
 
@@ -209,15 +260,43 @@
         position: relative;
     }
 
-    .timeline p {
+    .month-wrap:nth-child(even) {
 
-        font-size: 12px;
-        color: var(--defaultText);
+        background-color: rgba( 255, 255, 255, 0.03 );
+    }
+
+    .month {
 
         position: absolute;
-        top: 50%;
+
+        top: 8px;
         left: 50%;
-        transform: translate( -50%, -50% );
+        transform: translateX( -50% );
+    }
+
+    .day-wrap {
+
+        background-color: var(--menu)
+    }
+
+    .day {
+
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX( -50% );
+    }
+
+    #today {
+
+        background-color: var(--blue);
+    }
+
+    .test {
+
+        position: absolute;
+        left: 50%;
+        top: 40%;
     }
 
 </style>

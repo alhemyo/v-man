@@ -1,6 +1,6 @@
 <template>
 
-    <div class="sidebar" :class="{ 'sidebar-mini' : sidebar }" >
+    <div class="sidebar" :class="{ 'sidebar-mini' : sidebar }" id="sidebar" >
 
         <div class="sidebar-header" :class="{ mini : sidebar }" >
 
