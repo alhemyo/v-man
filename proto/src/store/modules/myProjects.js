@@ -44,7 +44,7 @@ export default {
     
                     })
                     
-                    sortedProjects = orderBy(sortedProjects, ['priority', 'deadline'], [ 'desc', 'desc' ] )
+                    sortedProjects = orderBy(sortedProjects, [ 'priority', 'deadline' ], [ 'desc', 'asc' ] )
 
                     commit( 'updateMyProjects', sortedProjects )
                     resolve( sortedProjects )
