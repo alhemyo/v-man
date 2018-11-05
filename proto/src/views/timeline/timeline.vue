@@ -319,7 +319,7 @@
         grid-auto-flow: column;
         grid-column-gap: 4px;
         overflow: hidden;
-        background: url('/images/assets/grid.png');
+        background: url('/images/assets/grid-01.png');
     }
 
     .year {
@@ -332,13 +332,14 @@
     .month {
         display: grid;
         grid-template-rows: 30px auto;
-        grid-column-gap: 2px;
+        grid-column-gap: 3px;
     }
 
     .month p {
-
         text-align: center;
         align-self: center;
+        padding: 10px;
+        background-color: var(--background);
     }
 
     .day {
@@ -380,6 +381,7 @@
     .project p {
 
         text-align: left;
+        background-color: transparent;
     }
 
     .priority {
