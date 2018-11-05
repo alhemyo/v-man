@@ -68,6 +68,7 @@ export default new Router({
         {
           path: '/timeline',
           name: 'timeline',
+          alias: '/',
           component: () => import('../views/timeline/timeline.vue')
         },
 

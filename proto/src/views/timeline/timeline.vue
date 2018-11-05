@@ -1,83 +1,84 @@
 <template>
     
-    <template-view>
+    <div class="timeline-wrap">
 
-        <div slot="card" class="card timeline-card" >
+        <div class="timeline-card card"></div>
 
-            <p @click="test" class="head-text">Timeline</p>
+        <div v-dragscroll class="timeline">
 
-        </div>
+            <div 
 
-        <div slot="nav" v-dragscroll class="nav timeline-nav">
-
-            <div
-            
-                class='year'
-                :style="yearStyle"
-                :id='year.name'
-                :key='year.name'
-                v-for='year in timeline'
+                class="year"
+                v-for="year in timeline"
+                :key="year.name"
             
             >
-
-                <div
+            
+                <div 
                 
                     class="month"
-                    :style="monthStyle"
-                    :key='month.id'
-                    :id="month.id"
-                    v-for='month in year.months'
+                    :style="{ gridTemplateColumns: 'repeat( ' + month.days.length + ', 4px )' }"
+                    v-for="(month, index) in year.months"
+                    :key="index"
                 
                 >
 
                     <p 
-
+                    
                         class="default-text"
-                        :style="{ gridColumn: '1 /' + month.days.length }"
-
+                        :style="{ gridColumn: '1 / ' + ( month.days.length + 1 ) }"
+                        
                     > 
                     
                         {{ month.name + ' ' + year.name }} 
                         
                     </p>
-
-                    <div
+                
+                    <div 
                     
                         class="day"
-                        :class="{ today: day.id === currentDay && month.id - 1 === currentMonth && year.name === currentYear }"
-                        :style="dayStyle"
-                        :key="index"
-                        :id="month.id + 'd' + day.id"
                         v-for="(day, index) in month.days"
+                        :key="index"
+                        :id=" day.id + '-' + month.id + '-' + year.name "
                         ref="days"
                     
                     >
+
+                        <div class="marker"></div>
+
+                        <div class="projects">
+
+                            <div class="project"
+                            
+                                v-if="  project.date_created.getDate() === day.id && 
+                                        project.date_created.getMonth() === month.id - 1 &&
+                                        project.date_created.getFullYear() === year.name"
+
+                                :style="{ top: 44 * index + 'px' }"
+
+                                v-for="(project, index) in sortedProjects"
+                                :key="index"
+                                :id="project.id"
+                            
+                            >
+
+                                <div class="priority" :class="{ mid: project.priority === 2, high: project.priority === 3 }" ></div>
+                            
+                                <p class="default-text" >{{ project.name }}</p>
+                            
+                            </div>
+
+                        </div>
                     
                     </div>
-
+                
                 </div>
-
-            </div>
-
-        </div>
-
-        <div slot="content" v-dragscroll class="timeline">
-
-            <div
             
-                class="timeline-project"
-                :key="project.id"
-                v-for="project in sortedProjects"
-
-            >
-
-                <p class="default-text">{{ project.name }}</p>
-
             </div>
 
         </div>
 
-    </template-view>
+    </div>
 
 </template>
 
@@ -111,143 +112,192 @@
 
         name: 'timeline',
 
-        components: {
-            templateView: () => import('../../components/templates/viewTemplate.vue')
-        },
-
         data() {
             return {
 
+                temp: document,
+
                 timeline: [],
 
-                currentDay: new Date().getDate(),
-                currentMonth: new Date().getMonth(),
-                currentYear: new Date().getFullYear(),
+                monthNames: [ 
 
-                months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
-                days: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+                    'January', 
+                    'February', 
+                    'March', 
+                    'April', 
+                    'May', 
+                    'June', 
+                    'July', 
+                    'August', 
+                    'September', 
+                    'October', 
+                    'November', 
+                    'December' 
+
+                ],
+
+                dayNames: [ 
+                    
+                    'Sunday', 
+                    'Monday', 
+                    'Tuesday', 
+                    'Wednesday', 
+                    'Thursday', 
+                    'Friday', 
+                    'Saturday'
+
+                ],
 
                 projects: [
 
                     {
                         id: 1,
                         name: 'Project 01',
-                        prioirity: 3,
-                        date_created: new Date( 2017, 11, 2 ),
-                        deadline: new Date( 2018, 9, 6 )
+                        priority: 3,
+                        date_created: new Date( 2017, 0, 1 ),
+                        deadline: new Date( 2017, 0, 31 )
                     },
                     {
                         id: 2,
                         name: 'Project 02',
-                        prioirity: 2,
+                        priority: 2,
                         date_created: new Date( 2018, 3, 6 ),
-                        deadline: new Date( 2018, 3, 28 )
+                        deadline: new Date( 2018, 4, 15 )
                     },
                     {
                         id: 3,
                         name: 'Project 03',
-                        prioirity: 1,
+                        priority: 1,
                         date_created: new Date( 2018, 2, 12 ),
                         deadline: new Date( 2018, 3, 10 )
                     },
                     {
                         id: 4,
                         name: 'Project 04',
-                        prioirity: 2,
+                        priority: 2,
                         date_created: new Date( 2018, 11, 16 ),
                         deadline: new Date( 2019, 1, 3 )
+                    },
+                    {
+                        id: 5,
+                        name: 'Project 05',
+                        priority: 3,
+                        date_created: new Date( 2017, 0, 1 ),
+                        deadline: new Date( 2017, 1, 15 )
+                    },
+                    {
+                        id: 6,
+                        name: 'Project 06',
+                        priority: 2,
+                        date_created: new Date( 2017, 1, 16 ),
+                        deadline: new Date( 2017, 1, 31 )
+                    },
+                    {
+                        id: 7,
+                        name: 'Project 07',
+                        priority: 1,
+                        date_created: new Date( 2017, 3, 22 ),
+                        deadline: new Date( 2017, 4, 20 )
+                    },
+                    {
+                        id: 8,
+                        name: 'Project 08',
+                        priority: 2,
+                        date_created: new Date( 2017, 5, 16 ),
+                        deadline: new Date( 2017, 6, 20 )
+                    },
+                    {
+                        id: 9,
+                        name: 'Project 09',
+                        priority: 3,
+                        date_created: new Date( 2018, 10, 15 ),
+                        deadline: new Date( 2019, 0, 5 )
                     }
 
-                ],
-
-                dayWidth: 4,
-                dayGap: 2
+                ]
 
             }
         },
 
         computed: {
 
-            yearStyle() {
-                return {
-                    display: 'grid',
-                    gridAutoColumns: 'max-content',
-                    gridColumnGap: this.dayGap + 'px',
-                    gridTemplateRows: '60px',
-                    gridAutoFlow: 'column'
-                }
-            },
-
-            monthStyle() {
-                return {
-                    display: 'grid',
-                    gridAutoColumns: this.dayWidth + 'px',
-                    gridTemplateRows: '30px 30px',
-                    gridColumnGap: this.dayGap + 'px',
-                    gridAutoFlow: 'column'
-                }
-            },
-
-            dayStyle() {
-                return {
-                    height: '30px',
-                    gridRow: '2/3'
-                }
-            },
-
-            sortedProjects() { return orderBy( this.projects, 'date_created' ) }
+            sortedProjects() { return orderBy( this.projects, ['date_created'],['asc'] ) }
 
         },
 
         watch: {
 
             sortedProjects: {
+                deep: true,
                 immediate: true,
-                handler: function() {
+                handler() {
 
                     let projects = this.sortedProjects
-                    let amount = projects.length
+                    let projectsAmount = projects.length
                     let firstYear = projects[0].date_created.getFullYear()
-                    let lastYear = projects[ amount - 1 ].deadline.getFullYear()
+                    let lastYear = projects[ projectsAmount - 1 ].deadline.getFullYear()
                     let range = lastYear - firstYear
-                    let days = 0
 
-                    for( let year = 0; year <= range; year ++ ) { //--------------------------------------------------------------- Create new Year in timeline for every year in range
-                        
-                        let newYear = [] // --------------------------------------------------------------------------------------- Empty array for the new Year
+                    for( let year = 0; year <= range; year ++ ) { // --------------------------------------------------------------------------- Iterate trough the years in range
 
-                        for( let i = 1; i <= 12; i ++ ) { // ---------------------------------------------------------------------- Create 12 new Months in the new Year
-                        
-                            days = 32 - new Date( firstYear, i - 1, 32 ).getDate() //---------------------------------------------- Find the exact number of days in each month
+                        let months = [] // ----------------------------------------------------------------------------------------------------- Empty Array to collect the months
 
-                            let daysCollection = [] // ---------------------------------------------------------------------------- Empty array to collect new Days
+                        for( let month = 1; month <= 12; month ++ ) { // ----------------------------------------------------------------------- Iterate trough the months in a year
 
-                            for( let day = 1; day <= days; day ++ ) {
+                            let days = [] // --------------------------------------------------------------------------------------------------- Empty Array to collect the days
+                            let daysInMonth = 32 - new Date( firstYear, month - 1, 32 ).getDate() // ------------------------------------------- Get the right number of days in month
 
-                                daysCollection.push( new Day( day, this.days[ new Date( firstYear, i - 1, day ).getDay() ] ) ) //-- Create new Day
+                            for( let day = 1; day <= daysInMonth; day ++ ) { // ---------------------------------------------------------------- Iterate trough the days in a month
+
+                                days.push( new Day( day, this.dayNames[ new Date( firstYear, month - 1, day ).getDay() ] ) ) // ---------------- Create new Day object
 
                             }
 
-                            let newMonth = new Month( i, this.months[ i - 1 ], daysCollection ) // -------------------------------- Create new Month
-                            newYear.push(newMonth) // ----------------------------------------------------------------------------- Push the new Month in the Year object
+                            months.push( new Month( month, this.monthNames[ month - 1 ], days ) ) // ------------------------------------------- Create new Month Object
 
                         }
 
-                        this.timeline.push( new Year( firstYear, newYear ) ) // --------------------------------------------------- Add the new Year to the timeline
+                        this.timeline.push( new Year( firstYear, months ) ) // ----------------------------------------------------------------- Create new Year Object
 
-                        firstYear ++
+                        firstYear ++ // -------------------------------------------------------------------------------------------------------- Increment the first year
 
                     }
 
                 }
-            },
+            }
 
         },
 
         methods: {
-            test() {
-                console.log(this.$refs.days)
+
+            setWidth() {
+                for( let project in this.sortedProjects ) { // -------------------------------------------------- Iterate trough the projects
+                    
+                    let created = document.getElementById( // --------------------------------------------------|
+                        this.sortedProjects[project].date_created.getDate() + '-' + // -------------------------|
+                        ( this.sortedProjects[project].date_created.getMonth() + 1 ) + '-' + // ----------------| Find Element with date_created ID
+                        this.sortedProjects[project].date_created.getFullYear() // -----------------------------|
+                    ) // ---------------------------------------------------------------------------------------|
+
+                    let deadline = document.getElementById( // -------------------------------------------------|
+                        this.sortedProjects[project].deadline.getDate() + '-' + // -----------------------------|
+                        ( this.sortedProjects[project].deadline.getMonth() + 1 ) + '-' + // --------------------| Find Element with deadline ID
+                        this.sortedProjects[project].deadline.getFullYear() // ---------------------------------|
+                    ) // ---------------------------------------------------------------------------------------|
+
+                    let projectWidth = ( deadline.offsetLeft + 4 ) - created.offsetLeft // ---------------------- Find distance between created and deadline Element
+
+                    let findProject = document.getElementById( this.sortedProjects[project].id ) // ------------- Find Element with current project ID
+
+                    findProject.style.width = projectWidth + 'px' // -------------------------------------------- Set width to ^
+
+                }
             }
+
+        },
+
+        mounted() {
+            this.setWidth()
         }
 
     }
@@ -256,60 +306,92 @@
 
 <style>
 
-    .timeline-card {
-        padding: 0px 20px;
+    .timeline-wrap {
         display: grid;
-        align-items: center;
-    }
-
-    .timeline-nav {
-        width: calc( 100vw - 288px );
-        display: grid;
-        grid-auto-columns: min-content;
-        grid-template-rows: 60px;
-        grid-column-gap: 2px;
-        grid-auto-flow: column;
-        overflow: hidden;
-    }
-
-    .month:nth-child(even) .day {
-
-        background-color: rgba( 255, 255, 255, 0.08 );
-    }
-
-    .month p {
-        text-align: center;
-        white-space: nowrap;
-        grid-row: 1 / 2;
-        align-self: center;
-        user-select: none;
-    }
-
-    .day {
-        background-color: var(--background);
-    }
-
-    .today {
-
-        background-color: white;
+        grid-template-rows: 160px calc( 100vh - 256px );
+        grid-row-gap: 4px;
     }
 
     .timeline {
         width: calc( 100vw - 288px );
         display: grid;
-        grid-auto-rows: 40px;
-        grid-row-gap: 4px;
+        grid-auto-columns: min-content;
+        grid-auto-flow: column;
+        grid-column-gap: 4px;
         overflow: hidden;
+        background: url('/images/assets/grid.png');
     }
 
-    .timeline-project {
-        width: 200px;
-        height: 40px;
-        position: relative;
-        padding: 0px 20px;
+    .year {
         display: grid;
-        align-items: center;
+        grid-auto-flow: column;
+        grid-auto-columns: min-content;
+        grid-column-gap: 4px;
+    }
+
+    .month {
+        display: grid;
+        grid-template-rows: 30px auto;
+        grid-column-gap: 2px;
+    }
+
+    .month p {
+
+        text-align: center;
+        align-self: center;
+    }
+
+    .day {
+
+        width: 4px;
+
+        display: grid;
+        grid-template-rows: 30px auto;
+        grid-row-gap: 4px;
+    }
+
+    .marker {
+
         background-color: var(--content);
     }
+
+    .projects {
+
+        display: grid;
+
+        position: relative;
+    }
+
+    .project {
+
+        width: 200px;
+        height: 40px;
+
+        position: absolute;
+
+        display: grid;
+        grid-template-columns: 20px auto;
+        align-items: center;
+
+        background-color: var(--content);
+        border-radius: 3px;
+    }
+
+    .project p {
+
+        text-align: left;
+    }
+
+    .priority {
+        width: 4px;
+        height: 14px;
+        justify-self: center;
+        background-color: var(--icon);
+        border-radius: 3px;
+    }
+
+    .mid { background-color: var(--lightblue); }
+
+    .high { background-color: var(--blue); }
 
 </style>
