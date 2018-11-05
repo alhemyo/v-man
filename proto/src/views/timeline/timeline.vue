@@ -56,7 +56,7 @@
 
                                 :style="{ top: 44 * index + 'px' }"
 
-                                v-for="(project, index) in sortedProjects"
+                                v-for="(project, index) in priorityProjects"
                                 :key="index"
                                 :id="project.id"
                             
@@ -114,8 +114,6 @@
 
         data() {
             return {
-
-                temp: document,
 
                 timeline: [],
 
@@ -212,7 +210,28 @@
                         priority: 3,
                         date_created: new Date( 2018, 10, 15 ),
                         deadline: new Date( 2019, 0, 5 )
-                    }
+                    },
+                    {
+                        id: 10,
+                        name: 'Project 10',
+                        priority: 2,
+                        date_created: new Date( 2018, 6, 12 ),
+                        deadline: new Date( 2018, 7, 10 )
+                    },
+                    {
+                        id: 11,
+                        name: 'Project 11',
+                        priority: 2,
+                        date_created: new Date( 2018, 8, 2 ),
+                        deadline: new Date( 2018, 10, 22 )
+                    },
+                    {
+                        id: 12,
+                        name: 'Project 12',
+                        priority: 3,
+                        date_created: new Date( 2018, 6, 12 ),
+                        deadline: new Date( 2018, 7, 10 )
+                    },
 
                 ]
 
@@ -221,7 +240,8 @@
 
         computed: {
 
-            sortedProjects() { return orderBy( this.projects, ['date_created'],['asc'] ) }
+            sortedProjects() { return orderBy( this.projects, [ 'date_created', 'priority' ],[ 'asc', 'asc' ] ) },
+            priorityProjects() { return orderBy( this.sortedProjects, [ 'priority' ], [ 'desc' ] ) }
 
         },
 
@@ -314,6 +334,7 @@
 
     .timeline {
         width: calc( 100vw - 288px );
+        padding: 0px 4px;
         display: grid;
         grid-auto-columns: min-content;
         grid-auto-flow: column;
@@ -381,6 +402,8 @@
     .project p {
 
         text-align: left;
+        white-space: nowrap;
+        padding: 0px;
         background-color: transparent;
     }
 
