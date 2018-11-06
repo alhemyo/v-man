@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 import auth from './modules/auth'
 import myProjects from './modules/myProjects'
+import projects from './modules/projects'
+import tasks from './modules/tasks'
 
 Vue.use(Vuex)
 
@@ -10,7 +12,9 @@ export default new Vuex.Store({
 
   modules: {
     auth,
-    myProjects
+    myProjects,
+    projects,
+    tasks
   },
 
   state: {

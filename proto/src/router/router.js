@@ -52,7 +52,8 @@ export default new Router({
 
             {
               path: '/myprojects/:id',
-              name: 'project'
+              name: 'project',
+              component: () => import('../views/myprojects/project.vue')
             }
 
           ]
@@ -62,6 +63,36 @@ export default new Router({
         {
           path: '/myevents',
           name: 'myevents'
+        },
+
+        {
+          path: '/timeline',
+          name: 'timeline',
+          alias: '/',
+          component: () => import('../views/timeline/timeline.vue')
+        },
+
+        // Admin routes
+
+        {
+          path: '/admin/settings',
+          name: 'settings',
+          component: () => import('../views/admin/settings.vue'),
+          meta: { admin: true }
+        },
+
+        {
+          path: '/admin/projects',
+          name: 'projects',
+          component: () => import('../views/admin/projects.vue'),
+          meta: { admin: true }
+        },
+
+        {
+          path: '/admin/users',
+          name: 'users',
+          component: () => import('../views/admin/users.vue'),
+          meta: { admin: true }
         }
 
       ]

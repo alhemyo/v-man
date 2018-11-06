@@ -4,11 +4,11 @@
 
         <div class="navbar-admin">
 
-            <router-link class="navbar-link" to="#"><i class="fas fa-cog" /></router-link>
+            <router-link class="navbar-link" :to="{ name : 'settings' }" ><i class="fas fa-cog" /></router-link>
 
-            <router-link class="navbar-link" to="#"><i class="fas fa-sliders-h" /></router-link>
+            <router-link class="navbar-link" :to="{ name : 'projects' }" ><i class="fas fa-sliders-h" /></router-link>
 
-            <router-link class="navbar-link" to="#"><i class="fas fa-users-cog" /></router-link>
+            <router-link class="navbar-link" :to="{ name : 'users' }" ><i class="fas fa-users-cog" /></router-link>
 
         </div>
 
@@ -88,6 +88,11 @@
 
         display: grid;
         align-items: center;
+    }
+
+    .router-link-active i {
+
+        color: var(--blue);
     }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="sidebar" :class="{ 'sidebar-mini' : sidebar }" >
+    <div class="sidebar" :class="{ 'sidebar-mini' : sidebar }" id="sidebar" >
 
         <div class="sidebar-header" :class="{ mini : sidebar }" >
 
@@ -8,7 +8,7 @@
 
         </div>
 
-        <div class="card sidebar-card">
+        <div class="card sidebar-card" :class="{ 'card-mini' : sidebar }" >
 
             <div class="avatar">
 
@@ -27,17 +27,21 @@
 
         <div class="nav sidebar-nav" :class="{ 'nav-mini mini' : sidebar }" >
 
-            <router-link class="nav-link" to="#" ><i class="fas fa-user" /></router-link>
+            <router-link class="nav-link" :to="{ name: 'myprofile' }" ><i class="fas fa-user" /></router-link>
 
             <router-link class="nav-link" :to="{ name: 'myprojects' }" ><i class="fas fa-bars" /></router-link>
 
-            <router-link class="nav-link" to="#" ><i class="fas fa-calendar-alt" /></router-link>
+            <router-link class="nav-link" :to="{ name: 'timeline' }" ><i class="fas fa-calendar-alt" /></router-link>
 
         </div>
 
         <div vue-scrollbar class="sidebar-view" :class="{ 'sidebar-view-mini' : sidebar }" >
 
-            <router-view name="sideview" />
+            <transition mode="out-in" name="routes" >
+            
+                <router-view name="sideview" />
+
+            </transition>
 
         </div>
 
@@ -90,8 +94,6 @@
 
         grid-row: 1/3;
 
-        padding: 0px 20px;
-
         display: grid;
         grid-template-rows: 80px 160px min-content auto 60px;
         grid-row-gap: 4px;
@@ -129,16 +131,27 @@
 
     .sidebar-card {
 
+        padding: 0px 20px;
+
         display: grid;
         grid-template-columns: 60px auto;
         grid-column-gap: 20px;
         align-items: center;
+
+        transition: padding 0.3s ease;
+    }
+
+    .card-mini {
+
+        padding: 0px;
     }
 
     .avatar {
 
         width: 60px;
         height: 60px;
+
+        padding: 10px;
     }
 
     .user-info {
@@ -151,6 +164,8 @@
         grid-row-gap: 6px;
 
         transition: opacity 0.3s ease;
+
+        opacity: 1;
     }
 
     .user-info-mini {
@@ -213,8 +228,11 @@
     .sidebar-view {
 
         width: 100%;
+        max-width: 280px;
         height: calc( 100vh - 384px );
         min-height: 0;
+
+        padding: 0px 20px;
 
         transition: height 0s ease;
 

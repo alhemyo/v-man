@@ -8,7 +8,11 @@
 
         <div class="mainview">
 
-            <router-view />
+            <transition mode="out-in" name="routes">
+
+                <router-view />
+
+            </transition>
 
         </div>
 
@@ -25,8 +29,25 @@
         components: {
             navbar: () => import('../components/nav/navbar'),
             sidebar: () => import('../components/nav/sidebar')
-        }
+        },
 
+        computed: {
+            sidebar: {
+                get() { return this.$store.state.uiComponents.sidebar },
+                set(sidebar) { this.$store.commit('updateSidebar', sidebar) }
+            }
+        },
+
+        watch: {
+
+            $route: {
+                immediate: true,
+                handler: function() {
+                    this.$route.meta.admin ? this.sidebar = true : this.sidebar = false
+                }
+            }
+        }
+        
     }
 
 </script>
@@ -45,6 +66,25 @@
     .list-enter, .list-leave-to {
 
         transform: translateY(20px);
+        opacity: 0;
+    }
+
+    .routes-enter-active, .routes-leave-active {
+
+        transition: 0.3s ease;
+    }
+
+    .routes-enter {
+
+        transform: translateY( -5px );
+
+        opacity: 0;
+    }
+
+    .routes-leave-to {
+
+        transform: translateY( 5px );
+
         opacity: 0;
     }
 
@@ -72,8 +112,13 @@
 
         font-family: var(--main);
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         color: var(--activeText);
+    }
+
+    .head-text span {
+
+        color: var(--defaultText);
     }
 
     .default-text {
@@ -82,6 +127,17 @@
         font-size: 12px;
         font-weight: 500;
         color: var(--defaultText);
+    }
+
+    .empty {
+
+        text-align: center;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate( -50%, -50% );
     }
 
     /* Components */
@@ -100,6 +156,18 @@
         height: 60px;
 
         position: relative;
+    }
+
+    .nav i {
+
+        font-size: 14px;
+    }
+
+    .nav-info {
+
+        text-align: center;
+
+        padding: 0px 10px;
     }
 
     /* ********** Dashboard CSS ********** */
@@ -125,6 +193,8 @@
         height: calc( 100vh - 92px );
 
         position: relative;
+
+        overflow: hidden;
     }
 
 </style>

@@ -4,7 +4,7 @@
 
         <form class="login-form">
 
-            <img src="/images/assets/logo/vman_logo_big.png" />
+            <img src="/images/assets/logo/vman_logo_big.png" id="logo" />
 
             <input 
                 

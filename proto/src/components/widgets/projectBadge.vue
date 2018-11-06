@@ -1,8 +1,8 @@
 <template>
     
-    <router-link to="#" class="project-badge">
+    <router-link :to="{ name: 'project', params: { id } }" class="project-badge">
 
-        <div class="priority" :class="{ mid : priority === 'mid', high : priority === 'high' }" ></div>
+        <div class="priority" :class="{ mid : priority === 2, high : priority === 3 }" ></div>
 
         <p class="default-text">{{ name }}</p>
 
@@ -21,7 +21,7 @@ export default {
     props: { 
         id: Number,
         name: String,
-        priority: String
+        priority: Number
     }
 
 }
@@ -45,6 +45,11 @@ export default {
         border-radius: 3px;
     }
 
+    .project-badge:nth-child(1) {
+
+        margin-top: 0px;
+    }
+
     .priority {
 
         width: 4px;
@@ -55,7 +60,7 @@ export default {
         background-color: var(--icon);
         border-radius: 4px;
     }
-
+    
     .mid {
 
         background-color: var(--lightblue);
@@ -65,7 +70,7 @@ export default {
 
         background-color: var(--blue);
     }
-
+    
     .project-badge i {
 
         font-size: 14px;
@@ -90,6 +95,8 @@ export default {
     }
 
     .router-link-active i {
+
+        color: var(--icon);
 
         transform: translateX( 0px );
 

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { orderBy } from 'lodash'
+
 const myProjectsDefault = () => {
     return {
         myProjects: []
@@ -14,7 +16,10 @@ export default {
 
     mutations: {
         updateMyProjects( state, myProjects ) { state.myProjects = myProjects },
-        resetMyProjects( state ) { Object.assign( state, myProjectsDefault() ) }
+        resetMyProjects( state ) { Object.assign( state, myProjectsDefault() ) },
+
+        // Socket
+        SOCKET_MY_PROJECT( state, project ) { state.myProjects.unshift(project) }
     },
 
     actions: {
@@ -32,8 +37,17 @@ export default {
                 })
                 .then(response => {
 
-                    commit( 'updateMyProjects', response.data )
-                    resolve( response )
+                    // Sort projects by priority / deadline and remap priority from string to number
+                    let sortedProjects = response.data.filter(item => {
+
+                        return item.priority === 'high' ? item.priority = 3 : item.priority === 'mid' ? item.priority = 2 : item.priority = 1
+    
+                    })
+                    
+                    sortedProjects = orderBy(sortedProjects, [ 'priority', 'deadline' ], [ 'desc', 'asc' ] )
+
+                    commit( 'updateMyProjects', sortedProjects )
+                    resolve( sortedProjects )
 
                 })
                 .catch(error => reject(error))
