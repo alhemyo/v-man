@@ -41,6 +41,7 @@
                         :key="index"
                         :id=" day.id + '-' + month.id + '-' + year.name "
                         ref="days"
+                        v-dragscroll.y="true"
                     
                     >
 
@@ -180,7 +181,7 @@
                         id: 5,
                         name: 'Project 05',
                         priority: 3,
-                        date_created: new Date( 2017, 0, 1 ),
+                        date_created: new Date( 2017, 0, 5 ),
                         deadline: new Date( 2017, 1, 15 )
                     },
                     {
@@ -231,6 +232,34 @@
                         priority: 3,
                         date_created: new Date( 2018, 6, 12 ),
                         deadline: new Date( 2018, 7, 10 )
+                    },
+                    {
+                        id: 13,
+                        name: 'Project 13',
+                        priority: 1,
+                        date_created: new Date( 2019, 1, 24 ),
+                        deadline: new Date( 2019, 2, 18 )
+                    },
+                    {
+                        id: 14,
+                        name: 'Project 14',
+                        priority: 2,
+                        date_created: new Date( 2019, 3, 2 ),
+                        deadline: new Date( 2019, 5, 22 )
+                    },
+                    {
+                        id: 15,
+                        name: 'Project 15',
+                        priority: 3,
+                        date_created: new Date( 2017, 9, 2 ),
+                        deadline: new Date( 2017, 10, 24 )
+                    },
+                    {
+                        id: 16,
+                        name: 'Project 16',
+                        priority: 2,
+                        date_created: new Date( 2017, 8, 22 ),
+                        deadline: new Date( 2017, 9, 30 )
                     },
 
                 ]
@@ -366,6 +395,7 @@
     .day {
 
         width: 4px;
+        height: calc( 100vh - 320px );
 
         display: grid;
         grid-template-rows: 30px auto;
