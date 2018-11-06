@@ -72,10 +72,6 @@ def on_disconnect():
 
 @socketio.on('logout')
 def on_logout(socket_id):
-    CONNECTED_USERS.pop(socket_id)
-    print(CONNECTED_USERS)
-    print("Online users: ", set(CONNECTED_USERS.values()))
-    emit('online_users', list(set(CONNECTED_USERS.values())), namespace='/', broadcast=True)
     disconnect(socket_id)
 
 
