@@ -2,7 +2,11 @@
 
     <div class="timeline-wrap" >
     
-        <div class="timeline-card card" ></div>
+        <div class="timeline-card card" >
+
+            <p class="head-text">Timeline</p>
+
+        </div>
 
         <div v-dragscroll.x="true" class="timeline" >
 
@@ -78,6 +82,12 @@
                     ></div>
 
                     <p class="default-text" >{{ project.name }}</p>
+
+                    <div class="project-button" >
+
+                        <i class="fas fa-angle-right" />
+
+                    </div>
 
                 </div> <!-- end .project -->
 
@@ -269,6 +279,32 @@
                         deadline: new Date( 2017, 9, 30 )
                     },
 
+                ],
+
+                events: [
+
+                    {
+                        id: 1,
+                        name: 'Event 01',
+                        date_created: new Date( 2017, 10, 22 ),
+                        date: new Date( 2017, 10, 22, 13, 30 ),
+                        deadline: new Date( 2017, 10, 22, 15, 30 ),
+                    },
+                    {
+                        id: 2,
+                        name: 'Event 02',
+                        date_created: new Date( 2017, 7, 12 ),
+                        date: new Date( 2017, 7, 12, 10 ),
+                        deadline: new Date( 2017, 7, 12, 12, 30 ),
+                    },
+                    {
+                        id: 3,
+                        name: 'Event 03',
+                        date_created: new Date( 2018, 1, 14 ),
+                        date: new Date( 2018, 1, 14, 9, 30 ),
+                        deadline: new Date( 2018, 1, 14, 10 ),
+                    }
+
                 ]
 
             }
@@ -392,6 +428,9 @@
     }
 
     .timeline-card {
+        padding: 0px 20px;
+        display: grid;
+        align-items: center;
         background-color: var(--content);
         border-radius: 3px;
     }
@@ -452,7 +491,7 @@
         display: grid;
         grid-auto-rows: min-content;
         grid-row-gap: 4px;
-        background: url( "/images/assets/grid-01.png" );
+        background: url( "/images/assets/grid-02.png" );
         border-radius: 3px;
         overflow: hidden;
     }
@@ -467,12 +506,13 @@
         width: 200px;
         height: 40px;
         display: grid;
-        grid-template-columns: 20px auto;
+        grid-template-columns: 20px auto 20px;
         grid-template-rows: 40px;
         align-items: center;
         background-color: var(--content);
         border-radius: 3px;
         cursor: pointer;
+        overflow: hidden;
     }
 
     .priority {
@@ -486,5 +526,16 @@
     .mid { background-color: var(--lightblue); }
 
     .high { background-color: var(--blue); }
+
+    .project-button {
+        height: 40px;
+        display: grid;
+        align-items: center;
+        background-color: rgba( 0,0,0,0.1 );
+    }
+
+    .project-button i {
+        font-size: 14px;
+    }
 
 </style>
