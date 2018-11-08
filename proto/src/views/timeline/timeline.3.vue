@@ -1,107 +1,89 @@
 <template>
-
-    <div class="timeline-wrap" >
     
-        <div class="timeline-card card" >
+    <div class="timeline-wrap">
 
-            <p class="head-text">Timeline</p>
+        <div class="timeline-card card"></div>
 
-        </div>
+        <div v-dragscroll.x="true" class="timeline">
 
-        <div v-dragscroll.x="true" class="timeline" >
+            <div 
 
-            <div class="timeline-nav" >
-
+                class="year"
+                v-for="year in timeline"
+                :key="year.name"
+            
+            >
+            
                 <div 
-
-                    class="year"
-                    v-for="year in timeline"
-                    :key="year.name"
+                
+                    class="month"
+                    :style="{ gridTemplateColumns: 'repeat( ' + month.days.length + ', 4px )' }"
+                    v-for="(month, index) in year.months"
+                    :key="index"
                 
                 >
 
-                    <div 
+                    <p 
+                    
+                        class="default-text"
+                        :style="{ gridColumn: '1 / ' + ( month.days.length + 1 ) }"
+                        
+                    > 
+                    
+                        {{ month.name + ' ' + year.name }} 
+                        
+                    </p>
                 
-                        class="month"
-                        :style="{ gridTemplateColumns: 'repeat( ' + month.days.length + ', 4px )' }"
-                        v-for="(month, index) in year.months"
+                    <div 
+                    
+                        class="day"
+                        v-for="(day, index) in month.days"
                         :key="index"
+                        :id=" day.id + '-' + month.id + '-' + year.name "
+                        ref="days"
                     
                     >
 
-                        <p 
-                        
-                            class="default-text"
-                            :style="{ gridColumn: '1 / ' + ( month.days.length + 1 ) }"
+                        <div class="marker"></div>
+
+                        <div class="projects">
+
+                            <div class="project"
                             
-                        >
+                                v-if="  project.date_created.getDate() === day.id && 
+                                        project.date_created.getMonth() === month.id - 1 &&
+                                        project.date_created.getFullYear() === year.name"
 
-                            {{ month.name + ' ' + year.name }}
-                         
-                        </p>
+                                :style="{ top: 44 * index + 'px' }"
 
-                        <div 
+                                v-for="(project, index) in priorityProjects"
+                                :key="index"
+                                :id="project.id"
+                            
+                            >
+
+                                <div class="priority" :class="{ mid: project.priority === 2, high: project.priority === 3 }" ></div>
+                            
+                                <p class="default-text" >{{ project.name }}</p>
+                            
+                            </div>
+
+                        </div>
                     
-                            class="day"
-                            v-for="(day, index) in month.days"
-                            :key="index"
-                            :id=" day.id + '-' + month.id + '-' + year.name "
-                            ref="days"
-                        
-                        >
-
-                            <div class="day-marker" ></div>
-
-                        </div> <!-- end .day -->
-
-                    </div> <!-- end .month -->
-
-                </div> <!-- end .year -->
-
+                    </div>
+                
+                </div>
+            
             </div>
 
-            <div v-dragscroll.y="true" class="timeline-canvas" >
-
-                <div 
-                
-                    class="project"
-                    v-for="project in priorityProjects"
-                    :key="project.id"
-                    :id="project.id"
-                
-                >
-
-                    <div 
-                        
-                        class="priority"
-                        :class="{
-                            mid: project.priority === 2,
-                            high: project.priority === 3
-                        }" 
-                        
-                    ></div>
-
-                    <p class="default-text" >{{ project.name }}</p>
-
-                    <div class="project-button" >
-
-                        <i class="fas fa-angle-right" />
-
-                    </div>
-
-                </div> <!-- end .project -->
-
-            </div> <!-- end .timeline-canvas -->
-
         </div>
-    
-    </div>    
+
+    </div>
 
 </template>
 
 <script>
 
-    import moment from 'moment'
     import { orderBy } from 'lodash'
 
     class Year {
@@ -279,32 +261,6 @@
                         deadline: new Date( 2017, 9, 30 )
                     },
 
-                ],
-
-                events: [
-
-                    {
-                        id: 1,
-                        name: 'Event 01',
-                        date_created: new Date( 2017, 10, 22 ),
-                        date: new Date( 2017, 10, 22, 13, 30 ),
-                        deadline: new Date( 2017, 10, 22, 15, 30 ),
-                    },
-                    {
-                        id: 2,
-                        name: 'Event 02',
-                        date_created: new Date( 2017, 7, 12 ),
-                        date: new Date( 2017, 7, 12, 10 ),
-                        deadline: new Date( 2017, 7, 12, 12, 30 ),
-                    },
-                    {
-                        id: 3,
-                        name: 'Event 03',
-                        date_created: new Date( 2018, 1, 14 ),
-                        date: new Date( 2018, 1, 14, 9, 30 ),
-                        deadline: new Date( 2018, 1, 14, 10 ),
-                    }
-
                 ]
 
             }
@@ -362,7 +318,7 @@
 
         methods: {
 
-            alignProjects() {
+            setWidth() {
                 for( let project in this.sortedProjects ) { // -------------------------------------------------- Iterate trough the projects
                     
                     let created = document.getElementById( // --------------------------------------------------|
@@ -381,23 +337,6 @@
 
                     let findProject = document.getElementById( this.sortedProjects[project].id ) // ------------- Find Element with current project ID
 
-                    created.firstChild.style.backgroundColor = 'white' // --------------------------------------- Asign color to days matching date_created
-
-                    created.title = // -------------------------------------------------------------------------|
-                    this.sortedProjects[project].name + ' / created - ' + // -----------------------------------| Add title to day created
-                    moment(this.sortedProjects[project].date_created).format('DD MMM YYYY') // -----------------|
-
-                    deadline.title = // ------------------------------------------------------------------------|
-                    this.sortedProjects[project].name + ' / deadline - ' + // ----------------------------------| Add title to deadline day
-                    moment(this.sortedProjects[project].deadline).format('DD MMM YYYY') // ---------------------|
-
-                    deadline.firstChild.style.backgroundColor =        //
-                    this.sortedProjects[project].priority === 3 ?      //  
-                    'var(--blue)' :                                    // --------------------------------------- Assign color to days matching deadline
-                    this.sortedProjects[project].priority === 2 ?      //
-                    'var(--lightblue)' : 'var(--icon)'                 //
-
-                    findProject.style.marginLeft = created.offsetLeft + 'px' // --------------------------------- Set position to ^
                     findProject.style.width = projectWidth + 'px' // -------------------------------------------- Set width to ^
 
                 }
@@ -406,11 +345,7 @@
         },
 
         mounted() {
-            this.alignProjects()
-        },
-
-        beforeUpdate() {
-            this.alignProjects()
+            this.setWidth()
         }
 
     }
@@ -420,99 +355,85 @@
 <style>
 
     .timeline-wrap {
-        width: 100%;
-        height: 100%;
         display: grid;
-        grid-template-rows: 160px auto;
+        grid-template-rows: 160px calc( 100vh - 256px );
         grid-row-gap: 4px;
-    }
-
-    .timeline-card {
-        padding: 0px 20px;
-        display: grid;
-        align-items: center;
-        background-color: var(--content);
-        border-radius: 3px;
     }
 
     .timeline {
-        width: calc( 100vw - 292px );
-        height: calc( 100vh - 256px );
-        position: relative;
-        display: grid;
-        grid-template-rows: 60px calc( 100vh - 320px );
-        grid-row-gap: 4px;
-        overflow: hidden;
-    }
-
-    .timeline-nav {
+        width: calc( 100vw - 288px );
         padding: 0px 4px;
         display: grid;
-        grid-auto-flow: column;
         grid-auto-columns: min-content;
-        grid-column-gap: 10px;
-        background-color: var(--content);
-        border-radius: 3px;
+        grid-auto-flow: column;
+        grid-column-gap: 4px;
+        overflow: hidden;
+        background: url('/images/assets/grid-01.png');
     }
 
     .year {
         display: grid;
         grid-auto-flow: column;
         grid-auto-columns: min-content;
-        grid-column-gap: 10px;
+        grid-column-gap: 4px;
     }
 
     .month {
         display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 4px;
-        grid-template-rows: 30px 30px;
+        grid-template-rows: 30px auto;
         grid-column-gap: 3px;
     }
 
     .month p {
         text-align: center;
+        align-self: center;
         padding: 10px;
-    }
-
-    .day {
-        grid-row: 2/3;
-        display: grid;
-    }
-
-    .day-marker {
         background-color: var(--background);
     }
 
-    .timeline-canvas {
-        width: auto;
+    .day {
+
+        width: 4px;
         height: calc( 100vh - 320px );
-        padding: 4px 0px;
+
         display: grid;
-        grid-auto-rows: min-content;
+        grid-template-rows: 30px calc( 100vh - 320px );
         grid-row-gap: 4px;
-        background: url( "/images/assets/grid-02.png" );
-        border-radius: 3px;
-        overflow: hidden;
     }
 
-    .timeline-canvas:hover {
+    .marker {
 
-        cursor: all-scroll;
+        background-color: var(--content);
+    }
+
+    .projects {
+
+        display: grid;
+
+        position: relative;
     }
 
     .project {
 
         width: 200px;
         height: 40px;
+
+        position: absolute;
+
         display: grid;
-        grid-template-columns: 20px auto 20px;
-        grid-template-rows: 40px;
+        grid-template-columns: 20px auto;
         align-items: center;
+
         background-color: var(--content);
         border-radius: 3px;
-        cursor: pointer;
-        overflow: hidden;
+    }
+
+    .project p {
+
+        text-align: left;
+        white-space: nowrap;
+        padding: 0px;
+        background-color: transparent;
     }
 
     .priority {
@@ -526,16 +447,5 @@
     .mid { background-color: var(--lightblue); }
 
     .high { background-color: var(--blue); }
-
-    .project-button {
-        height: 40px;
-        display: grid;
-        align-items: center;
-        background-color: rgba( 0,0,0,0.1 );
-    }
-
-    .project-button i {
-        font-size: 14px;
-    }
 
 </style>
