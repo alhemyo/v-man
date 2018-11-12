@@ -62,6 +62,7 @@
 
             <div v-dragscroll.y="true" class="timeline-canvas" >
 
+
                 <div 
                 
                     class="project"
