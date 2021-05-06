@@ -10,7 +10,7 @@ cryptography==1.9
 dnspython==1.15.0
 eventlet==0.24.1
 Flask==0.12.2
-Flask-Cors==3.0.3
+Flask-Cors==3.0.9
 Flask-Login==0.4.1
 Flask-RESTful==0.3.6
 Flask-SocketIO==3.0.2
